@@ -26,7 +26,7 @@ window.GEB_TOC = [
   "title": "Chapter II: Meaning and Form in Mathematics",
   "dialogue": "Two-Part Invention",
   "chapter": "Chapter II: Meaning and Form in Mathematics",
-  "done": false
+  "done": true
  },
  {
   "id": "04-ch03-figure-and-ground",

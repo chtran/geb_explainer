@@ -55,5 +55,12 @@ window.GEB_GLOSSARY = {
   "derivation":        {def:"The record of how a theorem was made: the axiom, then each string produced by a rule, one per line.", in:"02"},
   "decision procedure":{def:"A step-by-step test that is guaranteed to finish and answer yes or no.", in:"02"},
   "invariant":         {def:"A property that every step of a process leaves unchanged, like “the number of I’s is not a multiple of 3”.", in:"02"},
-  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"}
+  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"},
+  "premise":           {def:"A statement an argument starts from and asks you to accept.", in:"03"},
+  "conclusion":        {def:"The statement an argument ends with, said to follow from its premises.", in:"03"},
+  "rule of inference": {def:"A rule of reasoning that lets you go from statements you accept to a new one.", in:"03"},
+  "axiom schema":      {def:"A pattern that gives infinitely many axioms at once: every string that fits the pattern is an axiom.", in:"03"},
+  "well-formed":       {def:"Having the right shape to be considered at all, before asking whether it is a theorem. In the pq-system: hyphens, p, hyphens, q, hyphens.", in:"03"},
+  "interpretation":    {def:"A dictionary that matches each symbol of a formal system with a word or idea, such as p with “plus”.", in:"03"},
+  "factorial":         {def:"N factorial, written N!, is all the whole numbers from 1 to N multiplied together: 4! = 1 × 2 × 3 × 4 = 24.", in:"03"}
 };
