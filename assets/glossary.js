@@ -70,5 +70,6 @@ window.GEB_GLOSSARY = {
   "meaningless":       {def:"Said of an interpretation that is not meaningful: its theorems do not read as true statements about anything.", in:"03"},
   "active meaning":    {def:"Meaning as in everyday language: knowing what the words mean lets you make new true sentences.", in:"03"},
   "passive meaning":   {def:"Meaning in a formal system: the rules alone decide what is a theorem, and the meaning has no say.", in:"03"},
-  "ideal numbers":     {def:"Numbers as arithmetic treats them: counts of things that stay separate and never merge or split.", in:"03"}
+  "ideal numbers":     {def:"Numbers as arithmetic treats them: counts of things that stay separate and never merge or split.", in:"03"},
+  "prompt injection":  {def:"An attack on an AI system in which text hidden in the material it is given to work on gets treated as an instruction.", in:"03"}
 };
