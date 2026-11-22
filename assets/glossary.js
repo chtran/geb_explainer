@@ -67,7 +67,7 @@ window.GEB_GLOSSARY = {
   "bottom-up":         {def:"Starting from the simplest pieces and building up everything that can be made from them.", in:"03"},
   "isomorphic":        {def:"Two things are isomorphic when their parts line up, so that what happens in one is mirrored in the other.", in:"03"},
   "meaningful":        {def:"Said of an interpretation under which every theorem reads as a true statement about something.", in:"03"},
-  "meaningless":       {def:"Said of an interpretation whose readings line up with nothing, such as reading p as “horse”.", in:"03"},
+  "meaningless":       {def:"Said of an interpretation that is not meaningful: its theorems do not read as true statements about anything.", in:"03"},
   "active meaning":    {def:"Meaning as in everyday language: knowing what the words mean lets you make new true sentences.", in:"03"},
   "passive meaning":   {def:"Meaning in a formal system: the rules alone decide what is a theorem, and the meaning has no say.", in:"03"},
   "ideal numbers":     {def:"Numbers as arithmetic treats them: counts of things that stay separate and never merge or split.", in:"03"}
