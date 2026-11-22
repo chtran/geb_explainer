@@ -34,11 +34,10 @@ button.on{background:var(--gold);border-color:var(--gold);color:#fff}
 button.small{padding:5px 10px;font-size:12.5px}
 main{max-width:1040px;margin:0 auto;padding:0 22px 80px}
 section{padding:56px 0 30px;border-bottom:1px solid var(--rule)}
-.sec-head{display:flex;align-items:flex-start;gap:16px}
-.num{font:600 16px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--paper);background:var(--ink);border-radius:50%;width:40px;height:40px;display:grid;place-items:center;flex:none;box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--gold)}
-.sec-head h2{padding-top:1px}
+.sec-head{display:flex;align-items:baseline;gap:18px}
+.num{font:italic 400 34px/1.15 "EB Garamond",Georgia,serif;font-variant-numeric:oldstyle-nums proportional-nums;color:var(--gold);flex:none;min-width:.9em;padding-right:18px;border-right:1px solid color-mix(in srgb,var(--gold) 45%,transparent);text-align:right}
 h2{font-weight:500;font-size:34px;margin:0;line-height:1.15;flex:1;min-width:0}
-@media (max-width:560px){h2{font-size:27px}.num{width:34px;height:34px;font-size:14px}.sec-head{gap:12px}}
+@media (max-width:560px){h2{font-size:27px}.num{font-size:27px;padding-right:13px}.sec-head{gap:13px}}
 h3{font-weight:600;font-size:21px;margin:22px 0 6px}
 .listen{margin-left:auto}
 .cols{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:start}
