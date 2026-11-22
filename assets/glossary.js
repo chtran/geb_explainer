@@ -46,5 +46,13 @@ window.GEB_GLOSSARY = {
   "proof assistant":   {def:"Software, such as Lean, that checks every step of a mathematical proof by machine.", in:"01"},
   "parallel postulate":{def:"The axiom that through a point beside a line there’s exactly one line that never meets it.", in:"01"},
   "set":               {def:"A collection of things.", in:"01"},
-  "zeno's paradoxes":  {def:"Ancient Greek puzzles, e.g. one “proving” speedy Achilles can never catch a tortoise with a head start.", in:"01"}
+  "zeno's paradoxes":  {def:"Ancient Greek puzzles, e.g. one “proving” speedy Achilles can never catch a tortoise with a head start.", in:"01"},
+  "koan":              {def:"A short Zen Buddhist puzzle story, meant to jolt the mind out of ordinary reasoning.", in:"02"},
+  "invention":         {def:"Bach’s name for a short keyboard piece built from one small musical idea, passed between two or three voices.", in:"02"},
+  "string":            {def:"A row of symbols, such as MIUU.", in:"02"},
+  "rule of production":{def:"A rule of a formal system that lets you make a new string from one you already have.", in:"02"},
+  "derivation":        {def:"The record of how a theorem was made: the axiom, then each string produced by a rule, one per line.", in:"02"},
+  "decision procedure":{def:"A step-by-step test that is guaranteed to finish and answer yes or no.", in:"02"},
+  "invariant":         {def:"A property that every step of a process leaves unchanged, like “the number of I’s is not a multiple of 3”.", in:"02"},
+  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"}
 };

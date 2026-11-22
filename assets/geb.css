@@ -162,3 +162,12 @@ footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,san
 .mv-src{margin-top:14px;font:14px Inter,sans-serif;color:var(--ink2)}
 .mv-src summary{cursor:pointer;font-weight:600}
 .mv-src ol{margin:8px 0 0;padding-left:20px}
+/* Dialogue + Chapter pages: the divider that marks each half */
+.half{margin:64px 0 0;padding:18px 0 0;border-top:3px double var(--rule);text-align:center}
+.half .hk{font:600 11.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+.half .ht{font:500 30px/1.2 "EB Garamond",Georgia,serif;margin-top:4px}
+.half .ht em{color:var(--bach)}
+.half + section{border-top:0;padding-top:30px}
+/* a control that doesn't apply right now (kept clickable so it can say why) */
+button.ghost.off{opacity:.45}
+button.ghost.off:hover{transform:none}

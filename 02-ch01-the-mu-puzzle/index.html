@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEB · Three-Part Invention + Chapter I: The MU-puzzle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/geb.css?v=e950f1f2">
+<style>
+/* Zeno's race */
+.zmeter{font:500 14px Inter,sans-serif;color:var(--ink2);display:flex;gap:22px;flex-wrap:wrap;margin:8px 0}
+.zmeter b{color:var(--ink);font-size:19px}
+/* MIU strings */
+.miu{font-family:"JetBrains Mono",monospace;letter-spacing:.04em}
+.miu .m{color:var(--godel)} .miu .u{color:var(--bach)}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0}
+@media (max-width:720px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 16px}
+.rule .rn{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.rule .rs{font:15px "JetBrains Mono",monospace;margin:2px 0 4px}
+.rule p{margin:0;font-size:16px}
+.rule .ex{font:13.5px Inter,sans-serif;color:var(--ink2);margin-top:6px}
+.wb{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start}
+@media (max-width:820px){.wb{grid-template-columns:1fr}}
+.wbstr{font:500 34px/1.25 "JetBrains Mono",monospace;letter-spacing:.06em;padding:16px 18px;border:2px solid var(--rule);border-radius:12px;background:#fff;word-break:break-all;min-height:76px;transition:.3s}
+.wbstr.win{border-color:var(--escher);background:#eef7f1}
+.wbstr .hl{background:#f7e3b0;border-radius:4px}
+.wbmsg{font:14.5px/1.5 Inter,sans-serif;color:var(--ink2);min-height:24px;margin:8px 0}
+.wbmsg b{color:var(--ink)}
+.picks{margin-bottom:8px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.picks button{font-family:"JetBrains Mono",monospace;font-size:14px}
+.picks button u{text-decoration:none;background:#f7e3b0;border-radius:3px}
+ol.deriv{font:14.5px/1.5 "JetBrains Mono",monospace;margin:0;padding-left:30px;max-height:300px;overflow:auto;word-break:break-all}
+ol.deriv li span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:8px}
+ol.deriv li.last{font-weight:500}
+.lbl-s{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:4px 0 6px}
+/* claims (I-mode practice) */
+.claims{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:820px){.claims{grid-template-columns:1fr}}
+.claim p.c{font-size:18px;margin:0 0 8px}
+.claim .steps{min-height:0}
+/* tree of theorems */
+.trow{display:grid;grid-template-columns:64px 92px 1fr;gap:10px;align-items:start;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.trow .tn{font:600 13px Inter,sans-serif;color:var(--ink)}
+.trow .tc{font:13px Inter,sans-serif;color:var(--ink2)}
+.trow .chips{margin:0}
+.trow .chips span{font-size:13px;padding:2px 8px}
+.trow .chips span.hit{background:var(--gold);color:#fff;border-color:var(--gold)}
+.trow .chips span.more{background:transparent;border-style:dashed;font-family:Inter,sans-serif;color:var(--ink2)}
+@media (max-width:640px){.trow{grid-template-columns:52px 1fr}.trow .chips{grid-column:1/-1}}
+/* the answer */
+.ctable{border-collapse:collapse;font:14px Inter,sans-serif;margin:8px 0}
+.ctable th,.ctable td{padding:5px 14px 5px 0;text-align:left;border-bottom:1px solid var(--rule)}
+.ctable th{color:var(--ink2);font-weight:600}
+.ctable td.miu{font-size:14px;word-break:break-all}
+.tester{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tester input{font:18px "JetBrains Mono",monospace;width:240px;letter-spacing:.05em}
+</style>
+</head>
+<body data-chapter="02-ch01-the-mu-puzzle">
+
+<header class="hero">
+  <div class="kicker">Gödel, Escher, Bach · Explainer 02</div>
+  <h1>Three-Part Invention <span style="color:var(--ink2)">+</span> <em>The MU-puzzle</em></h1>
+  <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
+  <p class="lede">A race that, by one argument, can never be won, and a puzzle that looks easy. Followed one step at a time, from the inside, both can go on forever. Step outside and look at the whole thing, and both are settled in a few lines. This page covers the dialogue <i>Three-Part Invention</i> and Chapter I, where Hofstadter introduces formal systems with a game of just three letters.</p>
+</header>
+
+<div class="toolbar"><div class="in">
+  <nav id="toc">
+    <a href="#s-dialogue">1 · The dialogue</a>
+    <a href="#s-race">2 · Zeno's race</a>
+    <a href="#s-system">3 · A game of symbols</a>
+    <a href="#s-play">4 · Play it</a>
+    <a href="#s-modes">5 · Inside &amp; outside</a>
+    <a href="#s-tree">6 · All the theorems</a>
+    <a href="#s-decide">7 · Decision procedures</a>
+    <a href="#s-answer">8 · The answer</a>
+    <a href="#s-recap">9 · Recap</a>
+    <a href="#s-modern">10 · Modern view</a>
+  </nav>
+</div></div>
+
+<main>
+
+<div class="half"><div class="hk">Dialogue</div><div class="ht"><em>Three-Part Invention</em></div></div>
+
+<!-- 1 -->
+<section id="s-dialogue">
+  <div class="sec-head"><div class="num">1</div><h2>Achilles, the Tortoise, and the man who invented them</h2></div>
+  <div class="cols">
+    <div>
+      <p><b>The story.</b> Achilles (the Greek hero, fastest runner alive) and the Tortoise stand on a dusty running track in the hot sun. At the far end flies a red flag with a thin ring cut out of it: a zero, the Tortoise says, the favourite number of the flag's owner, Zeno. Achilles points out that zero hasn't been invented yet, so the flag can't exist. The Tortoise agrees, and admires it anyway.</p>
+      <p>Achilles tries to tell a Zen <span class="term">koan</span> (a short Buddhist puzzle story meant to jolt the mind out of ordinary reasoning). Two monks argue about a flag: one says the flag is moving, the other says the wind is. A wise master tells them: neither, <b>the mind is moving</b>. Achilles garbles it, crediting the master's line to "Zeno". Then a breeze comes up and the two of them act it out: "the flag is moving!" "No, the wind is!"</p>
+      <p>Zeno himself walks up and declares that <b>nothing</b> is moving: motion is impossible, which he proudly calls his Theorem. To prove it he tells his most famous story. Achilles races a tortoise that has a head start, and can never catch it. Zeno then sets up a real race to the flag, gives the Tortoise a head start of ten rods (about 50 metres), and calls "On your mark! Get set! Go!" The dialogue ends there. We never learn who wins.</p>
+    </div>
+    <div>
+      <div class="card">
+        <h3 style="margin-top:0">The form: a three-part invention</h3>
+        <p class="small-note">Bach wrote 15 <span class="term">inventions</span> for two <span class="term">voices</span> and 15 for three (he called the three-voice ones Sinfonias), finished in 1723 as lessons for keyboard students. Each is built from one small musical idea, passed from voice to voice. His title page says they teach students to play cleanly in several parts, to come up with good ideas and develop them, and to get a first taste of composing.</p>
+        <p class="small-note">This dialogue has three voices too: Achilles, the Tortoise and Zeno, who pick up and toss around one idea, motion. Below is a short sketch of the form: one idea, entering in a high, middle and low voice in turn. <i>(An original sketch in Bach's style, not his notes.)</i></p>
+        <canvas id="invCanvas" height="190"></canvas>
+        <div class="row"><button id="invPlay">▶ Play the three voices</button>
+          <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>voice 1 (high)</span><span><i style="background:var(--escher)"></i>voice 2 (middle)</span><span><i style="background:var(--godel)"></i>voice 3 (low)</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="intuit"><b>The hidden joke</b>An <i>invention</i> is also something someone made up. Achilles and the Tortoise first appear in one of <span class="term">Zeno's paradoxes</span> (puzzles that seem to prove something impossible), around 450 BC, so Zeno really did invent them. In the dialogue he calls them two characters of his own Invention. Hofstadter borrowed them from Lewis Carroll, who had borrowed them from Zeno. Here, the inventor walks into his own story and meets his creations.</div>
+  <p>Two more jokes set up the chapter. Zeno's grand "Theorem" with a capital T is exactly the kind of word Chapter I takes apart: in a formal system, a <i>theorem</i> will mean something much humbler. And the koan's answer refuses both options it was offered ("neither the flag nor the wind"). Chapter I has a name for that kind of answer, too.</p>
+</section>
+
+<!-- 2 -->
+<section id="s-race">
+  <div class="sec-head"><div class="num">2</div><h2>Zeno's race: inside the argument, and outside it</h2></div>
+  <p>Zeno of Elea (born around 490 BC) argued that motion is an illusion. His Achilles story goes like this. To pass the Tortoise, Achilles must first reach the spot where the Tortoise <i>was</i>. By then the Tortoise has crawled a little further. So Achilles must reach <i>that</i> spot, and by then the Tortoise has moved on again… There's always one more step, so (says Zeno) Achilles never catches up.</p>
+  <p>Let's run it. Simplified numbers: the Tortoise starts 50 metres ahead, and Achilles runs twice as fast (10 metres a second against an unusually sporty Tortoise's 5).</p>
+  <div class="card">
+    <svg id="zTrack" viewBox="0 0 640 150" width="100%"></svg>
+    <div class="zmeter"><span>Zeno steps: <b id="zN">0</b></span><span>Gap left: <b id="zGap">50 m</b></span><span>Time used: <b id="zT">0 s</b></span></div>
+    <div class="row"><button id="zStep">Zeno's way: next step ▶</button><button id="zOut">Step outside: watch the whole race</button><button class="ghost" id="zReset">Reset</button></div>
+    <div class="steps" id="zMsg" style="min-height:48px">Each Zeno step, Achilles runs to where the Tortoise was. Click a few times.</div>
+    <div class="lbl-s">Time, split into Zeno's steps</div>
+    <svg id="zTime" viewBox="0 0 640 64" width="100%"></svg>
+  </div>
+  <p><b>Inside the argument</b>, you only ever ask "where is the Tortoise now?" and take one more step. The steps never run out, so the argument never reaches an end. <b>Outside it</b>, you look at all the steps at once and add them up: 5 + 2.5 + 1.25 + 0.625 + … seconds. The pieces halve each time, and together they fill exactly 10 seconds, like cutting a bar in half, then the leftover in half, forever, without ever making the bar longer. After 10 seconds Achilles draws level, and then he's ahead. (Mathematicians made this precise in the 1800s. Philosophers still debate whether that fully answers Zeno.)</p>
+  <div class="intuit"><b>The idea the dialogue sets up</b>A process can be endless when followed one step at a time, and still easy to settle when you step back and look at the whole. The chapter now explains this difference between working <b>inside</b> a system, obeying its rules move by move, and stepping <b>outside</b> to reason about it. It does so with a puzzle you can try yourself.</div>
+</section>
+
+<div class="half"><div class="hk">Chapter I</div><div class="ht"><em>The MU-puzzle</em></div></div>
+
+<!-- 3 -->
+<section id="s-system">
+  <div class="sec-head"><div class="num">3</div><h2>A game played with symbols</h2></div>
+  <p>The Introduction described a <span class="term">formal system</span>: starting statements plus mechanical rules for making new ones, like a board game's starting position and its legal moves. Chapter I builds a tiny example, so you can see what "following the rules and nothing else" really feels like.</p>
+  <div class="words"><b>Words for this chapter.</b> A <span class="term">string</span> is just a row of symbols, like <span class="miu">MIUU</span>. The <span class="term">axiom</span> is the string you're given to start with. A <span class="term">rule of production</span> is a rule that lets you make a new string from one you already have. A <span class="term">theorem</span> is any string you can make from the axiom using the rules. The record of how you made it, one string per line, is its <span class="term">derivation</span>.</div>
+  <p>Notice that here "theorem" doesn't mean "an important truth". Zeno's grand Theorem was a claim about the world. A theorem of a formal system is only a string the rules let you write down. It doesn't mean anything at all.</p>
+  <h3>The MIU-system</h3>
+  <p>The only symbols are the three letters <b class="miu">M</b>, <b class="miu">I</b> and <b class="miu">U</b>. The axiom is <b class="miu">MI</b>. There are four rules. In them, <b class="miu">x</b> stands for any string at all, even an empty one.</p>
+  <div class="rules">
+    <div class="rule"><div class="rn">Rule I</div><div class="rs">xI → xIU</div><p>If a string ends in <b class="miu">I</b>, you may add a <b class="miu">U</b> at the end.</p><div class="ex">Example: <span class="miu">MI</span> → <span class="miu">MIU</span></div></div>
+    <div class="rule"><div class="rn">Rule II</div><div class="rs">Mx → Mxx</div><p>You may double everything after the <b class="miu">M</b>.</p><div class="ex">Example: <span class="miu">MIU</span> → <span class="miu">MIUIU</span></div></div>
+    <div class="rule"><div class="rn">Rule III</div><div class="rs">III → U</div><p>Anywhere you see <b class="miu">III</b>, you may replace those three letters with one <b class="miu">U</b>.</p><div class="ex">Example: <span class="miu">MUIIIU</span> → <span class="miu">MUUU</span></div></div>
+    <div class="rule"><div class="rn">Rule IV</div><div class="rs">UU → (nothing)</div><p>Anywhere you see <b class="miu">UU</b>, you may delete it.</p><div class="ex">Example: <span class="miu">MUUU</span> → <span class="miu">MU</span></div></div>
+  </div>
+  <p>Rules work in one direction only: rule III turns III into U, but no rule turns U back into III. And you may only do what the rules allow. No inventing shortcuts, no "obviously this works". Hofstadter calls this the requirement of formality.</p>
+  <p>The rule examples above end in <span class="miu">MU</span>, but that chain didn't start from the axiom <span class="miu">MI</span>. Here is the puzzle: <b>starting from <span class="miu">MI</span>, can you make <span class="miu">MU</span>?</b></p>
+</section>
+
+<!-- 4 -->
+<section id="s-play">
+  <div class="sec-head"><div class="num">4</div><h2>Try it: the MIU workbench</h2></div>
+  <p>Apply rules by clicking them. When a rule fits in more than one place, you choose where. Warm up on the first three targets, then go for MU, the real puzzle.</p>
+  <div class="card">
+    <div class="row"><span class="small-note">Target:</span><span id="wbTargets"></span></div>
+    <div class="wb">
+      <div>
+        <div class="wbstr miu" id="wbStr"></div>
+        <div class="row" id="wbRules">
+          <button class="ghost" data-rule="I">I · add U</button>
+          <button class="ghost" data-rule="II">II · double</button>
+          <button class="ghost" data-rule="III">III · III → U</button>
+          <button class="ghost" data-rule="IV">IV · drop UU</button>
+        </div>
+        <div class="wbmsg" id="wbMsg"></div>
+        <div class="picks" id="wbPick"></div>
+        <div class="row"><button class="ghost small" id="wbUndo">↶ Undo</button><button class="ghost small" id="wbReset">Start over</button><button class="ghost small" id="wbShow">Show a shortest way</button></div>
+      </div>
+      <div>
+        <div class="lbl-s">Your derivation</div>
+        <ol class="deriv miu" id="wbList"></ol>
+      </div>
+    </div>
+  </div>
+  <p class="small-note">Rule II doubles a string's length, so strings get long quickly. This screen stops at 64 letters; the rules themselves have no limit.</p>
+</section>
+
+<!-- 5 -->
+<section id="s-modes">
+  <div class="sec-head"><div class="num">5</div><h2>Working inside the system, and stepping outside it</h2></div>
+  <p>If you tried for MU, something probably happened after a while. You stopped just applying rules and started thinking <b>about</b> them: "doubling gives me more I's, and rule III removes them three at a time… what am I actually able to reach?" Hofstadter names the two attitudes:</p>
+  <div class="grid3">
+    <div class="card"><span class="tag g">M-mode</span><h4>Mechanical</h4><p>Work <b>inside</b> the system. Apply rules, look at the result, apply more. Never get bored, never ask why. A simple computer program that just applies rules works like this, and can grind on forever without noticing anything.</p></div>
+    <div class="card"><span class="tag e">I-mode</span><h4>Intelligent</h4><p>Step <b>outside</b>. Notice patterns in what you've made, guess what's always true, decide a path is hopeless. Hofstadter sees this ability to jump out of the task you're doing and survey it as a mark of intelligence.</p></div>
+    <div class="card"><span class="tag b">U-mode</span><h4>Un-mode</h4><p>The Zen way: refuse the question's own terms, as the koan in the dialogue refused both "the flag" and "the wind". Hofstadter only names it here and returns to it in later chapters.</p></div>
+  </div>
+  <p>The names spell the system's letters: <b>M</b>, <b>I</b>, <b>U</b>. Here's some I-mode practice: is each statement always true? To show one is false, a single example is enough. To show one is always true, you can't check every string, because there are infinitely many. You have to reason about the rules instead.</p>
+  <div class="claims">
+    <div class="card claim"><p class="c">"Every theorem starts with <span class="miu">M</span>."</p>
+      <div class="row"><button class="ghost small" data-claim="0" data-v="1">Always true</button><button class="ghost small" data-claim="0" data-v="0">Not always</button></div><div class="steps" id="cl0"></div></div>
+    <div class="card claim"><p class="c">"Applying a rule never makes a string shorter."</p>
+      <div class="row"><button class="ghost small" data-claim="1" data-v="1">Always true</button><button class="ghost small" data-claim="1" data-v="0">Not always</button></div><div class="steps" id="cl1"></div></div>
+    <div class="card claim"><p class="c">"Every theorem has exactly one <span class="miu">M</span>."</p>
+      <div class="row"><button class="ghost small" data-claim="2" data-v="1">Always true</button><button class="ghost small" data-claim="2" data-v="0">Not always</button></div><div class="steps" id="cl2"></div></div>
+  </div>
+  <p>The "always true" answers came from looking at the rules from outside, not from making more strings. None of these facts can even be written as a string of the MIU-system: the system only makes strings, it can't say anything about them. That's the gap between <b>working in a system</b> and <b>reasoning about it</b>, and it's a theme Gödel's proof will exploit later in the book.</p>
+</section>
+
+<!-- 6 -->
+<section id="s-tree">
+  <div class="sec-head"><div class="num">6</div><h2>Making every theorem, row by row</h2></div>
+  <p>Here's a purely mechanical way to hunt for MU that never misses anything. Start with the axiom. Apply every rule in every possible place to get every string one step away. Then do the same to each of those, and so on. Hofstadter draws this as a tree of theorems. Here, each row lists only the strings that are new: ones that first appear after that many steps.</p>
+  <div class="card">
+    <div id="treeRows"></div>
+    <div class="row"><button id="tNext">Add the next row</button><button class="ghost" id="tFindMUII">Search for MUII</button><button class="ghost" id="tFindMU">Search for MU</button><button class="ghost small" id="tReset">Reset</button></div>
+    <div class="steps" id="tMsg" style="min-height:40px"></div>
+  </div>
+  <p>Every theorem shows up in some row, eventually. So if MU is a theorem, this search will find it. But if MU isn't a theorem, the search just runs forever, and at no point does it say so. By row 8 (rows 0 to 8) there are already 15,885 theorems, none of them MU, and row 9 alone holds 194,220 more. "Not found yet" is not the same as "never".</p>
+</section>
+
+<!-- 7 -->
+<section id="s-decide">
+  <div class="sec-head"><div class="num">7</div><h2>Decision procedures: knowing when to stop</h2></div>
+  <div class="words"><b>Definition.</b> A <span class="term">decision procedure</span> is a step-by-step test that is <b>guaranteed to finish</b> and answer yes or no. For example, "is this number even? Look at its last digit" always finishes. A test that might run forever doesn't count.</div>
+  <p>The tree search isn't a decision procedure: when the answer is "no", it never finishes. Could we stop it early? Say, "MU has only 2 letters, so once the rows contain only long strings, give up"? That would work if every rule made strings longer. But rules III and IV make strings <b>shorter</b>. A short theorem might be reached only through a detour into long strings, and nothing in the rules limits how long the detour can be.</p>
+  <div class="card">
+    <h3 style="margin-top:0">The detour to MUII: up the mountain and back down</h3>
+    <svg id="mount" viewBox="0 0 640 230" width="100%"></svg>
+    <p class="small-note" style="margin-bottom:0">MUII has just 4 letters, but its shortest derivation takes 7 steps and climbs to 10 letters on the way (found by searching every derivation, by computer). Short strings can hide deep in the tree.</p>
+  </div>
+  <p>Hofstadter notes that a formal system must at least let you recognise its axioms by a sure test, but its theorems need not come with one. For MIU, nothing about the rules tells you in advance whether such a test exists. Finding one takes I-mode thinking.</p>
+</section>
+
+<!-- 8 -->
+<section id="s-answer">
+  <div class="sec-head"><div class="num">8</div><h2>The answer: step outside and count</h2></div>
+  <p>Hofstadter leaves the puzzle open in Chapter I and gives the answer much later (in Chapter IX). If you'd like to keep trying, stop here.</p>
+  <details class="primer" id="ansBox">
+    <summary><span class="pm-title">Show the answer</span><span class="pm-sub">Spoiler: whether MU can be made, and why.</span><span class="pm-sub pm-open">Click to hide.</span></summary>
+    <div class="primer-body">
+      <div class="step-h"><span class="sn">1</span><span>Watch only the number of I's</span></div>
+      <p>Forget the U's and look at one thing: how many I's the string has. Here is what each rule does to that count:</p>
+      <table class="ctable">
+        <tr><th>Rule</th><th>What it does to the I's</th></tr>
+        <tr><td>I · add U</td><td>no change</td></tr>
+        <tr><td>II · double</td><td>doubles the count</td></tr>
+        <tr><td>III · III → U</td><td>takes away 3</td></tr>
+        <tr><td>IV · drop UU</td><td>no change</td></tr>
+      </table>
+      <p>The axiom <span class="miu">MI</span> has <b>1</b> I. <span class="miu">MU</span> has <b>0</b>.</p>
+
+      <div class="step-h"><span class="sn">2</span><span>The count can never become a multiple of 3</span></div>
+      <p>Start with 1, which is not a multiple of 3 (0, 3, 6, 9, …). Now check both moves that change the count:</p>
+      <ul>
+        <li><b>Doubling</b> a number that isn't a multiple of 3 never gives one. Look at the remainder after dividing by 3. If it's 1 (like 4), doubling makes it 2 (8 is 6 + 2). If it's 2 (like 5), the remainder doubles to 4, which is 3 + 1, so it's 1 again (10 is 9 + 1). It never lands on 0.</li>
+        <li><b>Taking away 3</b> doesn't change the remainder at all: 7 and 4 both leave 1.</li>
+      </ul>
+      <p>So no matter which rules you use, in any order, the number of I's is <b>never</b> a multiple of 3. And 0 is a multiple of 3. <b>MU can't be made.</b> A property like this, which no step can change, is called an <span class="term">invariant</span>. In a picture: the remainder starts at 1, doubling swaps 1 and 2, taking away 3 leaves it where it is, and nothing ever leads to 0.</p>
+      <svg id="rem" viewBox="0 0 520 200" width="100%" style="max-width:540px;display:block;margin:4px auto"></svg>
+      <p>Here's your own derivation from the workbench, counted:</p>
+      <div id="ansTable"></div>
+
+      <div class="intuit"><b>Intuition</b>No amount of rule-following inside the system could ever show that MU is impossible. The <span class="term">proof</span> came from outside: we turned strings into numbers (their I-counts) and reasoned about the numbers. Hofstadter later does exactly this to the MIU-system, giving each string a number, so that "is MU a theorem?" becomes a question about numbers. That's the same trick as <span class="term">Gödel numbering</span>, from the Introduction.</div>
+      <div class="step-h"><span class="sn">3</span><span>Bonus: a real decision procedure for MIU</span></div>
+      <p>The count gives more than a no for MU. It turns out a string is a theorem <b>exactly when</b> it is an M followed only by I's and U's, and its number of I's is not a multiple of 3. (The count argument shows nothing else can be made. Showing that every such string really can be made takes more work. It's true, and a computer check of every string up to 9 letters agrees.) That's a test that always finishes. Try it:</p>
+      <div class="tester"><input type="text" id="tIn" value="MUII" placeholder="letters M, I, U" spellcheck="false" autocomplete="off" aria-label="String to test"><span class="steps" id="tOut" style="min-height:0"></span></div>
+          </div>
+  </details>
+
+</section>
+
+<!-- 9 -->
+<section id="s-recap">
+  <div class="sec-head"><div class="num">9</div><h2>Recap: the dialogue and chapter in one breath</h2></div>
+  <p class="big-idea">Followed step by step from inside, Zeno's race and the MU-puzzle both go on forever. Stepped back from, both are settled at once: the steps add up to 10 seconds, and the count of I's is never a multiple of 3.</p>
+  <div class="grid3">
+    <div class="card"><span class="tag b">Dialogue</span><h4>Three voices, one idea</h4><p>Zeno meets the characters he invented, and his race begins with "Go!". From inside his argument it never ends; from outside, Achilles catches up after 10 seconds.</p></div>
+    <div class="card"><span class="tag g">Formal systems</span><h4>Rules, not meanings</h4><p>An axiom, rules of production, and theorems that are just strings. Making every theorem row by row misses nothing, but never says "no".</p></div>
+    <div class="card"><span class="tag e">Outside the system</span><h4>Noticing is the trick</h4><p>M-mode follows rules; I-mode notices patterns, like the I-count. That's how we know MU can't be made, and how we get a test that always finishes.</p></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="s-modern">
+  <div class="sec-head"><div class="num">10</div><h2>Modern view: what we know now</h2></div>
+  <p class="mv-asof">As of November 2026</p>
+  <p>The difference between following rules and stepping back to reason about them is now a practical question: we build machines that do both. Here is where this page's ideas stand today.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · formal proof</div>
+      <h4>AI that searches the tree of theorems, with a mechanical referee</h4>
+      <p class="mv-then"><b>In the book:</b> a formal system's theorems form a huge tree. Mechanically checking a step is easy; knowing which step to take is the hard part.</p>
+      <p><b>Now:</b> AI provers work in just this setting. They write proofs in Lean, a <span class="term">proof assistant</span> that checks every step by machine, the way you can check every line of an MIU derivation. Google DeepMind's AlphaProof (published in <i>Nature</i>, November 2025) learned by trial and error, on millions of practice problems, which rules to try. At the 2024 International Mathematical Olympiad it solved 3 of the 5 non-geometry problems, including the hardest. Its successor, AlphaProof Nexus (<i>Science</i>, October 2026), pairs a <span class="term">large language model</span> that proposes proofs with Lean checking them. It settled 9 open problems posed by the mathematician Paul Erdős, two of them open since 1970. The caveats: the Olympiad problems were translated into Lean by people, and Nexus only tried problems that were already written out in Lean.</p>
+      <p class="mv-so"><b>Why it matters:</b> it's the M-mode/I-mode split, built into a machine. A learned guesser decides where to look (I-mode-like); a rigid checker makes sure every step is legal (pure M-mode).</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · impossible problems</div>
+      <h4>Do AI models notice when a puzzle can't be solved?</h4>
+      <p class="mv-then"><b>In the book:</b> a mechanical worker grinds on forever; an intelligent one steps back and suspects the goal is impossible.</p>
+      <p><b>Now:</b> mostly, not yet, and it's disputed. A 2025 study from Apple, "The Illusion of Thinking", reported that AI "reasoning" models (ones trained to write out long step-by-step reasoning before answering) collapse on harder puzzles like Tower of Hanoi and river-crossing problems. Critics replied that some of its river-crossing puzzles were impossible: the boat was too small, so no solution existed. The models had been marked as failing puzzles that had no solution, a trap the test's own authors fell into. A separate 2025 test set, ReliableMath, found that models rarely say "this problem can't be solved". They tend to produce long, confident reasoning instead. We found no published study testing AI models on the MU-puzzle itself.</p>
+      <p class="mv-so"><b>Why it matters:</b> recognising that a goal is unreachable is exactly the "jump out of the system" Hofstadter describes, and it's still one of the weak points of today's models. People can miss it too.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics · decision procedures</div>
+      <h4>No test works for every rule game, and the smallest cases are already hard</h4>
+      <p class="mv-then"><b>In the book:</b> theorems need not come with a decision procedure, and for MIU it takes insight to find one.</p>
+      <p><b>Now:</b> in 1947, Emil Post and Andrey Markov independently proved that no decision procedure works for <b>all</b> rule games of MIU's kind, where rules rewrite parts of strings. Each game may need its own insight, and some have no test at all. The same wall shows up in the "Busy Beaver" hunt, which asks how long a tiny computer program, a <span class="term">Turing machine</span>, can run before stopping. Machines are sized by their number of states (roughly, the rows of their rule table). In 2024 an online collaboration proved that the longest a 5-state machine can run and still stop is 47,176,870 steps. To do it they settled, for all 181 million or so such machines, whether each one stops, and checked the whole proof by machine. For 6 states the problem is open: one 6-state machine, nicknamed Antihydra, stops only if a certain unsolved number puzzle (a cousin of the famous 3n + 1 problem) comes out a particular way, so deciding whether it stops would mean solving that puzzle.</p>
+      <p class="mv-so"><b>Why it matters:</b> the gap between "search until you find it" and "know when to give up" from section 7 is a real, permanent limit on computation, not just a feature of one toy.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · interpretability</div>
+      <h4>Finding the hidden count</h4>
+      <p class="mv-then"><b>In the book:</b> the MU-puzzle falls to one property the rules never change: the number of I's is never a multiple of 3.</p>
+      <p><b>Now:</b> a property that every step preserves is called an <span class="term">invariant</span>, and finding invariants is central to checking that computer programs are correct. Language models now propose invariants for program loops, and a mechanical checker confirms or rejects them. One 2025 system did this for all 133 programs in a standard test set, against a previous best of 107. Inside AI models, <span class="term">mechanistic interpretability</span> has found similar hidden structure. A small model trained on "clock arithmetic" (adding numbers and keeping only the remainder after dividing by 113) first memorised its examples, then suddenly generalised. Researchers looking inside found it had learned to treat the numbers as positions on a circle, turning addition into rotation. As with MU, it was people looking from outside who found that structure; the model couldn't report it.</p>
+      <p class="mv-so"><b>Why it matters:</b> "watch one property the rules can't change" is the I-mode move of section 8, and both machines and the people studying them now make it.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://www.nature.com/articles/s41586-025-09833-y" target="_blank" rel="noopener">Hubert et al., Olympiad-level formal mathematical reasoning with reinforcement learning (AlphaProof), Nature, 2025</a></li>
+      <li><a href="https://deepmind.google/blog/ai-solves-imo-problems-at-silver-medal-level/" target="_blank" rel="noopener">Google DeepMind: AI achieves silver-medal standard solving IMO problems (2024)</a></li>
+      <li><a href="https://www.science.org/doi/10.1126/science.aej2213" target="_blank" rel="noopener">Tsoukalas et al., AlphaProof Nexus, Science, October 2026</a> · <a href="https://arxiv.org/abs/2605.22763" target="_blank" rel="noopener">preprint</a></li>
+      <li><a href="https://arxiv.org/abs/2506.06941" target="_blank" rel="noopener">Shojaee et al., The Illusion of Thinking (2025)</a></li>
+      <li><a href="https://arxiv.org/abs/2506.09250" target="_blank" rel="noopener">Lawsen, Comment on The Illusion of Thinking (2025)</a> · <a href="https://arxiv.org/abs/2507.01231" target="_blank" rel="noopener">replication</a></li>
+      <li><a href="https://arxiv.org/abs/2507.03133" target="_blank" rel="noopener">ReliableMath: benchmark of reliable mathematical reasoning (2025)</a></li>
+      <li><a href="https://arxiv.org/abs/2509.12337" target="_blank" rel="noopener">bbchallenge Collaboration, Determination of the fifth Busy Beaver value (2025)</a></li>
+      <li><a href="https://wiki.bbchallenge.org/wiki/BB(6)" target="_blank" rel="noopener">bbchallenge wiki: BB(6) and Antihydra</a></li>
+      <li><a href="https://arxiv.org/abs/2508.00419" target="_blank" rel="noopener">LLM + solver loop-invariant synthesis on Code2Inv (2025)</a></li>
+      <li><a href="https://arxiv.org/abs/2301.05217" target="_blank" rel="noopener">Nanda et al., Progress measures for grokking via mechanistic interpretability (ICLR 2023)</a></li>
+      <li><a href="https://sacred-texts.com/bud/glg/glg29.htm" target="_blank" rel="noopener">The Gateless Gate, case 29: the flag and the wind</a></li>
+    </ol>
+  </details>
+</section>
+
+</main>
+<footer>
+  An independent companion to Douglas Hofstadter's <i>Gödel, Escher, Bach: an Eternal Golden Braid</i> (1979). Summaries and paraphrases are original; music is synthesized live in your browser.
+</footer>
+
+<script src="../assets/toc.js?v=102005b4"></script>
+<script src="../assets/glossary.js?v=46153699"></script>
+<script src="../assets/terms.js?v=62f05ed1" defer></script>
+<script src="../assets/nav.js?v=7c652cb2" defer></script>
+<script src="../assets/music.js?v=761fe73a"></script>
+<script>
+const $=id=>document.getElementById(id);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const miuHTML=s=>s.replace(/M/g,'<span class="m">M</span>').replace(/U/g,'<span class="u">U</span>');
+
+/* ===== Section 1: a three-part sketch (original, not Bach's notes) ===== */
+// one idea (an up-and-down broken chord), entering high, middle, low; [midi or null, beats]
+const idea=r=>[[r,.5],[r+4,.5],[r+7,.5],[r+12,.5],[r+11,.5],[r+7,.5],[r+4,.5],[r+7,.5]];
+const INV=[
+  idea(72).concat([[79,2],[83,2],[84,2],[79,2],[74,1],[71,1],[72,2]]),
+  [[null,4]].concat(idea(67),[[64,2],[67,2],[67,2],[64,2]]),
+  [[null,8]].concat(idea(48),[[43,2],[48,2]])
+];
+const invCv=$('invCanvas');
+function invVoices(){return [{ev:toEvents(INV[0]),color:css('--bach'),gain:.16},{ev:toEvents(INV[1]),color:css('--escher'),gain:.16},{ev:toEvents(INV[2]),color:css('--godel'),gain:.2,timbre:'soft'}];}
+playToggle($('invPlay'),()=>playVoices(invCv,invVoices(),0.32));
+
+/* ===== Section 2: Zeno's race ===== */
+const Z={head:50,va:10,vt:5}, ZX=m=>30+m*(580/120);   // track shows 0..120 m
+let zs={n:0,a:0,t:Z.head,time:0,segs:[],raf:null,outside:false};
+function drawTrack(){
+  let s='<line x1="30" y1="70" x2="610" y2="70" stroke="#bfb39b" stroke-width="2"/>';
+  for(let m=0;m<=120;m+=10){s+=`<line x1="${ZX(m)}" y1="64" x2="${ZX(m)}" y2="76" stroke="#bfb39b"/>`;if(m%20===0)s+=`<text x="${ZX(m)}" y="140" text-anchor="middle" font-family="Inter" font-size="11" fill="#8c826e">${m} m</text>`;}
+  zs.segs.forEach((g,i)=>{const y=96+(i%2)*8;s+=`<line x1="${ZX(g.from)}" y1="${y}" x2="${ZX(g.to)}" y2="${y}" stroke="${i%2?'#b7862b':'#9b2f2f'}" stroke-width="4" stroke-linecap="round"/>`;
+    if(i<3)s+=`<text x="${(ZX(g.from)+ZX(g.to))/2}" y="${y+18}" text-anchor="middle" font-family="Inter" font-size="10.5" fill="#5b5447">step ${i+1}</text>`;});
+  if(zs.outside&&zs.time>=10)s+=`<line x1="${ZX(100)}" y1="20" x2="${ZX(100)}" y2="80" stroke="#2f6b4f" stroke-dasharray="4 3"/><text x="${ZX(100)}" y="16" text-anchor="middle" font-family="Inter" font-size="11" fill="#2f6b4f">level at 100 m, 10 s</text>`;
+  const fx=ZX(120);
+  s+=`<line x1="${fx}" y1="30" x2="${fx}" y2="70" stroke="#5b5447" stroke-width="2"/><rect x="${fx}" y="30" width="22" height="14" fill="#9b2f2f"/><circle cx="${fx+11}" cy="37" r="4.5" fill="none" stroke="#f6f1e7" stroke-width="1.5"/>`;
+  s+=`<g><circle cx="${ZX(zs.t)}" cy="70" r="11" fill="#2f6b4f"/><text x="${ZX(zs.t)}" y="74.5" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="#fff">T</text></g>`;
+  s+=`<g><circle cx="${ZX(zs.a)}" cy="70" r="11" fill="#9b2f2f"/><text x="${ZX(zs.a)}" y="74.5" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="#fff">A</text></g>`;
+  s+=`<text x="30" y="40" font-family="EB Garamond" font-size="15" fill="#5b5447"><tspan fill="#9b2f2f">A</tspan> Achilles · <tspan fill="#2f6b4f">T</tspan> Tortoise</text>`;
+  $('zTrack').innerHTML=s;
+  // time bar: 0..12 s; Zeno's steps are 5, 2.5, 1.25, ... seconds
+  const TX=t=>30+t*(580/12); let b=`<rect x="30" y="14" width="580" height="22" rx="4" fill="#efe7d6"/>`;
+  const shown=zs.outside?(zs.time>=10?30:Math.min(30,Math.floor(Math.log2(10/(10-zs.time))))):zs.n;
+  let t=0;for(let i=0;i<shown;i++){const d=5/Math.pow(2,i);b+=`<rect x="${TX(t)}" y="14" width="${Math.max(.6,TX(t+d)-TX(t)-.6)}" height="22" fill="${i%2?'#b7862b':'#9b2f2f'}" opacity=".85"/>`;if(i<4)b+=`<text x="${(TX(t)+TX(t+d))/2}" y="29" text-anchor="middle" font-family="Inter" font-size="10.5" fill="#fff">${d}</text>`;t+=d;}
+  if(zs.outside){b+=`<line x1="${TX(Math.min(12,zs.time))}" y1="8" x2="${TX(Math.min(12,zs.time))}" y2="42" stroke="#1f1c17" stroke-width="2"/>`;}
+  for(let s2=0;s2<=12;s2+=2)b+=`<text x="${TX(s2)}" y="56" text-anchor="middle" font-family="Inter" font-size="11" fill="#8c826e">${s2} s</text>`;
+  b+=`<line x1="${TX(10)}" y1="10" x2="${TX(10)}" y2="40" stroke="#2f6b4f" stroke-width="1.5" stroke-dasharray="3 2"/>`;
+  b+=`<text x="${TX(10)+6}" y="29" font-family="Inter" font-size="10.5" fill="#2f6b4f">Achilles draws level</text>`;
+  $('zTime').innerHTML=b;
+  const gap=zs.t-zs.a, fmt=v=>{if(v>=1)return (+v.toFixed(2)).toString(); if(v>=0.001)return (+v.toPrecision(3)).toString(); const [m,e]=v.toExponential(1).split('e'); return m+' × 10<sup>'+e.replace('-','−')+'</sup>';};
+  $('zN').textContent=zs.outside?'—':zs.n; $('zGap').innerHTML=gap>0?fmt(gap)+' m':(zs.time>10?'Achilles ahead':'0 m'); $('zT').textContent=(zs.time<10&&zs.time.toFixed(2)==='10.00'?'9.99…':+zs.time.toFixed(2))+' s';
+}
+function zAnim(to,dur,done){
+  cancelAnimationFrame(zs.raf); const from={a:zs.a,t:zs.t,time:zs.time}, t0=performance.now();
+  (function f(now){const k=Math.min(1,(now-t0)/dur);for(const key in to)zs[key]=from[key]+(to[key]-from[key])*k;drawTrack();if(k<1)zs.raf=requestAnimationFrame(f);else done&&done();})(t0);
+}
+const ZA=n=>100-100*Math.pow(.5,n), ZT=n=>100-50*Math.pow(.5,n), ZTM=n=>10-10*Math.pow(.5,n);  // after n Zeno steps
+$('zStep').onclick=()=>{
+  if(zs.outside)zReset();
+  if(zs.n>=40){$('zMsg').innerHTML='→ 40 steps: the gap is now far smaller than an atom, and there are still infinitely many steps to go. This page stops counting here. <b>Try "Step outside".</b>';return;}
+  const n=zs.n; Object.assign(zs,{a:ZA(n),t:ZT(n),time:ZTM(n)});
+  zs.segs.push({from:ZA(n),to:ZA(n+1)}); zs.n++;
+  zAnim({a:ZA(n+1),t:ZT(n+1),time:ZTM(n+1)},500);
+  const msgs=['Achilles reaches where the Tortoise started (50 m, after 5 s). The Tortoise has crawled 25 m on.','He reaches that spot too. The Tortoise is 12.5 m ahead now.','Again. The gap keeps halving…','…and halving. Each step takes half as long as the one before.'];
+  $('zMsg').innerHTML=zs.n<=4?'→ '+msgs[zs.n-1]:zs.n<10?'→ Smaller and smaller steps, and there\'s always another one. <b>Zeno: so Achilles never catches up.</b> But look at the clock.':'→ '+zs.n+' steps and the gap is microscopic, and the clock creeps closer to 10 s without ever passing it. The argument can go on forever, but it only ever describes the first 10 seconds of the race. <b>Try "Step outside".</b>';
+};
+$('zOut').onclick=()=>{
+  zReset(); zs.outside=true;
+  $('zMsg').innerHTML='→ Now just let both run, and watch the clock instead of the steps…';
+  zAnim({a:Z.va*12,t:Z.head+Z.vt*12,time:12},4200,()=>{$('zMsg').innerHTML='→ At <b>10 seconds</b> Achilles draws level, at 100 m, and then pulls ahead. All of Zeno\'s infinitely many steps fit inside those 10 seconds: <b>5 + 2.5 + 1.25 + 0.625 + … = 10</b>.';});
+};
+function zReset(){cancelAnimationFrame(zs.raf);zs={n:0,a:0,t:Z.head,time:0,segs:[],raf:null,outside:false};$('zMsg').innerHTML='Each Zeno step, Achilles runs to where the Tortoise was. Click a few times.';drawTrack();}
+$('zReset').onclick=zReset;
+drawTrack();
+
+/* ===== MIU engine ===== */
+function succ(s){
+  const out=[];
+  if(s.endsWith('I')) out.push({r:'I',t:s+'U',at:-1,len:0});
+  out.push({r:'II',t:s+s.slice(1),at:-1,len:0});
+  for(let i=1;i+3<=s.length;i++) if(s.substr(i,3)==='III') out.push({r:'III',t:s.slice(0,i)+'U'+s.slice(i+3),at:i,len:3});
+  for(let i=1;i+2<=s.length;i++) if(s.substr(i,2)==='UU') out.push({r:'IV',t:s.slice(0,i)+s.slice(i+2),at:i,len:2});
+  return out;
+}
+// breadth-first: ROWS[n] = strings first reachable in n steps; PAR[s] = [parent, rule]
+const ROWS=[['MI']], PAR={MI:null};
+for(let d=1;d<=8;d++){const nx=[];for(const s of ROWS[d-1])for(const o of succ(s))if(!(o.t in PAR)){PAR[o.t]=[s,o.r];nx.push(o.t);}ROWS.push(nx);}
+function pathTo(t){if(!(t in PAR))return null;const p=[];while(t){p.push({s:t,how:PAR[t]?'rule '+PAR[t][1]:'axiom'});t=PAR[t]?PAR[t][0]:null;}return p.reverse();}
+const isTheorem=s=>/^M[IU]*$/.test(s)&&(s.split('I').length-1)%3!==0;
+
+/* ===== Section 4: workbench ===== */
+const TARGETS=['MUI','MIUU','MUII','MU'], MAXLEN=64;
+let wb={d:[{s:'MI',how:'axiom'}],target:'MUI',pick:null,hover:null};
+const cur=()=>wb.d[wb.d.length-1].s;
+const RULE_WHY={I:'Rule I only works on a string that ends in I.',III:'Rule III needs three I\'s in a row.',IV:'Rule IV needs two U\'s in a row.'};
+function wbRender(msg){
+  const s=cur(); let h='';
+  if(wb.pick&&wb.pick.length){const o=wb.pick[wb.hover??-1];h=o?miuHTML(s.slice(0,o.at))+'<span class="hl">'+s.substr(o.at,o.len)+'</span>'+miuHTML(s.slice(o.at+o.len)):miuHTML(s);}
+  else h=miuHTML(s);
+  $('wbStr').innerHTML=h; $('wbStr').classList.toggle('win',s===wb.target);
+  const ok=new Set(succ(s).map(o=>o.r));
+  document.querySelectorAll('#wbRules [data-rule]').forEach(b=>{const r=b.dataset.rule;b.classList.toggle('off',!ok.has(r)||(r==='II'&&2*s.length-1>MAXLEN));});
+  $('wbList').innerHTML=wb.d.map((x,i)=>`<li class="${i===wb.d.length-1?'last':''}">${miuHTML(x.s)}<span>${x.how}</span></li>`).join('');
+  $('wbList').scrollTop=1e6;
+  $('wbTargets').innerHTML=TARGETS.map(t=>`<button class="ghost small mono ${t===wb.target?'on':''}" data-target="${t}">${t}${t==='MU'?' (the puzzle)':''}</button>`).join(' ');
+  $('wbShow').textContent=wb.target==='MU'?'Show a way to MU':'Show a shortest way';
+  if(msg!==undefined)$('wbMsg').innerHTML=msg;
+  else if(s===wb.target)$('wbMsg').innerHTML=`<b>You made ${wb.target} in ${wb.d.length-1} steps.</b> ${wb.d.length-1===pathTo(wb.target).length-1?'That\'s the shortest possible.':'The shortest possible takes '+(pathTo(wb.target).length-1)+'.'}${wb.target==='MUII'?' That was the hard one.':' Try another target.'}`;
+  else $('wbMsg').innerHTML=`${s.length} letters. Target: <b class="miu">${wb.target}</b>.`;
+  renderAnswer();
+}
+function wbApply(o){wb.d.push({s:o.t,how:'rule '+o.r});wb.pick=null;wb.hover=null;$('wbPick').innerHTML='';wbRender();}
+document.querySelectorAll('#wbRules [data-rule]').forEach(b=>b.onclick=()=>{
+  const r=b.dataset.rule, s=cur(), opts=succ(s).filter(o=>o.r===r);
+  wb.pick=null; wb.hover=null; $('wbPick').innerHTML='';
+  if(!opts.length) return wbRender(RULE_WHY[r]);
+  if(r==='II'&&opts[0].t.length>MAXLEN) return wbRender(`That would make ${opts[0].t.length} letters, too long for this screen. (The rules allow it.)`);
+  if(opts.length===1) return wbApply(opts[0]);
+  wb.pick=opts;
+  $('wbPick').innerHTML=opts.map((o,i)=>`<button class="ghost small" data-pick="${i}">${s.slice(0,o.at)}<u>${s.substr(o.at,o.len)}</u>${s.slice(o.at+o.len)} → ${o.t}</button>`).join('');
+  $('wbPick').querySelectorAll('[data-pick]').forEach(p=>{const o=opts[+p.dataset.pick];p.onclick=()=>wbApply(o);p.onmouseenter=()=>{wb.hover=+p.dataset.pick;wbRender(`Rule ${r} fits in ${opts.length} places. Pick one:`);};p.onmouseleave=()=>{wb.hover=null;wbRender(`Rule ${r} fits in ${opts.length} places. Pick one:`);};});
+  wbRender(`Rule ${r} fits in ${opts.length} places. Pick one:`);
+});
+$('wbTargets').addEventListener('click',e=>{const b=e.target.closest('[data-target]');if(!b)return;wb.target=b.dataset.target;wbRender();});
+$('wbUndo').onclick=()=>{if(wb.d.length>1)wb.d.pop();wb.pick=null;wb.hover=null;$('wbPick').innerHTML='';wbRender();};
+$('wbReset').onclick=()=>{wb.d=[{s:'MI',how:'axiom'}];wb.pick=null;wb.hover=null;$('wbPick').innerHTML='';wbRender();};
+$('wbShow').onclick=()=>{
+  if(wb.target==='MU')return wbRender('Section 8 has the answer. A hint first, if you want to keep trying: watch what the rules do to the number of I\'s.');
+  wb.d=pathTo(wb.target); wb.pick=null; wb.hover=null; $('wbPick').innerHTML='';
+  wbRender(`A shortest derivation of <b class="miu">${wb.target}</b>: ${wb.d.length-1} steps.${wb.target==='MUII'?' Notice the detour through a 10-letter string.':''}`);
+};
+
+/* ===== Section 5: claims ===== */
+const CLAIMS=[
+  [1,'<b>Always true.</b> The axiom starts with M, and no rule ever adds, moves or removes an M: rule II copies only what comes <i>after</i> the M.'],
+  [0,'<b>Not always.</b> Rules III and IV shrink strings: <span class="miu">MIIII</span> → <span class="miu">MUI</span> goes from 5 letters to 3.'],
+  [1,'<b>Always true.</b> The axiom has one M, and no rule ever makes another. (Rule II doubles what\'s after the M, not the M itself.)']
+];
+document.querySelectorAll('[data-claim]').forEach(b=>b.onclick=()=>{
+  const k=+b.dataset.claim,[ans,why]=CLAIMS[k], right=+b.dataset.v===ans;
+  $('cl'+k).innerHTML=(right?'✓ Right. ':'✗ Not quite. ')+why;
+});
+
+/* ===== Section 6: tree of theorems ===== */
+let tShown=1, tHit=null;
+const total=n=>ROWS.slice(0,n).reduce((a,r)=>a+r.length,0);
+function drawTree(){
+  let h='';
+  for(let i=0;i<tShown;i++){
+    const row=ROWS[i].slice().sort((a,b)=>a.length-b.length||a.localeCompare(b));
+    let show=row.slice(0,8); if(tHit&&row.includes(tHit)&&!show.includes(tHit))show=[tHit].concat(show.slice(0,7));
+    const more=row.length-show.length;
+    h+=`<div class="trow"><span class="tn">Row ${i}</span><span class="tc">${row.length.toLocaleString()} ${i?'new':'(axiom)'}</span><span class="chips">${show.map(s=>`<span class="miu${s===tHit?' hit':''}">${s.length>22?s.slice(0,20)+'…':s}</span>`).join('')}${more>0?`<span class="more">+ ${more.toLocaleString()} more</span>`:''}</span></div>`;
+  }
+  $('treeRows').innerHTML=h;
+  $('tNext').textContent=tShown<ROWS.length?'Add row '+tShown:'That\'s all this page computes';
+  $('tNext').classList.toggle('off',tShown>=ROWS.length);
+}
+$('tNext').onclick=()=>{if(tShown<ROWS.length){tShown++;$('tMsg').innerHTML=`${total(tShown).toLocaleString()} theorems so far. Strings are listed shortest first; long ones are cut short with "…".`;}else $('tMsg').innerHTML='This page stops at row 8. Row 9 alone would add 194,220 more.';drawTree();};
+$('tFindMUII').onclick=()=>{tHit='MUII';const r=ROWS.findIndex(x=>x.includes('MUII'));tShown=Math.max(tShown,r+1);drawTree();$('tMsg').innerHTML=`Found <b class="miu">MUII</b> in row ${r}, among ${total(r+1).toLocaleString()} theorems. A 4-letter string, yet it first appears 7 steps deep.`;};
+$('tFindMU').onclick=()=>{tHit='MU';tShown=ROWS.length;drawTree();$('tMsg').innerHTML=`<b class="miu">MU</b> isn't in the first ${ROWS.length} rows: ${total(ROWS.length).toLocaleString()} theorems checked. Does that mean it's impossible? Not by itself: it might be in row 9, or row 900.`;};
+$('tReset').onclick=()=>{tShown=1;tHit=null;$('tMsg').innerHTML='';drawTree();};
+drawTree();
+
+/* ===== Section 7: the MUII detour, as letter counts ===== */
+(function(){
+  const p=pathTo('MUII'), W=640, x0=40, bw=(W-x0-10)/p.length, yb=190, k=14;
+  let s=`<line x1="${x0}" y1="${yb}" x2="${W-10}" y2="${yb}" stroke="#bfb39b"/>`;
+  for(let L=2;L<=10;L+=2)s+=`<text x="${x0-8}" y="${yb-L*k+4}" text-anchor="end" font-family="Inter" font-size="10.5" fill="#8c826e">${L}</text><line x1="${x0}" y1="${yb-L*k}" x2="${W-10}" y2="${yb-L*k}" stroke="#efe7d6"/>`;
+  p.forEach((st,i)=>{const L=st.s.length,x=x0+i*bw+6,h=L*k,last=i===p.length-1;
+    s+=`<rect x="${x}" y="${yb-h}" width="${bw-12}" height="${h}" rx="4" fill="${last?'#b7862b':'#2c5282'}" opacity="${last?1:.8}"/>`;
+    s+=`<text x="${x+(bw-12)/2}" y="${yb-h-6}" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="#1f1c17">${L}</text>`;
+    s+=`<text x="${x+(bw-12)/2}" y="${yb+16}" text-anchor="middle" font-family="JetBrains Mono" font-size="${L>6?8:10}" fill="#5b5447">${st.s}</text>`;
+    if(i)s+=`<text x="${x+(bw-12)/2}" y="${yb+30}" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#8c826e">${st.how}</text>`;});
+  s+=`<text x="${x0}" y="14" font-family="Inter" font-size="11" fill="#8c826e">letters</text>`;
+  $('mount').innerHTML=s;
+})();
+
+/* ===== Section 8: the answer ===== */
+(function(){
+  // remainder after dividing the I-count by 3: start 1; doubling swaps 1 and 2; minus 3 keeps it
+  const N={0:[90,100],1:[260,100],2:[430,100]};
+  let s='<defs><marker id="ra" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#5b5447"/></marker></defs>';
+  s+=`<path d="M285,78 C320,40 370,40 405,78" fill="none" stroke="#5b5447" stroke-width="1.8" marker-end="url(#ra)"/><path d="M405,122 C370,160 320,160 285,122" fill="none" stroke="#5b5447" stroke-width="1.8" marker-end="url(#ra)"/>`;
+  s+=`<text x="345" y="40" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#5b5447">double (1 → 2)</text><text x="345" y="172" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#5b5447">double (2 → 4, remainder 1)</text>`;
+  for(const k of [1,2]){const [x,y]=N[k];s+=`<path d="M${x-14},${y-28} C${x-40},${y-75} ${x+40},${y-75} ${x+14},${y-28}" fill="none" stroke="#b7862b" stroke-width="1.5" marker-end="url(#ra)"/>`;}
+  s+=`<text x="260" y="22" text-anchor="middle" font-family="Inter" font-size="10.5" fill="#b7862b">take away 3: stays</text><text x="430" y="22" text-anchor="middle" font-family="Inter" font-size="10.5" fill="#b7862b">take away 3: stays</text>`;
+  for(const k of [0,1,2]){const [x,y]=N[k];s+=`<circle cx="${x}" cy="${y}" r="28" fill="${k?'#fff':'#fbefee'}" stroke="${k?'#2c5282':'#9b2f2f'}" stroke-width="2" ${k?'':'stroke-dasharray="5 4"'}/><text x="${x}" y="${y+7}" text-anchor="middle" font-family="EB Garamond" font-size="24" fill="${k?'#1f1c17':'#9b2f2f'}">${k}</text>`;}
+  s+=`<text x="90" y="150" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#9b2f2f">MU needs this</text><text x="90" y="166" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#9b2f2f">no arrow leads here</text>`;
+  s+=`<text x="260" y="150" text-anchor="middle" font-family="Inter" font-size="11.5" fill="#2c5282">MI starts here</text>`;
+  s+=`<text x="260" y="194" text-anchor="middle" font-family="Inter" font-size="11" fill="#8c826e">Circles: the remainder when the number of I's is divided by 3</text>`;
+  $('rem').innerHTML=s;
+})();
+function renderAnswer(){
+  const rows=wb.d.map(x=>{const n=x.s.split('I').length-1;return `<tr><td class="miu">${miuHTML(x.s.length>40?x.s.slice(0,38)+'…':x.s)}</td><td>${x.how}</td><td>${n}</td><td><b>${n%3}</b></td></tr>`;}).join('');
+  $('ansTable').innerHTML=`<table class="ctable"><tr><th>string</th><th>made by</th><th>I's</th><th>remainder ÷ 3</th></tr>${rows}</table>`+(wb.d.length<3?'<p class="small-note">Make a few strings in the workbench (section 4) and this table follows along.</p>':'<p class="small-note">The last column is always 1 or 2, never 0.</p>');
+}
+function testString(){
+  const inp=$('tIn'), v=inp.value.toUpperCase().replace(/[^MIU]/g,''); if(inp.value!==v){const c=inp.value.slice(0,inp.selectionStart).toUpperCase().replace(/[^MIU]/g,'').length;inp.value=v;inp.setSelectionRange(c,c);}
+  let out;
+  if(!v) out='Type a string of M, I and U.';
+  else if(!/^M/.test(v)) out='<span class="gfalse">Not a theorem.</span> Every theorem starts with M.';
+  else if(/M/.test(v.slice(1))) out='<span class="gfalse">Not a theorem.</span> Theorems have only one M.';
+  else {const n=v.split('I').length-1; out=isTheorem(v)?`<span class="gt">A theorem.</span> ${n} I${n===1?'':'\'s'}, not a multiple of 3.`:`<span class="gfalse">Not a theorem.</span> ${n} I's, and ${n} is a multiple of 3.`;}
+  $('tOut').innerHTML=out;
+}
+$('tIn').addEventListener('input',testString); testString();
+
+/* ===== shared ===== */
+wbRender();
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+function redrawAll(){drawRoll(invCv,invVoices());}
+window.addEventListener('resize',redrawAll);
+document.fonts&&document.fonts.ready.then(redrawAll); redrawAll();
+</script>
+</body>
+</html>

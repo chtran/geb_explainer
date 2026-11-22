@@ -19,7 +19,7 @@ window.GEB_TOC = [
   "title": "Chapter I: The MU-puzzle",
   "dialogue": "Three-Part Invention",
   "chapter": "Chapter I: The MU-puzzle",
-  "done": false
+  "done": true
  },
  {
   "id": "03-ch02-meaning-and-form-in-mathematics",
