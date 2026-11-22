@@ -96,6 +96,8 @@
       <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>voice 1 (original)</span><span><i style="background:var(--godel)"></i>voice 2 (copy + rule)</span><span><i style="background:#e8a29a"></i>clash</span></div>
     </div>
     <div class="clashmeter"><span>Clash meter</span><div class="bar"><div id="clashFill"></div></div><b id="clashPct" class="mono">–</b><span id="clashWord"></span></div>
+    <div class="row"><span class="small-note">Show the best setting (fewest clashes, copy starting later):</span><button class="ghost small" data-best="fj">Frère Jacques</button><button class="ghost small" data-best="royal">The King's theme</button></div>
+    <p class="small-note" id="bestNote" hidden></p>
     <p class="small-note">Try "Crab canon": the second voice is the theme played backwards, so the two voices are mirror images in time. Bach really wrote one of these in the Offering. The "Mirror canon" preset uses inversion: the copy is the theme upside-down, like a reflection in a lake.</p>
   </div>
 </section>
@@ -316,6 +318,13 @@ function refreshCanon(){
 $('cInv').onclick=()=>{st.inv=!st.inv;refreshCanon();};
 $('cRetro').onclick=()=>{st.retro=!st.retro;refreshCanon();};
 $('cAug').onclick=()=>{st.aug=!st.aug;refreshCanon();};
+const BEST_NOTES={"fj": "<b>Best for Frère Jacques: copy 1 bar later, same pitch (about 4% clashes).</b> Nearly every bar of the tune uses the same three notes, C, E and G, so shifting the copy by exactly one bar stacks those notes on top of each other. Starting an octave up or down scores the same. The usual round entry, 2 bars later, comes second at about 8%.", "royal": "<b>Best for the King's theme: copy 2 beats later, upside-down, backwards and twice as slow (about 11% clashes).</b> (It scores well partly because the slowed copy keeps going long after the original ends, so the two overlap for only part of the time.) Nothing gets the bare theme under 6%: its slow slide down one key at a time grinds against copies of itself. That's why Bach's real canons on it add extra melody lines around the theme. Runner-up: 2 beats later, a fifth higher, no other changes (about 13%)."};
+document.querySelectorAll('[data-best]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.best;
+  if(k==='fj'){$('cTheme').value='fj';$('cDelay').value='4';$('cTrans').value='0';st.inv=st.retro=st.aug=false;}
+  else{$('cTheme').value='royal';$('cDelay').value='2';$('cTrans').value='0';st.inv=st.retro=st.aug=true;}
+  refreshCanon(); const n=$('bestNote'); n.innerHTML=BEST_NOTES[k]; n.hidden=false;
+});
 document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{
   const p=b.dataset.preset;
   const set=(th,d,t,i,r,a)=>{$('cTheme').value=th;$('cDelay').value=d;$('cTrans').value=t;st.inv=i;st.retro=r;st.aug=a;};
