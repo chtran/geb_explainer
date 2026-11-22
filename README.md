@@ -61,7 +61,15 @@ Rules:
 - Parchment background, EB Garamond body, Inter for UI, JetBrains Mono for formulas.
 - Colour code: **Gödel blue** `#2c5282`, **Escher green** `#2f6b4f`, **Bach red** `#9b2f2f`, **gold** `#b7862b` for highlights and "playing now", ink `#1f1c17`.
 - Building blocks in `assets/geb.css`: numbered section headings (`.sec-head` + `.num`), sub-steps (`.step-h` with a gold badge `.sn`), `.card`, `.intuit` (gold-bordered "Intuition"/"Definition" box), `.words` (dashed box defining words before they're used), `.primer` (collapsible basics), `.chips`, `.legend`, `.row`, `.small-note`. Give headings a real design; don't leave plain text or Unicode circled numbers (①) as headings.
-- Each page ends with a one-breath recap and a 4–5 question self-check quiz.
+- Each page ends with a one-breath recap, then a **Modern view** section (no quiz).
+
+### 8. Every page ends with "Modern view"
+The last section of every explainer is **Modern view: what we know now**, stamped with the month it was written ("As of November 2026"). It covers how today's understanding improves, confirms, challenges or applies the section's ideas.
+- **Focus:** AI first, especially large language models and mechanistic interpretability (how models work inside); then neuroscience, mathematics and anything else that genuinely bears on the section.
+- **Format:** 3–5 cards. Each has a small topic label, a title, **In the book:** (one line), **Now:** (what's known today, concrete examples and numbers), and **Why it matters:** (the link back to the section). End with a collapsible **Sources** list of links.
+- **Research it fresh every time.** This field changes monthly. Search for the latest work and verify each claim against a primary source (the paper, the lab's own write-up). Prefer peer-reviewed results.
+- **Be careful with hype.** Label disputed or unverified claims as such (2026's AI Navier–Stokes "solution" is the example: it went in as "still being debated"). Repeat researchers' own caveats (e.g. "worked about 20% of the time", "says nothing about consciousness").
+- Same taste as the rest: define new words (large language model, artificial neuron, feature…), concrete examples, no jargon, paraphrase sources, keep it concise.
 
 ## How the user works with you (process)
 - They read a section of the book, then ask for its explainer. Then they read the page top to bottom and give feedback on whatever confuses them. Expect several rounds. Treat each confusion as a gap in the explanation, not in the reader.

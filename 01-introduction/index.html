@@ -6,7 +6,7 @@
 <title>GEB · Introduction: A Musico-Logical Offering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=43503c40">
+<link rel="stylesheet" href="../assets/geb.css?v=bea5bdb8">
 </head>
 <body data-chapter="01-introduction">
 
@@ -28,6 +28,7 @@
     <a href="#s-machines">7 · Minds &amp; machines</a>
     <a href="#s-book">8 · The book's shape</a>
     <a href="#s-recap">9 · Recap</a>
+    <a href="#s-modern">10 · Modern view</a>
   </nav>
 </div></div>
 
@@ -345,9 +346,61 @@
     <div class="card"><span class="tag e">Escher</span><h4>Pictures</h4><p>Waterfalls, staircases and hands that loop. Every step is fine; the whole is impossible.</p></div>
     <div class="card"><span class="tag g">Gödel</span><h4>Logic</h4><p>Code statements as numbers, and math can talk about itself: "I am unprovable." So there are truths no system can prove.</p></div>
   </div>
-  <div class="card quiz" style="margin-top:20px" id="quiz">
-    <h3 style="margin-top:0">Check yourself</h3>
+</section>
+
+<!-- 10 -->
+<section id="s-modern">
+  <div class="sec-head"><div class="num">10</div><h2>Modern view: what we know now</h2></div>
+  <p class="mv-asof">As of November 2026</p>
+  <p>GEB came out in 1979. Since then, machines that learn from data have turned some of this chapter's biggest "what ifs" into things researchers can test. Here is where the chapter's ideas stand today.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI</div>
+      <h4>Rule-following machines now do much of Hofstadter's list</h4>
+      <p class="mv-then"><b>In the book:</b> how could rigid rules ever produce flexible intelligence: handling ambiguity, seeing what matters, finding likeness, having new ideas?</p>
+      <p><b>Now:</b> <span class="term">Large language models</span> (the AI systems behind chatbots such as ChatGPT, Gemini and Claude) do many of these things fluently. Underneath, they are nothing but arithmetic repeated billions of times: rigid rules at the bottom, flexible behaviour on top. In 2025, two of them reached gold-medal level at the International Mathematical Olympiad, the hardest math contest for school students, writing their proofs in ordinary language. Hofstadter, long a sceptic of such systems, said in 2023 that they had shaken his views. In his words, they reinforce the idea that human creativity comes from "the brain's hardware".</p>
+      <p class="mv-so"><b>Why it matters:</b> the book's central bet, that meaning can grow out of meaningless rule-following, now has working examples to study. Whether these systems truly <i>understand</i> is still argued over.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · interpretability</div>
+      <h4>Levels, seen inside a machine</h4>
+      <p class="mv-then"><b>In the book:</b> meaning lives in patterns at a high level. You won't find a thought inside any single low-level part.</p>
+      <p><b>Now:</b> a young field called <span class="term">mechanistic interpretability</span> takes AI models apart to see how they work, like neuroscience for machines. MIT Technology Review named it one of its ten breakthrough technologies of 2026. One of its key findings matches the book closely. A single <span class="term">artificial neuron</span> usually means a jumble of unrelated things (one, in an image-recognition model, responds to both cats' faces and the fronts of cars). Real concepts show up as patterns spread across many neurons, called <span class="term">features</span>. Researchers can now trace chains of features as a model works. Asked for the capital of the state that contains Dallas, a model internally activates "Texas" and then "Austin". Writing a rhyming couplet, it picks the rhyme word <i>before</i> writing the line.</p>
+      <p class="mv-so"><b>Why it matters:</b> Hofstadter's levels are no longer only a metaphor. In AI models we can watch meaning appear above the level of the raw parts, though today's tools still capture only part of what happens.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · self-reference</div>
+      <h4>A loop that can look at itself?</h4>
+      <p class="mv-then"><b>In the book:</b> a self, an "I", may be a Strange Loop: a system whose high-level patterns represent the system itself.</p>
+      <p><b>Now:</b> in October 2025, researchers at Anthropic tested whether a language model can notice its own internal state. They planted a concept directly into the model's internal activity, for example the pattern for "ALL CAPS" text, and asked whether it noticed anything unusual. The most capable models sometimes did, and named the concept (here: something like loudness or shouting) before it had shown up in anything they wrote. It worked only about 20% of the time, and the researchers stress it says nothing about whether the model is conscious.</p>
+      <p class="mv-so"><b>Why it matters:</b> whether machines can form loops that model themselves is becoming a question you can test in a lab, not only argue about.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics</div>
+      <h4>Hilbert's dream, half come true, and Gödel still stands</h4>
+      <p class="mv-then"><b>In the book:</b> Hilbert hoped math could be made fully mechanical and complete. Gödel (and later Turing) showed no fixed system can capture every truth.</p>
+      <p><b>Now:</b> <span class="term">proof assistants</span> such as Lean check every step of a proof by machine, which is Hilbert's idea of a fully checkable proof, put into practice. AI systems now work with them. In October 2026 the journal <i>Science</i> reported Google DeepMind's AlphaProof Nexus producing machine-checked solutions to 9 unsolved problems posed by the mathematician Paul Erdős, and to 44 open conjectures about number sequences. Claims about far bigger problems, such as OpenAI's 2026 result on the Navier–Stokes equations of fluid flow, are still being debated by mathematicians.</p>
+      <p class="mv-so"><b>Why it matters:</b> Gödel's theorem is untouched. These AI provers work inside formal systems too, so there will always be true statements they can't prove. The theorem doesn't stop machines doing mathematics. It says no single fixed system, human or machine, gets all of it. (People have argued that Gödel proves minds can't be machines; most logicians, and Hofstadter himself, reject that argument.)</p>
+    </div>
   </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/" target="_blank" rel="noopener">Google DeepMind: Gemini Deep Think reaches gold-medal standard at IMO 2025</a></li>
+      <li><a href="https://www.greaterwrong.com/posts/kAmgdEjq2eYQkB5PP/douglas-hofstadter-changes-his-mind-on-deep-learning-and-ai" target="_blank" rel="noopener">Douglas Hofstadter interview excerpts on deep learning and AI (2023)</a></li>
+      <li><a href="https://www.technologyreview.com/2026/01/12/1130003/" target="_blank" rel="noopener">MIT Technology Review: Mechanistic interpretability, 10 Breakthrough Technologies 2026</a></li>
+      <li><a href="https://transformer-circuits.pub/2023/monosemantic-features/" target="_blank" rel="noopener">Anthropic: Towards Monosemanticity (neurons that mix unrelated concepts)</a></li>
+      <li><a href="https://transformer-circuits.pub/2025/attribution-graphs/biology.html" target="_blank" rel="noopener">Anthropic: On the Biology of a Large Language Model (Dallas → Texas → Austin; rhyme planning)</a></li>
+      <li><a href="https://www.anthropic.com/research/introspection" target="_blank" rel="noopener">Anthropic: Signs of introspection in large language models (2025)</a></li>
+      <li><a href="https://www.thedailystar.net/news/technology/news/ai-can-now-solve-complex-mathematical-research-problems-scientists-say-4296911" target="_blank" rel="noopener">Report on AlphaProof Nexus in Science (October 2026)</a></li>
+      <li><a href="https://www.scientificamerican.com/article/did-openai-solve-the-wrong-navier-stokes-problem/" target="_blank" rel="noopener">Scientific American: Did OpenAI solve the wrong Navier–Stokes problem?</a></li>
+    </ol>
+  </details>
 </section>
 
 </main>
@@ -356,7 +409,7 @@
 </footer>
 
 <script src="../assets/toc.js?v=b9b4a14e"></script>
-<script src="../assets/glossary.js?v=8df00b7f"></script>
+<script src="../assets/glossary.js?v=9c3992e5"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=825ddc85" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -754,16 +807,6 @@ $('weave').innerHTML=(()=>{
   s+=`<text x="20" y="210" font-family="EB Garamond" font-size="17" fill="#2c5282">Chapters — explain it</text>`;
   return s;})();
 
-/* Quiz */
-const Q=[
- ['What is a Strange Loop?',['A melody played backwards','Moving up through levels and ending up back where you started','A proof with an error in it'],1,'Climbing a hierarchy and arriving home — like the rising canon, Escher\'s stairs, or Gödel\'s self-referring statement.'],
- ['In a crab canon, the second voice is…',['the theme upside-down','the theme backwards','the theme twice as slow'],1,'Retrograde — like a crab walking backwards. Upside-down is inversion; slower is augmentation.'],
- ['Gödel\'s key move was to replace "this sentence is false" with…',['"this sentence is unprovable"','"this sentence is meaningless"','"all sentences are false"'],0,'Swapping truth for provability turns a paradox into a theorem: a true but unprovable statement.'],
- ['How can a statement about numbers also be about statements?',['It can\'t','Gödel numbering: code every formula as a number','By using a different language'],1,'Once formulas are numbers, number theory can describe properties of its own formulas — a second, hidden level of meaning.'],
- ['What is the big question the book is heading toward?',['Was Bach better than Mozart?','How can a mind/self arise from meaningless rule-following parts?','Is mathematics useless?'],1,'Hofstadter suspects that Strange Loops are how meaning and an "I" emerge from rigid low-level rules.']
-];
-$('quiz').innerHTML+=Q.map((q,i)=>`<div class="q" id="q${i}"><div><b>${i+1}.</b> ${q[0]}</div><div class="opts">${q[1].map((o,j)=>`<button data-q="${i}" data-a="${j}">${o}</button>`).join('')}</div><div class="why">${q[3]}</div></div>`).join('');
-$('quiz').addEventListener('click',e=>{const b=e.target.closest('button[data-q]');if(!b)return;const q=+b.dataset.q,a=+b.dataset.a;b.classList.add(a===Q[q][2]?'right':'wrong');if(a===Q[q][2]){$('q'+q).classList.add('done');}});
 
 
 /* TOC highlight */

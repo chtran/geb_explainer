@@ -39,6 +39,11 @@ window.GEB_GLOSSARY = {
   "prime":             {def:"A whole number divisible only by 1 and itself: 2, 3, 5, 7, 11, …", in:"01"},
   "power":             {def:"Repeated multiplication: 3\u00b3 (\u201c3 to the power 3\u201d) = 3 \u00d7 3 \u00d7 3 = 27.", in:"01"},
   "g\u00f6del numbering":   {def:"Gödel\u2019s code that turns every formula into a unique whole number, so statements about numbers can be about formulas.", in:"01"},
+  "large language model":{def:"An AI system trained on huge amounts of text to predict the next word; the kind of system behind chatbots such as ChatGPT, Gemini and Claude.", in:"01"},
+  "mechanistic interpretability":{def:"The study of how AI models work inside, by tracing which internal parts do what: like neuroscience for machines.", in:"01"},
+  "artificial neuron": {def:"The smallest unit of an AI model: it adds up numbers coming in and passes a number on. Models have billions of them.", in:"01"},
+  "feature":           {def:"In an AI model, a concept represented as a pattern of activity spread across many artificial neurons.", in:"01"},
+  "proof assistant":   {def:"Software, such as Lean, that checks every step of a mathematical proof by machine.", in:"01"},
   "parallel postulate":{def:"The axiom that through a point beside a line there’s exactly one line that never meets it.", in:"01"},
   "set":               {def:"A collection of things.", in:"01"},
   "zeno's paradoxes":  {def:"Ancient Greek puzzles, e.g. one “proving” speedy Achilles can never catch a tortoise with a head start.", in:"01"}
