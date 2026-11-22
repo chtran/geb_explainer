@@ -120,3 +120,4 @@ footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,san
 .term{cursor:help}
 .termtip{position:absolute;z-index:50;max-width:300px;background:var(--ink);color:var(--paper);font:13.5px/1.5 Inter,sans-serif;padding:9px 12px;border-radius:9px;box-shadow:0 6px 20px #0003;pointer-events:none}
 .termtip b{color:#f3d9a0;margin-right:2px}
+.keypanel{border-top:1px dashed var(--rule);margin-top:16px;padding-top:6px}

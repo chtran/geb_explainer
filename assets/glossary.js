@@ -18,6 +18,7 @@ window.GEB_GLOSSARY = {
   "fifth":             {def:"An interval of 7 piano keys — the most harmonious after the octave.", in:"01"},
   "semitone":          {def:"A step of one piano key.", in:"01"},
   "clash":             {def:"Two notes sounding together that grind against each other (here: 1, 2, 6, 10 or 11 piano keys apart).", in:"01"},
+  "chord":           {def:"A group of notes played together that sound good together, e.g. C, E\u266d and G.", in:"01"},
   "key":               {def:"A piece’s home note and the scale built around it, e.g. C minor.", in:"01"},
   "modulation":        {def:"Moving a piece from one key to another.", in:"01"},
   "shepard tones":     {def:"Notes played in many octaves at once, with the highest and lowest faded out, so the ear can’t tell which octave it is.", in:"01"},
