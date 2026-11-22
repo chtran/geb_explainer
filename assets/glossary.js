@@ -54,5 +54,16 @@ window.GEB_GLOSSARY = {
   "derivation":        {def:"The record of how a theorem was made: the axiom, then each string produced by a rule, one per line.", in:"02"},
   "decision procedure":{def:"A step-by-step test that is guaranteed to finish and answer yes or no.", in:"02"},
   "invariant":         {def:"A property that every step of a process leaves unchanged, like “the number of I’s is not a multiple of 3”.", in:"02"},
-  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"}
+  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"},
+  "sonata":            {def:"A piece of music in several separate parts (movements) for one or two instruments.", in:"04"},
+  "unaccompanied":     {def:"Played by one instrument alone, with nothing else playing along.", in:"04"},
+  "figure":            {def:"The thing a picture shows; the part you are meant to look at.", in:"04"},
+  "ground":            {def:"Short for background: everything in a picture that is not the figure.", in:"04"},
+  "hyphen-string":     {def:"A row of one or more hyphens and nothing else, such as ---.", in:"04"},
+  "axiom schema":      {def:"A pattern that describes the shape of endlessly many axioms at once.", in:"04"},
+  "composite number":  {def:"A whole number made by multiplying two smaller numbers, each at least 2: 4, 6, 8, 9, 10, …", in:"04"},
+  "typographical operation": {def:"A step that only handles symbols as shapes: reading, writing, copying, erasing or comparing them.", in:"04"},
+  "cursively drawable":{def:"Hofstadter’s name for a figure you can draw directly, whatever its background turns out to be.", in:"04"},
+  "recursive":         {def:"In this chapter: a figure whose background is also a figure, or a set whose members and non-members can each be listed by a formal system.", in:"04"},
+  "recursively enumerable": {def:"Said of a set whose members some formal system can list one by one, missing none and adding no others.", in:"04"}
 };
