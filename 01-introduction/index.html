@@ -122,7 +122,7 @@
     </div>
     <div class="keypanel">
       <h3 style="margin-top:4px">Where each key sits on the piano</h3>
-      <p class="small-note">A key uses 7 of the 12 notes in an <span class="term">octave</span>. Step around the ring one key at a time, then try jumping straight across it, and compare how many notes change. Each move plays the old key's home <span class="term">chord</span>, then the new one.</p>
+      <p class="small-note">A key uses 7 of the 12 notes in an <span class="term">octave</span>. Click a key on the ring to hear the canon's melody in that key, the same one you hear during playback. Then step around the ring one key at a time, try jumping straight across it, and compare how many notes change. Each move plays the end of the old key's melody, then the new key's.</p>
       <svg id="kbd" viewBox="0 0 520 200" width="100%" style="max-width:540px;display:block;margin:8px auto 0"></svg>
       <div class="legend" id="kLegend"><span><i style="background:#b7862b"></i>kept from the previous key</span><span><i style="background:#9b2f2f"></i>new in this key</span><span><i style="background:#efe7d6;border:1px dashed #8c826e"></i>dropped</span><span>● home note</span></div>
       <div class="row"><button class="ghost" id="kPrev">◀ Step down</button><button class="ghost" id="kNext">Step up ▶</button><span class="small-note">or click any key on the ring to jump straight to it</span></div>
@@ -276,7 +276,7 @@
 </footer>
 
 <script src="../assets/toc.js?v=b9b4a14e"></script>
-<script src="../assets/glossary.js?v=a5d1f3fc"></script>
+<script src="../assets/glossary.js?v=086884f1"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=825ddc85" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -414,13 +414,18 @@ function showKeys(i,prev){
   }
   $('kMsg').innerHTML=msg;
 }
-function homeTonic(k){const t=60+2*k;return t>66?t-12:t;}
 function selectKey(j){
-  const prev=kb.cur;
+  const prev=kb.cur, spb=0.27;
   stopSound(); const out=newBus(), c=ac(); let t=c.currentTime+0.06;
-  const chord=(k,at,dur)=>{const r=homeTonic(k);[0,3,7].forEach(x=>pluck(out,r+x,at,dur,0.13));pluck(out,r-12,at,dur,0.12,'soft');};
-  if(prev!=null && prev!==j){chord(prev,t,0.75); t+=0.85;}
-  chord(j,t,1.3);
+  // Same melody and sound as "Bach-style" playback, starting on each key's home note.
+  let base=60+2*j, pbase=prev==null?null:60+2*prev;
+  if(prev!=null){ // keep a one-step move going the way it goes on the ring (B-flat minor -> C minor goes up)
+    if((j-prev+6)%6===1 && j<prev) base+=12;
+    if((prev-j+6)%6===1 && j>prev) base-=12;
+  }
+  const phrase=(b,notes)=>{const start=t;let len=0;for(const [iv,d] of notes){pluck(out,b+iv,t,d*spb,0.2);t+=d*spb;len+=d;}pluck(out,b-12,start,len*spb*0.95,0.12,'soft');};
+  if(prev!=null && prev!==j) phrase(pbase,MOTIF.slice(-4));   // end of the old key's melody
+  phrase(base,MOTIF);
   ringHighlight(j); $('mKey').textContent=KEYS[j];
   showKeys(j,prev===j?kb.prev:prev);
 }
