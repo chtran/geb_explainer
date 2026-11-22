@@ -121,3 +121,19 @@ footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,san
 .termtip{position:absolute;z-index:50;max-width:300px;background:var(--ink);color:var(--paper);font:13.5px/1.5 Inter,sans-serif;padding:9px 12px;border-radius:9px;box-shadow:0 6px 20px #0003;pointer-events:none}
 .termtip b{color:#f3d9a0;margin-right:2px}
 .keypanel{border-top:1px dashed var(--rule);margin-top:16px;padding-top:6px}
+/* sub-steps inside a section */
+.step-h{display:flex;align-items:center;gap:12px;margin:34px 0 10px;font:500 24px/1.2 "EB Garamond",Georgia,serif;color:var(--ink)}
+.step-h .sn{flex:none;width:30px;height:30px;border-radius:8px;background:var(--gold);color:#fff;font:600 14px Inter,sans-serif;display:grid;place-items:center}
+/* collapsible primer */
+.primer{margin:18px 0 6px;border:1px solid var(--rule);border-radius:14px;background:var(--card)}
+.primer summary{cursor:pointer;list-style:none;padding:14px 18px 14px 48px;position:relative}
+.primer summary::-webkit-details-marker{display:none}
+.primer summary::before{content:"+";position:absolute;left:16px;top:14px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font:600 15px/22px Inter,sans-serif;text-align:center}
+.primer[open] summary::before{content:"−"}
+.primer .pm-title{display:block;font:600 16px Inter,sans-serif;color:var(--ink)}
+.primer .pm-sub{display:block;font:14px Inter,sans-serif;color:var(--ink2);margin-top:2px}
+.primer .pm-open{display:none}
+.primer[open] .pm-sub{display:none}
+.primer[open] .pm-sub.pm-open{display:block}
+.primer-body{padding:0 18px 18px;border-top:1px solid var(--rule)}
+.primer-body .step-h{margin-top:22px}
