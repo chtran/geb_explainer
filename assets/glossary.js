@@ -64,5 +64,10 @@ window.GEB_GLOSSARY = {
   "non-euclidean":     {def:"Describes a geometry in which Euclid’s parallel postulate is false.", in:"05"},
   "undefined term":    {def:"A word, like “point” or “line” in geometry, that the axioms use without saying what it is. It means whatever fits the axioms.", in:"05"},
   "great circle":      {def:"A circle on a sphere that is as large as possible, like the equator. The shortest path between two places on a sphere runs along one.", in:"05"},
-  "absolute geometry": {def:"The geometry that follows from Euclid’s first four postulates alone, without the parallel postulate.", in:"05"}
+  "absolute geometry": {def:"The geometry that follows from Euclid’s first four postulates alone, without the parallel postulate.", in:"05"},
+  "explicit meaning":  {def:"The meaning a thing was made to carry, like the music on a record.", in:"05"},
+  "implicit meaning":  {def:"A second meaning that appears only when a thing is lined up against something else, like a record against the design of one player.", in:"05"},
+  "inconsistent":      {def:"Describes a system, read under some interpretation, in which at least one theorem comes out false.", in:"05"},
+  "external consistency": {def:"The theorems of a system, as interpreted, agree with the world.", in:"05"},
+  "internal consistency": {def:"The theorems of a system, as interpreted, agree with each other: some imaginable world makes them all true together.", in:"05"}
 };
