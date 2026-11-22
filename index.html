@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEB Explainers — Gödel, Escher, Bach, section by section</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/geb.css">
+<style>
+.wrap{max-width:860px;margin:0 auto;padding:0 22px 80px}
+.progress{font:500 14px Inter,sans-serif;color:var(--ink2);margin:18px 0 6px;text-align:center}
+.pbar{height:8px;border-radius:6px;background:var(--paper2);overflow:hidden;max-width:420px;margin:0 auto}
+.pbar div{height:100%;background:linear-gradient(90deg,var(--godel),var(--escher),var(--bach))}
+.part{font:600 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.toc{list-style:none;margin:0;padding:0}
+.toc li{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:10px}
+.toc li.done{background:var(--card);border:1px solid var(--rule);margin:6px 0}
+.toc li.done:hover{border-color:var(--ink)}
+.toc .n{font:500 12px "JetBrains Mono",monospace;color:var(--ink2);width:22px;flex:none}
+.toc .k{font:600 10.5px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;padding:2px 8px;flex:none;width:76px;text-align:center}
+.toc .k.dialogue{background:#f7e6e6;color:var(--bach)}
+.toc .k.chapter{background:#e4ecf6;color:var(--godel)}
+.toc .t{flex:1;font-size:18px}
+.toc li:not(.done) .t{color:#9a907c}
+.toc a{color:inherit;text-decoration:none}
+.toc .s{font:500 12px Inter,sans-serif;color:var(--ink2)}
+.toc li.done .s{color:var(--escher)}
+.links{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.links a{font:500 14px Inter,sans-serif;padding:8px 14px;border-radius:8px;border:1px solid var(--rule);color:var(--ink);text-decoration:none;background:var(--card)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="kicker">A reading companion</div>
+  <h1>Gödel, Escher, Bach, <em>explained</em></h1>
+  <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
+  <p class="lede">Interactive, visual, sound-on explainers for Douglas Hofstadter's <i>Gödel, Escher, Bach: an Eternal Golden Braid</i>, built one section at a time as the book is read. Every new word is explained where it first appears.</p>
+  <div class="progress" id="prog"></div>
+  <div class="pbar"><div id="pfill"></div></div>
+  <div class="links"><a href="glossary.html">Glossary of every term</a></div>
+</header>
+<main class="wrap" id="toc"></main>
+<footer>
+  The book alternates <b>Dialogues</b> (stories that show an idea) with <b>Chapters</b> (which explain it). Summaries are original paraphrases; no text from the book is reproduced. Music is synthesized live in your browser.
+</footer>
+<script src="assets/toc.js"></script>
+<script>
+(function(){
+  const toc=window.GEB_TOC, root=document.getElementById('toc');
+  const secs=toc.filter(e=>e.id), done=secs.filter(e=>e.done).length;
+  document.getElementById('prog').textContent=done+' of '+secs.length+' sections explained';
+  document.getElementById('pfill').style.width=(100*done/secs.length)+'%';
+  let html='', n=0, open=false;
+  for(const e of toc){
+    if(e.part){ if(open)html+='</ul>'; html+='<div class="part">'+e.part+'</div><ul class="toc">'; open=true; continue; }
+    n++;
+    const row='<span class="n">'+String(n).padStart(2,'0')+'</span><span class="k '+e.kind+'">'+e.kind+'</span><span class="t">'+e.title+'</span><span class="s">'+(e.done?'Read →':'coming soon')+'</span>';
+    html+= e.done ? '<li class="done"><a href="'+e.id+'/" style="display:contents">'+row+'</a></li>' : '<li>'+row+'</li>';
+  }
+  if(open)html+='</ul>';
+  root.innerHTML=html;
+})();
+</script>
+</body>
+</html>
