@@ -14,7 +14,7 @@
   <div class="kicker">Gödel, Escher, Bach · Explainer 01</div>
   <h1>Introduction: <em>A Musico-Logical Offering</em></h1>
   <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
-  <p class="lede">A mathematician, an artist and a composer each found the same strange trick: a system that climbs upward, level by level, and ends up right back where it started. Hofstadter calls this trick a <b>Strange Loop</b>. This chapter introduces it and hints that it might be what a mind is.</p>
+  <p class="lede">A mathematician, an artist and a composer each found the same strange trick: a system that climbs upward, level by level, and ends up right back where it started. Hofstadter calls this trick a <span class="term">Strange Loop</span>. This chapter introduces it and hints that it might be what a mind is.</p>
 </header>
 
 <div class="toolbar"><div class="in">
@@ -46,11 +46,11 @@
       <p>Bach was playful. He prefaced the gift with a Latin phrase whose first letters spell a word. Click to reveal it:</p>
       <div class="acro" id="acro"><span><i>R</i>egis </span><span><i>I</i>ussu </span><span><i>C</i>antio </span><span><i>E</i>t </span><span><i>R</i>eliqua </span><span><i>C</i>anonica </span><span><i>A</i>rte </span><span><i>R</i>esoluta</span></div>
       <div class="ric">RICERCAR</div>
-      <p class="small-note">It means: "At the King's command, the song and the rest resolved with canonic art" (the art of <i>canons</i>, explained in section 2). <i>Ricercar</i> ("to seek") is an old word for a fugue — so the sentence secretly <b>names what it is</b>. That's <span class="term">self-reference</span>: something that talks about, or points back to, itself. Keep an eye on it; it's the thread running through the whole book.</p>
+      <p class="small-note">It means: "At the King's command, the song and the rest resolved with canonic art" (the art of <i>canons</i>, explained in section 2). <span class="term">Ricercar</span> ("to seek") is an old word for a fugue — so the sentence secretly <b>names what it is</b>. That's <span class="term">self-reference</span>: something that talks about, or points back to, itself. Keep an eye on it; it's the thread running through the whole book.</p>
     </div>
     <div class="card">
       <h3 style="margin-top:0">Hear the King's theme</h3>
-      <p class="small-note">Simplified synth rendering (rhythm approximate). Notice the slow slide down in the middle, one piano key at a time (black and white keys alike). Musicians call that a <b>chromatic</b> line, and it's part of what made the theme so hard to work with.</p>
+      <p class="small-note">Simplified synth rendering (rhythm approximate). Notice the slow slide down in the middle, one piano key at a time (black and white keys alike). Musicians call that a <span class="term">chromatic</span> line, and it's part of what made the theme so hard to work with.</p>
       <canvas id="themeCanvas" height="200"></canvas>
       <div class="row"><button id="playTheme">▶ Play the Royal Theme</button></div>
     </div>
@@ -60,7 +60,7 @@
 <!-- 2 -->
 <section id="s-canon">
   <div class="sec-head"><div class="num">2</div><h2>Canons: one melody, copied and transformed</h2></div>
-  <p>The Musical Offering is full of <b>canons</b>. A canon is the simplest kind of musical "copying machine": one voice plays a theme, and another voice plays <b>the same theme</b> a little later. Think of a round like "Frère Jacques". The magic is that the copies fit together even though they overlap.</p>
+  <p>The Musical Offering is full of <span class="term">canons</span>. A canon is the simplest kind of musical "copying machine": one voice plays a theme, and another voice plays <b>the same theme</b> a little later. Think of a round like "Frère Jacques". The magic is that the copies fit together even though they overlap.</p>
   <p>Bach pushed the copying further. The copy doesn't have to be exact — it can be <b>transformed</b>, as long as there's a strict rule linking it to the original:</p>
   <div class="grid3" style="grid-template-columns:repeat(5,1fr);gap:10px">
     <div class="card small-note"><b>Delay</b><br>start later in time</div>
@@ -87,7 +87,7 @@
       <button class="ghost small" data-preset="mirror">Mirror canon</button>
       <button class="ghost small" data-preset="aug">Augmentation canon</button>
     </div>
-    <div class="words">Music words for the controls: a <b>beat</b> is one pulse of the music, and a <b>bar</b> is a group of 4 beats. The distance between two notes is called an <b>interval</b>. An <b>octave</b> is the same note sung higher (12 piano keys up), and a <b>fifth</b> is 7 piano keys up, the most harmonious interval after the octave. A <span class="term">clash</span> is when two notes sounding together grind against each other (here: notes 1, 2, 6, 10 or 11 piano keys apart). Clashes show as <span style="color:#c0392b;font-weight:600">red bands</span> on the chart.</div>
+    <div class="words">Music words for the controls: a <span class="term">beat</span> is one pulse of the music, and a <span class="term">bar</span> is a group of 4 beats. The distance between two notes is called an <span class="term">interval</span>. An <span class="term">octave</span> is the same note sung higher (12 piano keys up), and a <span class="term">fifth</span> is 7 piano keys up, the most harmonious interval after the octave. A <span class="term">clash</span> is when two notes sounding together grind against each other (here: notes 1, 2, 6, 10 or 11 piano keys apart). Clashes show as <span style="color:#c0392b;font-weight:600">red bands</span> on the chart.</div>
     <canvas id="canonCanvas" height="260"></canvas>
     <div class="row">
       <button id="cPlay">▶ Play both voices</button>
@@ -117,7 +117,7 @@
           <button id="riseShep">∞ Shepard: rise forever</button>
         </div>
         <p class="meter">Current key: <b id="mKey">—</b><br>Steps climbed: <b id="mSteps">0</b> &nbsp;·&nbsp; Total rise: <b id="mRise">0</b> semitones</p>
-        <p class="small-note">A <b>semitone</b> is a step of one piano key. Each step around the ring rises 2 semitones (a "whole tone"), and six of them make 12, a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
+        <p class="small-note">A <span class="term">semitone</span> is a step of one piano key. Each step around the ring rises 2 semitones (a "whole tone"), and six of them make 12, a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
       </div>
     </div>
   </div>
@@ -136,7 +136,7 @@
         <li><b><a href="https://mcescher.com/product-tag/drawing-hands" target="_blank" rel="noopener">Drawing Hands</a></b> (1948) — two hands, each drawing the other. Which one is "really" the artist? Neither level is on top.</li>
         <li><b><a href="https://mcescher.com/" target="_blank" rel="noopener">Metamorphosis</a></b> (1939–40, 1967–68) — patterns that slowly morph into other things and finally back into themselves.</li>
       </ul>
-      <div class="words"><b>See the real artworks ↗</b> Escher's prints are still under copyright, so they aren't copied here. Click a title above to see it on the official M.C. Escher site, or read the <a href="https://www.escherinhetpaleis.nl/topstuk/waterfall/?lang=en" target="_blank" rel="noopener">Escher in Het Paleis museum's page on Waterfall</a>, which shows his sketches working out the loop. They're also printed in your copy of GEB, in this Introduction. A <b>lithograph</b>, by the way, is a print made from a drawing on a flat stone or metal plate.</div>
+      <div class="words"><b>See the real artworks ↗</b> Escher's prints are still under copyright, so they aren't copied here. Click a title above to see it on the official M.C. Escher site, or read the <a href="https://www.escherinhetpaleis.nl/topstuk/waterfall/?lang=en" target="_blank" rel="noopener">Escher in Het Paleis museum's page on Waterfall</a>, which shows his sketches working out the loop. They're also printed in your copy of GEB, in this Introduction. A <span class="term">lithograph</span>, by the way, is a print made from a drawing on a flat stone or metal plate.</div>
       <p>The trick in all of them: <b>each local step looks perfectly reasonable</b>. It's only when you follow the whole path that it becomes impossible. Exactly like the canon: every key change sounds fine, yet the whole thing loops.</p>
       <div class="intuit"><b>Intuition</b>"Up" and "down", "the drawer" and "the drawn" are supposed to be different levels. A Strange Loop is when those levels <b>tangle</b>: the thing at the bottom ends up holding up the thing at the top.</div>
     </div>
@@ -154,11 +154,11 @@
 <section id="s-godel">
   <div class="sec-head"><div class="num">5</div><h2>Gödel: a Strange Loop inside mathematics</h2></div>
   <p><span class="tag g">Gödel</span> The deepest Strange Loop in the book belongs to <b>Kurt Gödel</b>, who in 1931 found one inside math itself. His idea starts from an ancient puzzle, but first we need a few words.</p>
-  <div class="words"><b>Words for this section.</b> A <span class="term">proof</span> is a chain of steps, each following strict rules, from starting assumptions to a conclusion. A <span class="term">formal system</span> is a fixed list of starting statements, called <span class="term">axioms</span>, plus mechanical rules for producing new statements, called <span class="term">theorems</span>. Think of a board game: the axioms are the starting position and the rules are the legal moves. A statement is <b>provable</b> if you can reach it with legal moves. A system is <span class="term">consistent</span> if it never proves a contradiction (a statement and its opposite). It's <span class="term">complete</span> if every true statement in its language is provable.</div>
+  <div class="words"><b>Words for this section.</b> A <span class="term">proof</span> is a chain of steps, each following strict rules, from starting assumptions to a conclusion. A <span class="term">formal system</span> is a fixed list of starting statements, called <span class="term">axioms</span>, plus mechanical rules for producing new statements, called <span class="term">theorems</span>. Think of a board game: the axioms are the starting position and the rules are the legal moves. A statement is <span class="term">provable</span> if you can reach it with legal moves. A system is <span class="term">consistent</span> if it never proves a contradiction (a statement and its opposite). It's <span class="term">complete</span> if every true statement in its language is provable.</div>
   <div class="cols">
     <div class="card">
       <h3 style="margin-top:0">Step 1 — The Liar (Epimenides paradox)</h3>
-      <p class="small-note">A <b>paradox</b> is a statement or argument where every step seems fine but you end up with a contradiction. The ancient poet Epimenides, who was from Crete, said "All Cretans are liars." Boiled down, the puzzle is this sentence:</p>
+      <p class="small-note">A <span class="term">paradox</span> is a statement or argument where every step seems fine but you end up with a contradiction. The ancient poet Epimenides, who was from Crete, said "All Cretans are liars." Boiled down, the puzzle is this sentence:</p>
       <div class="sentence" id="liar">"This sentence is false."</div>
       <div class="row"><button id="liarGo">Suppose it's true…</button><button class="ghost" id="liarReset">Reset</button></div>
       <div class="steps" id="liarSteps"></div>
@@ -178,10 +178,10 @@
       <label class="ctl">Type a formula <input type="text" id="gIn" value="S0+S0=SS0" maxlength="24" style="width:220px"></label>
       <span class="small-note mono">symbols: 0 S = + × ( ) ~ x</span>
     </div>
-    <p class="small-note">Codes: <span class="mono">0→1 S→2 =→3 +→4 ×→5 (→6 )→7 ~→8 x→9</span>. <b>S</b> means "the next number after", so S0 = 1 and SS0 = 2; "S0+S0=SS0" means 1+1=2. To build the number, take the <b>primes</b> (numbers divisible only by 1 and themselves: 2, 3, 5, 7, 11, …), and raise the 1st prime to the 1st symbol's code, the 2nd prime to the 2nd symbol's code, and so on. Then multiply everything together.</p>
+    <p class="small-note">Codes: <span class="mono">0→1 S→2 =→3 +→4 ×→5 (→6 )→7 ~→8 x→9</span>. <b>S</b> means "the next number after", so S0 = 1 and SS0 = 2; "S0+S0=SS0" means 1+1=2. To build the number, take the <span class="term">primes</span> (numbers divisible only by 1 and themselves: 2, 3, 5, 7, 11, …), and raise the 1st prime to the 1st symbol's code, the 2nd prime to the 2nd symbol's code, and so on. Then multiply everything together.</p>
     <div class="godelout" id="gOut"></div>
   </div>
-  <div class="intuit"><b>The punchline — Gödel's Incompleteness Theorem</b>(A <i>theorem</i> in ordinary math talk just means a proven result.) Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
+  <div class="intuit"><b>The punchline — Gödel's Incompleteness Theorem</b>(A <span class="term">theorem</span> in ordinary math talk just means a proven result.) Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
 </section>
 
 <!-- 6 -->
@@ -190,8 +190,8 @@
   <p>Hofstadter sketches a short history: mathematicians kept trying to make math perfectly rigorous, and self-reference kept slipping in through the back door. Scroll →</p>
   <div class="timeline">
     <div class="tl"><div class="yr">~300 BC</div><h4>Euclid</h4><p>Geometry from a few axioms by pure deduction. The dream of rigor begins.</p></div>
-    <div class="tl"><div class="yr">1800s</div><h4>Non-Euclidean geometry</h4><p>Change one axiom — the <i>parallel postulate</i>, which says that through a point beside a line there's exactly one line that never meets it — and you get perfectly consistent "other" geometries. Axioms aren't obvious truths — they're choices. Shock.</p></div>
-    <div class="tl"><div class="yr">1870s–90s</div><h4>Cantor's sets</h4><p>A <b>set</b> is just a collection of things. Set theory becomes the foundation for everything — and handles infinities. Powerful, but it can talk about sets of sets…</p></div>
+    <div class="tl"><div class="yr">1800s</div><h4>Non-Euclidean geometry</h4><p>Change one axiom — the <span class="term">parallel postulate</span>, which says that through a point beside a line there's exactly one line that never meets it — and you get perfectly consistent "other" geometries. Axioms aren't obvious truths — they're choices. Shock.</p></div>
+    <div class="tl"><div class="yr">1870s–90s</div><h4>Cantor's sets</h4><p>A <span class="term">set</span> is just a collection of things. Set theory becomes the foundation for everything — and handles infinities. Powerful, but it can talk about sets of sets…</p></div>
     <div class="tl crack"><div class="yr">1901</div><h4>Russell's paradox</h4><p>Take the set of all sets that <i>don't</i> contain themselves. Does it contain itself? Yes ⇒ no, no ⇒ yes. Self-reference breaks set theory.</p></div>
     <div class="tl"><div class="yr">1910–13</div><h4>Principia Mathematica</h4><p>Russell &amp; Whitehead build math from logic with a strict "type" ladder that forbids anything from referring to itself or its own level.</p></div>
     <div class="tl"><div class="yr">1920s</div><h4>Hilbert's program</h4><p>Hilbert asks: prove that such a system is complete (every truth provable) and consistent (no contradictions).</p></div>
@@ -236,7 +236,7 @@
   <div class="sec-head"><div class="num">8</div><h2>How the book itself is built</h2></div>
   <div class="cols">
     <div>
-      <p>GEB alternates between <b>Chapters</b> (explanations) and <b>Dialogues</b> (playful stories). The Dialogues star <b>Achilles</b> and the <b>Tortoise</b>, borrowed from <b>Zeno's paradoxes</b> (ancient Greek puzzles, including one "proving" that speedy Achilles can never catch a tortoise with a head start) and from Lewis Carroll's little piece <i>What the Tortoise Said to Achilles</i>; later a Crab, a Genie and others join in.</p>
+      <p>GEB alternates between <b>Chapters</b> (explanations) and <b>Dialogues</b> (playful stories). The Dialogues star <b>Achilles</b> and the <b>Tortoise</b>, borrowed from <span class="term">Zeno's paradoxes</span> (ancient Greek puzzles, including one "proving" that speedy Achilles can never catch a tortoise with a head start) and from Lewis Carroll's little piece <i>What the Tortoise Said to Achilles</i>; later a Crab, a Genie and others join in.</p>
       <p>Many Dialogues are shaped like Bach pieces — some are literally written as canons or fugues in words, with characters repeating, inverting or reversing each other's lines. Each Dialogue <b>shows</b> an idea concretely, as a story, before the next Chapter <b>explains</b> it.</p>
       <div class="intuit"><b>Reading tip</b>Don't worry if a Dialogue feels like nonsense the first time. It's usually a puzzle-box: the following Chapter hands you the key. And the book's structure is itself an example of what it's about — form mirroring content.</div>
       <p class="small-note">Next up in your reading: the first Dialogue, <b>Three-Part Invention</b> — a retelling of Lewis Carroll's Achilles-and-Tortoise story.</p>
@@ -259,7 +259,6 @@
   <div class="card quiz" style="margin-top:20px" id="quiz">
     <h3 style="margin-top:0">Check yourself</h3>
   </div>
-  <details class="card" style="margin-top:20px"><summary style="cursor:pointer;font:600 15px Inter,sans-serif">Glossary — every new word in this chapter</summary><dl class="gloss"><dt>Theme</dt><dd>the main melody a piece is built from.</dd><dt>Voice</dt><dd>one independent melodic line in a piece.</dd><dt>Fugue</dt><dd>a piece where voices enter one by one with the same theme, then weave together.</dd><dt>Ricercar</dt><dd>an old name for a fugue (Italian, "to seek").</dd><dt>Clash</dt><dd>two notes sounding together that grind against each other.</dd><dt>Canon</dt><dd>a theme played against a copy of itself that follows a strict rule (delayed, shifted, flipped, reversed or slowed).</dd><dt>Self-reference</dt><dd>something that talks about, or points back to, itself.</dd><dt>Isomorphism</dt><dd>two things whose parts and relationships correspond one-to-one, so one can stand in for the other.</dd><dt>Key / modulation</dt><dd>a piece's home note and scale / moving from one key to another.</dd><dt>Octave, semitone</dt><dd>the same note higher (12 piano keys) / one piano-key step.</dd><dt>Strange Loop</dt><dd>moving up (or down) through levels and ending up back where you started.</dd><dt>Tangled Hierarchy</dt><dd>a system of levels that loops back into itself instead of stacking cleanly.</dd><dt>Paradox</dt><dd>reasoning where every step seems fine but the conclusion contradicts itself.</dd><dt>Formal system</dt><dd>starting statements (axioms) plus mechanical rules for producing new ones (theorems).</dd><dt>Proof / provable</dt><dd>a rule-following chain of steps from axioms / reachable by such a chain.</dd><dt>Consistent / complete</dt><dd>never proves a contradiction / proves every true statement.</dd><dt>Gödel numbering</dt><dd>coding each formula as a unique number, so math can talk about its own formulas.</dd><dt>Incompleteness Theorem</dt><dd>any consistent system strong enough for arithmetic has true statements it cannot prove.</dd></dl></details>
 </section>
 
 </main>
@@ -268,6 +267,8 @@
 </footer>
 
 <script src="../assets/toc.js"></script>
+<script src="../assets/glossary.js"></script>
+<script src="../assets/terms.js" defer></script>
 <script src="../assets/nav.js" defer></script>
 <script src="../assets/music.js"></script>
 <script>

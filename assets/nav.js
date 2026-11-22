@@ -4,7 +4,7 @@
   var id=document.body.dataset.chapter, toc=(window.GEB_TOC||[]).filter(function(e){return e.id;});
   var i=toc.findIndex(function(e){return e.id===id;}); if(i<0)return;
   var bar=document.createElement('div'); bar.className='sitebar';
-  bar.innerHTML='<a href="../">← All chapters</a><a href="../glossary.html">Glossary</a>';
+  bar.innerHTML='<a href="../">← All chapters</a>';
   document.body.insertBefore(bar,document.body.firstChild);
   function link(e,label,cls){
     if(!e) return '<span class="'+cls+'"></span>';
