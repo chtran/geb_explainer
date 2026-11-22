@@ -15,10 +15,6 @@
   <h1>Introduction: <em>A Musico-Logical Offering</em></h1>
   <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
   <p class="lede">A mathematician, an artist and a composer each found the same strange trick: a system that climbs upward, level by level, and ends up right back where it started. Hofstadter calls this trick a <b>Strange Loop</b>. This chapter introduces it and hints that it might be what a mind is.</p>
-  <div class="row" style="justify-content:center;margin-top:22px">
-    <button class="ghost" id="stopAll">■ Stop sound</button>
-  </div>
-  <div class="small-note" id="ttsNote" style="margin-top:6px">The music demos play sound — turn your volume up a bit.</div>
 </header>
 
 <div class="toolbar"><div class="in">
@@ -503,7 +499,6 @@ const Q=[
 $('quiz').innerHTML+=Q.map((q,i)=>`<div class="q" id="q${i}"><div><b>${i+1}.</b> ${q[0]}</div><div class="opts">${q[1].map((o,j)=>`<button data-q="${i}" data-a="${j}">${o}</button>`).join('')}</div><div class="why">${q[3]}</div></div>`).join('');
 $('quiz').addEventListener('click',e=>{const b=e.target.closest('button[data-q]');if(!b)return;const q=+b.dataset.q,a=+b.dataset.a;b.classList.add(a===Q[q][2]?'right':'wrong');if(a===Q[q][2]){$('q'+q).classList.add('done');}});
 
-$('stopAll').onclick=stopSound;
 
 /* TOC highlight */
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-40% 0px -55% 0px'});
