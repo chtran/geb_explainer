@@ -6,7 +6,7 @@
 <title>GEB · Three-Part Invention + Chapter I: The MU-puzzle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=e950f1f2">
+<link rel="stylesheet" href="../assets/geb.css?v=44055f94">
 <style>
 /* Zeno's race */
 .zmeter{font:500 14px Inter,sans-serif;color:var(--ink2);display:flex;gap:22px;flex-wrap:wrap;margin:8px 0}
@@ -247,7 +247,7 @@ ol.deriv li.last{font-weight:500}
       </ul>
       <p>So no matter which rules you use, in any order, the number of I's is <b>never</b> a multiple of 3. And 0 is a multiple of 3. <b>MU can't be made.</b> A property like this, which no step can change, is called an <span class="term">invariant</span>. In a picture: the remainder starts at 1, doubling swaps 1 and 2, taking away 3 leaves it where it is, and nothing ever leads to 0.</p>
       <svg id="rem" viewBox="0 0 520 200" width="100%" style="max-width:540px;display:block;margin:4px auto"></svg>
-      <p>Here's your own derivation from the workbench, counted:</p>
+      <p>Here's your own derivation from the <a class="xref" href="#s-play">workbench</a>, counted:</p>
       <div id="ansTable"></div>
 
       <div class="intuit"><b>Intuition</b>No amount of rule-following inside the system could ever show that MU is impossible. The <span class="term">proof</span> came from outside: we turned strings into numbers (their I-counts) and reasoned about the numbers. Hofstadter later does exactly this to the MIU-system, giving each string a number, so that "is MU a theorem?" becomes a question about numbers. That's the same trick as <span class="term">Gödel numbering</span>, from the Introduction.</div>
@@ -298,7 +298,7 @@ ol.deriv li.last{font-weight:500}
       <h4>No test works for every rule game, and the smallest cases are already hard</h4>
       <p class="mv-then"><b>In the book:</b> theorems need not come with a decision procedure, and for MIU it takes insight to find one.</p>
       <p><b>Now:</b> in 1947, Emil Post and Andrey Markov independently proved that no decision procedure works for <b>all</b> rule games of MIU's kind, where rules rewrite parts of strings. Each game may need its own insight, and some have no test at all. The same wall shows up in the "Busy Beaver" hunt, which asks how long a tiny computer program, a <span class="term">Turing machine</span>, can run before stopping. Machines are sized by their number of states (roughly, the rows of their rule table). In 2024 an online collaboration proved that the longest a 5-state machine can run and still stop is 47,176,870 steps. To do it they settled, for all 181 million or so such machines, whether each one stops, and checked the whole proof by machine. For 6 states the problem is open: one 6-state machine, nicknamed Antihydra, stops only if a certain unsolved number puzzle (a cousin of the famous 3n + 1 problem) comes out a particular way, so deciding whether it stops would mean solving that puzzle.</p>
-      <p class="mv-so"><b>Why it matters:</b> the gap between "search until you find it" and "know when to give up" from section 7 is a real, permanent limit on computation, not just a feature of one toy.</p>
+      <p class="mv-so"><b>Why it matters:</b> the gap between "search until you find it" and "know when to give up" from <a class="xref" href="#s-decide">section 7</a> is a real, permanent limit on computation, not just a feature of one toy.</p>
     </div>
 
     <div class="mv-card">
@@ -306,7 +306,7 @@ ol.deriv li.last{font-weight:500}
       <h4>Finding the hidden count</h4>
       <p class="mv-then"><b>In the book:</b> the MU-puzzle falls to one property the rules never change: the number of I's is never a multiple of 3.</p>
       <p><b>Now:</b> a property that every step preserves is called an <span class="term">invariant</span>, and finding invariants is central to checking that computer programs are correct. Language models now propose invariants for program loops, and a mechanical checker confirms or rejects them. One 2025 system did this for all 133 programs in a standard test set, against a previous best of 107. Inside AI models, <span class="term">mechanistic interpretability</span> has found similar hidden structure. A small model trained on "clock arithmetic" (adding numbers and keeping only the remainder after dividing by 113) first memorised its examples, then suddenly generalised. Researchers looking inside found it had learned to treat the numbers as positions on a circle, turning addition into rotation. As with MU, it was people looking from outside who found that structure; the model couldn't report it.</p>
-      <p class="mv-so"><b>Why it matters:</b> "watch one property the rules can't change" is the I-mode move of section 8, and both machines and the people studying them now make it.</p>
+      <p class="mv-so"><b>Why it matters:</b> "watch one property the rules can't change" is the I-mode move of <a class="xref" href="#s-answer">section 8</a>, and both machines and the people studying them now make it.</p>
     </div>
   </div>
 
@@ -525,7 +525,7 @@ drawTree();
 })();
 function renderAnswer(){
   const rows=wb.d.map(x=>{const n=x.s.split('I').length-1;return `<tr><td class="miu">${miuHTML(x.s.length>40?x.s.slice(0,38)+'…':x.s)}</td><td>${x.how}</td><td>${n}</td><td><b>${n%3}</b></td></tr>`;}).join('');
-  $('ansTable').innerHTML=`<table class="ctable"><tr><th>string</th><th>made by</th><th>I's</th><th>remainder ÷ 3</th></tr>${rows}</table>`+(wb.d.length<3?'<p class="small-note">Make a few strings in the workbench (section 4) and this table follows along.</p>':'<p class="small-note">The last column is always 1 or 2, never 0.</p>');
+  $('ansTable').innerHTML=`<table class="ctable"><tr><th>string</th><th>made by</th><th>I's</th><th>remainder ÷ 3</th></tr>${rows}</table>`+(wb.d.length<3?'<p class="small-note">Make a few strings in the workbench (<a class="xref" href="#s-play">section 4</a>) and this table follows along.</p>':'<p class="small-note">The last column is always 1 or 2, never 0.</p>');
 }
 function testString(){
   const inp=$('tIn'), v=inp.value.toUpperCase().replace(/[^MIU]/g,''); if(inp.value!==v){const c=inp.value.slice(0,inp.selectionStart).toUpperCase().replace(/[^MIU]/g,'').length;inp.value=v;inp.setSelectionRange(c,c);}

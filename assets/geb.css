@@ -5,6 +5,9 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+section[id],.card[id]{scroll-margin-top:64px}
+a.xref{color:var(--godel);text-decoration:underline dotted;text-underline-offset:3px}
+a.xref:hover{text-decoration-style:solid}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.62 "EB Garamond",Georgia,serif;}
 .sans{font-family:Inter,system-ui,sans-serif}
 .mono{font-family:"JetBrains Mono",ui-monospace,monospace}

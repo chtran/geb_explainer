@@ -6,7 +6,7 @@
 <title>GEB · Introduction: A Musico-Logical Offering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=e950f1f2">
+<link rel="stylesheet" href="../assets/geb.css?v=44055f94">
 </head>
 <body data-chapter="01-introduction">
 
@@ -47,7 +47,7 @@
       <p>Bach was playful. He prefaced the gift with a Latin phrase whose first letters spell a word. Click to reveal it:</p>
       <div class="acro" id="acro"><span><i>R</i>egis </span><span><i>I</i>ussu </span><span><i>C</i>antio </span><span><i>E</i>t </span><span><i>R</i>eliqua </span><span><i>C</i>anonica </span><span><i>A</i>rte </span><span><i>R</i>esoluta</span></div>
       <div class="ric">RICERCAR</div>
-      <p class="small-note">It means: "At the King's command, the song and the rest resolved with canonic art" (the art of <i>canons</i>, explained in section 2). <span class="term">Ricercar</span> ("to seek") is an old word for a fugue — so the sentence secretly <b>names what it is</b>. That's <span class="term">self-reference</span>: something that talks about, or points back to, itself. Keep an eye on it; it's the thread running through the whole book.</p>
+      <p class="small-note">It means: "At the King's command, the song and the rest resolved with canonic art" (the art of <i>canons</i>, explained in <a class="xref" href="#s-canon">section 2</a>). <span class="term">Ricercar</span> ("to seek") is an old word for a fugue — so the sentence secretly <b>names what it is</b>. That's <span class="term">self-reference</span>: something that talks about, or points back to, itself. Keep an eye on it; it's the thread running through the whole book.</p>
     </div>
     <div class="card">
       <h3 style="margin-top:0">Hear the King's theme</h3>
@@ -220,14 +220,14 @@
   <p><span class="tag g">Gödel</span> The deepest Strange Loop in the book belongs to <b>Kurt Gödel</b>, who in 1931 found one inside math itself. His idea starts from an ancient puzzle, but first we need a few words.</p>
   <div class="words"><b>Words for this section.</b> A <span class="term">proof</span> is a chain of steps, each following strict rules, from starting assumptions to a conclusion. A <span class="term">formal system</span> is a fixed list of starting statements, called <span class="term">axioms</span>, plus mechanical rules for producing new statements, called <span class="term">theorems</span>. Think of a board game: the axioms are the starting position and the rules are the legal moves. A statement is <span class="term">provable</span> if you can reach it with legal moves. A system is <span class="term">consistent</span> if it never proves a contradiction (a statement and its opposite). It's <span class="term">complete</span> if every true statement in its language is provable.</div>
   <div class="cols">
-    <div class="card">
+    <div class="card" id="g-step1">
       <h3 style="margin-top:0">Step 1 — The Liar (Epimenides paradox)</h3>
       <p class="small-note">A <span class="term">paradox</span> is a statement or argument where every step seems fine but you end up with a contradiction. The ancient poet Epimenides, who was from Crete, said "All Cretans are liars." Boiled down, the puzzle is this sentence:</p>
       <div class="sentence" id="liar">"This sentence is false."</div>
       <div class="row"><button id="liarGo">Suppose it's true…</button><button class="ghost" id="liarReset">Reset</button></div>
       <div class="steps" id="liarSteps"></div>
     </div>
-    <div class="card">
+    <div class="card" id="g-step2">
       <h3 style="margin-top:0">Step 2 — Gödel's version</h3>
       <p class="small-note">Gödel swapped "false" for "unprovable" — and the paradox turns into a theorem.</p>
       <div class="sentence" id="gsent">"This statement has no proof in this system."</div>
@@ -271,7 +271,7 @@
     <div class="row"><button id="qGo">Follow the instruction</button><button class="ghost" id="qReset">Reset</button></div>
     <div class="steps" id="qSteps"></div>
   </div>
-  <p>Gödel did the same thing with numbers. The result is a formula of number theory, call it <b>G</b>, which, decoded, says "<b>G has no proof</b>". That is Step 2's sentence, now a genuine piece of math, so Step 2's reasoning applies to it. If the system could prove G, it would be proving something false, so in a trustworthy system it can't. And since G can't be proven, what it says is true. <b>G is true but has no proof.</b></p>
+  <p>Gödel did the same thing with numbers. The result is a formula of number theory, call it <b>G</b>, which, decoded, says "<b>G has no proof</b>". That is <a class="xref" href="#g-step2">Step 2</a>'s sentence, now a genuine piece of math, so Step 2's reasoning applies to it. If the system could prove G, it would be proving something false, so in a trustworthy system it can't. And since G can't be proven, what it says is true. <b>G is true but has no proof.</b></p>
   <div class="intuit"><b>The punchline — Gödel's Incompleteness Theorem</b>(A <span class="term">theorem</span> in ordinary math talk just means a proven result.) Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
 </section>
 
@@ -292,7 +292,7 @@
       </div></div></li>
     <li><div class="yr">1910–13</div><div><h4>Principia Mathematica: ban the loop</h4><p>Russell and Alfred North Whitehead rebuilt math with a strict ladder of levels. Plain objects are on the bottom rung, sets of objects on the next, sets of sets above that, and a set may only contain things from <b>lower</b> rungs. Nothing can contain or talk about itself, so Russell's paradox can't even be written down. <b>So…</b> is this system finally safe and complete?</p></div></li>
     <li><div class="yr">1920s</div><div><h4>Hilbert: prove it's perfect</h4><p>David Hilbert asked mathematicians to prove that a system like this is <span class="term">consistent</span> (it never proves a contradiction) and <span class="term">complete</span> (every true statement in it can be proven).</p></div></li>
-    <li class="crack"><div class="yr">1931</div><div><h4>Gödel: the loop comes back</h4><p>Gödel showed both hopes fail. With Gödel numbering (section 5), ordinary arithmetic can talk about itself, so self-reference sneaks back in without breaking any of the ladder's rules. Any consistent system strong enough for arithmetic has true statements it can't prove (it's incomplete), and it can't even prove its own consistency. The loop can't be banned: it's built into numbers themselves.</p></div></li>
+    <li class="crack"><div class="yr">1931</div><div><h4>Gödel: the loop comes back</h4><p>Gödel showed both hopes fail. With Gödel numbering (<a class="xref" href="#s-godel">section 5</a>), ordinary arithmetic can talk about itself, so self-reference sneaks back in without breaking any of the ladder's rules. Any consistent system strong enough for arithmetic has true statements it can't prove (it's incomplete), and it can't even prove its own consistency. The loop can't be banned: it's built into numbers themselves.</p></div></li>
     <li><div class="yr">1936</div><div><h4>Church and Turing: limits of machines</h4><p>Alonzo Church and Alan Turing found the same kind of limit for any step-by-step mechanical procedure, which is exactly what a computer program is: some yes-or-no questions can't be answered by <i>any</i> program. This brings machines into the story.</p></div></li>
   </ol>
 </section>
