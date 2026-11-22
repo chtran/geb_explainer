@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEB · Introduction: A Musico-Logical Offering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f1e7; --paper2:#efe7d6; --ink:#1f1c17; --ink2:#5b5447; --rule:#d9cfbb;
+  --bach:#9b2f2f; --escher:#2f6b4f; --godel:#2c5282; --gold:#b7862b;
+  --card:#fffdf8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.62 "EB Garamond",Georgia,serif;}
+.sans{font-family:Inter,system-ui,sans-serif}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+a{color:var(--godel)}
+header.hero{padding:64px 24px 40px;text-align:center;border-bottom:1px solid var(--rule);background:
+  radial-gradient(1200px 400px at 50% -100px,#fff8e8 0,transparent 70%)}
+.kicker{font:600 12px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+h1{font-weight:500;font-size:clamp(34px,6vw,58px);line-height:1.05;margin:14px 0 10px}
+h1 em{color:var(--bach)}
+.lede{max-width:680px;margin:0 auto;font-size:20px;color:var(--ink2)}
+.geb{display:flex;justify-content:center;gap:6px;margin:26px 0 8px;font:600 64px/1 "EB Garamond",serif}
+.geb span{width:78px;height:78px;display:grid;place-items:center;border-radius:12px;color:#fff}
+.geb .g{background:var(--godel)} .geb .e{background:var(--escher)} .geb .b{background:var(--bach)}
+.toolbar{position:sticky;top:0;z-index:20;background:rgba(246,241,231,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+.toolbar .in{max-width:1040px;margin:0 auto;display:flex;gap:10px;align-items:center;padding:8px 18px;flex-wrap:wrap}
+.toolbar nav{display:flex;gap:4px;flex-wrap:wrap;flex:1}
+.toolbar nav a{font:500 12.5px Inter,sans-serif;color:var(--ink2);text-decoration:none;padding:5px 8px;border-radius:6px}
+.toolbar nav a:hover,.toolbar nav a.on{background:var(--paper2);color:var(--ink)}
+button{font:500 14px Inter,sans-serif;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:8px;cursor:pointer;transition:.15s}
+button:hover{transform:translateY(-1px)}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+button.ghost:hover{border-color:var(--ink)}
+button.on{background:var(--gold);border-color:var(--gold);color:#fff}
+button.small{padding:5px 10px;font-size:12.5px}
+main{max-width:1040px;margin:0 auto;padding:0 22px 80px}
+section{padding:56px 0 30px;border-bottom:1px solid var(--rule)}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.num{font:600 13px Inter,sans-serif;color:#fff;background:var(--ink);border-radius:50%;width:28px;height:28px;display:grid;place-items:center;flex:none}
+h2{font-weight:500;font-size:34px;margin:0;line-height:1.15;flex:1}
+h3{font-weight:600;font-size:21px;margin:22px 0 6px}
+.listen{margin-left:auto}
+.cols{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:start}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:20px;box-shadow:0 1px 0 #0000000a}
+.intuit{border-left:4px solid var(--gold);background:#fff8e6;padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+.intuit > b:first-child{font-family:Inter,sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px}
+.tag{display:inline-block;font:600 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;color:#fff}
+.tag.b{background:var(--bach)} .tag.e{background:var(--escher)} .tag.g{background:var(--godel)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+label.ctl{font:500 13px Inter,sans-serif;color:var(--ink2);display:flex;gap:6px;align-items:center}
+select,input[type=text]{font:14px Inter,sans-serif;padding:6px 8px;border-radius:7px;border:1px solid var(--rule);background:#fff;color:var(--ink)}
+canvas{width:100%;display:block;border-radius:10px;background:#fbf8f1;border:1px solid var(--rule)}
+.acro{font-size:22px;line-height:1.9}
+.acro span{cursor:default;transition:.3s}
+.acro span i{font-style:normal;transition:.3s}
+.acro.show span i{color:var(--bach);font-weight:600;font-size:1.25em}
+.acro.show span{color:#b9ae99}
+.ric{font:600 28px/1 "JetBrains Mono",monospace;letter-spacing:.3em;color:var(--bach);opacity:0;transition:.6s;margin-top:8px}
+.acro.show + .ric{opacity:1}
+.loopwrap{display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:center}
+@media (max-width:820px){.loopwrap{grid-template-columns:1fr}}
+.meter{font:500 14px Inter,sans-serif;color:var(--ink2)}
+.meter b{color:var(--ink);font-size:20px}
+.sentence{font-size:24px;padding:18px 20px;border-radius:12px;border:2px solid var(--rule);background:#fff;text-align:center;transition:.35s}
+.sentence.T{border-color:var(--escher);background:#eef7f1}
+.sentence.F{border-color:var(--bach);background:#fbefee}
+.steps{font:15px/1.5 Inter,sans-serif;color:var(--ink2);min-height:72px}
+.timeline{display:flex;gap:14px;overflow-x:auto;padding:8px 2px 16px;scroll-snap-type:x mandatory}
+.tl{flex:0 0 230px;scroll-snap-align:start;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px;position:relative}
+.tl .yr{font:600 13px Inter,sans-serif;color:var(--gold)}
+.tl h4{margin:2px 0 6px;font-size:19px;font-weight:600}
+.tl p{margin:0;font-size:15.5px;color:var(--ink2)}
+.tl.crack{border-color:var(--bach)}
+.tl.crack .yr{color:var(--bach)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:820px){.grid3{grid-template-columns:1fr}}
+.grid3 .card h4{margin:6px 0;font-size:20px}
+.godelout{font:13px/1.5 "JetBrains Mono",monospace;word-break:break-all;background:#f3f6fb;border-radius:10px;padding:12px;border:1px solid #d6e0ee;min-height:60px}
+.quiz .q{margin:14px 0}
+.quiz .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.quiz .opts button{background:#fff;color:var(--ink);border-color:var(--rule);font-weight:400}
+.quiz .opts button.right{background:var(--escher);color:#fff;border-color:var(--escher)}
+.quiz .opts button.wrong{background:var(--bach);color:#fff;border-color:var(--bach)}
+.quiz .why{font:14px Inter,sans-serif;color:var(--ink2);margin-top:6px;display:none}
+.quiz .q.done .why{display:block}
+.speakbar{font:13px Inter,sans-serif;color:var(--ink2);display:flex;gap:8px;align-items:center}
+.small-note{font:13px Inter,sans-serif;color:var(--ink2)}
+.legend{font:12.5px Inter,sans-serif;color:var(--ink2);display:flex;gap:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.term{font-weight:600;border-bottom:1.5px dotted var(--gold)}
+.def{color:var(--ink2)}
+.words{font:14px/1.55 Inter,sans-serif;color:var(--ink2);background:#faf6ec;border:1px dashed var(--rule);border-radius:10px;padding:10px 14px;margin:12px 0}
+.words b{color:var(--ink)}
+.gloss dt{font-weight:600;margin-top:8px}
+.gloss dd{margin:0 0 0 0;color:var(--ink2);font-size:16px}
+.offer{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:820px){.offer{grid-template-columns:1fr}}
+.offer .oh{font:600 12px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--bach);margin-bottom:4px}
+.offer p{margin:0;font-size:16px}
+.listenbox{margin:16px 0;padding:14px 18px;border-radius:12px;background:#f7efe9;border:1px solid #e6cfc4;font-size:16px}
+.listenbox ul{margin:6px 0 0;padding-left:20px}
+.roadmap{margin:22px 0 4px;padding:14px 18px;border-radius:12px;background:var(--ink);color:var(--paper);font:15px/1.6 Inter,sans-serif}
+.roadmap .rm{display:inline-block;background:#ffffff14;border-radius:8px;padding:2px 8px;margin:4px 2px}
+.clashmeter{display:flex;align-items:center;gap:10px;font:13px Inter,sans-serif;color:var(--ink2)}
+.clashmeter .bar{flex:0 0 200px;height:10px;border-radius:6px;background:#eee6d6;overflow:hidden}
+.clashmeter #clashFill{height:100%;width:0;background:var(--escher);transition:.3s}
+.puzzle{border-color:var(--gold);background:#fffaf0}
+.pzans{border-top:1px dashed var(--rule);margin-top:10px;padding-top:6px}
+.big-idea{font-size:26px;line-height:1.35;text-align:center;max-width:760px;margin:20px auto;font-style:italic}
+footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,sans-serif;color:var(--ink2)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker">Gödel, Escher, Bach · Explainer 01</div>
+  <h1>Introduction: <em>A Musico-Logical Offering</em></h1>
+  <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
+  <p class="lede">A mathematician, an artist and a composer each found the same strange trick: a system that climbs upward, level by level, and ends up right back where it started. Hofstadter calls this trick a <b>Strange Loop</b>. This chapter introduces it and hints that it might be what a mind is. <span style="font-size:16px">(New words are <span class="term">underlined like this</span> and explained the first time they appear.)</span></p>
+  <div class="row" style="justify-content:center;margin-top:22px">
+    <button class="ghost" id="stopAll">■ Stop sound</button>
+  </div>
+  <div class="small-note" id="ttsNote" style="margin-top:6px">The music demos play sound — turn your volume up a bit.</div>
+</header>
+
+<div class="toolbar"><div class="in">
+  <nav id="toc">
+    <a href="#s-king">1 · The King's theme</a>
+    <a href="#s-canon">2 · Canons</a>
+    <a href="#s-loop">3 · Endless rise</a>
+    <a href="#s-escher">4 · Escher</a>
+    <a href="#s-godel">5 · Gödel</a>
+    <a href="#s-history">6 · How we got here</a>
+    <a href="#s-machines">7 · Minds &amp; machines</a>
+    <a href="#s-book">8 · The book's shape</a>
+    <a href="#s-recap">9 · Recap</a>
+  </nav>
+</div></div>
+
+<main>
+
+<!-- 1 -->
+<section id="s-king">
+  <div class="sec-head"><div class="num">1</div><h2>A king hums a tune, and Bach takes the bait</h2></div>
+  <div class="cols">
+    <div>
+      <p><span class="tag b">Bach</span> In May 1747, Johann Sebastian Bach — old, famous, a bit of a legend — visits the court of <b>Frederick the Great</b> of Prussia in Potsdam. Frederick is a keen flute player and collector of fancy new pianos (fortepianos).</p>
+      <p>The King plays Bach a <span class="term">theme</span> <span class="def">(the main melody a piece of music is built from)</span> of his own. It's long, winding and slightly awkward. He challenges Bach to make up a <span class="term">fugue</span> on it, on the spot.</p>
+      <div class="words"><b>What's a fugue?</b> Music can have several melodies playing at once. Musicians call each separate melodic line a <span class="term">voice</span>, even when it's played on an instrument. In a <b>fugue</b>, the voices come in one after another, each starting with the same theme, and then weave around each other, all fitting into one harmony. A "three-voice fugue" means three melodic lines going at once.</div>
+      <p>Bach does it right there, in three voices. Then the King asks for a <b>six</b>-voice fugue. That's absurdly hard to improvise, so Bach politely declines… goes home to Leipzig, and two months later sends the King a whole collection built on that one tune: <b>The Musical Offering</b>.</p>
+      <div class="intuit"><b>Intuition</b>A six-voice fugue is like keeping six conversations going at once, each one making sense on its own, and all of them fitting together into one harmony.</div>
+      <p>Bach was playful. He prefaced the gift with a Latin phrase whose first letters spell a word. Click to reveal it:</p>
+      <div class="acro" id="acro"><span><i>R</i>egis </span><span><i>I</i>ussu </span><span><i>C</i>antio </span><span><i>E</i>t </span><span><i>R</i>eliqua </span><span><i>C</i>anonica </span><span><i>A</i>rte </span><span><i>R</i>esoluta</span></div>
+      <div class="ric">RICERCAR</div>
+      <p class="small-note">It means: "At the King's command, the song and the rest resolved with canonic art" (the art of <i>canons</i>, explained in section 2). <i>Ricercar</i> ("to seek") is an old word for a fugue — so the sentence secretly <b>names what it is</b>. That's <span class="term">self-reference</span>: something that talks about, or points back to, itself. Keep an eye on it; it's the thread running through the whole book.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Hear the King's theme</h3>
+      <p class="small-note">Simplified synth rendering (rhythm approximate). Notice the slow slide down in the middle, one piano key at a time (black and white keys alike). Musicians call that a <b>chromatic</b> line, and it's part of what made the theme so hard to work with.</p>
+      <canvas id="themeCanvas" height="200"></canvas>
+      <div class="row"><button id="playTheme">▶ Play the Royal Theme</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="s-canon">
+  <div class="sec-head"><div class="num">2</div><h2>Canons: one melody, copied and transformed</h2></div>
+  <p>The Musical Offering is full of <b>canons</b>. A canon is the simplest kind of musical "copying machine": one voice plays a theme, and another voice plays <b>the same theme</b> a little later. Think of a round like "Frère Jacques". The magic is that the copies fit together even though they overlap.</p>
+  <p>Bach pushed the copying further. The copy doesn't have to be exact — it can be <b>transformed</b>, as long as there's a strict rule linking it to the original:</p>
+  <div class="grid3" style="grid-template-columns:repeat(5,1fr);gap:10px">
+    <div class="card small-note"><b>Delay</b><br>start later in time</div>
+    <div class="card small-note"><b>Transpose</b><br>shift higher or lower in pitch</div>
+    <div class="card small-note"><b>Inversion</b><br>flip upside-down: every "up" becomes "down"</div>
+    <div class="card small-note"><b>Retrograde</b><br>play it backwards — a "crab canon"</div>
+    <div class="card small-note"><b>Augmentation</b><br>slow it down, every note twice as long</div>
+  </div>
+  <div class="intuit"><b>Intuition</b>A canon is a theme plus a rule. Once you know the rule, the second voice is "already contained" in the first. Hofstadter's big theme starts here: how one thing can carry the shape of another. He uses the word <span class="term">isomorphism</span> for this: two things whose parts and relationships line up one-to-one, so that one can stand in for the other (like a map and the city it shows). The second voice of a canon is an isomorphic copy of the first.</div>
+  <div class="card">
+    <h3 style="margin-top:0">Canon lab — build your own</h3>
+    <div class="row">
+      <label class="ctl">Theme <select id="cTheme"><option value="fj">Frère Jacques (easy to hear)</option><option value="royal">The King's theme</option></select></label>
+      <label class="ctl">Delay <select id="cDelay"><option value="0">none</option><option value="2">2 beats</option><option value="4">1 bar</option><option value="8" selected>2 bars</option></select></label>
+      <label class="ctl">Transpose <select id="cTrans"><option value="0" selected>same pitch</option><option value="7">up a fifth</option><option value="12">up an octave</option><option value="-12">down an octave</option></select></label>
+    </div>
+    <div class="row">
+      <button class="ghost small" id="cInv">Inversion: off</button>
+      <button class="ghost small" id="cRetro">Retrograde: off</button>
+      <button class="ghost small" id="cAug">Augmentation: off</button>
+      <span class="small-note">Presets:</span>
+      <button class="ghost small" data-preset="round">Round</button>
+      <button class="ghost small" data-preset="crab">Crab canon</button>
+      <button class="ghost small" data-preset="mirror">Mirror canon</button>
+      <button class="ghost small" data-preset="aug">Augmentation canon</button>
+    </div>
+    <div class="words">Music words for the controls: a <b>beat</b> is one pulse of the music, and a <b>bar</b> is a group of 4 beats. The distance between two notes is called an <b>interval</b>. An <b>octave</b> is the same note sung higher (12 piano keys up), and a <b>fifth</b> is 7 piano keys up, the most harmonious interval after the octave. A <span class="term">clash</span> is when two notes sounding together grind against each other (here: notes 1, 2, 6, 10 or 11 piano keys apart). Clashes show as <span style="color:#c0392b;font-weight:600">red bands</span> on the chart.</div>
+    <canvas id="canonCanvas" height="260"></canvas>
+    <div class="row">
+      <button id="cPlay">▶ Play both voices</button>
+      <button class="ghost" id="cPlay1">Voice 1 only</button>
+      <button class="ghost" id="cPlay2">Voice 2 only</button>
+      <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>voice 1 (original)</span><span><i style="background:var(--godel)"></i>voice 2 (copy + rule)</span><span><i style="background:#e8a29a"></i>clash</span></div>
+    </div>
+    <div class="clashmeter"><span>Clash meter</span><div class="bar"><div id="clashFill"></div></div><b id="clashPct" class="mono">–</b><span id="clashWord"></span></div>
+    <p class="small-note">Try "Crab canon": the second voice is the theme played backwards, so the two voices are mirror images in time. Bach really wrote one of these in the Offering. The "Mirror canon" preset uses inversion: the copy is the theme upside-down, like a reflection in a lake.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s-loop">
+  <div class="sec-head"><div class="num">3</div><h2>The Endlessly Rising Canon — the first Strange Loop</h2></div>
+  <div class="words"><b>First, what's a key?</b> Most music has a "home note" it keeps returning to and feels settled on, plus a family of notes (a scale) built around it. That home base is the piece's <span class="term">key</span>. "C minor" means home is the note C, using a minor (darker-sounding) scale. Moving a piece from one key to another is called <span class="term">modulation</span>.</div>
+  <p>One canon in the Offering, the <b>Canon per Tonos</b> ("canon through the keys"), does something sneaky. Each time through, it modulates and ends one step <b>higher</b> than it began — C minor, then D minor, then E minor… After six rounds you're back in C minor. You've been going <b>up</b> the whole time, yet you're <b>home</b> again (an octave higher). Bach even wrote the King a flattering note: may his glory rise like the modulation.</p>
+  <p>With a little audio trickery we can go further. <span class="term">Shepard tones</span> play every note in many octaves at once, with the highest and lowest copies faded out, so your ear can't tell which octave you're in. With them we can make the loop truly seamless: it rises forever and never gets anywhere.</p>
+  <div class="card">
+    <div class="loopwrap">
+      <svg id="keyRing" viewBox="0 0 320 320" width="100%"></svg>
+      <div>
+        <div class="row">
+          <button id="riseBach">▶ Bach-style: rise 6 keys</button>
+          <button id="riseShep">∞ Shepard: rise forever</button>
+          <button class="ghost" id="riseStop">■ Stop</button>
+        </div>
+        <p class="meter">Current key: <b id="mKey">—</b><br>Steps climbed: <b id="mSteps">0</b> &nbsp;·&nbsp; Total rise: <b id="mRise">0</b> semitones</p>
+        <p class="small-note">A <b>semitone</b> is a step of one piano key. Each step around the ring rises 2 semitones (a "whole tone"), and six of them make 12, a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
+      </div>
+    </div>
+  </div>
+  <div class="intuit"><b>Definition</b>A <b>Strange Loop</b> happens when, by moving <i>upward</i> (or downward) through the levels of some <span class="term">hierarchy</span> <span class="def">(any system arranged in levels, one above another, like floors of a building or ranks in an army)</span>, you unexpectedly find yourself right back where you started. A hierarchy where this happens — where the levels aren't cleanly stacked but loop into each other — is a <span class="term">Tangled Hierarchy</span>.</div>
+</section>
+
+<!-- 4 -->
+<section id="s-escher">
+  <div class="sec-head"><div class="num">4</div><h2>Escher: Strange Loops you can see</h2></div>
+  <div class="cols">
+    <div>
+      <p><span class="tag e">Escher</span> The Dutch artist M. C. Escher drew Strange Loops over and over:</p>
+      <ul>
+        <li><b><a href="https://mcescher.com/product-tag/waterfall/" target="_blank" rel="noopener">Waterfall</a></b> (1961) — water flows down, down, down a channel… and lands at the top of its own waterfall.</li>
+        <li><b><a href="https://mcescher.com/gallery/impossible-constructions/" target="_blank" rel="noopener">Ascending and Descending</a></b> (1960) — monks march around a staircase on a roof, always climbing (or always descending), forever. It's the visual twin of the Endlessly Rising Canon.</li>
+        <li><b><a href="https://mcescher.com/product-tag/drawing-hands" target="_blank" rel="noopener">Drawing Hands</a></b> (1948) — two hands, each drawing the other. Which one is "really" the artist? Neither level is on top.</li>
+        <li><b><a href="https://mcescher.com/" target="_blank" rel="noopener">Metamorphosis</a></b> (1939–40, 1967–68) — patterns that slowly morph into other things and finally back into themselves.</li>
+      </ul>
+      <div class="words"><b>See the real artworks ↗</b> Escher's prints are still under copyright, so they aren't copied here. Click a title above to see it on the official M.C. Escher site, or read the <a href="https://www.escherinhetpaleis.nl/topstuk/waterfall/?lang=en" target="_blank" rel="noopener">Escher in Het Paleis museum's page on Waterfall</a>, which shows his sketches working out the loop. They're also printed in your copy of GEB, in this Introduction. A <b>lithograph</b>, by the way, is a print made from a drawing on a flat stone or metal plate.</div>
+      <p>The trick in all of them: <b>each local step looks perfectly reasonable</b>. It's only when you follow the whole path that it becomes impossible. Exactly like the canon: every key change sounds fine, yet the whole thing loops.</p>
+      <div class="intuit"><b>Intuition</b>"Up" and "down", "the drawer" and "the drawn" are supposed to be different levels. A Strange Loop is when those levels <b>tangle</b>: the thing at the bottom ends up holding up the thing at the top.</div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Two hands, two levels, one loop</h3>
+      <svg id="hands" viewBox="0 0 400 240" width="100%"></svg>
+      <h3>A picture that contains itself</h3>
+      <canvas id="droste" height="240"></canvas>
+      <p class="small-note">A frame inside a frame inside a frame… zoom in forever and you arrive back at the picture you started with.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="s-godel">
+  <div class="sec-head"><div class="num">5</div><h2>Gödel: a Strange Loop inside mathematics</h2></div>
+  <p><span class="tag g">Gödel</span> The deepest Strange Loop in the book belongs to <b>Kurt Gödel</b>, who in 1931 found one inside math itself. His idea starts from an ancient puzzle, but first we need a few words.</p>
+  <div class="words"><b>Words for this section.</b> A <span class="term">proof</span> is a chain of steps, each following strict rules, from starting assumptions to a conclusion. A <span class="term">formal system</span> is a fixed list of starting statements, called <span class="term">axioms</span>, plus mechanical rules for producing new statements, called <span class="term">theorems</span>. Think of a board game: the axioms are the starting position and the rules are the legal moves. A statement is <b>provable</b> if you can reach it with legal moves. A system is <span class="term">consistent</span> if it never proves a contradiction (a statement and its opposite). It's <span class="term">complete</span> if every true statement in its language is provable.</div>
+  <div class="cols">
+    <div class="card">
+      <h3 style="margin-top:0">Step 1 — The Liar (Epimenides paradox)</h3>
+      <p class="small-note">A <b>paradox</b> is a statement or argument where every step seems fine but you end up with a contradiction. The ancient poet Epimenides, who was from Crete, said "All Cretans are liars." Boiled down, the puzzle is this sentence:</p>
+      <div class="sentence" id="liar">"This sentence is false."</div>
+      <div class="row"><button id="liarGo">Suppose it's true…</button><button class="ghost" id="liarReset">Reset</button></div>
+      <div class="steps" id="liarSteps"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Step 2 — Gödel's version</h3>
+      <p class="small-note">Gödel swapped "false" for "unprovable" — and the paradox turns into a theorem.</p>
+      <div class="sentence" id="gsent">"This statement has no proof in this system."</div>
+      <div class="row"><button id="gProv">What if it's provable?</button><button id="gUnprov">What if it isn't?</button></div>
+      <div class="steps" id="gSteps"></div>
+    </div>
+  </div>
+  <h3>Step 3 — How can math talk about itself? Gödel numbering</h3>
+  <p><span class="term">Number theory</span> <span class="def">(the mathematics of the whole numbers 0, 1, 2, 3, …)</span> talks about <b>numbers</b>, not about sentences. Gödel's trick was to give every symbol a code number and turn every formula into one (huge) number. Then a statement about numbers can be — read the right way — a statement about <b>statements</b>. Like a canon: one line of music secretly carries another.</p>
+  <div class="card">
+    <div class="row">
+      <label class="ctl">Type a formula <input type="text" id="gIn" value="S0+S0=SS0" maxlength="24" style="width:220px"></label>
+      <span class="small-note mono">symbols: 0 S = + × ( ) ~ x</span>
+    </div>
+    <p class="small-note">Codes: <span class="mono">0→1 S→2 =→3 +→4 ×→5 (→6 )→7 ~→8 x→9</span>. <b>S</b> means "the next number after", so S0 = 1 and SS0 = 2; "S0+S0=SS0" means 1+1=2. To build the number, take the <b>primes</b> (numbers divisible only by 1 and themselves: 2, 3, 5, 7, 11, …), and raise the 1st prime to the 1st symbol's code, the 2nd prime to the 2nd symbol's code, and so on. Then multiply everything together.</p>
+    <div class="godelout" id="gOut"></div>
+  </div>
+  <div class="intuit"><b>The punchline — Gödel's Incompleteness Theorem</b>(A <i>theorem</i> in ordinary math talk just means a proven result.) Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
+</section>
+
+<!-- 6 -->
+<section id="s-history">
+  <div class="sec-head"><div class="num">6</div><h2>How mathematics walked into this trap</h2></div>
+  <p>Hofstadter sketches a short history: mathematicians kept trying to make math perfectly rigorous, and self-reference kept slipping in through the back door. Scroll →</p>
+  <div class="timeline">
+    <div class="tl"><div class="yr">~300 BC</div><h4>Euclid</h4><p>Geometry from a few axioms by pure deduction. The dream of rigor begins.</p></div>
+    <div class="tl"><div class="yr">1800s</div><h4>Non-Euclidean geometry</h4><p>Change one axiom — the <i>parallel postulate</i>, which says that through a point beside a line there's exactly one line that never meets it — and you get perfectly consistent "other" geometries. Axioms aren't obvious truths — they're choices. Shock.</p></div>
+    <div class="tl"><div class="yr">1870s–90s</div><h4>Cantor's sets</h4><p>A <b>set</b> is just a collection of things. Set theory becomes the foundation for everything — and handles infinities. Powerful, but it can talk about sets of sets…</p></div>
+    <div class="tl crack"><div class="yr">1901</div><h4>Russell's paradox</h4><p>Take the set of all sets that <i>don't</i> contain themselves. Does it contain itself? Yes ⇒ no, no ⇒ yes. Self-reference breaks set theory.</p></div>
+    <div class="tl"><div class="yr">1910–13</div><h4>Principia Mathematica</h4><p>Russell &amp; Whitehead build math from logic with a strict "type" ladder that forbids anything from referring to itself or its own level.</p></div>
+    <div class="tl"><div class="yr">1920s</div><h4>Hilbert's program</h4><p>Hilbert asks: prove that such a system is complete (every truth provable) and consistent (no contradictions).</p></div>
+    <div class="tl crack"><div class="yr">1931</div><h4>Gödel</h4><p>Impossible. Self-reference sneaks back in via numbering. Any such system is incomplete. You can't ban the loop — arithmetic itself is rich enough to build it.</p></div>
+    <div class="tl"><div class="yr">1936</div><h4>Church &amp; Turing</h4><p>Related limits on what any step-by-step mechanical procedure (any computer program) can answer.</p></div>
+  </div>
+  <div class="card" style="margin-top:8px">
+    <h3 style="margin-top:0">Try Russell's paradox (barber version)</h3>
+    <p>A village barber shaves <b>exactly</b> those men who don't shave themselves. Does the barber shave himself?</p>
+    <div class="row"><button id="barberYes">Yes, he does</button><button id="barberNo">No, he doesn't</button></div>
+    <div class="steps" id="barberOut"></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="s-machines">
+  <div class="sec-head"><div class="num">7</div><h2>Can a machine of rules ever have a mind?</h2></div>
+  <div class="cols">
+    <div>
+      <p>The chapter then pivots to the real question of the book. Charles Babbage designed mechanical computers in the 1800s; Ada Lovelace saw that they could manipulate any symbols, not just numbers — but argued a machine could only do what it's told. Turing later asked, head-on: <b>can machines think?</b></p>
+      <p>Here's the puzzle Hofstadter sets up. Computers are the ultimate rule-followers: rigid, literal, never bored. Minds look like the opposite. Intelligence seems to need abilities such as:</p>
+      <ul>
+        <li>responding flexibly to situations</li>
+        <li>making use of lucky accidents</li>
+        <li>making sense of ambiguous or contradictory messages</li>
+        <li>recognizing what matters most in a situation</li>
+        <li>seeing likeness among differences — and differences among likeness</li>
+        <li>forming new concepts and having new ideas</li>
+      </ul>
+      <p>How could rigid rules produce <i>that</i>? Hofstadter's hint: through <b>levels</b>. Rules at a low level can give rise to flexible, meaningful behavior at a higher level — and when a high level loops back to affect the low level, you get a Strange Loop. Maybe <b>that loop is what an "I" is</b>.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">The book's bet, in one picture</h3>
+      <svg id="levels" viewBox="0 0 380 330" width="100%"></svg>
+      <p class="small-note">Meaningless symbols → patterns → meaning → a self that can think about the symbols. The arrow back down is the loop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="s-book">
+  <div class="sec-head"><div class="num">8</div><h2>How the book itself is built</h2></div>
+  <div class="cols">
+    <div>
+      <p>GEB alternates between <b>Chapters</b> (explanations) and <b>Dialogues</b> (playful stories). The Dialogues star <b>Achilles</b> and the <b>Tortoise</b>, borrowed from <b>Zeno's paradoxes</b> (ancient Greek puzzles, including one "proving" that speedy Achilles can never catch a tortoise with a head start) and from Lewis Carroll's little piece <i>What the Tortoise Said to Achilles</i>; later a Crab, a Genie and others join in.</p>
+      <p>Many Dialogues are shaped like Bach pieces — some are literally written as canons or fugues in words, with characters repeating, inverting or reversing each other's lines. Each Dialogue <b>shows</b> an idea concretely, as a story, before the next Chapter <b>explains</b> it.</p>
+      <div class="intuit"><b>Reading tip</b>Don't worry if a Dialogue feels like nonsense the first time. It's usually a puzzle-box: the following Chapter hands you the key. And the book's structure is itself an example of what it's about — form mirroring content.</div>
+      <p class="small-note">Next up in your reading: the first Dialogue, <b>Three-Part Invention</b> — a retelling of Lewis Carroll's Achilles-and-Tortoise story.</p>
+    </div>
+    <div class="card">
+      <svg id="weave" viewBox="0 0 380 230" width="100%"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section id="s-recap">
+  <div class="sec-head"><div class="num">9</div><h2>Recap: the whole chapter in one breath</h2></div>
+  <p class="big-idea">Bach, Escher and Gödel each built a system that climbs through levels and loops back to itself. Hofstadter suspects that same Strange Loop is how meaningless rules can give rise to a mind.</p>
+  <div class="grid3">
+    <div class="card"><span class="tag b">Bach</span><h4>Music</h4><p>Canons copy a theme under a rule. The Endlessly Rising Canon goes up forever yet returns home.</p></div>
+    <div class="card"><span class="tag e">Escher</span><h4>Pictures</h4><p>Waterfalls, staircases and hands that loop. Every step is fine; the whole is impossible.</p></div>
+    <div class="card"><span class="tag g">Gödel</span><h4>Logic</h4><p>Code statements as numbers, and math can talk about itself: "I am unprovable." So there are truths no system can prove.</p></div>
+  </div>
+  <div class="card quiz" style="margin-top:20px" id="quiz">
+    <h3 style="margin-top:0">Check yourself</h3>
+  </div>
+  <details class="card" style="margin-top:20px"><summary style="cursor:pointer;font:600 15px Inter,sans-serif">Glossary — every new word in this chapter</summary><dl class="gloss"><dt>Theme</dt><dd>the main melody a piece is built from.</dd><dt>Voice</dt><dd>one independent melodic line in a piece.</dd><dt>Fugue</dt><dd>a piece where voices enter one by one with the same theme, then weave together.</dd><dt>Ricercar</dt><dd>an old name for a fugue (Italian, "to seek").</dd><dt>Clash</dt><dd>two notes sounding together that grind against each other.</dd><dt>Canon</dt><dd>a theme played against a copy of itself that follows a strict rule (delayed, shifted, flipped, reversed or slowed).</dd><dt>Self-reference</dt><dd>something that talks about, or points back to, itself.</dd><dt>Isomorphism</dt><dd>two things whose parts and relationships correspond one-to-one, so one can stand in for the other.</dd><dt>Key / modulation</dt><dd>a piece's home note and scale / moving from one key to another.</dd><dt>Octave, semitone</dt><dd>the same note higher (12 piano keys) / one piano-key step.</dd><dt>Strange Loop</dt><dd>moving up (or down) through levels and ending up back where you started.</dd><dt>Tangled Hierarchy</dt><dd>a system of levels that loops back into itself instead of stacking cleanly.</dd><dt>Paradox</dt><dd>reasoning where every step seems fine but the conclusion contradicts itself.</dd><dt>Formal system</dt><dd>starting statements (axioms) plus mechanical rules for producing new ones (theorems).</dd><dt>Proof / provable</dt><dd>a rule-following chain of steps from axioms / reachable by such a chain.</dd><dt>Consistent / complete</dt><dd>never proves a contradiction / proves every true statement.</dd><dt>Gödel numbering</dt><dd>coding each formula as a unique number, so math can talk about its own formulas.</dd><dt>Incompleteness Theorem</dt><dd>any consistent system strong enough for arithmetic has true statements it cannot prove.</dd></dl></details>
+</section>
+
+</main>
+<footer>
+  Explainer written for a personal read-through of Douglas Hofstadter's <i>Gödel, Escher, Bach: an Eternal Golden Braid</i> (1979). Summaries and paraphrases are original; music is synthesized live in your browser.
+</footer>
+
+<script>
+/* ============ AUDIO CORE ============ */
+let AC=null, bus=null;
+function ac(){
+  if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();}
+  if(AC.state==='suspended') AC.resume();
+  return AC;
+}
+function newBus(){
+  const c=ac();
+  if(bus){try{bus.gain.setTargetAtTime(0,c.currentTime,0.02);const b=bus;setTimeout(()=>b.disconnect(),300);}catch(e){}}
+  bus=c.createGain(); bus.gain.value=0.9;
+  const comp=c.createDynamicsCompressor(); bus.connect(comp); comp.connect(c.destination);
+  return bus;
+}
+function stopSound(){
+  if(bus&&AC){const b=bus;b.gain.setTargetAtTime(0,AC.currentTime,0.02);setTimeout(()=>{try{b.disconnect()}catch(e){}},300);bus=null;}
+  anims.forEach(f=>f.stop&&f.stop()); anims.clear();
+  stopShepard();
+}
+const anims=new Set();
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+function pluck(out,midi,t,dur,gain=0.22,color='harpsi'){
+  const c=ac(), f=mtof(midi);
+  const o=c.createOscillator(); o.type=color==='soft'?'triangle':'sawtooth'; o.frequency.value=f;
+  const o2=c.createOscillator(); o2.type='triangle'; o2.frequency.value=f*2.001;
+  const g2=c.createGain(); g2.gain.value=0.3;
+  const fl=c.createBiquadFilter(); fl.type='lowpass'; fl.Q.value=1;
+  fl.frequency.setValueAtTime(Math.min(f*9,12000),t); fl.frequency.exponentialRampToValueAtTime(Math.max(f*1.6,300),t+0.5);
+  const g=c.createGain();
+  const hold=Math.max(t+0.27,t+dur-0.04);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(gain,t+0.008);
+  g.gain.exponentialRampToValueAtTime(gain*0.4,t+0.26); g.gain.setValueAtTime(gain*0.4,hold);
+  g.gain.exponentialRampToValueAtTime(0.0001,hold+0.22);
+  o.connect(fl); o2.connect(g2); g2.connect(fl); fl.connect(g); g.connect(out);
+  o.start(t); o2.start(t); o.stop(hold+0.25); o2.stop(hold+0.25);
+}
+
+/* ============ THEMES ============ */
+// [midi or null(rest), beats]
+const ROYAL=[[60,2],[63,2],[67,2],[68,2],[59,2],[null,1],[67,1],[66,2],[65,2],[64,2],[63,2],[62,1],[61,1],[60,1],[59,.5],[57,.5],[55,1],[60,1],[65,1],[63,2],[62,2],[60,3]];
+const FJ=[[60,1],[62,1],[64,1],[60,1],[60,1],[62,1],[64,1],[60,1],[64,1],[65,1],[67,2],[64,1],[65,1],[67,2],
+  [67,.5],[69,.5],[67,.5],[65,.5],[64,1],[60,1],[67,.5],[69,.5],[67,.5],[65,.5],[64,1],[60,1],[60,1],[55,1],[60,2],[60,1],[55,1],[60,2]];
+function toEvents(seq,offset=0){let t=offset,ev=[];for(const [p,d] of seq){if(p!=null)ev.push({p,s:t,d});t+=d;}return ev;}
+function seqLen(seq){return seq.reduce((a,[,d])=>a+d,0);}
+
+/* ============ PIANO ROLL ============ */
+function setupCanvas(cv){const r=window.devicePixelRatio||1;if(!cv._h)cv._h=+cv.getAttribute('height');const w=cv.clientWidth||600;if(cv._w!==w||cv._r!==r){cv._w=w;cv._r=r;cv.width=w*r;cv.height=cv._h*r;cv.style.height=cv._h+'px';}const x=cv.getContext('2d');x.setTransform(r,0,0,r,0,0);return x;}
+function drawRoll(cv,voices,playBeat=-1){
+  const x=setupCanvas(cv), W=cv._w, H=cv._h;
+  x.clearRect(0,0,W,H);
+  let all=voices.flatMap(v=>v.ev); if(!all.length)return;
+  let lo=Math.min(...all.map(e=>e.p))-2, hi=Math.max(...all.map(e=>e.p))+2;
+  let end=Math.max(...all.map(e=>e.s+e.d));
+  const pad=14, bx=b=>pad+(W-2*pad)*b/end, py=p=>H-pad-(H-2*pad)*(p-lo)/(hi-lo);
+  // grid
+  x.strokeStyle='#e7dfcd';x.lineWidth=1;
+  for(let b=0;b<=end;b+=4){x.beginPath();x.moveTo(bx(b),pad/2);x.lineTo(bx(b),H-pad/2);x.stroke();}
+  for(let p=Math.ceil(lo);p<=hi;p++){if(p%12===0){x.strokeStyle='#d9cfbb';x.beginPath();x.moveTo(pad,py(p));x.lineTo(W-pad,py(p));x.stroke();x.fillStyle='#a89d86';x.font='10px Inter';x.fillText('C'+(p/12-1),2,py(p)-2);}}
+  if(voices.clashes){x.fillStyle='rgba(192,57,43,.16)';for(const t of voices.clashes.times){x.fillRect(bx(t),pad/2,Math.max(1.5,bx(t+.25)-bx(t)),H-pad);}}
+  const nh=Math.max(4,Math.min(10,(H-2*pad)/(hi-lo)*0.9));
+  for(const v of voices){
+    for(const e of v.ev){
+      const active=playBeat>=e.s&&playBeat<e.s+e.d;
+      x.fillStyle=v.color; x.globalAlpha=active?1:(playBeat<0?0.85:0.45);
+      const X=bx(e.s),Y=py(e.p)-nh/2,w=Math.max(2,bx(e.s+e.d)-bx(e.s)-2);
+      x.beginPath(); if(x.roundRect)x.roundRect(X,Y,w,nh,3); else x.rect(X,Y,w,nh); x.fill();
+      if(active){x.globalAlpha=.25;x.beginPath();x.arc(X+w/2,Y+nh/2,nh*1.6,0,7);x.fill();}
+    }
+  }
+  x.globalAlpha=1;
+  if(playBeat>=0){x.strokeStyle='#b7862b';x.lineWidth=2;x.beginPath();x.moveTo(bx(playBeat),0);x.lineTo(bx(playBeat),H);x.stroke();}
+}
+function playVoices(cv,voices,spb){
+  stopSound(); const out=newBus(), c=ac(), t0=c.currentTime+0.08;
+  let end=0;
+  for(const v of voices){for(const e of v.ev){pluck(out,e.p,t0+e.s*spb,e.d*spb,v.gain||0.2,v.timbre);end=Math.max(end,e.s+e.d);}}
+  const myBus=out; let raf;
+  const anim={stop(){cancelAnimationFrame(raf);drawRoll(cv,voices);}};
+  anims.add(anim);
+  (function frame(){const b=(c.currentTime-t0)/spb; if(b>end+0.3||bus!==myBus){anim.stop();anims.delete(anim);return;} drawRoll(cv,voices,Math.max(0,b)); raf=requestAnimationFrame(frame);})();
+}
+
+/* Section 1: theme */
+const themeCv=document.getElementById('themeCanvas');
+const themeVoices=[{ev:toEvents(ROYAL),color:getCss('--bach'),gain:.25}];
+function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+document.getElementById('playTheme').onclick=()=>playVoices(themeCv,themeVoices,0.36);
+document.getElementById('acro').onclick=function(){this.classList.toggle('show');};
+
+/* Section 2: canon lab */
+const st={inv:false,retro:false,aug:false};
+const canonCv=document.getElementById('canonCanvas');
+const $=id=>document.getElementById(id);
+function buildCanon(){
+  const seq=$('cTheme').value==='fj'?FJ:ROYAL;
+  const delay=+$('cDelay').value, tr=+$('cTrans').value;
+  const v1=toEvents(seq);
+  let s2=seq.map(([p,d])=>[p,d]);
+  if(st.retro) s2=s2.slice().reverse();
+  const pivot=seq[0][0];
+  if(st.inv) s2=s2.map(([p,d])=>[p==null?null:2*pivot-p,d]);
+  if(st.aug) s2=s2.map(([p,d])=>[p,d*2]);
+  s2=s2.map(([p,d])=>[p==null?null:p+tr,d]);
+  const v2=toEvents(s2,delay);
+  const arr=[{ev:v1,color:getCss('--bach'),gain:.18},{ev:v2,color:getCss('--godel'),gain:.18,timbre:'soft'}];
+  arr.clashes=clashInfo(v1,v2); return arr;
+}
+function clashInfo(v1,v2){
+  const at=(ev,t)=>{for(const e of ev)if(e.s<=t&&t<e.s+e.d)return e.p;return null;};
+  const end=Math.max(...v1.concat(v2).map(e=>e.s+e.d)); let tot=0,times=[];
+  for(let t=0;t<end;t+=.25){const a=at(v1,t),b=at(v2,t);if(a!=null&&b!=null){tot++;if([1,2,6,10,11].includes(Math.abs(a-b)%12))times.push(t);}}
+  return {pct:tot?Math.round(100*times.length/tot):0,times};
+}
+function delayLabel(v){v=+v;return v===0?'none':v+' beat'+(v>1?'s':'')+(v===4?' (1 bar)':v===8?' (2 bars)':'');}
+function refreshCanon(){
+  $('cInv').textContent='Inversion: '+(st.inv?'on':'off'); $('cInv').classList.toggle('on',st.inv);
+  $('cRetro').textContent='Retrograde: '+(st.retro?'on':'off'); $('cRetro').classList.toggle('on',st.retro);
+  $('cAug').textContent='Augmentation: '+(st.aug?'on':'off'); $('cAug').classList.toggle('on',st.aug);
+  const v=buildCanon(); drawRoll(canonCv,v);
+  const pc=v.clashes.pct; $('clashPct').textContent=pc+'%';
+  $('clashFill').style.width=Math.min(100,pc*2.5)+'%';
+  $('clashFill').style.background=pc<6?'var(--escher)':pc<15?'var(--gold)':'var(--bach)';
+  $('clashWord').textContent=pc<6?'fits beautifully':pc<15?'mostly fits':'clashes a lot';
+}
+['cTheme','cDelay','cTrans'].forEach(id=>$(id).onchange=refreshCanon);
+$('cInv').onclick=()=>{st.inv=!st.inv;refreshCanon();};
+$('cRetro').onclick=()=>{st.retro=!st.retro;refreshCanon();};
+$('cAug').onclick=()=>{st.aug=!st.aug;refreshCanon();};
+document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{
+  const p=b.dataset.preset;
+  const set=(th,d,t,i,r,a)=>{$('cTheme').value=th;$('cDelay').value=d;$('cTrans').value=t;st.inv=i;st.retro=r;st.aug=a;};
+  if(p==='round')set('fj','8','0',false,false,false);
+  if(p==='crab')set('royal','0','0',false,true,false);
+  if(p==='mirror')set('fj','4','12',true,false,false);
+  if(p==='aug')set('fj','0','-12',false,false,true);
+  refreshCanon();
+});
+const spbCanon=()=>$('cTheme').value==='fj'?0.42:0.34;
+$('cPlay').onclick=()=>playVoices(canonCv,buildCanon(),spbCanon());
+$('cPlay1').onclick=()=>{const v=buildCanon();const w=[v[0],{...v[1],gain:0.0001}];playVoices(canonCv,w,spbCanon());};
+$('cPlay2').onclick=()=>{const v=buildCanon();const w=[{...v[0],gain:0.0001},v[1]];playVoices(canonCv,w,spbCanon());};
+
+
+/* Section 3: endlessly rising */
+const KEYS=['C minor','D minor','E minor','F♯ minor','G♯ minor','B♭ minor'];
+const ring=$('keyRing');
+(function drawRing(){
+  const cx=160,cy=160,R=115; let s='<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b7862b"/></marker></defs>';
+  s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#e2d8c3" stroke-width="18"/>`;
+  for(let i=0;i<6;i++){
+    const a1=-Math.PI/2+i*Math.PI/3+0.28,a2=-Math.PI/2+(i+1)*Math.PI/3-0.28;
+    s+=`<path d="M${cx+R*Math.cos(a1)},${cy+R*Math.sin(a1)} A${R},${R} 0 0 1 ${cx+R*Math.cos(a2)},${cy+R*Math.sin(a2)}" fill="none" stroke="#b7862b" stroke-width="2" marker-end="url(#ah)"/>`;
+    const a=-Math.PI/2+i*Math.PI/3, x=cx+R*Math.cos(a), y=cy+R*Math.sin(a);
+    s+=`<g id="kn${i}"><circle cx="${x}" cy="${y}" r="24" fill="#fff" stroke="#9b2f2f" stroke-width="2"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="EB Garamond" font-size="15" fill="#1f1c17">${KEYS[i].replace(' minor','m')}</text></g>`;
+    const lx=cx+(R+0)*Math.cos(a+Math.PI/6)*0.62, ly=cy+(R)*Math.sin(a+Math.PI/6)*0.62;
+    s+=`<text x="${lx}" y="${ly+4}" text-anchor="middle" font-family="Inter" font-size="10" fill="#b7862b">+2 ↑</text>`;
+  }
+  s+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" font-family="EB Garamond" font-size="18" fill="#5b5447">always up…</text><text x="${cx}" y="${cy+18}" text-anchor="middle" font-family="EB Garamond" font-size="18" fill="#5b5447" font-style="italic">always home</text>`;
+  s+=`<circle id="kdot" r="9" fill="#b7862b" cx="${cx}" cy="${cy-R}" opacity="0"/>`;
+  ring.innerHTML=s;
+})();
+function highlightKey(i,steps){
+  for(let k=0;k<6;k++){const c=$('kn'+k).querySelector('circle');c.setAttribute('fill',k===i?'#9b2f2f':'#fff');$('kn'+k).querySelector('text').setAttribute('fill',k===i?'#fff':'#1f1c17');}
+  const a=-Math.PI/2+i*Math.PI/3; const d=$('kdot'); d.setAttribute('opacity',1);
+  d.setAttribute('cx',160+150*Math.cos(a)*0.97); d.setAttribute('cy',160+150*Math.sin(a)*0.97);
+  $('mKey').textContent=KEYS[i]; $('mSteps').textContent=steps; $('mRise').textContent=steps*2;
+}
+const MOTIF=[[0,.5],[3,.5],[7,.5],[8,.5],[7,.5],[5,.5],[3,.5],[2,1],[0,.5],[2,.5],[3,.5],[5,.5],[7,.5],[9,.5],[11,.5],[12,1.5]];
+// motif rises toward next key's tonic (ends a tone above where next loop begins)
+let shep=null;
+function shepardNote(out,pc,t,dur,gain=0.11){
+  const c=ac();
+  const g=c.createGain(); const hold=Math.max(t+0.06,t+dur-0.03);
+  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+0.02);g.gain.setValueAtTime(gain,hold);g.gain.exponentialRampToValueAtTime(0.0001,hold+0.18);
+  g.connect(out);
+  const C0=16.352, center=Math.log2(330), sig=1.1;
+  for(let o=0;o<9;o++){
+    const f=C0*Math.pow(2,pc/12+o); if(f<25||f>9000)continue;
+    const w=Math.exp(-Math.pow(Math.log2(f)-center,2)/(2*sig*sig)); if(w<0.01)continue;
+    const osc=c.createOscillator(); osc.type='sine'; osc.frequency.value=f;
+    const og=c.createGain(); og.gain.value=w; osc.connect(og); og.connect(g);
+    osc.start(t); osc.stop(hold+0.2);
+  }
+}
+function stopShepard(){if(shep){clearInterval(shep.timer);shep=null;}}
+function startRise(mode){
+  stopSound(); const out=newBus(), c=ac(), spb=0.27;
+  const motifLen=MOTIF.reduce((a,[,d])=>a+d,0);
+  let rep=0, t=c.currentTime+0.1; const myBus=out; const marks=[];
+  shep={timer:null};
+  function schedRep(){
+    const tr=rep*2, start=t;
+    for(const [iv,d] of MOTIF){
+      if(mode==='shep') shepardNote(out,(tr+iv)%12,t,d*spb);
+      else pluck(out,57+tr+iv,t,d*spb,0.2);
+      t+=d*spb;
+    }
+    // bass tonic
+    if(mode!=='shep') pluck(out,45+tr,start,motifLen*spb*0.95,0.12,'soft');
+    marks.push({time:start,rep});
+    rep++;
+  }
+  const lim=mode==='shep'?Infinity:6;
+  shep.timer=setInterval(()=>{
+    if(bus!==myBus){stopShepard();return;}
+    while(rep<lim && t<c.currentTime+0.6) schedRep();
+    if(rep>=lim && mode!=='shep' && !shep.finalDone){shep.finalDone=true; pluck(out,69,t,2,0.2); pluck(out,57,t,2,0.15,'soft'); pluck(out,72,t,2,0.12); marks.push({time:t,rep:6});}
+    const now=c.currentTime; let cur=null; for(const m of marks){if(m.time<=now)cur=m;}
+    if(cur){highlightKey(cur.rep%6,cur.rep);}
+  },50);
+}
+$('riseBach').onclick=()=>startRise('bach');
+$('riseShep').onclick=()=>startRise('shep');
+$('riseStop').onclick=stopSound;
+
+/* Section 4: hands + droste */
+$('hands').innerHTML=`
+<defs><marker id="ah2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#2f6b4f"/></marker></defs>
+<rect x="20" y="80" width="130" height="80" rx="12" fill="#eef7f1" stroke="#2f6b4f" stroke-width="2"/>
+<text x="85" y="115" text-anchor="middle" font-family="EB Garamond" font-size="20">Left hand</text>
+<text x="85" y="138" text-anchor="middle" font-family="Inter" font-size="11" fill="#5b5447">"I am the artist"</text>
+<rect x="250" y="80" width="130" height="80" rx="12" fill="#eef7f1" stroke="#2f6b4f" stroke-width="2"/>
+<text x="315" y="115" text-anchor="middle" font-family="EB Garamond" font-size="20">Right hand</text>
+<text x="315" y="138" text-anchor="middle" font-family="Inter" font-size="11" fill="#5b5447">"No, I am!"</text>
+<path id="hArc1" d="M110,78 C150,10 250,10 290,78" fill="none" stroke="#2f6b4f" stroke-width="2.5" marker-end="url(#ah2)"/>
+<path id="hArc2" d="M290,162 C250,230 150,230 110,162" fill="none" stroke="#2f6b4f" stroke-width="2.5" marker-end="url(#ah2)"/>
+<text x="200" y="54" text-anchor="middle" font-family="Inter" font-size="12" fill="#2f6b4f">draws</text>
+<text x="200" y="196" text-anchor="middle" font-family="Inter" font-size="12" fill="#2f6b4f">draws</text>
+<circle r="6" fill="#b7862b"><animateMotion dur="4s" repeatCount="indefinite" path="M110,78 C150,10 250,10 290,78 L290,162 C250,230 150,230 110,162 Z"/></circle>
+<text x="200" y="125" text-anchor="middle" font-family="EB Garamond" font-style="italic" font-size="15" fill="#5b5447">which level is on top?</text>`;
+(function droste(){
+  const cv=$('droste'); let x=setupCanvas(cv); let t0=performance.now();
+  window.addEventListener('resize',()=>{x=setupCanvas(cv);});
+  function frame(now){
+    const W=cv._w,H=cv._h; x.clearRect(0,0,W,H);
+    const k=0.55, phase=((now-t0)/3500)%1, cx=W/2, cy=H/2;
+    const base=Math.min(W,H)*0.95;
+    for(let i=-1;i<9;i++){
+      const s=base*Math.pow(k,i-phase); if(s>Math.max(W,H)*3||s<2)continue;
+      const rot=(i-phase)*0.35;
+      x.save(); x.translate(cx,cy); x.rotate(rot);
+      x.fillStyle=(i%2===0)?'#eef7f1':'#fbf8f1'; x.strokeStyle='#2f6b4f'; x.lineWidth=Math.max(.5,s/90);
+      x.fillRect(-s/2,-s*0.34,s,s*0.68); x.strokeRect(-s/2,-s*0.34,s,s*0.68);
+      x.fillStyle='#2f6b4f'; x.font=`${Math.max(6,s/14)}px EB Garamond`; x.textAlign='center';
+      x.fillText('a picture of…',0,-s*0.22);
+      x.restore();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* Section 5: liar + godel */
+let liarT=null;
+$('liarGo').onclick=()=>{
+  clearInterval(liarT); const el=$('liar'), out=$('liarSteps'); let n=0;
+  const lines=[['T','If it\'s TRUE, then what it says holds — so it\'s FALSE.'],['F','If it\'s FALSE, then what it says doesn\'t hold — so it\'s TRUE.'],['T','…which makes it FALSE again…'],['F','…which makes it TRUE again…']];
+  function step(){const [c,s]=lines[n%4]; el.className='sentence '+c; out.innerHTML+=(n?'<br>':'')+'→ '+s; n++; if(n>=4){clearInterval(liarT);out.innerHTML+='<br><b>It flips forever.</b> The sentence refers to itself and has no stable truth value — a Strange Loop in language.';}}
+  out.innerHTML=''; step(); liarT=setInterval(step,1300);
+};
+$('liarReset').onclick=()=>{clearInterval(liarT);$('liar').className='sentence';$('liarSteps').innerHTML='';};
+$('gProv').onclick=()=>{$('gsent').className='sentence F';$('gSteps').innerHTML='→ Then the system proves a statement saying "I have no proof" — it proves something <b>false</b>.<br>→ A system that proves false things is broken. <b>So, in a trustworthy system (one that only proves true things), this can\'t happen.</b>';};
+$('gUnprov').onclick=()=>{$('gsent').className='sentence T';$('gSteps').innerHTML='→ Then what it says is exactly right: it has no proof. So it\'s <b>TRUE</b>.<br>→ <b>A true statement the system can never prove.</b> No paradox, just a gap: the system is <b>incomplete</b>. And the gap can\'t be patched: add the sentence as a new axiom, and a new Gödel sentence appears for the bigger system.';};
+const CODES={'0':1,'S':2,'=':3,'+':4,'×':5,'*':5,'(':6,')':7,'~':8,'x':9};
+const PR=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113];
+function godel(){
+  const s=$('gIn').value.replace(/\s/g,''); const out=$('gOut');
+  if(!s){out.textContent='Type something…';return;}
+  let bad=[...s].filter(ch=>!(ch in CODES)); if(bad.length){out.innerHTML='Unknown symbol: <b>'+bad[0]+'</b>';return;}
+  let n=1n, parts=[];
+  [...s].forEach((ch,i)=>{const c=CODES[ch];n*=BigInt(PR[i])**BigInt(c);parts.push(PR[i]+'<sup>'+c+'</sup>');});
+  const ns=n.toString();
+  out.innerHTML=`<div>${[...s].map(ch=>`<b>${ch}</b>→${CODES[ch]}`).join('&nbsp; ')}</div><div style="margin:6px 0">${parts.join(' · ')}</div><div>= <b>${ns}</b></div><div style="color:#5b5447;margin-top:6px">${ns.length} digits. Every formula gets a unique number, and you can always factor it to get the formula back.</div>`;
+}
+$('gIn').oninput=godel; godel();
+
+/* Section 6: barber */
+$('barberYes').onclick=()=>{$('barberOut').innerHTML='→ He shaves himself… but he only shaves men who <i>don\'t</i> shave themselves. So he <b>doesn\'t</b>. Contradiction! Try the other answer.';};
+$('barberNo').onclick=()=>{$('barberOut').innerHTML='→ He doesn\'t shave himself… so he\'s one of the men he must shave. So he <b>does</b>. Contradiction again! <br>Same knot as Russell\'s set: a definition that includes itself. Principia Mathematica tried to forbid such loops; Gödel showed they come back anyway.';};
+
+/* Section 7: levels diagram */
+$('levels').innerHTML=(()=>{
+  const L=[['Symbols & rules','meaningless marks, shuffled mechanically','#e9e2d2'],['Patterns','symbols that mirror something (isomorphism)','#e4ecf6'],['Meaning','the patterns are "about" things','#e6f2ea'],['Self','a pattern that represents itself — "I"','#f7e6e6']];
+  let s='<defs><marker id="ah3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1f1c17"/></marker><marker id="ah4" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b7862b"/></marker></defs>';
+  L.forEach(([t,d,c],i)=>{const y=262-i*78;s+=`<rect x="20" y="${y}" width="270" height="56" rx="10" fill="${c}" stroke="#bfb39b"/><text x="34" y="${y+24}" font-family="EB Garamond" font-size="19" font-weight="600">${t}</text><text x="34" y="${y+44}" font-family="Inter" font-size="11" fill="#5b5447">${d}</text>`; if(i<3)s+=`<path d="M155,${y} L155,${y-20}" stroke="#1f1c17" stroke-width="1.5" marker-end="url(#ah3)"/>`;});
+  s+=`<path d="M290,52 C360,60 360,280 292,290" fill="none" stroke="#b7862b" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#ah4)"/><text x="350" y="175" font-family="Inter" font-size="12" fill="#b7862b" text-anchor="middle" transform="rotate(90 350 175)">the Strange Loop</text>`;
+  return s;})();
+
+/* Section 8: weave */
+$('weave').innerHTML=(()=>{
+  let s='';const items=['Intro','Dialogue','Ch. I','Dialogue','Ch. II','Dialogue','Ch. III','…'];
+  items.forEach((t,i)=>{const x=20+i*44,isD=t==='Dialogue';const y=isD?60:130;
+    s+=`<rect x="${x}" y="${y}" width="40" height="50" rx="7" fill="${isD?'#f7e6e6':'#e4ecf6'}" stroke="${isD?'#9b2f2f':'#2c5282'}"/>`;
+    s+=`<text x="${x+20}" y="${y+30}" text-anchor="middle" font-family="Inter" font-size="${isD?8.5:10}" fill="#1f1c17">${isD?'story':t}</text>`;
+    if(i<items.length-1){const nx=20+(i+1)*44, ny=(items[i+1]==='Dialogue'?60:130);s+=`<path d="M${x+40},${y+25} L${nx},${ny+25}" stroke="#bfb39b"/>`;}
+  });
+  s+=`<text x="20" y="40" font-family="EB Garamond" font-size="17" fill="#9b2f2f">Dialogues — show it (Achilles &amp; the Tortoise)</text>`;
+  s+=`<text x="20" y="210" font-family="EB Garamond" font-size="17" fill="#2c5282">Chapters — explain it</text>`;
+  return s;})();
+
+/* Quiz */
+const Q=[
+ ['What is a Strange Loop?',['A melody played backwards','Moving up through levels and ending up back where you started','A proof with an error in it'],1,'Climbing a hierarchy and arriving home — like the rising canon, Escher\'s stairs, or Gödel\'s self-referring statement.'],
+ ['In a crab canon, the second voice is…',['the theme upside-down','the theme backwards','the theme twice as slow'],1,'Retrograde — like a crab walking backwards. Upside-down is inversion; slower is augmentation.'],
+ ['Gödel\'s key move was to replace "this sentence is false" with…',['"this sentence is unprovable"','"this sentence is meaningless"','"all sentences are false"'],0,'Swapping truth for provability turns a paradox into a theorem: a true but unprovable statement.'],
+ ['How can a statement about numbers also be about statements?',['It can\'t','Gödel numbering: code every formula as a number','By using a different language'],1,'Once formulas are numbers, number theory can describe properties of its own formulas — a second, hidden level of meaning.'],
+ ['What is the big question the book is heading toward?',['Was Bach better than Mozart?','How can a mind/self arise from meaningless rule-following parts?','Is mathematics useless?'],1,'Hofstadter suspects that Strange Loops are how meaning and an "I" emerge from rigid low-level rules.']
+];
+$('quiz').innerHTML+=Q.map((q,i)=>`<div class="q" id="q${i}"><div><b>${i+1}.</b> ${q[0]}</div><div class="opts">${q[1].map((o,j)=>`<button data-q="${i}" data-a="${j}">${o}</button>`).join('')}</div><div class="why">${q[3]}</div></div>`).join('');
+$('quiz').addEventListener('click',e=>{const b=e.target.closest('button[data-q]');if(!b)return;const q=+b.dataset.q,a=+b.dataset.a;b.classList.add(a===Q[q][2]?'right':'wrong');if(a===Q[q][2]){$('q'+q).classList.add('done');}});
+
+$('stopAll').onclick=stopSound;
+
+/* TOC highlight */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+
+/* initial draws */
+function redrawAll(){drawRoll(themeCv,themeVoices);refreshCanon();}
+window.addEventListener('resize',redrawAll);
+document.fonts&&document.fonts.ready.then(redrawAll); redrawAll();
+</script>
+</body>
+</html>
