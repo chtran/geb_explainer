@@ -115,7 +115,6 @@
         <div class="row">
           <button id="riseBach">▶ Bach-style: rise 6 keys</button>
           <button id="riseShep">∞ Shepard: rise forever</button>
-          <button class="ghost" id="riseStop">■ Stop</button>
         </div>
         <p class="meter">Current key: <b id="mKey">—</b><br>Steps climbed: <b id="mSteps">0</b> &nbsp;·&nbsp; Total rise: <b id="mRise">0</b> semitones</p>
         <p class="small-note">A <b>semitone</b> is a step of one piano key. Each step around the ring rises 2 semitones (a "whole tone"), and six of them make 12, a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
@@ -276,7 +275,7 @@
 const themeCv=document.getElementById('themeCanvas');
 const themeVoices=[{ev:toEvents(ROYAL),color:getCss('--bach'),gain:.25}];
 function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
-document.getElementById('playTheme').onclick=()=>playVoices(themeCv,themeVoices,0.36);
+playToggle(document.getElementById('playTheme'),()=>playVoices(themeCv,themeVoices,0.36));
 document.getElementById('acro').onclick=function(){this.classList.toggle('show');};
 
 /* Section 2: canon lab */
@@ -335,9 +334,9 @@ document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{
   refreshCanon();
 });
 const spbCanon=()=>$('cTheme').value==='fj'?0.42:0.34;
-$('cPlay').onclick=()=>playVoices(canonCv,buildCanon(),spbCanon());
-$('cPlay1').onclick=()=>{const v=buildCanon();const w=[v[0],{...v[1],gain:0.0001}];playVoices(canonCv,w,spbCanon());};
-$('cPlay2').onclick=()=>{const v=buildCanon();const w=[{...v[0],gain:0.0001},v[1]];playVoices(canonCv,w,spbCanon());};
+playToggle($('cPlay'),()=>playVoices(canonCv,buildCanon(),spbCanon()));
+playToggle($('cPlay1'),()=>{const v=buildCanon();const w=[v[0],{...v[1],gain:0.0001}];playVoices(canonCv,w,spbCanon());});
+playToggle($('cPlay2'),()=>{const v=buildCanon();const w=[{...v[0],gain:0.0001},v[1]];playVoices(canonCv,w,spbCanon());});
 
 
 /* Section 3: endlessly rising */
@@ -403,14 +402,14 @@ function startRise(mode){
   shep.timer=setInterval(()=>{
     if(bus!==myBus){stopShepard();return;}
     while(rep<lim && t<c.currentTime+0.6) schedRep();
-    if(rep>=lim && mode!=='shep' && !shep.finalDone){shep.finalDone=true; pluck(out,69,t,2,0.2); pluck(out,57,t,2,0.15,'soft'); pluck(out,72,t,2,0.12); marks.push({time:t,rep:6});}
+    if(rep>=lim && mode!=='shep' && !shep.finalDone){shep.finalDone=true; pluck(out,69,t,2,0.2); pluck(out,57,t,2,0.15,'soft'); pluck(out,72,t,2,0.12); marks.push({time:t,rep:6}); shep.endAt=t+2.4;}
+    if(shep && shep.endAt && c.currentTime>shep.endAt){stopSound();return;}
     const now=c.currentTime; let cur=null; for(const m of marks){if(m.time<=now)cur=m;}
     if(cur){highlightKey(cur.rep%6,cur.rep);}
   },50);
 }
-$('riseBach').onclick=()=>startRise('bach');
-$('riseShep').onclick=()=>startRise('shep');
-$('riseStop').onclick=stopSound;
+playToggle($('riseBach'),()=>startRise('bach'));
+playToggle($('riseShep'),()=>startRise('shep'));
 
 /* Section 4: hands + droste */
 $('hands').innerHTML=`

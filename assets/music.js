@@ -17,6 +17,21 @@ function stopSound(){
   if(bus&&AC){const b=bus;b.gain.setTargetAtTime(0,AC.currentTime,0.02);setTimeout(()=>{try{b.disconnect()}catch(e){}},300);bus=null;}
   anims.forEach(f=>f.stop&&f.stop()); anims.clear();
   if(typeof stopShepard==='function')stopShepard();
+  releaseButton();
+}
+/* Play/Stop toggle buttons: while a button's sound plays, it reads "■ Stop"
+   and clicking it stops that sound. Starting any other sound resets it. */
+let activeBtn=null;
+function releaseButton(){
+  if(activeBtn){activeBtn.textContent=activeBtn.dataset.label;activeBtn.classList.remove('on');activeBtn=null;}
+}
+function playToggle(btn,start){
+  btn.dataset.label=btn.textContent;
+  btn.onclick=()=>{
+    if(activeBtn===btn){stopSound();return;}
+    start();                       // start() calls stopSound() first, which resets any other button
+    activeBtn=btn; btn.textContent='■ Stop'; btn.classList.add('on');
+  };
 }
 const anims=new Set();
 const mtof=m=>440*Math.pow(2,(m-69)/12);
@@ -78,6 +93,6 @@ function playVoices(cv,voices,spb){
   const myBus=out; let raf;
   const anim={stop(){cancelAnimationFrame(raf);drawRoll(cv,voices);}};
   anims.add(anim);
-  (function frame(){const b=(c.currentTime-t0)/spb; if(b>end+0.3||bus!==myBus){anim.stop();anims.delete(anim);return;} drawRoll(cv,voices,Math.max(0,b)); raf=requestAnimationFrame(frame);})();
+  (function frame(){const b=(c.currentTime-t0)/spb; if(b>end+0.3||bus!==myBus){anim.stop();anims.delete(anim);if(bus===myBus)releaseButton();return;} drawRoll(cv,voices,Math.max(0,b)); raf=requestAnimationFrame(frame);})();
 }
 
