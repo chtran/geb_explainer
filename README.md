@@ -33,4 +33,5 @@ To preview locally with working links, run `python3 -m http.server` in this fold
 - Terms defined in earlier explainers still get a one-line reminder at first use in each new explainer. Mark them with `<span class="term">` too so the hover works.
 - Each page ends with a one-breath recap and a short self-check quiz. Definitions live in the hover, not in a separate glossary list.
 - Keep it simple: prefer the clearest explanation over extra panels and widgets.
+- Pages are public. Write for any reader: no references to a particular reader, their copy of the book, or their reading progress. Assume no music or math background beyond everyday knowledge (e.g. do-re-mi).
 - Copyrighted art (e.g. Escher's prints) is linked, never copied. Paraphrase the book — no long quotes.
