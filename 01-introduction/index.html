@@ -105,9 +105,56 @@
 <!-- 3 -->
 <section id="s-loop">
   <div class="sec-head"><div class="num">3</div><h2>The Endlessly Rising Canon — the first Strange Loop</h2></div>
-  <div class="words"><b>First, what's a key?</b> Most music has a "home note" it keeps returning to and feels settled on, plus a family of notes (a scale) built around it. That home base is the piece's <span class="term">key</span>. "C minor" means home is the note C, using a minor (darker-sounding) scale. Moving a piece from one key to another is called <span class="term">modulation</span>.</div>
-  <p>One canon in the Offering, the <b>Canon per Tonos</b> ("canon through the keys"), does something sneaky. Each time through, it modulates and ends one step <b>higher</b> than it began — C minor, then D minor, then E minor… After six rounds you're back in C minor. You've been going <b>up</b> the whole time, yet you're <b>home</b> again (an octave higher). Bach even wrote the King a flattering note: may his glory rise like the modulation.</p>
-  <p>With a little audio trickery we can go further. <span class="term">Shepard tones</span> play every note in many octaves at once, with the highest and lowest copies faded out, so your ear can't tell which octave you're in. With them we can make the loop truly seamless: it rises forever and never gets anywhere.</p>
+  <p>One of the Offering's canons does a magic trick: it keeps climbing higher and higher, yet ends up exactly where it started. To see how, we need three small music ideas. Each takes a minute, and each comes with something to click and hear.</p>
+
+  <h3>① Notes have letter names</h3>
+  <div class="cols">
+    <div>
+      <p>You know <i>do, re, mi, fa, sol, la, si</i>. Musicians usually write the same notes as letters: <b>C D E F G A B</b>. So C is do, D is re, and so on. On a piano, these are the white keys.</p>
+      <p>The black keys are the notes <b>in between</b>. Each is named after a neighbour: <span class="term">sharp</span> (♯) means "one key higher" and <span class="term">flat</span> (♭) means "one key lower". So the black key between C and D is called C♯, or D♭ — same key, two names.</p>
+      <p>Counting white and black, there are <b>12 different notes</b>. After B the pattern starts again with a higher C. That jump, from a note to the same note higher up (like singing <i>do</i> again at the top of do-re-mi), is an <span class="term">octave</span>. Moving by one key, white or black, is a <span class="term">semitone</span>; two keys is a <b>whole tone</b>.</p>
+    </div>
+    <div class="card">
+      <svg id="pianoA" viewBox="0 0 500 180" width="100%"></svg>
+      <p class="small-note" style="margin-bottom:0">Click any key to hear it. Play the white keys left to right and you'll hear do-re-mi-fa-sol-la-si-do.</p>
+    </div>
+  </div>
+
+  <h3>② A key = a home note + a family of 7 notes</h3>
+  <div class="cols">
+    <div>
+      <p>A <span class="term">key</span> is <b>not a tune</b>, and <b>not notes played together</b>. It's the setting a piece of music lives in. It has two parts:</p>
+      <ul>
+        <li><b>a home note</b> — the note the music keeps coming back to, and feels finished on;</li>
+        <li><b>a family of 7 notes</b> (out of the 12) that the music mostly uses. Played in order, that family is called a <span class="term">scale</span>.</li>
+      </ul>
+      <p>Do-re-mi-fa-sol-la-si-do, starting on C, uses only white keys. That's <b>C major</b>: home note C, with a bright, cheerful family. <b>C minor</b> has the same home note, C, but swaps three notes (E, A and B) for the black keys just below them (E♭, A♭, B♭). That small change makes it sound darker and more serious. Bach's canon starts in C minor.</p>
+    </div>
+    <div class="card">
+      <svg id="pianoB" viewBox="0 0 500 180" width="100%"></svg>
+      <div class="legend"><span><i style="background:#9b2f2f"></i>the key's family of notes</span><span>● home note</span><span><i style="background:#b7862b"></i>note playing now</span></div>
+      <div class="row"><button id="pbMaj">▶ C major scale</button><button id="pbMin">▶ C minor scale</button></div>
+      <p class="small-note">The home note really does feel like home. Here's a short tune in C minor, first ending on C, then stopping one note early:</p>
+      <div class="row"><button class="ghost" id="pbHome">▶ Ends at home</button><button class="ghost" id="pbEarly">▶ Stops one note early</button></div>
+      <p class="small-note" style="margin-bottom:0">The second one feels unfinished: your ear is waiting for that last C.</p>
+    </div>
+  </div>
+
+  <h3>③ Changing key = moving the whole tune</h3>
+  <div class="cols">
+    <div>
+      <p>You can take a tune and start it on a <b>different home note</b>, keeping exactly the same pattern of steps. It's still the same tune, just higher or lower, like singing a song in a higher voice. Moving music to a new home note is called <b>changing key</b>, or <span class="term">modulation</span>.</p>
+      <p>Play the C minor tune, then the same tune starting on D (two keys higher), which puts it in <b>D minor</b>. On the keyboard, the whole family of notes slides two keys to the right.</p>
+    </div>
+    <div class="card">
+      <svg id="pianoC" viewBox="0 0 500 180" width="100%"></svg>
+      <div class="row"><button id="pcC">▶ Tune in C minor</button><button id="pcD">▶ Same tune in D minor</button></div>
+    </div>
+  </div>
+
+  <h3>④ Bach's trick: climbing through the keys</h3>
+  <p>Now Bach's canon, the <b>Canon per Tonos</b> ("canon through the keys"). Each time through, the music changes key, moving up a whole tone (two piano keys): C minor → D minor → E minor → F♯ minor → A♭ minor → B♭ minor → and, after six steps, <b>C minor again</b>. It has been climbing the whole time, yet it's back home, just one octave higher. Bach even wrote the King a flattering note: may his glory rise like the music.</p>
+  <p>Real music would eventually climb too high to hear. <span class="term">Shepard tones</span> get around that: every note sounds in several octaves at once, with the highest and lowest faded out, so your ear can't tell which octave you're in. With them, the loop can rise forever and never get anywhere.</p>
   <div class="card">
     <div class="loopwrap">
       <svg id="keyRing" viewBox="0 0 320 320" width="100%"></svg>
@@ -117,12 +164,12 @@
           <button id="riseShep">∞ Shepard: rise forever</button>
         </div>
         <p class="meter">Current key: <b id="mKey">—</b><br>Steps climbed: <b id="mSteps">0</b> &nbsp;·&nbsp; Total rise: <b id="mRise">0</b> semitones</p>
-        <p class="small-note">A <span class="term">semitone</span> is a step of one piano key. Each step around the ring rises 2 semitones (a "whole tone"), and six of them make 12, a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
+        <p class="small-note">Each step around the ring is 2 semitones, so six steps make 12: a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
       </div>
     </div>
     <div class="keypanel">
-      <h3 style="margin-top:4px">Where each key sits on the piano</h3>
-      <p class="small-note">A key uses 7 of the 12 notes in an <span class="term">octave</span>. Click a key on the ring to hear the canon's melody in that key, the same one you hear during playback. Then step around the ring one key at a time, try jumping straight across it, and compare how many notes change. Each move plays the end of the old key's melody, then the new key's.</p>
+      <h3 style="margin-top:4px">Why one step at a time?</h3>
+      <p class="small-note">Click a key on the ring to hear the canon's melody in that key, the same one you hear during playback. Then step around the ring one key at a time, try jumping straight across it, and compare how many of the 7 family notes change. Each move plays the end of the old key's melody, then the new key's.</p>
       <svg id="kbd" viewBox="0 0 520 200" width="100%" style="max-width:540px;display:block;margin:8px auto 0"></svg>
       <div class="legend" id="kLegend"><span><i style="background:#b7862b"></i>kept from the previous key</span><span><i style="background:#9b2f2f"></i>new in this key</span><span><i style="background:#efe7d6;border:1px dashed #8c826e"></i>dropped</span><span>● home note</span></div>
       <div class="row"><button class="ghost" id="kPrev">◀ Step down</button><button class="ghost" id="kNext">Step up ▶</button><span class="small-note">or click any key on the ring to jump straight to it</span></div>
@@ -276,7 +323,7 @@
 </footer>
 
 <script src="../assets/toc.js?v=b9b4a14e"></script>
-<script src="../assets/glossary.js?v=086884f1"></script>
+<script src="../assets/glossary.js?v=94fe7877"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=825ddc85" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -349,8 +396,71 @@ playToggle($('cPlay1'),()=>{const v=buildCanon();const w=[v[0],{...v[1],gain:0.0
 playToggle($('cPlay2'),()=>{const v=buildCanon();const w=[{...v[0],gain:0.0001},v[1]];playVoices(canonCv,w,spbCanon());});
 
 
-/* Section 3: endlessly rising */
-const KEYS=['C minor','D minor','E minor','F♯ minor','G♯ minor','B♭ minor'];
+/* Section 3, steps 1-3: note names, keys, changing key */
+const SOLF={0:'do',2:'re',4:'mi',5:'fa',7:'sol',9:'la',11:'si',12:'do'};
+const BLK={1:['C♯','D♭'],3:['D♯','E♭'],6:['F♯','G♭'],8:['G♯','A♭'],10:['A♯','B♭']};
+const LET={0:'C',2:'D',4:'E',5:'F',7:'G',9:'A',11:'B',12:'C'};
+const FAM_MAJ=[0,2,4,5,7,9,11], FAM_MIN=[0,2,3,5,7,8,10];
+/* Draw one octave plus the top C (13 keys, semitones 0..12).
+   o = {fam: Set of pitch classes in the key, home: pitch class, active: semitone 0..12 now sounding, solf: show do-re-mi} */
+function drawPiano(svg,o={}){
+  const W=60,X0=10,Y0=6,H=150, wh=[0,2,4,5,7,9,11,12], bl={1:0,3:1,6:3,8:4,10:5};
+  const look=(semi,black)=>{
+    if(o.active===semi) return ['#b7862b','#fff'];
+    if(o.fam && o.fam.has(semi%12)) return ['#9b2f2f','#fff'];
+    return black?['#2a2621','#d9d0bf']:['#fffdf8','#5b5447'];
+  };
+  let s='';
+  wh.forEach((semi,j)=>{const [f,tc]=look(semi,false),x=X0+j*W;
+    s+=`<g data-semi="${semi}" style="cursor:pointer"><rect x="${x}" y="${Y0}" width="${W-3}" height="${H}" rx="5" fill="${f}" stroke="#bfb39b" stroke-width="1.5"/>`;
+    s+=`<text x="${x+W/2-1.5}" y="${Y0+H-30}" text-anchor="middle" font-family="Inter" font-size="17" font-weight="600" fill="${tc}">${LET[semi]}</text>`;
+    if(o.solf) s+=`<text x="${x+W/2-1.5}" y="${Y0+H-11}" text-anchor="middle" font-family="EB Garamond" font-style="italic" font-size="15" fill="${tc}">${SOLF[semi]}</text>`;
+    if(o.home!=null && semi%12===o.home) s+=`<circle cx="${x+W/2-1.5}" cy="${Y0+H-56}" r="6" fill="${tc}"/>`;
+    s+='</g>';});
+  Object.entries(bl).forEach(([semi,j])=>{semi=+semi;const [f,tc]=look(semi,true),x=X0+(j+1)*W-19;
+    s+=`<g data-semi="${semi}" style="cursor:pointer"><rect x="${x}" y="${Y0}" width="36" height="${H*0.6}" rx="4" fill="${f}" stroke="#1f1c17" stroke-width="1.2"/>`;
+    if(o.solf){
+      s+=`<text x="${x+18}" y="${Y0+H*0.6-26}" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="600" fill="${tc}">${BLK[semi][0]}</text>`;
+      s+=`<text x="${x+18}" y="${Y0+H*0.6-10}" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="600" fill="${tc}">${BLK[semi][1]}</text>`;
+    } else s+=`<text x="${x+18}" y="${Y0+H*0.6-12}" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="${tc}">${NOTE[semi]}</text>`;
+    if(o.home!=null && semi%12===o.home) s+=`<circle cx="${x+18}" cy="${Y0+16}" r="5" fill="${tc}"/>`;
+    s+='</g>';});
+  svg.innerHTML=s;
+}
+const famSet=(home,pat)=>new Set(pat.map(x=>(home+x)%12));
+/* Play a list of [semitone,beats] notes, lighting each key on the given piano as it sounds. */
+function playOnPiano(svg,o,notes,spb){
+  stopSound(); const out=newBus(), c=ac(), t0=c.currentTime+0.06, myBus=out, timers=[];
+  let t=0;
+  for(const [semi,d] of notes){
+    pluck(out,60+semi,t0+t*spb,d*spb,0.22);
+    timers.push(setTimeout(()=>drawPiano(svg,{...o,active:semi}),(t*spb+0.06)*1000));
+    t+=d;
+  }
+  const anim={stop(){timers.forEach(clearTimeout);drawPiano(svg,o);}};
+  anims.add(anim);
+  timers.push(setTimeout(()=>{anims.delete(anim);drawPiano(svg,o);if(bus===myBus)releaseButton();},(t*spb+0.4)*1000));
+}
+// ① click a key to hear it
+const pA=$('pianoA'); drawPiano(pA,{solf:true});
+pA.addEventListener('click',e=>{const g=e.target.closest('[data-semi]'); if(!g)return; const semi=+g.dataset.semi;
+  stopSound(); const out=newBus(); pluck(out,60+semi,ac().currentTime+0.02,0.9,0.25);
+  drawPiano(pA,{solf:true,active:semi}); setTimeout(()=>drawPiano(pA,{solf:true}),450);});
+// ② C major vs C minor, and the home note
+const pB=$('pianoB'); let pBo={fam:famSet(0,FAM_MIN),home:0}; drawPiano(pB,pBo);
+const scale=pat=>pat.concat([12]).map((x,i,a)=>[x,i===a.length-1?1.5:0.5]);
+const TUNE=[[0,.5],[2,.5],[3,.5],[5,.5],[7,1],[5,.5],[3,.5],[2,.5],[0,1.5]];
+playToggle($('pbMaj'),()=>{pBo={fam:famSet(0,FAM_MAJ),home:0};playOnPiano(pB,pBo,scale(FAM_MAJ),0.36);});
+playToggle($('pbMin'),()=>{pBo={fam:famSet(0,FAM_MIN),home:0};playOnPiano(pB,pBo,scale(FAM_MIN),0.36);});
+playToggle($('pbHome'),()=>{pBo={fam:famSet(0,FAM_MIN),home:0};playOnPiano(pB,pBo,TUNE,0.36);});
+playToggle($('pbEarly'),()=>{pBo={fam:famSet(0,FAM_MIN),home:0};playOnPiano(pB,pBo,TUNE.slice(0,-1),0.36);});
+// ③ the same tune in C minor and D minor
+const pC=$('pianoC'); drawPiano(pC,{fam:famSet(0,FAM_MIN),home:0});
+playToggle($('pcC'),()=>playOnPiano(pC,{fam:famSet(0,FAM_MIN),home:0},TUNE,0.36));
+playToggle($('pcD'),()=>playOnPiano(pC,{fam:famSet(2,FAM_MIN),home:2},TUNE.map(([x,d])=>[x+2,d]),0.36));
+
+/* Section 3, step 4: endlessly rising */
+const KEYS=['C minor','D minor','E minor','F♯ minor','A♭ minor','B♭ minor'];
 const ring=$('keyRing');
 (function drawRing(){
   const cx=160,cy=160,R=115; let s='<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b7862b"/></marker></defs>';
@@ -378,7 +488,7 @@ function ringHighlight(i){
   d.setAttribute('cx',160+150*Math.cos(a)*0.97); d.setAttribute('cy',160+150*Math.sin(a)*0.97);
 }
 /* Keyboard: which 7 notes each key uses, compared with the previous key */
-const MINOR=[0,2,3,5,7,8,10], NOTE=['C','C♯','D','E♭','E','F','F♯','G','G♯','A','B♭','B'];
+const MINOR=[0,2,3,5,7,8,10], NOTE=['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
 const keyNotes=k=>new Set(MINOR.map(x=>(2*k+x)%12));
 const kb={cur:null,prev:null};
 function showKeys(i,prev){
