@@ -8,7 +8,8 @@
   document.body.insertBefore(bar,document.body.firstChild);
   function link(e,label,cls){
     if(!e) return '<span class="'+cls+'"></span>';
-    var inner='<div class="lbl">'+label+'</div>'+e.title;
+    var name=(e.dialogue&&e.chapter)?e.dialogue+' + '+e.chapter:e.title;
+    var inner='<div class="lbl">'+label+'</div>'+name;
     return e.done?'<a class="'+cls+'" href="../'+e.id+'/">'+inner+'</a>':'<span class="'+cls+'">'+inner+'<div class="lbl" style="margin-top:4px">coming soon</div></span>';
   }
   var pg=document.createElement('nav'); pg.className='pager';

@@ -1,6 +1,9 @@
-/* Table of contents for the whole book. Single source of truth for the home page
-   and the previous/next links. Set done:true when a section's explainer exists
-   (its folder is the id). Dialogues and chapters alternate, as in the book. */
+/* The site's pages, in book order. Single source of truth for the home page
+   and the previous/next links.
+   One page per pair: the book's Dialogue followed by the Chapter it sets up
+   (the Introduction has no dialogue; the final dialogue, Six-Part Ricercar,
+   has its own page). The page's folder is its id. Set done:true once its
+   explainer exists. */
 window.GEB_TOC = [
  {
   "part": "Part I: GEB"
@@ -8,256 +11,156 @@ window.GEB_TOC = [
  {
   "id": "01-introduction",
   "title": "Introduction: A Musico-Logical Offering",
-  "kind": "chapter",
+  "chapter": "Introduction: A Musico-Logical Offering",
   "done": true
  },
  {
-  "id": "02-three-part-invention",
-  "title": "Three-Part Invention",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "03-chi-the-mu-puzzle",
+  "id": "02-ch01-the-mu-puzzle",
   "title": "Chapter I: The MU-puzzle",
-  "kind": "chapter",
+  "dialogue": "Three-Part Invention",
+  "chapter": "Chapter I: The MU-puzzle",
   "done": false
  },
  {
-  "id": "04-two-part-invention",
-  "title": "Two-Part Invention",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "05-chii-meaning-and-form-in-mathematics",
+  "id": "03-ch02-meaning-and-form-in-mathematics",
   "title": "Chapter II: Meaning and Form in Mathematics",
-  "kind": "chapter",
+  "dialogue": "Two-Part Invention",
+  "chapter": "Chapter II: Meaning and Form in Mathematics",
   "done": false
  },
  {
-  "id": "06-sonata-for-unaccompanied-achilles",
-  "title": "Sonata for Unaccompanied Achilles",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "07-chiii-figure-and-ground",
+  "id": "04-ch03-figure-and-ground",
   "title": "Chapter III: Figure and Ground",
-  "kind": "chapter",
+  "dialogue": "Sonata for Unaccompanied Achilles",
+  "chapter": "Chapter III: Figure and Ground",
   "done": false
  },
  {
-  "id": "08-contracrostipunctus",
-  "title": "Contracrostipunctus",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "09-chiv-consistency-completeness-and-geometry",
+  "id": "05-ch04-consistency-completeness-and-geometry",
   "title": "Chapter IV: Consistency, Completeness, and Geometry",
-  "kind": "chapter",
+  "dialogue": "Contracrostipunctus",
+  "chapter": "Chapter IV: Consistency, Completeness, and Geometry",
   "done": false
  },
  {
-  "id": "10-little-harmonic-labyrinth",
-  "title": "Little Harmonic Labyrinth",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "11-chv-recursive-structures-and-processes",
+  "id": "06-ch05-recursive-structures-and-processes",
   "title": "Chapter V: Recursive Structures and Processes",
-  "kind": "chapter",
+  "dialogue": "Little Harmonic Labyrinth",
+  "chapter": "Chapter V: Recursive Structures and Processes",
   "done": false
  },
  {
-  "id": "12-canon-by-intervallic-augmentation",
-  "title": "Canon by Intervallic Augmentation",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "13-chvi-the-location-of-meaning",
+  "id": "07-ch06-the-location-of-meaning",
   "title": "Chapter VI: The Location of Meaning",
-  "kind": "chapter",
+  "dialogue": "Canon by Intervallic Augmentation",
+  "chapter": "Chapter VI: The Location of Meaning",
   "done": false
  },
  {
-  "id": "14-chromatic-fantasy-and-feud",
-  "title": "Chromatic Fantasy, And Feud",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "15-chvii-the-propositional-calculus",
+  "id": "08-ch07-the-propositional-calculus",
   "title": "Chapter VII: The Propositional Calculus",
-  "kind": "chapter",
+  "dialogue": "Chromatic Fantasy, And Feud",
+  "chapter": "Chapter VII: The Propositional Calculus",
   "done": false
  },
  {
-  "id": "16-crab-canon",
-  "title": "Crab Canon",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "17-chviii-typographical-number-theory",
+  "id": "09-ch08-typographical-number-theory",
   "title": "Chapter VIII: Typographical Number Theory",
-  "kind": "chapter",
+  "dialogue": "Crab Canon",
+  "chapter": "Chapter VIII: Typographical Number Theory",
   "done": false
  },
  {
-  "id": "18-a-mu-offering",
-  "title": "A Mu Offering",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "19-chix-mumon-and-godel",
+  "id": "10-ch09-mumon-and-godel",
   "title": "Chapter IX: Mumon and Gödel",
-  "kind": "chapter",
+  "dialogue": "A Mu Offering",
+  "chapter": "Chapter IX: Mumon and Gödel",
   "done": false
  },
  {
   "part": "Part II: EGB"
  },
  {
-  "id": "20-prelude",
-  "title": "Prelude …",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "21-chx-levels-of-description-and-computer-systems",
+  "id": "11-ch10-levels-of-description-and-computer-systems",
   "title": "Chapter X: Levels of Description, and Computer Systems",
-  "kind": "chapter",
+  "dialogue": "Prelude …",
+  "chapter": "Chapter X: Levels of Description, and Computer Systems",
   "done": false
  },
  {
-  "id": "22-ant-fugue",
-  "title": "… Ant Fugue",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "23-chxi-brains-and-thoughts",
+  "id": "12-ch11-brains-and-thoughts",
   "title": "Chapter XI: Brains and Thoughts",
-  "kind": "chapter",
+  "dialogue": "… Ant Fugue",
+  "chapter": "Chapter XI: Brains and Thoughts",
   "done": false
  },
  {
-  "id": "24-english-french-german-suite",
-  "title": "English French German Suite",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "25-chxii-minds-and-thoughts",
+  "id": "13-ch12-minds-and-thoughts",
   "title": "Chapter XII: Minds and Thoughts",
-  "kind": "chapter",
+  "dialogue": "English French German Suite",
+  "chapter": "Chapter XII: Minds and Thoughts",
   "done": false
  },
  {
-  "id": "26-aria-with-diverse-variations",
-  "title": "Aria with Diverse Variations",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "27-chxiii-bloop-and-floop-and-gloop",
+  "id": "14-ch13-bloop-and-floop-and-gloop",
   "title": "Chapter XIII: BlooP and FlooP and GlooP",
-  "kind": "chapter",
+  "dialogue": "Aria with Diverse Variations",
+  "chapter": "Chapter XIII: BlooP and FlooP and GlooP",
   "done": false
  },
  {
-  "id": "28-air-on-g-s-string",
-  "title": "Air on G's String",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "29-chxiv-on-formally-undecidable-propositions-of-tnt-and-related-systems",
+  "id": "15-ch14-on-formally-undecidable-propositions-of-tnt-and-related-systems",
   "title": "Chapter XIV: On Formally Undecidable Propositions of TNT and Related Systems",
-  "kind": "chapter",
+  "dialogue": "Air on G's String",
+  "chapter": "Chapter XIV: On Formally Undecidable Propositions of TNT and Related Systems",
   "done": false
  },
  {
-  "id": "30-birthday-cantatatata",
-  "title": "Birthday Cantatatata …",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "31-chxv-jumping-out-of-the-system",
+  "id": "16-ch15-jumping-out-of-the-system",
   "title": "Chapter XV: Jumping out of the System",
-  "kind": "chapter",
+  "dialogue": "Birthday Cantatatata …",
+  "chapter": "Chapter XV: Jumping out of the System",
   "done": false
  },
  {
-  "id": "32-edifying-thoughts-of-a-tobacco-smoker",
-  "title": "Edifying Thoughts of a Tobacco Smoker",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "33-chxvi-self-ref-and-self-rep",
+  "id": "17-ch16-self-ref-and-self-rep",
   "title": "Chapter XVI: Self-Ref and Self-Rep",
-  "kind": "chapter",
+  "dialogue": "Edifying Thoughts of a Tobacco Smoker",
+  "chapter": "Chapter XVI: Self-Ref and Self-Rep",
   "done": false
  },
  {
-  "id": "34-the-magnificrab-indeed",
-  "title": "The Magnificrab, Indeed",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "35-chxvii-church-turing-tarski-and-others",
+  "id": "18-ch17-church-turing-tarski-and-others",
   "title": "Chapter XVII: Church, Turing, Tarski, and Others",
-  "kind": "chapter",
+  "dialogue": "The Magnificrab, Indeed",
+  "chapter": "Chapter XVII: Church, Turing, Tarski, and Others",
   "done": false
  },
  {
-  "id": "36-shrdlu-toy-of-man-s-designing",
-  "title": "SHRDLU, Toy of Man's Designing",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "37-chxviii-artificial-intelligence-retrospects",
+  "id": "19-ch18-artificial-intelligence-retrospects",
   "title": "Chapter XVIII: Artificial Intelligence: Retrospects",
-  "kind": "chapter",
+  "dialogue": "SHRDLU, Toy of Man's Designing",
+  "chapter": "Chapter XVIII: Artificial Intelligence: Retrospects",
   "done": false
  },
  {
-  "id": "38-contrafactus",
-  "title": "Contrafactus",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "39-chxix-artificial-intelligence-prospects",
+  "id": "20-ch19-artificial-intelligence-prospects",
   "title": "Chapter XIX: Artificial Intelligence: Prospects",
-  "kind": "chapter",
+  "dialogue": "Contrafactus",
+  "chapter": "Chapter XIX: Artificial Intelligence: Prospects",
   "done": false
  },
  {
-  "id": "40-sloth-canon",
-  "title": "Sloth Canon",
-  "kind": "dialogue",
-  "done": false
- },
- {
-  "id": "41-chxx-strange-loops-or-tangled-hierarchies",
+  "id": "21-ch20-strange-loops-or-tangled-hierarchies",
   "title": "Chapter XX: Strange Loops, Or Tangled Hierarchies",
-  "kind": "chapter",
+  "dialogue": "Sloth Canon",
+  "chapter": "Chapter XX: Strange Loops, Or Tangled Hierarchies",
   "done": false
  },
  {
-  "id": "42-six-part-ricercar",
+  "id": "22-six-part-ricercar",
   "title": "Six-Part Ricercar",
-  "kind": "dialogue",
+  "dialogue": "Six-Part Ricercar",
   "done": false
  }
 ];

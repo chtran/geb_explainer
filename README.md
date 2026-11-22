@@ -1,12 +1,33 @@
 # GEB explainers
 
-Interactive, visual, sound-on explainers for Douglas Hofstadter's *Gödel, Escher, Bach: an Eternal Golden Braid*, one page per section of the book (dialogues and chapters).
+Interactive, visual, sound-on explainers for Douglas Hofstadter's *Gödel, Escher, Bach: an Eternal Golden Braid*. There are 22 pages: the Introduction, then one page per **Dialogue + Chapter** pair, then the final Dialogue.
 
 **Live site:** https://chtran.github.io/geb_explainer/ (GitHub Pages, deployed from `main`)
 
 This README is the brief for anyone, human or agent, building the next explainer. The **Taste** section matters most: it records what worked and what was rejected while building the first page (`01-introduction/`), which is the reference example.
 
 ---
+
+## How pages map to the book
+GEB alternates **Dialogues** (playful stories, often written in the form of a Bach piece) with **Chapters** (which explain). Each dialogue acts out an idea that the next chapter explains, so **each page covers one dialogue together with the chapter that follows it**, in that order:
+
+| Page | Covers |
+|---|---|
+| `01-introduction` | Introduction: A Musico-Logical Offering (no dialogue before it) |
+| `02-ch01-the-mu-puzzle` … `21-ch20-strange-loops-or-tangled-hierarchies` | Dialogue + Chapter I … Dialogue + Chapter XX (e.g. *Three-Part Invention* + *Chapter I: The MU-puzzle*) |
+| `22-six-part-ricercar` | The final dialogue, *Six-Part Ricercar*, on its own |
+
+The full list, with each page's dialogue and chapter, is in `assets/toc.js`.
+
+### Writing a dialogue + chapter page
+- **Dialogue first, then chapter,** as in the book. Mark the two halves clearly: a short "Dialogue" part, then the chapter's sections.
+- **The dialogue part is short.** It covers four things:
+  - a brief summary of the story, paraphrased (dialogues are creative writing: never reproduce them);
+  - the musical or structural form it imitates (canon, fugue, crab canon…), with sound or a picture where that helps; `assets/music.js` and the canon lab in `01-introduction` are there to reuse;
+  - the hidden puzzle or trick (acrostics, self-reference, wordplay);
+  - the idea it sets up, with an explicit sentence handing over to the chapter ("The chapter now explains…").
+- Rich dialogues (*Contracrostipunctus*, *Prelude… Ant Fugue*, *Crab Canon*) can get more room, but stay within their page.
+- The chapter part follows all the rules below, and the page ends with the recap and **Modern view** for the pair as a whole.
 
 ## Who it's for
 
@@ -64,27 +85,27 @@ Rules:
 - Each page ends with a one-breath recap, then a **Modern view** section (no quiz).
 
 ### 8. Every page ends with "Modern view"
-The last section of every explainer is **Modern view: what we know now**, stamped with the month it was written ("As of November 2026"). It covers how today's understanding improves, confirms, challenges or applies the section's ideas.
-- **Focus:** AI first, especially large language models and mechanistic interpretability (how models work inside); then neuroscience, mathematics and anything else that genuinely bears on the section.
-- **Format:** 3–5 cards. Each has a small topic label, a title, **In the book:** (one line), **Now:** (what's known today, concrete examples and numbers), and **Why it matters:** (the link back to the section). End with a collapsible **Sources** list of links.
+The last section of every explainer is **Modern view: what we know now**, stamped with the month it was written ("As of November 2026"). It covers how today's understanding improves, confirms, challenges or applies the page's ideas (dialogue and chapter together).
+- **Focus:** AI first, especially large language models and mechanistic interpretability (how models work inside); then neuroscience, mathematics and anything else that genuinely bears on the page.
+- **Format:** 3–5 cards. Each has a small topic label, a title, **In the book:** (one line), **Now:** (what's known today, concrete examples and numbers), and **Why it matters:** (the link back to the page). End with a collapsible **Sources** list of links.
 - **Research it fresh every time.** This field changes monthly. Search for the latest work and verify each claim against a primary source (the paper, the lab's own write-up). Prefer peer-reviewed results.
 - **Be careful with hype.** Label disputed or unverified claims as such (2026's AI Navier–Stokes "solution" is the example: it went in as "still being debated"). Repeat researchers' own caveats (e.g. "worked about 20% of the time", "says nothing about consciousness").
 - Same taste as the rest: define new words (large language model, artificial neuron, feature…), concrete examples, no jargon, paraphrase sources, keep it concise.
 
 ## How the user works with you (process)
-- They read a section of the book, then ask for its explainer. Then they read the page top to bottom and give feedback on whatever confuses them. Expect several rounds. Treat each confusion as a gap in the explanation, not in the reader.
+- They read a dialogue and its chapter, then ask for its explainer. Then they read the page top to bottom and give feedback on whatever confuses them. Expect several rounds. Treat each confusion as a gap in the explanation, not in the reader.
 - When feedback says a change made things worse, **restore the previous version exactly** (use git), keeping only the parts they explicitly liked.
 - Keep changes scoped to what was asked, and report anything else you changed or noticed (e.g. a bug fixed along the way).
 - Every change: test, stamp assets, commit with a descriptive message, push to `main`. The live site updates in a minute or two.
 
 ## Repo structure
 ```
-index.html             home page: all 42 sections of the book; done ones are linked
-NN-slug/index.html     one explainer per section, e.g. 01-introduction/ (the reference example)
+index.html             home page: all 22 pages (dialogue + chapter pairs); done ones are linked
+NN-slug/index.html     one explainer per page, e.g. 01-introduction/ (the reference example)
 assets/geb.css         shared look (colours, type, components, nav, tooltips)
 assets/music.js        shared audio: ac(), newBus(), stopSound(), pluck(), playToggle(),
                        piano-roll drawRoll()/playVoices(), themes ROYAL and FJ
-assets/toc.js          the book's table of contents (single source); `done: true` marks a finished explainer
+assets/toc.js          the site's pages in book order, each with its `dialogue` and `chapter` (single source); `done: true` marks a finished page
 assets/nav.js          "All chapters" link + previous/next links on each explainer
 assets/glossary.js     every defined term → plain-language definition (single source)
 assets/terms.js        hover/tap tooltips for <span class="term">
@@ -94,10 +115,10 @@ tools/check_pages.py   headless smoke test of the home page and every finished e
 Page-specific code (e.g. the keyboards and Gödel builder in `01-introduction/`) stays inline. Move a component into `assets/` once a second page needs it.
 
 ## Adding a new explainer
-1. Find the section's `id` in `assets/toc.js` (e.g. `02-three-part-invention`) and create that folder with an `index.html`. Copy the head, the scripts and the overall skeleton from `01-introduction/index.html`.
+1. Find the page's `id` in `assets/toc.js` (e.g. `02-ch01-the-mu-puzzle`, which covers *Three-Part Invention* + *Chapter I*) and create that folder with an `index.html`. Copy the head, the scripts and the overall skeleton from `01-introduction/index.html`.
 2. Use `<body data-chapter="<id>">`. Link `../assets/geb.css`. Load `../assets/toc.js`, `../assets/glossary.js`, `../assets/terms.js` (defer), `../assets/nav.js` (defer), and `../assets/music.js` if it plays sound.
 3. Write it following **Taste** above. Add new terms to `assets/glossary.js`.
-4. Set `done: true` for the section in `assets/toc.js`.
+4. Set `done: true` for the page in `assets/toc.js`.
 5. Before committing:
    - `python3 tools/stamp_assets.py`
    - `python3 tools/check_pages.py` (must print only `OK` lines; needs Playwright and Chromium, or `CHROME=/path/to/chrome`)
