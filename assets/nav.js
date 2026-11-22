@@ -40,7 +40,7 @@
 
 /* Chapter sidebar: every page of the site, in book order, on the left.
    Open by default on wide screens (remembered per viewer); a slide-in drawer
-   on narrow ones. Toggled from the "Chapters" button in the toolbar. */
+   on narrow ones. Toggled from the "Chapters" tab on the left edge of the window. */
 (function(){
   var id=document.body.dataset.chapter, all=window.GEB_TOC||[]; if(!id||!all.length)return;
   var WIDE=window.matchMedia('(min-width:1180px)'), KEY='geb-side-open';
@@ -63,14 +63,14 @@
   var shade=document.createElement('div'); shade.className='side-shade';
   document.body.appendChild(side); document.body.appendChild(shade);
   var btn=document.createElement('button'); btn.type='button'; btn.className='side-btn'; btn.setAttribute('aria-controls','side');
-  btn.innerHTML='<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 3.5h12M2 8h12M2 12.5h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Chapters</span>';
-  var tin=document.querySelector('.toolbar .in');
-  if(tin) tin.insertBefore(btn,tin.firstChild); else { btn.classList.add('float'); document.body.appendChild(btn); }
+  btn.setAttribute('aria-label','Show chapter list'); btn.title='Show chapter list';
+  btn.innerHTML='<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2.5 3.5h11M2.5 8h11M2.5 12.5h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="sb-l">Chapters</span><span class="sb-c" aria-hidden="true">»</span>';
+  document.body.appendChild(btn);
   function get(){ try{return localStorage.getItem(KEY);}catch(e){return null;} }
   function put(v){ try{localStorage.setItem(KEY,v);}catch(e){} }
   function set(open,remember){
     document.body.classList.toggle('side-open',open);
-    btn.setAttribute('aria-expanded',open); btn.classList.toggle('on',open);
+    btn.setAttribute('aria-expanded',open);
     side.toggleAttribute('inert',!open);
     if(remember&&WIDE.matches) put(open?'1':'0');
   }
