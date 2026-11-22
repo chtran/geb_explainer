@@ -21,6 +21,7 @@ NN-slug/index.html  one explainer per section, e.g. 01-introduction/
 2. Start the page with `<body data-chapter="<id>">`, link `../assets/geb.css`, and load `../assets/toc.js`, `../assets/glossary.js`, `../assets/terms.js`, `../assets/nav.js` and (if it plays music) `../assets/music.js`.
 3. Set `done: true` for that entry in `assets/toc.js`.
 4. Add each new term to `assets/glossary.js`.
+5. Run `python3 tools/stamp_assets.py` before committing. It tags every `assets/` link with a version so browsers never mix a new page with an old cached file.
 
 To preview locally with working links, run `python3 -m http.server` in this folder and open http://localhost:8000.
 
