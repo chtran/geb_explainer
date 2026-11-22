@@ -1,11 +1,8 @@
-/* Adds "All chapters" link at the top and previous/next links at the bottom of a chapter page.
+/* Adds previous/next links at the bottom of a chapter page.
    The page declares itself with <body data-chapter="<folder id>">. */
 (function(){
   var id=document.body.dataset.chapter, toc=(window.GEB_TOC||[]).filter(function(e){return e.id;});
   var i=toc.findIndex(function(e){return e.id===id;}); if(i<0)return;
-  var bar=document.createElement('div'); bar.className='sitebar';
-  bar.innerHTML='<a href="../">← All chapters</a>';
-  document.body.insertBefore(bar,document.body.firstChild);
   function link(e,label,cls){
     if(!e) return '<span class="'+cls+'"></span>';
     var name=(e.dialogue&&e.chapter)?e.dialogue+' + '+e.chapter:e.title;
