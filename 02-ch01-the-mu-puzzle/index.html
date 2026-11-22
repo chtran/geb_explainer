@@ -6,7 +6,7 @@
 <title>GEB · Three-Part Invention + Chapter I: The MU-puzzle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=9d9b7065">
+<link rel="stylesheet" href="../assets/geb.css?v=adf29df6">
 <style>
 /* Zeno's race */
 .zmeter{font:500 14px Inter,sans-serif;color:var(--ink2);display:flex;gap:22px;flex-wrap:wrap;margin:8px 0}
@@ -92,7 +92,7 @@ ol.deriv li.last{font-weight:500}
   <div class="cols">
     <div>
       <p><b>The story.</b> Achilles (the Greek hero, fastest runner alive) and the Tortoise stand on a dusty running track in the hot sun. At the far end flies a red flag with a thin ring cut out of it: a zero, the Tortoise says, the favourite number of the flag's owner, Zeno. Achilles points out that zero hasn't been invented yet, so the flag can't exist. The Tortoise agrees, and admires it anyway.</p>
-      <p>Achilles tries to tell a Zen <span class="term">koan</span> (a short Buddhist puzzle story meant to jolt the mind out of ordinary reasoning). Two monks argue about a flag: one says the flag is moving, the other says the wind is. A wise master tells them: neither, <b>the mind is moving</b>. Achilles garbles it, crediting the master's line to "Zeno". Then a breeze comes up and the two of them act it out: "the flag is moving!" "No, the wind is!"</p>
+      <p>Achilles tries to tell a Zen <span class="term">koan</span> (a short Buddhist puzzle story meant to jolt the mind out of ordinary reasoning). Two monks argue about a flag: one says the flag is moving, the other says the wind is. A wise master tells them: neither, <b>the mind is moving</b>. Achilles garbles it, crediting the master's line to "Zeno". (That's a pun: in the real koan the master is the Zen patriarch Enō, one letter away.) Then a breeze comes up and the two of them act it out: "the flag is moving!" "No, the wind is!"</p>
       <p>Zeno himself walks up and declares that <b>nothing</b> is moving: motion is impossible, which he proudly calls his Theorem. To prove it he tells his most famous story. Achilles races a tortoise that has a head start, and can never catch it. Zeno then sets up a real race to the flag, gives the Tortoise a head start of ten rods (about 50 metres), and calls "On your mark! Get set! Go!" The dialogue ends there. We never learn who wins.</p>
     </div>
     <div>
@@ -140,11 +140,11 @@ ol.deriv li.last{font-weight:500}
   <div class="rules">
     <div class="rule"><div class="rn">Rule I</div><div class="rs">xI → xIU</div><p>If a string ends in <b class="miu">I</b>, you may add a <b class="miu">U</b> at the end.</p><div class="ex">Example: <span class="miu">MI</span> → <span class="miu">MIU</span></div></div>
     <div class="rule"><div class="rn">Rule II</div><div class="rs">Mx → Mxx</div><p>You may double everything after the <b class="miu">M</b>.</p><div class="ex">Example: <span class="miu">MIU</span> → <span class="miu">MIUIU</span></div></div>
-    <div class="rule"><div class="rn">Rule III</div><div class="rs">III → U</div><p>Anywhere you see <b class="miu">III</b>, you may replace those three letters with one <b class="miu">U</b>.</p><div class="ex">Example: <span class="miu">MUIIIU</span> → <span class="miu">MUUU</span></div></div>
-    <div class="rule"><div class="rn">Rule IV</div><div class="rs">UU → (nothing)</div><p>Anywhere you see <b class="miu">UU</b>, you may delete it.</p><div class="ex">Example: <span class="miu">MUUU</span> → <span class="miu">MU</span></div></div>
+    <div class="rule"><div class="rn">Rule III</div><div class="rs">III → U</div><p>Anywhere you see <b class="miu">III</b>, you may replace those three letters with one <b class="miu">U</b>.</p><div class="ex">Example: <span class="miu">MIIII</span> → <span class="miu">MUI</span></div></div>
+    <div class="rule"><div class="rn">Rule IV</div><div class="rs">UU → (nothing)</div><p>Anywhere you see <b class="miu">UU</b>, you may delete it.</p><div class="ex">Example: <span class="miu">MIUU</span> → <span class="miu">MI</span></div></div>
   </div>
   <p>Rules work in one direction only: rule III turns III into U, but no rule turns U back into III. And you may only do what the rules allow. No inventing shortcuts, no "obviously this works". Hofstadter calls this the requirement of formality.</p>
-  <p>The rule examples above end in <span class="miu">MU</span>, but that chain didn't start from the axiom <span class="miu">MI</span>. Here is the puzzle: <b>starting from <span class="miu">MI</span>, can you make <span class="miu">MU</span>?</b></p>
+  <p>Here is the puzzle: <b>starting from <span class="miu">MI</span>, can you make <span class="miu">MU</span>?</b></p>
 </section>
 
 <!-- 4 -->
@@ -180,7 +180,7 @@ ol.deriv li.last{font-weight:500}
   <div class="sec-head"><div class="num">5</div><h2>Working inside the system, and stepping outside it</h2></div>
   <p>If you tried for MU, something probably happened after a while. You stopped just applying rules and started thinking <b>about</b> them: "doubling gives me more I's, and rule III removes them three at a time… what am I actually able to reach?" Hofstadter names the two attitudes:</p>
   <div class="grid3">
-    <div class="card"><span class="tag g">M-mode</span><h4>Mechanical</h4><p>Work <b>inside</b> the system. Apply rules, look at the result, apply more. Never get bored, never ask why. A simple computer program that just applies rules works like this, and can grind on forever without noticing anything.</p></div>
+    <div class="card"><span class="tag g">M-mode</span><h4>Mechanical</h4><p>Work <b>inside</b> the system. Apply rules, look at the result, apply more. Never get bored, never ask why. A simple computer program that just applies rules works like this, and can grind on forever without noticing anything. A program <i>can</i> be built to notice patterns. Hofstadter's point is that it has to be built that way, while a person can't help noticing.</p></div>
     <div class="card"><span class="tag e">I-mode</span><h4>Intelligent</h4><p>Step <b>outside</b>. Notice patterns in what you've made, guess what's always true, decide a path is hopeless. Hofstadter sees this ability to jump out of the task you're doing and survey it as a mark of intelligence.</p></div>
     <div class="card"><span class="tag b">U-mode</span><h4>Un-mode</h4><p>The Zen way: refuse the question's own terms, as the koan in the dialogue refused both "the flag" and "the wind". Hofstadter only names it here and returns to it in later chapters.</p></div>
   </div>
@@ -212,13 +212,13 @@ ol.deriv li.last{font-weight:500}
 <section id="s-decide">
   <div class="sec-head"><div class="num">7</div><h2>Decision procedures: knowing when to stop</h2></div>
   <div class="words"><b>Definition.</b> A <span class="term">decision procedure</span> is a step-by-step test that is <b>guaranteed to finish</b> and answer yes or no. For example, "is this number even? Look at its last digit" always finishes. A test that might run forever doesn't count.</div>
-  <p>The tree search isn't a decision procedure: when the answer is "no", it never finishes. Could we stop it early? Say, "MU has only 2 letters, so once the rows contain only long strings, give up"? That would work if every rule made strings longer. But rules III and IV make strings <b>shorter</b>. A short theorem might be reached only through a detour into long strings, and nothing in the rules limits how long the detour can be.</p>
+  <p>The tree search isn't a decision procedure: when the answer is "no", it never finishes. This is where the puzzle parts ways with Zeno's race. His endless steps kept shrinking, so all of them fit into 10 seconds. The tree's rows keep growing, so no amount of time gets through them all. Could we stop it early? Say, "MU has only 2 letters, so once the rows contain only long strings, give up"? That would work if every rule made strings longer. But rules III and IV make strings <b>shorter</b>. A short theorem might be reached only through a detour into long strings, and nothing in the rules limits how long the detour can be.</p>
   <div class="card">
     <h3 style="margin-top:0">The detour to MUII: up the mountain and back down</h3>
     <svg id="mount" viewBox="0 0 640 230" width="100%"></svg>
     <p class="small-note" style="margin-bottom:0">MUII has just 4 letters, but its shortest derivation takes 7 steps and climbs to 10 letters on the way (found by searching every derivation, by computer). Short strings can hide deep in the tree.</p>
   </div>
-  <p>Hofstadter notes that a formal system must at least let you recognise its axioms by a sure test, but its theorems need not come with one. For MIU, nothing about the rules tells you in advance whether such a test exists. Finding one takes I-mode thinking.</p>
+  <p>So does the MIU-system have a decision procedure at all? Hofstadter notes that a formal system must come with one for its <b>axioms</b>, so you can always tell where you're allowed to start. Its <b>theorems</b> need not have one. For MIU, nothing about the rules tells you in advance. Finding one takes I-mode thinking.</p>
 </section>
 
 <!-- 8 -->
@@ -262,11 +262,11 @@ ol.deriv li.last{font-weight:500}
 <!-- 9 -->
 <section id="s-recap">
   <div class="sec-head"><div class="num">9</div><h2>Recap: the dialogue and chapter in one breath</h2></div>
-  <p class="big-idea">Followed step by step from inside, Zeno's race and the MU-puzzle both go on forever. Stepped back from, both are settled at once: the steps add up to 10 seconds, and the count of I's is never a multiple of 3.</p>
+  <p class="big-idea">Followed step by step from inside, Zeno's race and the MU-puzzle both go on forever. Stepped back from, both are settled at once: Zeno's steps add up to 10 seconds, and one property that the rules can never change answers the puzzle.</p>
   <div class="grid3">
     <div class="card"><span class="tag b">Dialogue</span><h4>Three voices, one idea</h4><p>Zeno meets the characters he invented, and his race begins with "Go!". From inside his argument it never ends; from outside, Achilles catches up after 10 seconds.</p></div>
     <div class="card"><span class="tag g">Formal systems</span><h4>Rules, not meanings</h4><p>An axiom, rules of production, and theorems that are just strings. Making every theorem row by row misses nothing, but never says "no".</p></div>
-    <div class="card"><span class="tag e">Outside the system</span><h4>Noticing is the trick</h4><p>M-mode follows rules; I-mode notices patterns, like the I-count. That's how we know MU can't be made, and how we get a test that always finishes.</p></div>
+    <div class="card"><span class="tag e">Outside the system</span><h4>Noticing is the trick</h4><p>M-mode follows rules; I-mode notices patterns. One such pattern settles the MU-puzzle, and gives a test that always finishes.</p></div>
   </div>
 </section>
 
@@ -304,7 +304,7 @@ ol.deriv li.last{font-weight:500}
     <div class="mv-card">
       <div class="mv-k">AI · interpretability</div>
       <h4>Finding the hidden count</h4>
-      <p class="mv-then"><b>In the book:</b> the MU-puzzle falls to one property the rules never change: the number of I's is never a multiple of 3.</p>
+      <p class="mv-then"><b>In the book:</b> the MU-puzzle falls to one property that the rules never change (<a class="xref" href="#s-answer">section 8</a>).</p>
       <p><b>Now:</b> a property that every step preserves is called an <span class="term">invariant</span>, and finding invariants is central to checking that computer programs are correct. Language models now propose invariants for program loops, and a mechanical checker confirms or rejects them. One 2025 system did this for all 133 programs in a standard test set, against a previous best of 107. Inside AI models, <span class="term">mechanistic interpretability</span> has found similar hidden structure. A small model trained on "clock arithmetic" (adding numbers and keeping only the remainder after dividing by 113) first memorised its examples, then suddenly generalised. Researchers looking inside found it had learned to treat the numbers as positions on a circle, turning addition into rotation. As with MU, it was people looking from outside who found that structure; the model couldn't report it.</p>
       <p class="mv-so"><b>Why it matters:</b> "watch one property the rules can't change" is the I-mode move of <a class="xref" href="#s-answer">section 8</a>, and both machines and the people studying them now make it.</p>
     </div>
@@ -435,7 +435,7 @@ function wbRender(msg){
   $('wbList').innerHTML=wb.d.map((x,i)=>`<li class="${i===wb.d.length-1?'last':''}">${miuHTML(x.s)}<span>${x.how}</span></li>`).join('');
   $('wbList').scrollTop=1e6;
   $('wbTargets').innerHTML=TARGETS.map(t=>`<button class="ghost small mono ${t===wb.target?'on':''}" data-target="${t}">${t}${t==='MU'?' (the puzzle)':''}</button>`).join(' ');
-  $('wbShow').textContent=wb.target==='MU'?'Show a way to MU':'Show a shortest way';
+  $('wbShow').textContent=wb.target==='MU'?'Give me a hint':'Show a shortest way';
   if(msg!==undefined)$('wbMsg').innerHTML=msg;
   else if(s===wb.target)$('wbMsg').innerHTML=`<b>You made ${wb.target} in ${wb.d.length-1} steps.</b> ${wb.d.length-1===pathTo(wb.target).length-1?'That\'s the shortest possible.':'The shortest possible takes '+(pathTo(wb.target).length-1)+'.'}${wb.target==='MUII'?' That was the hard one.':' Try another target.'}`;
   else $('wbMsg').innerHTML=`${s.length} letters. Target: <b class="miu">${wb.target}</b>.`;
