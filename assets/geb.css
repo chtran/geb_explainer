@@ -176,3 +176,42 @@ footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,san
 /* a control that doesn't apply right now (kept clickable so it can say why) */
 button.ghost.off{opacity:.45}
 button.ghost.off:hover{transform:none}
+/* chapter sidebar (built by nav.js) */
+:root{--side-w:288px}
+.side{position:fixed;top:0;left:0;bottom:0;width:var(--side-w);z-index:40;display:flex;flex-direction:column;background:var(--paper2);border-right:1px solid var(--rule);transform:translateX(-100%);visibility:hidden;font-family:Inter,sans-serif}
+.side-open .side{transform:none;visibility:visible}
+.side-ready .side{transition:transform .28s ease,visibility .28s}
+.sd-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 12px 12px 16px;border-bottom:1px solid var(--rule)}
+.sd-home{display:flex;align-items:center;gap:10px;font:600 13px Inter,sans-serif;color:var(--ink);text-decoration:none}
+.sd-home:hover{color:var(--godel)}
+.sd-geb{display:flex;gap:2px}
+.sd-geb i{width:18px;height:18px;border-radius:4px;display:grid;place-items:center;font:600 12px/1 "EB Garamond",serif;font-style:normal;color:#fff}
+.sd-geb .g{background:var(--godel)} .sd-geb .e{background:var(--escher)} .sd-geb .b{background:var(--bach)}
+.sd-close{background:transparent;border:1px solid transparent;color:var(--ink2);padding:2px 9px;font-size:17px;line-height:1.2;border-radius:6px}
+.sd-close:hover{transform:none;border-color:var(--rule);color:var(--ink);background:var(--paper)}
+.sd-list{flex:1;overflow-y:auto;padding:4px 8px 28px;overscroll-behavior:contain;scrollbar-width:thin}
+.sd-part{font:600 10.5px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--bach);padding:18px 10px 6px}
+.sd-i{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border-radius:8px;color:var(--ink);text-decoration:none;border-left:3px solid transparent;margin:1px 0}
+a.sd-i:hover{background:var(--paper)}
+.sd-i.cur{background:var(--card);border-left-color:var(--gold);box-shadow:0 1px 0 #0000000d}
+.sd-i.soon{opacity:.5}
+.sd-n{font:500 11px/1 "JetBrains Mono",monospace;color:var(--ink2);padding-top:5px;flex:none;width:18px}
+.sd-i.cur .sd-n{color:var(--gold);font-weight:600}
+.sd-t{font:500 13px/1.35 Inter,sans-serif;min-width:0}
+.sd-k{display:block;font:600 9.5px/1.6 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.sd-d{display:block;font:italic 14px/1.3 "EB Garamond",serif;color:var(--ink2);margin-top:1px}
+.side-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--ink2);border:1px solid var(--rule);padding:4px 10px;font-size:12.5px;border-radius:6px;flex:none}
+.side-btn:hover{transform:none;color:var(--ink);border-color:var(--ink2)}
+.side-btn.on{background:var(--paper2);color:var(--ink);border-color:var(--rule)}
+.side-btn.float{position:fixed;top:10px;left:10px;z-index:30;background:var(--paper)}
+.side-shade{display:none}
+@media (min-width:1180px){
+  .side-ready.has-side{transition:padding-left .28s ease}
+  .side-open.has-side{padding-left:var(--side-w)}
+}
+@media (max-width:1179px){
+  .side{box-shadow:6px 0 24px #1f1c1726}
+  .side-shade{display:block;position:fixed;inset:0;z-index:35;background:#1f1c1740;opacity:0;pointer-events:none;transition:opacity .28s}
+  .side-open .side-shade{opacity:1;pointer-events:auto}
+}
+@media (max-width:420px){:root{--side-w:86vw}}
