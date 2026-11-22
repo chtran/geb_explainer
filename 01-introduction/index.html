@@ -6,7 +6,7 @@
 <title>GEB · Introduction: A Musico-Logical Offering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=d4966e63">
+<link rel="stylesheet" href="../assets/geb.css?v=832eafb4">
 </head>
 <body data-chapter="01-introduction">
 
@@ -234,16 +234,33 @@
       <div class="steps" id="gSteps"></div>
     </div>
   </div>
-  <h3>Step 3 — How can math talk about itself? Gödel numbering</h3>
-  <p><span class="term">Number theory</span> <span class="def">(the mathematics of the whole numbers 0, 1, 2, 3, …)</span> talks about <b>numbers</b>, not about sentences. Gödel's trick was to give every symbol a code number and turn every formula into one (huge) number. Then a statement about numbers can be — read the right way — a statement about <b>statements</b>. Like a canon: one line of music secretly carries another.</p>
+  <h3>Step 3 — How can math talk about itself?</h3>
+  <p>Step 2 has a catch. Math formulas talk about <b>numbers</b> ("2 + 2 = 4", "7 is prime"). They have no way to say "this statement", because statements aren't numbers. Gödel's way around it is a secret code, now called <span class="term">Gödel numbering</span>: turn every formula into a number. Then a statement about numbers can secretly be a statement about formulas, including itself. Here's how the code works, in three small moves.</p>
+
+  <p><b>a) A tiny math language.</b> Gödel used a bare-bones language for <span class="term">number theory</span> (the math of the whole numbers 0, 1, 2, 3, …). It has the number <b>0</b>, and a symbol <b>S</b> that means "the next number after". Every other number is written with S's:</p>
+  <div class="chips"><span>0 = 0</span><span>S0 = 1</span><span>SS0 = 2</span><span>SSS0 = 3</span><span>…</span></div>
+  <p>It also has the familiar <b>+</b>, <b>×</b> and <b>=</b>. So the formula <span class="mono">S0+S0=SS0</span> says "1 + 1 = 2".</p>
+
+  <p><b>b) Give each symbol a code number</b>, like a cipher where A = 1, B = 2:</p>
+  <div class="chips"><span><b class="mono">0</b> → 1</span><span><b class="mono">S</b> → 2</span><span><b class="mono">=</b> → 3</span><span><b class="mono">+</b> → 4</span><span><b class="mono">×</b> → 5</span></div>
+  <p>Now any formula becomes a list of codes. For example, <span class="mono">0=0</span> becomes 1, 3, 1.</p>
+
+  <p><b>c) Pack the list into one number.</b> Gödel used the <span class="term">primes</span> (whole numbers divisible only by 1 and themselves: 2, 3, 5, 7, 11, …). The 1st code becomes the <span class="term">power</span> of 2, the 2nd code the power of 3, the 3rd the power of 5, and so on. (A power is repeated multiplication: 3<sup>3</sup>, "3 to the power 3", means 3 × 3 × 3 = 27.) Then multiply everything together:</p>
+  <div class="worked mono">0=0 &nbsp;→&nbsp; codes 1, 3, 1 &nbsp;→&nbsp; 2<sup>1</sup> × 3<sup>3</sup> × 5<sup>1</sup> = 2 × 27 × 5 = <b>270</b></div>
+  <p>So the formula <span class="mono">0=0</span> has the Gödel number <b>270</b>. The code also runs backwards. Every whole number splits into primes in exactly one way (270 = 2 × 3 × 3 × 3 × 5), so from 270 you can read off the powers 1, 3, 1 and get <span class="mono">0=0</span> back. No two formulas share a number.</p>
+
   <div class="card">
-    <div class="row">
-      <label class="ctl">Type a formula <input type="text" id="gIn" value="S0+S0=SS0" maxlength="24" style="width:220px"></label>
-      <span class="small-note mono">symbols: 0 S = + × ( ) ~ x</span>
+    <h3 style="margin-top:0">Try it: build a formula, get its Gödel number</h3>
+    <div class="row" id="gKeys">
+      <button class="ghost small mono" data-sym="0">0</button><button class="ghost small mono" data-sym="S">S</button><button class="ghost small mono" data-sym="+">+</button><button class="ghost small mono" data-sym="×">×</button><button class="ghost small mono" data-sym="=">=</button>
+      <button class="ghost small" data-sym="back">⌫ delete</button><button class="ghost small" data-sym="clear">clear</button>
+      <span class="small-note">Examples:</span><button class="ghost small mono" data-ex="0=0">0=0</button><button class="ghost small mono" data-ex="S0+S0=SS0">S0+S0=SS0</button><button class="ghost small mono" data-ex="SS0×SS0=SSSS0">SS0×SS0=SSSS0</button>
     </div>
-    <p class="small-note">Codes: <span class="mono">0→1 S→2 =→3 +→4 ×→5 (→6 )→7 ~→8 x→9</span>. <b>S</b> means "the next number after", so S0 = 1 and SS0 = 2; "S0+S0=SS0" means 1+1=2. To build the number, take the <span class="term">primes</span> (numbers divisible only by 1 and themselves: 2, 3, 5, 7, 11, …), and raise the 1st prime to the 1st symbol's code, the 2nd prime to the 2nd symbol's code, and so on. Then multiply everything together.</p>
+    <div class="gform"><span class="mono" id="gFormula"></span><span id="gMeaning"></span></div>
     <div class="godelout" id="gOut"></div>
   </div>
+
+  <p><b>d) Why this matters.</b> Every formula now has its own number, and so does every proof (a proof is just a list of formulas). Checking "is this a correct proof?" becomes checking a property of numbers, the same kind of question as "is 270 even?". So number theory can, in effect, talk about which formulas are provable. Gödel then built a formula which, decoded, says "the formula with Gödel number <i>g</i> has no proof", and arranged things so that its own Gödel number is exactly <i>g</i>. That is the sentence from Step 2: a statement about numbers that, read through the code, says <b>"I have no proof."</b></p>
   <div class="intuit"><b>The punchline — Gödel's Incompleteness Theorem</b>(A <span class="term">theorem</span> in ordinary math talk just means a proven result.) Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
 </section>
 
@@ -330,7 +347,7 @@
 </footer>
 
 <script src="../assets/toc.js?v=b9b4a14e"></script>
-<script src="../assets/glossary.js?v=94fe7877"></script>
+<script src="../assets/glossary.js?v=8df00b7f"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=825ddc85" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -648,18 +665,38 @@ $('liarGo').onclick=()=>{
 $('liarReset').onclick=()=>{clearInterval(liarT);$('liar').className='sentence';$('liarSteps').innerHTML='';};
 $('gProv').onclick=()=>{$('gsent').className='sentence F';$('gSteps').innerHTML='→ Then the system proves a statement saying "I have no proof" — it proves something <b>false</b>.<br>→ A system that proves false things is broken. <b>So, in a trustworthy system (one that only proves true things), this can\'t happen.</b>';};
 $('gUnprov').onclick=()=>{$('gsent').className='sentence T';$('gSteps').innerHTML='→ Then what it says is exactly right: it has no proof. So it\'s <b>TRUE</b>.<br>→ <b>A true statement the system can never prove.</b> No paradox, just a gap: the system is <b>incomplete</b>. And the gap can\'t be patched: add the sentence as a new axiom, and a new Gödel sentence appears for the bigger system.';};
-const CODES={'0':1,'S':2,'=':3,'+':4,'×':5,'*':5,'(':6,')':7,'~':8,'x':9};
-const PR=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113];
+const CODES={'0':1,'S':2,'=':3,'+':4,'×':5};
+const PR=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53];
+let gF='S0+S0=SS0';
+const SUP=n=>String(n).split('').map(d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[d]).join('');
 function godel(){
-  const s=$('gIn').value.replace(/\s/g,''); const out=$('gOut');
-  if(!s){out.textContent='Type something…';return;}
-  let bad=[...s].filter(ch=>!(ch in CODES)); if(bad.length){out.innerHTML='Unknown symbol: <b>'+bad[0]+'</b>';return;}
-  let n=1n, parts=[];
-  [...s].forEach((ch,i)=>{const c=CODES[ch];n*=BigInt(PR[i])**BigInt(c);parts.push(PR[i]+'<sup>'+c+'</sup>');});
+  $('gFormula').textContent=gF||' ';
+  // plain-language reading: SS0 -> 2, etc.
+  const term='S*0(?:[+×]S*0)*', ok=new RegExp('^'+term+'='+term+'$').test(gF);
+  if(!gF) $('gMeaning').innerHTML='Click the symbols above to build a formula.';
+  else if(ok){
+    const plain=gF.replace(/S*0/g,m=>String(m.length-1)).replace(/([+×=])/g,' $1 ');
+    const [l,r]=gF.replace(/S*0/g,m=>String(m.length-1)).replace(/×/g,'*').split('=').map(x=>x.split('+').reduce((a,t)=>a+t.split('*').reduce((p,v)=>p*+v,1),0));
+    $('gMeaning').innerHTML=`means &nbsp;<b>${plain}</b>&nbsp; <span class="${l===r?'gt':'gfalse'}">(${l===r?'true':'false'})</span>`;
+  } else $('gMeaning').innerHTML='<span class="small-note">not a complete formula yet (still gets a number)</span>';
+  if(!gF){$('gOut').innerHTML='';return;}
+  let n=1n, rows='';
+  [...gF].forEach((ch,i)=>{const c=CODES[ch],f=BigInt(PR[i])**BigInt(c);n*=f;
+    rows+=`<tr><td>${i+1}</td><td class="mono"><b>${ch}</b></td><td>${c}</td><td>${PR[i]}</td><td class="mono">${PR[i]}${SUP(c)} = ${f}</td></tr>`;});
   const ns=n.toString();
-  out.innerHTML=`<div>${[...s].map(ch=>`<b>${ch}</b>→${CODES[ch]}`).join('&nbsp; ')}</div><div style="margin:6px 0">${parts.join(' · ')}</div><div>= <b>${ns}</b></div><div style="color:#5b5447;margin-top:6px">${ns.length} digits. Every formula gets a unique number, and you can always factor it to get the formula back.</div>`;
+  $('gOut').innerHTML=`<table class="gtab"><tr><th>#</th><th>symbol</th><th>code</th><th>prime</th><th>prime<sup>code</sup></th></tr>${rows}</table>
+    <div style="margin-top:8px">Multiply the last column together: Gödel number = <b>${ns}</b></div>
+    <div class="small-note" style="margin-top:4px">${ns.length} digits. Long formulas get huge numbers, but every formula gets its own.</div>`;
 }
-$('gIn').oninput=godel; godel();
+document.getElementById('gKeys').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  if(b.dataset.ex) gF=b.dataset.ex;
+  else if(b.dataset.sym==='back') gF=gF.slice(0,-1);
+  else if(b.dataset.sym==='clear') gF='';
+  else if(gF.length<PR.length) gF+=b.dataset.sym;
+  godel();
+});
+godel();
 
 /* Section 6: barber */
 $('barberYes').onclick=()=>{$('barberOut').innerHTML='→ He shaves himself… but he only shaves men who <i>don\'t</i> shave themselves. So he <b>doesn\'t</b>. Contradiction! Try the other answer.';};

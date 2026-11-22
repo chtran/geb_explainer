@@ -37,6 +37,8 @@ window.GEB_GLOSSARY = {
   "complete":          {def:"Proves every true statement in its language.", in:"01"},
   "number theory":     {def:"The mathematics of the whole numbers 0, 1, 2, 3, …", in:"01"},
   "prime":             {def:"A whole number divisible only by 1 and itself: 2, 3, 5, 7, 11, …", in:"01"},
+  "power":             {def:"Repeated multiplication: 3\u00b3 (\u201c3 to the power 3\u201d) = 3 \u00d7 3 \u00d7 3 = 27.", in:"01"},
+  "g\u00f6del numbering":   {def:"Gödel\u2019s code that turns every formula into a unique whole number, so statements about numbers can be about formulas.", in:"01"},
   "parallel postulate":{def:"The axiom that through a point beside a line there’s exactly one line that never meets it.", in:"01"},
   "set":               {def:"A collection of things.", in:"01"},
   "zeno's paradoxes":  {def:"Ancient Greek puzzles, e.g. one “proving” speedy Achilles can never catch a tortoise with a head start.", in:"01"}
