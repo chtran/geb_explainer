@@ -16,3 +16,24 @@
   pg.innerHTML=link(toc[i-1],'← Previous','pv')+link(toc[i+1],'Next →','nx');
   var f=document.querySelector('footer'); f.parentNode.insertBefore(pg,f);
 })();
+
+/* Scroll-spy: as the reader scrolls, highlight the current section in the
+   toolbar and put its #id in the address bar (without adding history entries),
+   so the URL always points at the section on screen. */
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('main section[id]')); if(!secs.length)return;
+  var links={}; [].forEach.call(document.querySelectorAll('#toc a[href^="#"]'),function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var bar=document.querySelector('.toolbar'), cur, ticking=false;
+  function update(){
+    ticking=false;
+    var off=Math.max((bar?bar.offsetHeight:0)+24,window.innerHeight*0.3), id=null;
+    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=off) id=secs[i].id; else break; }
+    if((window.innerHeight+window.scrollY)>=document.documentElement.scrollHeight-2) id=secs[secs.length-1].id;
+    if(id===cur)return; cur=id;
+    for(var k in links) links[k].classList.toggle('on',k===id);
+    var url=location.pathname+location.search+(id?'#'+id:'');
+    if(url!==location.pathname+location.search+location.hash) history.replaceState(history.state,'',url);
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(update);} },{passive:true});
+  /* No initial update(): on load the browser must first scroll to any #id in the URL. */
+})();

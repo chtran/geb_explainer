@@ -6,7 +6,7 @@
 <title>GEB · Introduction: A Musico-Logical Offering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=44055f94">
+<link rel="stylesheet" href="../assets/geb.css?v=710e31d1">
 </head>
 <body data-chapter="01-introduction">
 
@@ -411,7 +411,7 @@
 <script src="../assets/toc.js?v=102005b4"></script>
 <script src="../assets/glossary.js?v=46153699"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
-<script src="../assets/nav.js?v=7c652cb2" defer></script>
+<script src="../assets/nav.js?v=f3f91624" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
 <script>
 /* Section 1: theme */
@@ -808,10 +808,6 @@ $('weave').innerHTML=(()=>{
   return s;})();
 
 
-
-/* TOC highlight */
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-40% 0px -55% 0px'});
-document.querySelectorAll('main section').forEach(s=>io.observe(s));
 
 /* initial draws */
 function redrawAll(){drawRoll(themeCv,themeVoices);refreshCanon();}
