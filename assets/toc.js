@@ -40,7 +40,7 @@ window.GEB_TOC = [
   "title": "Chapter IV: Consistency, Completeness, and Geometry",
   "dialogue": "Contracrostipunctus",
   "chapter": "Chapter IV: Consistency, Completeness, and Geometry",
-  "done": false
+  "done": true
  },
  {
   "id": "06-ch05-recursive-structures-and-processes",

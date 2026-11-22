@@ -54,5 +54,15 @@ window.GEB_GLOSSARY = {
   "derivation":        {def:"The record of how a theorem was made: the axiom, then each string produced by a rule, one per line.", in:"02"},
   "decision procedure":{def:"A step-by-step test that is guaranteed to finish and answer yes or no.", in:"02"},
   "invariant":         {def:"A property that every step of a process leaves unchanged, like “the number of I’s is not a multiple of 3”.", in:"02"},
-  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"}
+  "turing machine":    {def:"The simplest model of a computer program: a machine that reads and writes symbols on a tape, following a fixed table of rules.", in:"02"},
+  "counterpoint":      {def:"The craft of fitting two or more melodies together so they sound good at the same time.", in:"05"},
+  "acrostic":          {def:"A text whose first letters, read in order, spell a hidden message.", in:"05"},
+  "fidelity":          {def:"How faithfully a machine reproduces a sound. High fidelity: very faithfully.", in:"05"},
+  "pq-system":         {def:"A tiny formal system from Chapter II whose strings are made of hyphens, one p and one q, such as --p---q-----.", in:"05"},
+  "interpretation":    {def:"A way of reading a system’s symbols as words, so that its strings become statements.", in:"05"},
+  "postulate":         {def:"Euclid’s word for an axiom: a starting statement accepted without proof.", in:"05"},
+  "non-euclidean":     {def:"Describes a geometry in which Euclid’s parallel postulate is false.", in:"05"},
+  "undefined term":    {def:"A word, like “point” or “line” in geometry, that the axioms use without saying what it is. It means whatever fits the axioms.", in:"05"},
+  "great circle":      {def:"A circle on a sphere that is as large as possible, like the equator. The shortest path between two places on a sphere runs along one.", in:"05"},
+  "absolute geometry": {def:"The geometry that follows from Euclid’s first four postulates alone, without the parallel postulate.", in:"05"}
 };
