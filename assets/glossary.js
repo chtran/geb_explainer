@@ -60,10 +60,10 @@ window.GEB_GLOSSARY = {
   "figure":            {def:"The thing a picture shows; the part you are meant to look at.", in:"04"},
   "ground":            {def:"Short for background: everything in a picture that is not the figure.", in:"04"},
   "hyphen-string":     {def:"A row of one or more hyphens and nothing else, such as ---.", in:"04"},
-  "axiom schema":      {def:"A pattern that describes the shape of endlessly many axioms at once.", in:"04"},
   "composite number":  {def:"A whole number made by multiplying two smaller numbers, each at least 2: 4, 6, 8, 9, 10, …", in:"04"},
   "typographical operation": {def:"A step that only handles symbols as shapes: reading, writing, copying, erasing or comparing them.", in:"04"},
   "cursively drawable":{def:"Hofstadter’s name for a figure you can draw directly, whatever its background turns out to be.", in:"04"},
   "recursive":         {def:"In this chapter: a figure whose background is also a figure, or a set whose members and non-members can each be listed by a formal system.", in:"04"},
-  "recursively enumerable": {def:"Said of a set whose members some formal system can list one by one, missing none and adding no others.", in:"04"}
+  "recursively enumerable": {def:"Said of a set whose members some formal system can list one by one, missing none and adding no others.", in:"04"},
+  "border ownership":  {def:"A nerve cell's signal of which side of an edge the object is on.", in:"04"}
 };

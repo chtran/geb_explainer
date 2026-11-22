@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../assets/geb.css?v=adf29df6">
 <style>
 /* hyphen strings */
-.hy{font-family:"JetBrains Mono",monospace;letter-spacing:.02em;word-break:break-all}
+.hy{font-family:"JetBrains Mono",monospace;letter-spacing:.02em;white-space:nowrap}
 .hy .k{color:var(--godel);font-weight:500}
 .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0}
 @media (max-width:720px){.rules{grid-template-columns:1fr}}
@@ -20,8 +20,15 @@
 .rule .ex{font:13.5px Inter,sans-serif;color:var(--ink2);margin-top:6px}
 .rule.bad{border-color:var(--bach);border-style:dashed}
 .rule.bad .rn{color:var(--bach)}
-ol.deriv{font:14px/1.5 "JetBrains Mono",monospace;margin:0;padding-left:34px;max-height:320px;overflow:auto;word-break:break-all}
-ol.deriv li span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:8px;word-break:normal}
+ol.deriv{font:14px/1.5 "JetBrains Mono",monospace;margin:0;padding-left:34px;word-break:break-all}
+ol.deriv li .k{color:var(--godel);font-weight:500}
+ol.deriv li .why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:8px;word-break:normal}
+ol.deriv li.more{list-style:none;font:13px Inter,sans-serif}
+ol.deriv li.more button{padding:3px 10px;font-size:12.5px}
+@media (max-width:720px){ol.deriv li .why{display:block;margin-left:0}}
+.legend[hidden]{display:none}
+.legend{margin:6px 0 10px}
+@media (max-width:720px){section[id]{scroll-margin-top:170px}}
 ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
 .lbl-s{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:10px 0 6px}
 .pick{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font:500 14px Inter,sans-serif;color:var(--ink2)}
@@ -47,7 +54,9 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media (max-width:820px){.two{grid-template-columns:1fr}}
 .chips span.hit{background:var(--gold);border-color:var(--gold);color:#fff}
+.chips span .k{border:0;background:none;padding:0;margin:0;font:inherit}
 .chips span.hit .k{color:#fff}
+.chips{min-height:30px}
 .chips span.hy{font-size:13px;padding:2px 8px;word-break:normal}
 .seq{font:500 20px "JetBrains Mono",monospace;letter-spacing:.02em;line-height:1.9}
 .seq{display:flex;flex-wrap:wrap;gap:0 12px;align-items:baseline}
@@ -60,7 +69,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <div class="kicker">Gödel, Escher, Bach · Explainer 04</div>
   <h1>Sonata for Unaccompanied Achilles <span style="color:var(--ink2)">+</span> <em>Figure and Ground</em></h1>
   <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
-  <p class="lede">Draw a shape and you have also drawn everything around it. Usually what's left over is just background. Sometimes it is a shape in its own right. This page covers the dialogue <i>Sonata for Unaccompanied Achilles</i>, where half a conversation is left for you to fill in, and Chapter III, where Hofstadter asks the same thing of formal systems: when a system's rules make some strings, are the strings it never makes a pattern too?</p>
+  <p class="lede">Draw a shape and you have also drawn everything around it. Usually what's left over is just background. Sometimes it is a shape in its own right. This page covers the dialogue <i>Sonata for Unaccompanied Achilles</i>, where half a conversation is left for you to fill in, and Chapter III, where Hofstadter asks the same thing of games played with symbols and rules: when the rules produce some rows of symbols, are the rows they never produce a pattern too?</p>
 </header>
 
 <div class="toolbar"><div class="in">
@@ -88,8 +97,9 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <div class="sec-head"><div class="num">1</div><h2>A phone call with one end missing</h2></div>
   <div class="cols">
     <div>
-      <p><b>The story.</b> Achilles is on the telephone with the Tortoise. The page prints only what Achilles says. Wherever the Tortoise speaks, there is a gap.</p>
-      <p>From Achilles' replies you can still follow the call. The Tortoise has a stiff, twisted neck (the medical word, torticollis, sounds like his name) and a headache. He got the stiff neck from staring too long, head tilted, at a print by M. C. Escher in which creatures fit together so tightly that the gaps between the dark ones are themselves light ones. The talk turns to Bach's sonatas for a violin playing alone, and how one violin can be enough. Then they trade two word puzzles: one asks for a word with the letters A, D, A, C in a row inside it; the other for a word that both begins and ends with the letters HE. Achilles tries hard, gets one of them backwards, and they arrange to meet.</p>
+      <p><b>The story.</b> Achilles and the Tortoise are the two characters who talk their way through the book's dialogues. Here Achilles is on the telephone with the Tortoise, and the book prints only what Achilles says. Wherever the Tortoise speaks, there is a gap.</p>
+      <p>From Achilles' replies you can still follow the call. The Tortoise has a stiff, twisted neck (the medical word, torticollis, sounds like his name) and a headache. It seems he held his head in one position too long, staring at a crowd of strange creatures. They talk about Bach's sonatas for a violin playing alone, and whether such music needs anything playing along with it or leaves the listener to imagine the rest.</p>
+      <p>Then come two word puzzles. The Tortoise asks for a word with the letters A, D, A, C in a row inside it. Achilles answers with a puzzle of his own: a word that both begins and ends with the letters HE. The Tortoise hints that the two puzzles are related as "figure" and "ground", and to explain those words he has Achilles look at a print by the Dutch artist M. C. Escher, in which dark creatures and light creatures fit together so tightly that each kind is the space between the other. Achilles tries hard, gets the first puzzle backwards, and they arrange to meet.</p>
       <details class="primer">
         <summary><span class="pm-title">The answer to the two word puzzles</span><span class="pm-sub">Try them first: a word containing ADAC, and a word that starts and ends with HE.</span><span class="pm-sub pm-open">One word solves both.</span></summary>
         <div class="primer-body">
@@ -101,19 +111,19 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
     <div>
       <div class="card">
         <h3 style="margin-top:0">The form: a sonata for one instrument</h3>
-        <p class="small-note">A <span class="term">sonata</span> is a piece of music in several movements (separate parts, usually fast, slow, fast) for one or two instruments. A violin sonata normally comes with a keyboard playing along: the accompaniment. Around 1720 Bach wrote three sonatas and three partitas (sets of dances) for a violin with nothing playing along at all. Musicians call such a piece <span class="term">unaccompanied</span>.</p>
-        <p class="small-note">A violin mostly plays one note at a time, so these pieces are mostly a single line of notes. Yet listeners hear a tune <i>and</i> a bass under it. Section 2 lets you hear how.</p>
+        <p class="small-note">A <span class="term">sonata</span> is a piece of music in several movements (separate parts) for one or two instruments. A violin sonata normally comes with a keyboard playing along: the accompaniment. Around 1720 Bach wrote six pieces, three of them sonatas, for a violin with nothing playing along at all. Musicians call such a piece <span class="term">unaccompanied</span>.</p>
+        <p class="small-note">A violin mostly plays one note at a time, so these pieces are mostly a single line of notes. Yet listeners hear a tune <i>and</i> a second, lower line under it. Section 2 lets you hear how.</p>
         <p class="small-note">The dialogue copies this. It is a piece for two <span class="term">voices</span> with only one written down.</p>
       </div>
     </div>
   </div>
-  <div class="intuit"><b>The hidden trick</b>You never read a word from the Tortoise, and you know roughly what he said anyway. Achilles' printed lines are a shape; the Tortoise's lines are the space around that shape; and the space turns out to be a second, readable conversation. The title says so: Achilles is "unaccompanied" on the page only.</div>
+  <div class="intuit"><b>The hidden trick</b>You never read a word from the Tortoise, and you know roughly what he said anyway. Achilles' printed lines are a shape; the Tortoise's lines are the space around that shape; and the space turns out to be a second, readable conversation. The title says so: Achilles is "unaccompanied" on the page only. The two word puzzles repeat the trick in miniature: one describes the middle of a word, the other describes its two ends.</div>
 </section>
 
 <!-- 2 -->
 <section id="s-voices">
   <div class="sec-head"><div class="num">2</div><h2>One line, two voices</h2></div>
-  <p>Here is how one violin can sound like two. The line below is a single string of notes, one after another, never two at once. But it keeps hopping between a high region and a low region. The ear groups the high notes into one tune and the low notes into another, and fills in each tune across the hops.</p>
+  <p>Here is how one violin can sound like two. The line below is a single run of notes, one after another, never two at once. But it keeps hopping between a high region and a low region. The ear groups the high notes into one tune and the low notes into another, and fills in each tune across the hops.</p>
   <div class="card">
     <canvas id="vCanvas" height="200"></canvas>
     <div class="row">
@@ -122,11 +132,11 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
       <button id="vLo">▶ Only the low notes</button>
       <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>high notes</span><span><i style="background:var(--godel)"></i>low notes</span></div>
     </div>
-    <p class="small-note">An original sketch in the style of Bach's solo violin music, not his notes, played on a synthesised plucked sound rather than a violin. On their own, the high and low notes are each held longer, to show the tune the ear fills in.</p>
+    <p class="small-note">An original sketch in the style of Bach's solo violin music, not his notes, played on a synthesised plucked sound rather than a violin. Each note rings on a little after the next one starts, as a plucked string does.</p>
   </div>
   <p>Play the single line, then each half. Neither half is written as a separate part. Each is what remains when you take the other away, and each makes sense by itself.</p>
   <p>Painters have words for this. The thing a picture shows is its <span class="term">figure</span>. Everything around it is the <span class="term">ground</span>, short for background. In the single line above you can treat the high notes as figure and the low notes as ground, or the other way round.</p>
-  <div class="intuit"><b>The idea the dialogue sets up</b>When you make one thing, you also make its leftover. The Tortoise's half of the call, the bass under the violin's tune, the gaps between Escher's animals: each leftover here was a real thing with its own shape. The chapter now asks whether that is always so. Its test case is a <span class="term">formal system</span>, the rule-following symbol game of page 02. The rules produce some rows of symbols and never produce others. Is everything they never produce also something that rules could produce?</div>
+  <div class="intuit"><b>The idea the dialogue sets up</b>When you make one thing, you also make its leftover. The Tortoise's half of the call, the low line under the violin's tune, the gaps between Escher's animals: each leftover here was a real thing with its own shape. The chapter now asks whether that is always so. Its test case is a <span class="term">formal system</span>, the rule-following symbol game of page 02. The rules produce some rows of symbols and never produce others. Is everything they never produce also something that rules could produce?</div>
 </section>
 
 <div class="half"><div class="hk">Chapter III</div><div class="ht"><em>Figure and Ground</em></div></div>
@@ -134,28 +144,28 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
 <!-- 3 -->
 <section id="s-tq">
   <div class="sec-head"><div class="num">3</div><h2>A system that multiplies</h2></div>
-  <p>The chapter begins with <span class="term">prime</span> numbers: whole numbers bigger than 1 that no smaller number except 1 divides evenly, such as 2, 3, 5 and 7. Hofstadter's question: can a formal system, which only shuffles symbols, produce the primes and nothing else? He builds up to it in three steps: first multiplication, then the numbers that are <i>not</i> prime, then the primes themselves.</p>
+  <p>The chapter's test case is the <span class="term">prime</span> numbers: whole numbers bigger than 1 that no smaller number except 1 divides evenly, such as 2, 3, 5 and 7. Hofstadter's question: can a formal system, which only shuffles symbols, produce the primes and nothing else? The primes will turn out to be a leftover: what remains when rules have produced all the other numbers. He builds up to it in three steps: first multiplication, then the numbers that are <i>not</i> prime, then the primes themselves.</p>
   <div class="words"><b>Words from earlier pages.</b> A <span class="term">string</span> is a row of symbols. An <span class="term">axiom</span> is a string you are given to start with. A <span class="term">rule of production</span> makes a new string from ones you already have. A <span class="term">theorem</span> is any string you can reach from the axioms by the rules, and the record of how you reached it is its <span class="term">derivation</span>. A theorem here is only a string the rules allow. It need not mean anything.</div>
   <p>Chapter II had a system built from the letters <b class="hy">p</b>, <b class="hy">q</b> and hyphens, whose theorems looked like <span class="hy">--p---q-----</span>: two hyphens, three hyphens, five hyphens. Read <b class="hy">p</b> as "plus" and <b class="hy">q</b> as "equals", count the hyphens, and every theorem is a correct addition. The system knows nothing about adding. Its rules only shuffle symbols, and the sums come out right all the same.</p>
   <h3>The tq-system</h3>
-  <p>The new system does the same for multiplication. Its symbols are <b class="hy">t</b>, <b class="hy">q</b> and the hyphen. A <span class="term">hyphen-string</span> is a row of one or more hyphens and nothing else. Below, <b class="hy">x</b>, <b class="hy">y</b> and <b class="hy">z</b> each stand for some hyphen-string.</p>
+  <p>The new system does the same for multiplication. Its symbols are <b class="hy">t</b>, <b class="hy">q</b> and the hyphen. A <span class="term">hyphen-string</span> is a row of one or more hyphens and nothing else. Below, <b class="hy">x</b>, <b class="hy">y</b> and <b class="hy">z</b> each stand for some hyphen-string. The patterns are printed with spaces to make them easier to read; the strings themselves have none.</p>
   <div class="rules">
     <div class="rule"><div class="rn">Axioms</div><div class="rs">x t - q x</div><p>Any hyphen-string, then <b class="hy">t</b>, one hyphen, <b class="hy">q</b>, and the same hyphen-string again.</p><div class="ex">Example: <span class="hy">---t-q---</span> (3 times 1 equals 3)</div></div>
     <div class="rule"><div class="rn">Rule</div><div class="rs">x t y q z → x t y- q zx</div><p>From a theorem, make a new one: add one hyphen in the middle group, and add a copy of the first group to the last group.</p><div class="ex">Example: <span class="hy">---t-q---</span> → <span class="hy">---t--q------</span> (3 times 2 equals 6)</div></div>
   </div>
-  <p>There are endlessly many axioms, one for each hyphen-string. A pattern like this, which says what shape every axiom has, is called an <span class="term">axiom schema</span>.</p>
+  <p>There are endlessly many axioms, one for each hyphen-string.</p>
   <p>Read <b class="hy">t</b> as "times" and <b class="hy">q</b> as "equals" and every theorem is a true multiplication. The rule is how you multiply by counting: "3 times 2" is "3 times 1" with one more 3 added on. Once again the system does not multiply. It copies hyphens.</p>
 </section>
 
 <!-- 4 -->
 <section id="s-comp">
-  <div class="sec-head"><div class="num">4</div><h2>Capturing the composite numbers</h2></div>
+  <div class="sec-head"><div class="num">4</div><h2>A system for the composite numbers</h2></div>
   <p>A <span class="term">composite number</span> is a whole number you get by multiplying two smaller numbers, each at least 2. So 6 is composite (2 times 3), 9 is composite (3 times 3), and 7 is not. (Without "each at least 2" every number would count, since any number is 1 times itself.) Every whole number bigger than 1 is either composite or prime, never both.</p>
   <p>With multiplication in hand, composites take one more rule. The new symbol <b class="hy">C</b> will mark them.</p>
   <div class="rules">
     <div class="rule" style="grid-column:1/-1"><div class="rn">Rule of the C-system</div><div class="rs">x- t y- q z → C z</div><p>If a tq-theorem has at least two hyphens in its first group and at least two in its second, you may write <b class="hy">C</b> followed by its last group.</p><div class="ex">Example: <span class="hy">---t--q------</span> → <span class="hy">C------</span> (6 is composite)</div></div>
   </div>
-  <p>Writing <b class="hy">x-</b> is how a rule says "at least two hyphens" using shapes alone: some hyphen-string, plus one more hyphen. Try it. Pick two numbers and the page writes out the derivation, then marks the result on the number strip.</p>
+  <p>Writing <b class="hy">x-</b> is how a rule says "at least two hyphens" using shapes alone: some hyphen-string, plus one more hyphen. The tq-system together with this rule is the C-system. Try it. Pick two numbers and the demo writes out the derivation, then marks the result on the number strip.</p>
   <div class="card">
     <div class="pick">
       <label>first group <input type="range" id="cA" min="2" max="20" value="3"><b id="cAv">3</b></label>
@@ -169,7 +179,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
     <div class="steps" id="cMsg" style="min-height:44px"></div>
   </div>
   <p>The system makes <b class="hy">C</b> followed by <i>n</i> hyphens exactly when <i>n</i> is composite. A property of numbers, "being composite", has been turned into a property of strings, "being a theorem of the C-system".</p>
-  <p>Now look at the squares the system never fills. Apart from 1, they are the primes. So the primes are sitting right there, as the holes in the pattern. Surely that is enough to capture them?</p>
+  <p>Now look at the squares the system never fills. Apart from 1, they are the primes. So the primes are sitting right there, as the holes in the pattern. Surely that is enough to pin them down?</p>
 </section>
 
 <!-- 5 -->
@@ -181,26 +191,28 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   </div>
   <p>Hofstadter rejects it, and the reason is the heart of the chapter. Every rule so far could be carried out by a clerk who understands nothing: look at a string in front of you, check its shape, copy pieces of it. He calls such steps <span class="term">typographical operations</span> (typography is the craft of arranging printed symbols). His list is short: reading and recognising symbols, writing them down, copying them, erasing them, checking whether two symbols are the same, and keeping a list of the theorems made so far.</p>
   <p>"Is not a theorem" is not on the list. To use the proposed rule, the clerk would need to know that <span class="hy">C-------</span> will <i>never</i> turn up. No string in front of him shows that. He could keep producing C-theorems and watching, but page 02 showed where that leads: producing theorems one after another tells you "yes" when a string appears and never tells you "no". Knowing that 7 hyphens will never follow a C takes reasoning about the whole system from outside it. A rule is only allowed to work inside.</p>
+  <p>You can see that 7 will never appear: try 2 times 2, 2 times 3, 3 times 2, and you have run out of ways to reach it. That is exactly the outside reasoning the clerk is not allowed. Section 9 will turn it into rules he can follow.</p>
   <div class="intuit"><b>Holes are not automatically a shape</b>The C-system draws the composites. The primes are what it leaves blank. But "what the rules leave blank" is not something rules can point at. If the primes are to be theorems, some system has to produce them directly, by rules that only ever say "this follows from that". Before building one, Hofstadter stops to ask how often a leftover can be produced directly at all.</div>
 </section>
 
 <!-- 6 -->
 <section id="s-art">
   <div class="sec-head"><div class="num">6</div><h2>Figure and ground in pictures and music</h2></div>
-  <p>Section 2 gave the two words: the figure is what a picture shows, the ground is what surrounds it. Hofstadter also calls them positive space and negative space. He picks out a special kind of figure. Tap the parts of each picture below to see the difference.</p>
+  <p>Section 2 gave the two words: the figure is what a picture shows, the ground is what surrounds it.  He picks out a special kind of figure. Tap the parts of each picture below to see the difference.</p>
   <div class="card">
     <div class="fg">
       <div><h4>One bird on a sheet of paper</h4><svg id="fgA" viewBox="0 0 360 240"></svg></div>
       <div><h4>A sheet filled with birds</h4><svg id="fgB" viewBox="0 0 360 240"></svg></div>
     </div>
     <div class="row"><button id="fgDark">Keep only the dark parts</button><button id="fgLight">Keep only the light parts</button><button class="ghost" id="fgBoth">Show everything</button></div>
-    <div class="steps" id="fgMsg" style="min-height:48px">Original drawings. Tap a bird, or the space around one.</div>
+    <div class="steps" id="fgMsg" style="min-height:48px"></div>
+    <p class="small-note">Original drawings. The bird is a simple tile: a crest on top, a beak at the right, an eye.</p>
   </div>
-  <p>On the left, the ground is whatever the bird happened to leave: a sheet with a bird-shaped hole. Nobody would draw that on purpose. Hofstadter calls any figure you can simply draw <span class="term">cursively drawable</span>: you draw it as you would write a word in cursive handwriting, attending only to the pen line, and the ground is whatever results.</p>
+  <p>On the left, the ground is whatever the bird happened to leave: a sheet with a bird-shaped hole. Nobody would draw that on purpose. Hofstadter calls any figure you can simply draw <span class="term">cursively drawable</span>: you draw it as you would write a word in cursive (joined-up) handwriting, attending only to the pen line, and the ground is whatever results.</p>
   <p>On the right, the ground of the dark birds is the light birds, and the ground of the light birds is the dark ones. Whichever you call the figure, the leftover is a figure too: its ground could have been drawn on purpose as well. Hofstadter calls such a figure <span class="term">recursive</span>. He borrows the word from the mathematics of the next section, and here it means only this: the ground is also a figure. So recursive figures are the special ones among the cursively drawable. The left-hand bird is cursively drawable and not recursive.</p>
-  <p>The chapter's examples are Escher's prints of interlocking creatures, such as <i>Mosaic II</i>, the print Achilles hears about on the phone, and a drawing by Scott Kim in which the word FIGURE is written in black letters so that the white gaps between them spell FIGURE as well. Escher's work is still under copyright, so it is not reproduced here; you can see his tilings at the <a href="https://mcescher.com/gallery/" target="_blank" rel="noopener">official M. C. Escher gallery</a>.</p>
+  <p>The chapter's examples are an Escher tiling of interlocking birds and a drawing by Scott Kim in which the word FIGURE is written in black letters so that the white gaps between them spell FIGURE as well. The print in the dialogue is Escher's <i>Mosaic II</i>. Escher's work is still under copyright, so it is not reproduced here; you can see his tilings at the <a href="https://mcescher.com/gallery/" target="_blank" rel="noopener">official M. C. Escher gallery</a>.</p>
   <p><b>In music</b>, the usual figure is the melody and the usual ground is the accompaniment, which you are not meant to notice much. Hofstadter points out that Bach rarely leaves it at that. His lower parts are tunes worth following for their own sake, and in the solo violin pieces of section 2 a single line carries both. That is a recursive figure made of sound.</p>
-  <p>The lesson to carry forward: <b>some figures have a ground that is a figure, and some do not</b>. It depends on the figure. Hofstadter admits that "a recognisable shape" is a loose idea for drawings. For formal systems it can be made exact.</p>
+  <p>The lesson to carry forward: <b>some figures have a ground that is a figure, and some do not</b>. Hofstadter admits that "a recognisable shape" is a loose idea for drawings. For formal systems it can be made exact.</p>
 </section>
 
 <!-- 7 -->
@@ -209,19 +221,20 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <p>Back to formal systems. Take every string that can be written with a system's symbols. The theorems are some of them: that is the figure the rules draw. All the other strings, the non-theorems, are the ground. Section 5 showed that you cannot get at this ground by saying "whatever isn't a theorem". The remaining hope is that the ground has rules of its own: a second formal system whose theorems are exactly the first system's non-theorems.</p>
   <p>Two terms make the question precise. Both describe a <span class="term">set</span> of strings or of numbers.</p>
   <div class="step-h"><span class="sn">1</span>Recursively enumerable: a figure</div>
-  <p>Think of a formal system as a machine that prints its theorems one after another, forever. A set is <span class="term">recursively enumerable</span> if some formal system prints exactly its members. "Enumerable" means listable: every member turns up on the list sooner or later, and nothing else does. The composites are recursively enumerable, because the C-system lists them. This is the cursively drawable figure: something rules can trace directly.</p>
+  <p>Think of a formal system as a machine that prints its theorems one after another, forever. A set is <span class="term">recursively enumerable</span> if some formal system prints exactly its members. "Enumerable" means listable: every member turns up on the list sooner or later, and nothing else does. The composites are recursively enumerable, because the C-system lists them (count only its theorems that start with <b class="hy">C</b>, and read the hyphens as a number). This is the cursively drawable figure: something rules can trace directly.</p>
   <div class="step-h"><span class="sn">2</span>Recursive: figure and ground both</div>
-  <p>A set is <span class="term">recursive</span> if it is recursively enumerable <i>and</i> everything outside it is recursively enumerable too. One machine lists the members; a second machine lists the non-members. This is the recursive figure: one whose ground is also a figure.</p>
+  <p>A set is <span class="term">recursive</span> if it is recursively enumerable <i>and</i> everything outside it is recursively enumerable too. One machine lists the members; a second machine lists the non-members. This is the recursive figure: one whose ground is also a figure. (The two names are historical and easy to mix up. Read them as labels: "recursively enumerable" is the weaker property, "recursive" the stronger.)</p>
   <div class="step-h"><span class="sn">3</span>Two lists make a test that always finishes</div>
   <p>Page 02 introduced a <span class="term">decision procedure</span>: a test that is guaranteed to finish and say yes or no. It also showed that one machine listing theorems is not such a test. If your string appears, you have a "yes". If it has not appeared yet, you learn nothing, however long you wait.</p>
   <p>A second machine fixes this. Run both side by side, a step of one and then a step of the other. Your string is either a member or a non-member, so it must turn up on one of the two lists. Wait until it does, and see which list it is on. The "no" you could never get from the first machine arrives as a "yes" from the second.</p>
+  <p>For example: is 7 composite? The C-system never says no. But if some second system listed the numbers that are not composite, 7 would turn up on its list, and that would settle it. Section 9 builds that second system.</p>
   <p>It works the other way round as well. If you have a decision procedure, you can build the second machine from it: go through every possible string in turn, test each, and print the ones that get a "no". So "the ground is a figure" and "there is a decision procedure" are the same thing.</p>
   <div class="step-h"><span class="sn">4</span>The surprise</div>
   <p>It would be natural to guess that a second machine can always be built: that whenever rules can list a set, some other rules can list what is left out. Hofstadter states that the guess is false. He does not prove it here; the proof needs ideas from much later in the book.</p>
   <p class="big-idea">There are formal systems whose non-theorems are not the theorems of any formal system.</p>
-  <p>The same fact in the new terms: some sets are recursively enumerable but not recursive. And in terms of tests: some formal systems have no decision procedure. Their theorems can be listed, and no mechanical method can tell you, for every string, that it will never appear.</p>
-  <p>The MIU-system of page 02 is not one of these. It looked as if it might be, and then section 8 of that page found a test for it. The systems that truly have none are richer, and the book reaches them later. The Introduction told how Alan Turing and Alonzo Church found the first such cases in 1936.</p>
-  <p>The Introduction also said that Gödel found true statements about numbers that their formal system can never prove. This chapter gives a first picture of how that can happen. The rules trace out the theorems as a pen traces a line, and what they leave behind can have a shape that no rules trace. Hofstadter calls this fact as deep as Gödel's theorem itself. The next page starts to ask what separates "true" from "is a theorem".</p>
+  <p>The same fact in the new terms: some sets are recursively enumerable but not recursive. And in terms of tests: some formal systems have no decision procedure. Their theorems can be listed, and no mechanical method can pick out every string that will never appear.</p>
+  <p>The MIU-system of page 02 is not one of these: it looked as if it might be, and then a test was found for it. The systems that truly have no test are richer, and the book reaches them later.</p>
+  <p>Hofstadter calls this fact as deep as Gödel's theorem, the result from the Introduction that some true statements about numbers can never be proved in their formal system. Here is the link in outline; later pages make it exact. Suppose a system's strings are statements about numbers, and every statement has an opposite, as "7 is prime" has "7 is not prime". Suppose the system never produces both. If it always produced one of the two, you would have a decision procedure: list theorems until the statement or its opposite turns up. So if such a system has no decision procedure, there must be a statement where neither it nor its opposite is ever a theorem. One of the two is true. That is a true statement the system cannot prove.</p>
 </section>
 
 <!-- 8 -->
@@ -230,12 +243,13 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <p>Hofstadter then sets a puzzle to make the idea concrete with numbers. Here is a list of numbers that goes on forever. What is the rule, and what comes next?</p>
   <div class="card puzzle">
     <div class="seq" id="sqSeq"></div>
-    <div class="row"><button id="sqGaps">Show the gap between each pair of neighbours</button><button id="sqStrip">Mark both lists on the numbers 1 to 100</button><button class="ghost" id="sqReset">Reset</button></div>
+    <div class="row"><button id="sqGaps">Hint: show the gap between each pair of neighbours</button><button id="sqStrip">Show the rule and the next number</button><button class="ghost" id="sqReset">Reset</button></div>
     <div class="strip wide" id="sqGrid" hidden></div>
-    <div class="legend" id="sqLeg" hidden><span><i style="background:var(--bach)"></i>numbers in the list</span><span><i style="background:var(--escher)"></i>gaps between them</span></div>
+    <div class="legend" id="sqLeg" hidden><span><i style="background:var(--godel)"></i>numbers in the list</span><span><i style="background:var(--gold)"></i>gaps between them</span></div>
     <div class="steps" id="sqMsg" style="min-height:44px"></div>
   </div>
-  <p>Hofstadter leaves this one for the reader to work out. The list and its gaps are figure and ground for the whole numbers: each is exactly what the other leaves out. And here both are produced by one simple rule, so both are figures. The set of numbers in the list is recursive.</p>
+  <p>Hofstadter leaves this one for the reader to work out.</p>
+  <p id="sqAfter" hidden>The list and its gaps are figure and ground for the whole numbers: each is exactly what the other leaves out. And here both are produced by one simple rule, so both are figures. The set of numbers in the list is recursive.</p>
 </section>
 
 <!-- 9 -->
@@ -246,32 +260,32 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <div class="step-h"><span class="sn">1</span>"Does not divide" as a theorem</div>
   <p>The new symbol is <b class="hy">DND</b>. The string <span class="hy">--DND---</span> is to be read "2 does not divide 3".</p>
   <div class="rules">
-    <div class="rule"><div class="rn">Axioms</div><div class="rs">xy DND x</div><p>A longer hyphen-string, <b class="hy">DND</b>, then a shorter one.</p><div class="ex">Example: <span class="hy">---DND--</span> (3 does not divide 2, since 3 is bigger)</div></div>
-    <div class="rule"><div class="rn">Rule</div><div class="rs">x DND y → x DND xy</div><p>Add a copy of the left group to the right group.</p><div class="ex">Example: <span class="hy">---DND--</span> → <span class="hy">---DND-----</span> (if 3 does not divide 2, it does not divide 2 + 3)</div></div>
+    <div class="rule"><div class="rn">Axioms</div><div class="rs">xy DND x</div><p>Here <b class="hy">xy</b> means <b class="hy">x</b> with <b class="hy">y</b> stuck on its end. So: a longer hyphen-string, <b class="hy">DND</b>, then a shorter one.</p><div class="ex">Example: <span class="hy">---DND--</span> (3 does not divide 2, since 3 is bigger)</div></div>
+    <div class="rule"><div class="rn">Rule</div><div class="rs">x DND y → x DND xy</div><p>Add a copy of the left group to the right group.</p><div class="ex">Example: <span class="hy">---DND--</span> → <span class="hy">---DND-----</span> (if 3 does not go evenly into 2, it does not go evenly into 2 + 3 either)</div></div>
   </div>
   <div class="step-h"><span class="sn">2</span>Collecting the checks</div>
-  <p>The symbol <b class="hy">DF</b> stands for "divisor-free up to". The string <span class="hy">-----DF---</span> is to be read "nothing from 2 up to 3 divides 5".</p>
+  <p>The symbol <b class="hy">DF</b> stands for "divisor-free up to". A divisor of a number is a number that divides it evenly. The string <span class="hy">-----DF---</span> is to be read "nothing from 2 up to 3 divides 5".</p>
   <div class="rules">
-    <div class="rule"><div class="rn">Rule: start</div><div class="rs">-- DND z → z DF --</div><p>If 2 does not divide <b class="hy">z</b>, then <b class="hy">z</b> is divisor-free up to 2.</p></div>
-    <div class="rule"><div class="rn">Rule: one more</div><div class="rs">z DF x  and  x- DND z → z DF x-</div><p>If <b class="hy">z</b> is divisor-free up to <b class="hy">x</b>, and the next number after <b class="hy">x</b> does not divide <b class="hy">z</b> either, extend the check by one.</p></div>
-    <div class="rule"><div class="rn">Rule: prime</div><div class="rs">z- DF z → P z-</div><p>If a number is divisor-free all the way up to the number just below it, write <b class="hy">P</b> and that number.</p></div>
+    <div class="rule"><div class="rn">Rule: start</div><div class="rs">-- DND z → z DF --</div><p>If 2 does not divide <b class="hy">z</b>, then <b class="hy">z</b> is divisor-free up to 2.</p><div class="ex">Example: <span class="hy">--DND-----</span> → <span class="hy">-----DF--</span></div></div>
+    <div class="rule"><div class="rn">Rule: one more</div><div class="rs">z DF x  and  x- DND z → z DF x-</div><p>If <b class="hy">z</b> is divisor-free up to <b class="hy">x</b>, and the next number after <b class="hy">x</b> does not divide <b class="hy">z</b> either, extend the check by one.</p><div class="ex">Example: <span class="hy">-----DF--</span> and <span class="hy">---DND-----</span> → <span class="hy">-----DF---</span></div></div>
+    <div class="rule"><div class="rn">Rule: prime</div><div class="rs">z- DF z → P z-</div><p>If a number is divisor-free all the way up to the number just below it, write <b class="hy">P</b> and that number.</p><div class="ex">Example: <span class="hy">-----DF----</span> → <span class="hy">P-----</span> (5 is prime)</div></div>
     <div class="rule"><div class="rn">One extra axiom</div><div class="rs">P --</div><p>2 is prime. It needs its own axiom because there is nothing between 2 and itself to check.</p></div>
   </div>
-  <p>Every rule here is a typographical operation: compare shapes, copy hyphens. None asks what is <i>not</i> a theorem. Yet <b class="hy">P</b> followed by <i>n</i> hyphens is a theorem exactly when <i>n</i> is prime.</p>
+  <p>Call all of this together the P-system. Every rule in it is a typographical operation: compare shapes, copy hyphens. None asks what is <i>not</i> a theorem. Yet <b class="hy">P</b> followed by <i>n</i> hyphens is a theorem exactly when <i>n</i> is prime.</p>
   <div class="step-h"><span class="sn">3</span>Run both systems side by side</div>
-  <p>Here are section 7's two machines. Pick a number and run them. Each prints its theorems in order of length, one per step. To save space, <span class="hy"><span class="k">C</span>·6</span> stands for <b class="hy">C</b> followed by 6 hyphens.</p>
+  <p>Here are section 7's two machines. Pick a number and run them. The picture is simplified: it shows only each system's <b class="hy">C</b> and <b class="hy">P</b> theorems, smallest first, one per step. To save space, <span class="hy"><span class="k">C</span>·6</span> stands for <b class="hy">C</b> followed by 6 hyphens.</p>
   <div class="card">
     <div class="pick"><label>number <input type="range" id="pN" min="2" max="30" value="7"><b id="pNv">7</b></label><button id="pRun">Run both systems</button></div>
+    <div class="steps" id="pMsg" style="min-height:66px"></div>
     <div class="two">
       <div><div class="lbl-s">C-system prints</div><div class="chips" id="pC"></div></div>
       <div><div class="lbl-s">P-system prints</div><div class="chips" id="pP"></div></div>
     </div>
-    <div class="steps" id="pMsg" style="min-height:66px"></div>
     <div class="lbl-s" id="pDl" hidden>How the system made that theorem</div>
     <ol class="deriv" id="pD"></ol>
   </div>
   <p>For every number from 2 up, exactly one of the two machines prints it, so the wait always ends. Neither machine ever says "no". Each "no" is read off from the other machine's "yes". The composites are a figure, their ground (leaving aside 1) is the primes, and the primes are a figure too. So the set of primes is recursive, and "is this number prime?" has a decision procedure.</p>
-  <p><b>Why it worked here.</b> Step 3 of section 7 said a ground can be listed exactly when there is a decision procedure. Composites have an easy one. To test a number, you only need to try multiplying the smaller numbers, and there are only so many of those. The rules of the tq-system and the C-system only ever make strings longer, so nothing short can appear late. The P-system is that finite check, written out as rules. Trouble can come with systems whose rules both lengthen and shorten strings, as the MIU rules did: there a short string might appear after a long detour, so waiting alone never rules it out. (For MIU a different trick settled the matter. Sometimes nothing does.)</p>
+  <p><b>Why it worked here.</b> Step 3 of section 7 said a ground can be listed exactly when there is a decision procedure. Composites have an easy one. To test a number, you only need to try multiplying the smaller numbers, and there are only so many of those. The tq rule only ever makes strings longer, and the number after <b class="hy">C</b> is never smaller than the groups it was multiplied from, so nothing small can appear late. The P-system is that finite check, written out as rules. Trouble can come with systems whose rules both lengthen and shorten strings, as the MIU rules did: there a short string might appear after a long detour, so waiting alone never rules it out.</p>
   <p>Notice also what it cost. The ground did not come free with the figure. Someone had to find new rules, with new symbols, that state the negative facts positively. For primes that could be done. Section 7's claim is that for some systems it cannot.</p>
 </section>
 
@@ -282,14 +296,75 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <div class="grid3">
     <div class="card"><span class="tag b">Dialogue</span><h4>One line, two voices</h4><p>Only Achilles' half of a phone call is printed, and the Tortoise's half can be read from the gaps, as a solo violin line carries a tune and a bass at once.</p></div>
     <div class="card"><span class="tag e">Figure and ground</span><h4>Two kinds of figure</h4><p>A cursively drawable figure leaves an accidental ground. A recursive figure, like interlocking birds, has a ground that is a figure too.</p></div>
-    <div class="card"><span class="tag g">Formal systems</span><h4>Theorems and non-theorems</h4><p>Rules can produce composites, and by different rules, primes. But "not a theorem" is never a rule, and some systems' non-theorems cannot be produced by any rules at all.</p></div>
+    <div class="card"><span class="tag g">Formal systems</span><h4>Theorems and non-theorems</h4><p>Rules can produce composites, and by different rules, primes. But "not a theorem" is never a rule, and some systems' non-theorems cannot be produced by any rules at all. Those are the systems with no decision procedure.</p></div>
   </div>
 </section>
 
 <!-- 11 -->
 <section id="s-modern">
   <div class="sec-head"><div class="num">11</div><h2>Modern view: what we know now</h2></div>
-<!--MODERN-->
+  <p class="mv-asof">As of November 2026</p>
+  <p>This page asked when a leftover is a shape of its own: the missing half of a phone call, the space around a bird, the strings a system never makes. Each version of that question is now studied directly, in AI models, in the brain and in mathematics. Here is where the page's ideas stand today.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · dialogue</div>
+      <h4>Machines asked to write the Tortoise's half</h4>
+      <p class="mv-then"><b>In the book:</b> only Achilles' side of the call is printed, and the reader rebuilds the Tortoise's side from the gaps (<a class="xref" href="#s-dialogue">section 1</a>).</p>
+      <p><b>Now:</b> this is a named research task. A paper at a 2026 language-technology conference calls it the "one-sided conversation problem": a <span class="term">large language model</span> (the kind of AI system behind chatbots such as ChatGPT, Gemini and Claude) is shown one speaker's lines and must write the other's. The case is a practical one, because call centres and smart glasses often record only one person. In a small test, 16 human judges saw a hidden reply and a model-written one, without being told which was which, and picked the better fit. For conversations about bookings, most judges preferred the reply written by a large model (Claude) in 56% of cases and the real one in 12%. For everyday chat it was 32% against 28%. A small model lost clearly even after extra training: 8% against 68% for everyday chat. The caveats are the authors' own. A reply that fits is not the reply that was given: scores for matching the real meaning stayed low, the models sometimes invented details such as names and times, and asking a model to fill several gaps at once did not work.</p>
+      <p class="mv-so"><b>Why it matters:</b> half a conversation does carry a great deal of the other half, enough for a machine to write something people accept. But the ground is only fully readable when the figure was made that way. Hofstadter wrote Achilles' lines so that the Tortoise's could be recovered; ordinary speakers don't.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Neuroscience · AI interpretability</div>
+      <h4>Which side owns the edge?</h4>
+      <p class="mv-then"><b>In the book:</b> an outline is shared by a figure and its ground, and in Escher's tilings either side can be taken as the figure (<a class="xref" href="#s-art">section 6</a>).</p>
+      <p><b>Now:</b> the brain settles this edge by edge. In two of the areas of a monkey's brain that handle seeing, called V2 and V4, 30 to 50% of the nerve cells respond differently to the very same edge depending on which side of it is the object. Researchers call this <span class="term">border ownership</span>. A 2025 study recorded cells in V4 that seem to mark where a whole object is, fast enough to be the source of that signal. The same kind of unit appears in machines nobody taught about objects. An artificial network trained only to predict the next frame of a video developed border-ownership units of its own, and switching them off hurt its predictions for videos of moving objects more than switching off other units did (2025). <span class="term">Mechanistic interpretability</span>, the field that takes AI models apart to see how they work, has started on the question too. A 2026 study, not yet peer-reviewed, hid part of a shape from an image model and found it preferred to fill the gap as a bulging shape, not a notched one. One small internal part gave that preference its first push; turned down to 30% of its strength, the model drew the notch. The authors tested one model on simple drawn shapes, and say so.</p>
+      <p class="mv-so"><b>Why it matters:</b> "figure" is not in the picture. Something has to decide it, and in brains and in machines we can now point to the parts that do. An Escher tiling is the case built so that this decision has two good answers.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · negation</div>
+      <h4>A "not" added from outside doesn't stick</h4>
+      <p class="mv-then"><b>In the book:</b> "is not a theorem" can't be a rule. The primes had to be reached by theorems that state a negative fact outright, like "2 does not divide 3" (<a class="xref" href="#s-illegal">sections 5</a> and <a class="xref" href="#s-primes">9</a>).</p>
+      <p><b>Now:</b> AI models have a matching weak spot. A 2026 study (not yet peer-reviewed; latest version November 2026) gave language models extra training on made-up news stories, for instance that the singer Ed Sheeran won the Olympic 100 metres, with warnings all around saying the story is false. Afterwards the models answered as if the story were true. In the main model tested, averaged over six invented claims, belief rose from 2.5% of answers to 88.6%, almost the 92.4% reached with no warnings at all. When each sentence carried its own "not" ("Ed Sheeran did not win"), the models mostly learned it correctly (tested on two of the claims). The caveats: this is about training on specially written documents, and the same models do spot the falsehood when the documents are simply shown to them in a conversation. Models that match pictures to captions show a related gap. On a test of about 79,000 examples (peer-reviewed, 2025), they often did no better than guessing when a caption said what was <i>not</i> in the picture.</p>
+      <p class="mv-so"><b>Why it matters:</b> this is an echo of the chapter, not the same result. A machine that learns from examples picks up what is put in front of it; "and this isn't so", said from outside, is easy to lose. What worked was what Hofstadter did for the primes: write the negative fact as a statement of its own.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics · undecidability</div>
+      <h4>Grounds that no rules can draw: equations and tiles</h4>
+      <p class="mv-then"><b>In the book:</b> some sets can be listed by rules while what they leave out can't be listed by any rules (<a class="xref" href="#s-sets">section 7</a>). The chapter gives no example.</p>
+      <p><b>Now:</b> there are concrete ones. Take equations built from whole numbers, such as x² + y² = z². If an equation has a whole-number solution, trying numbers one after another will find it, so the solvable equations can be listed. In 1970 Yuri Matiyasevich, finishing work by Martin Davis, Hilary Putnam and Julia Robinson, proved that no method lists the unsolvable ones. So there is no <span class="term">decision procedure</span> for "does this equation have a solution?". Number theorists also use larger number systems, which add numbers such as √2 to the whole numbers. Over the following decades the same result was proved for some of these, including the one with √2, but for over fifty years not for all of them. Two teams have now proved it for every one (published in 2025 and 2026). Escher's subject has its own case. Give a computer a set of square tiles with coloured edges and ask whether copies can cover the whole plane with touching edges matching. If they can't, a search finds a finite patch that is impossible to cover, so the sets that fail can be listed. The sets that succeed can't be: the question has been known since the 1960s to have no decision procedure. In 2025 Rachel Greenfeld and Terence Tao published a proof that this holds even for a single tile that may only be slid, never turned, when the number of dimensions of the grid is not fixed in advance but is part of the question. Their caveats: the region to be covered is a repeating pattern within the grid, not the whole grid; for any one fixed number of dimensions above two the question was left open; and in two dimensions, for a tile that only slides, it can be decided. For one shape in the ordinary plane that may also be turned or flipped, the question was open when Tao wrote up the result in 2023, and still is. The "hat" tile announced that year, a single shape that covers the plane but never in a repeating pattern, shows why it is hard.</p>
+      <p class="mv-so"><b>Why it matters:</b> the "surprise" of section 7 is a fact about ordinary things, equations and tiles. With tiles the roles are swapped: failing to tile is the figure that a search can trace, and tiling is the ground.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics · primes</div>
+      <h4>The test for primes became fast</h4>
+      <p class="mv-then"><b>In the book:</b> the primes are a figure too, so "is this number prime?" has a decision procedure. The one the P-system spells out checks every smaller number (<a class="xref" href="#s-primes">section 9</a>).</p>
+      <p><b>Now:</b> that check is hopeless for big numbers, and for a long time nobody had a test proved to be both always right and always fast. Three computer scientists in India, Manindra Agrawal, Neeraj Kayal and Nitin Saxena, found one (published 2004). Its running time grows only as a fixed power of the number of digits, never as the size of the number itself. For numbers of special forms there are faster tests still. The largest prime known, found in October 2024, is 136,279,841 twos multiplied together, minus 1. It has 41,024,320 digits. A graphics chip, the kind of processor that also runs AI models, first flagged it as "probably prime". It was then confirmed by an exact test, run with several different programs on different machines.</p>
+      <p class="mv-so"><b>Why it matters:</b> knowing that a ground is a figure is the start. How cheaply it can be drawn is a second question, and for the primes the answer turned out to be: far more cheaply than by the rules of section 9.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://aclanthology.org/2026.findings-acl.1757/" target="_blank" rel="noopener">Ebert et al., Reading Between the Lines: The One-Sided Conversation Problem, Findings of ACL, July 2026</a></li>
+      <li><a href="https://doi.org/10.1016/j.neuron.2025.05.003" target="_blank" rel="noopener">Franken and Reynolds, Grouping signals in primate visual cortex, Neuron, 2025</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12331435/" target="_blank" rel="noopener">free copy</a></li>
+      <li><a href="https://www.cell.com/iscience/fulltext/S2589-0042(25)00460-2" target="_blank" rel="noopener">Ye, Wessel and Franken, Brain-like border ownership signals support prediction of natural videos, iScience, 2025</a></li>
+      <li><a href="https://arxiv.org/abs/2603.06407" target="_blank" rel="noopener">Arnold and Gröbner, Locating and Editing Figure-Ground Organization in Vision Transformers (March 2026 preprint)</a></li>
+      <li><a href="https://arxiv.org/abs/2605.13829" target="_blank" rel="noopener">Mayne et al., Negation Neglect: When models fail to learn negations in training (2026 preprint)</a></li>
+      <li><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Alhamoud_Vision-Language_Models_Do_Not_Understand_Negation_CVPR_2025_paper.html" target="_blank" rel="noopener">Alhamoud et al., Vision-Language Models Do Not Understand Negation, CVPR 2025</a></li>
+      <li><a href="https://doi.org/10.1090/jams/1081" target="_blank" rel="noopener">Koymans and Pagano, Hilbert's tenth problem via additive combinatorics, Journal of the American Mathematical Society, 2026</a></li>
+      <li><a href="https://link.springer.com/article/10.1007/s00222-025-01392-3" target="_blank" rel="noopener">Alpöge, Bhargava, Ho and Shnidman, Rank stability in quadratic extensions and Hilbert's tenth problem for the ring of integers of a number field, Inventiones mathematicae, December 2025</a></li>
+      <li><a href="https://ems.press/journals/jems/articles/14298908" target="_blank" rel="noopener">Greenfeld and Tao, Undecidability of translational monotilings, Journal of the European Mathematical Society, 2025</a> · <a href="https://terrytao.wordpress.com/2023/09/18/undecidability-of-translational-monotilings/" target="_blank" rel="noopener">Tao's own summary (2023)</a></li>
+      <li><a href="https://doi.org/10.5070/C64163843" target="_blank" rel="noopener">Smith, Myers, Kaplan and Goodman-Strauss, An aperiodic monotile (the "hat"), Combinatorial Theory, 2024</a></li>
+      <li><a href="https://annals.math.princeton.edu/2004/160-2/p12" target="_blank" rel="noopener">Agrawal, Kayal and Saxena, PRIMES is in P, Annals of Mathematics, 2004</a></li>
+      <li><a href="https://www.mersenne.org/primes/press/m136279841.html" target="_blank" rel="noopener">Great Internet Mersenne Prime Search: largest known prime announced (October 2024)</a></li>
+    </ol>
+  </details>
 </section>
 
 </main>
@@ -298,7 +373,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
 </footer>
 
 <script src="../assets/toc.js?v=2688bd06"></script>
-<script src="../assets/glossary.js?v=c0b6d5a8"></script>
+<script src="../assets/glossary.js?v=1945e847"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=c12517d0" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -307,7 +382,14 @@ const $=id=>document.getElementById(id);
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const H=n=>'-'.repeat(n);
 const kw=s=>s.replace(/(DND|DF|[tqCP])/g,'<span class="k">$1</span>');
-function showDeriv(ol,lines){ol.innerHTML=lines.map((l,i)=>`<li class="${i===lines.length-1?'last':''}">${kw(l.s)}<span>${l.why}</span></li>`).join('');}
+function showDeriv(ol,lines){ol._all=lines.map((l,i)=>`<li value="${i+1}" class="${i===lines.length-1?'last':''}">${kw(l.s)}<span class="why">${l.why}</span></li>`);
+  // long derivations: first lines, an expander, and always the final theorem
+  const KEEP=4, n=lines.length;
+  if(n>KEEP+4&&!ol._open){
+    ol.innerHTML=ol._all.slice(0,KEEP).join('')+`<li class="more"><button class="ghost">… show the ${n-KEEP-2} steps in between</button></li>`+ol._all.slice(n-2).join('');
+    ol.querySelector('.more button').onclick=()=>{ol.innerHTML=ol._all.join('');};
+  } else ol.innerHTML=ol._all.join('');
+}
 
 /* ===== Section 2: one line, two voices (original sketch, not Bach's notes) ===== */
 // the line alternates low, high in half-beats; HI and LO are the two strands it hops between
@@ -316,15 +398,17 @@ const LO=[57,57,57,57, 53,53,52,52, 50,50,52,52, 53,52,52,45];
 const lineHi=[], lineLo=[];
 HI.forEach((h,i)=>{lineLo.push([LO[i],.5],[null,.5]); lineHi.push([null,.5],[h,.5]);});
 const vCv=$('vCanvas');
+// one sound for every note, so that only the hopping separates the two strands
 function vVoices(mode){
-  const hi={color:css('--bach'),gain:.17}, lo={color:css('--godel'),gain:.2,timbre:'soft'};
-  if(mode==='all') return [{...hi,ev:toEvents(lineHi)},{...lo,ev:toEvents(lineLo)}];
-  if(mode==='hi')  return [{...hi,ev:toEvents(HI.map(p=>[p,1]),.5)}];
-  return [{...lo,ev:toEvents(LO.map(p=>[p,1]))}];
+  const hi={color:css('--bach'),gain:.18,ev:toEvents(lineHi)}, lo={color:css('--godel'),gain:.18,ev:toEvents(lineLo)};
+  const mute=v=>({...v,gain:.0001,color:'#d8cfbd'});
+  return mode==='hi'?[mute(lo),hi]:mode==='lo'?[mute(hi),lo]:[hi,lo];
 }
-let vMode='all';
 function vDraw(){drawRoll(vCv,vVoices('all'));}
-[['vAll','all'],['vHi','hi'],['vLo','lo']].forEach(([id,m])=>playToggle($(id),()=>playVoices(vCv,vVoices(m),0.36)));
+[['vAll','all'],['vHi','hi'],['vLo','lo']].forEach(([id,m])=>{
+  playToggle($(id),()=>playVoices(vCv,vVoices(m),0.36));
+  new MutationObserver(()=>{if(!$(id).classList.contains('on'))vDraw();}).observe($(id),{attributes:true,attributeFilter:['class']});
+});
 vDraw(); addEventListener('resize',vDraw);
 
 /* ===== Section 4: tq-system and C-system ===== */
@@ -368,13 +452,15 @@ function fgDraw(){
 fgDraw();
 function fgKeep(k){
   document.querySelectorAll('.fg [data-k]').forEach(el=>{
-    const mine=el.dataset.k, isDark=mine==='dark';
-    el.style.opacity=(k==='both'||(k==='dark')===isDark)?1:0.06;
+    const isDark=el.dataset.k==='dark', keep=k==='both'||(k==='dark')===isDark, lone=el.closest('#fgA')&&isDark;
+    el.style.opacity=keep?1:(lone?1:0.06);
+    if(lone){el.querySelector('path').setAttribute('fill',keep?DARK:'#fff'); el.querySelector('circle').style.opacity=keep?1:0;}
   });
+  [['fgDark','dark'],['fgLight','light']].forEach(([id,m])=>$(id).classList.toggle('on',k===m));
   $('fgMsg').innerHTML={
     dark:'<b>Dark parts only.</b> Left: a bird. Right: birds, with bird-shaped spaces between them.',
     light:'<b>Light parts only.</b> Left: a sheet with a hole in it, the shape of nothing in particular until you are told what was removed. Right: birds again, facing the same way, with bird-shaped spaces between them.',
-    both:'Original drawings. Tap a bird, or the space around one.'}[k];
+    both:''}[k];
 }
 $('fgDark').onclick=()=>fgKeep('dark'); $('fgLight').onclick=()=>fgKeep('light'); $('fgBoth').onclick=()=>fgKeep('both');
 document.querySelectorAll('.fg svg').forEach(svg=>svg.addEventListener('click',e=>{
@@ -398,22 +484,22 @@ function seqAndGaps(limit){
   return {s,d};
 }
 const SQ=seqAndGaps(100), SHOWN=10;
-let sqGapsOn=false;
+let sqGapsOn=false, sqDone=false;
 function sqDraw(){
   let h='';
-  for(let i=0;i<SHOWN;i++) h+=`<span>${SQ.s[i]}</span> `+(sqGapsOn?`<i>+${SQ.d[i]}</i> `:'');
-  h+=sqGapsOn?`<span>${SQ.s[SHOWN]}</span> <span>…</span>`:'<span>?</span>';
+  for(let i=0;i<SHOWN;i++) h+=`<span>${SQ.s[i]}</span> `+((sqGapsOn&&i<SHOWN-1)||sqDone?`<i>+${SQ.d[i]}</i> `:'');
+  h+=sqDone?`<span>${SQ.s[SHOWN]}</span> <span>…</span>`:'<span>?</span>';
   $('sqSeq').innerHTML=h;
 }
-$('sqGaps').onclick=()=>{sqGapsOn=true;sqDraw();
-  $('sqMsg').innerHTML=`The gaps are ${SQ.d.slice(0,SHOWN).join(', ')}. They climb, but they skip ${[1,3,7,12].join(', ')}: exactly the numbers already in the list. So the next gap is ${SQ.d[SHOWN-1]}, and the next number is ${SQ.s[SHOWN-1]} + ${SQ.d[SHOWN-1]} = <b>${SQ.s[SHOWN]}</b>.`;};
+$('sqGaps').onclick=()=>{if(sqDone)return; sqGapsOn=true;sqDraw();
+  $('sqMsg').innerHTML=`The gaps are ${SQ.d.slice(0,SHOWN-1).join(', ')}. They climb, but some numbers never turn up as a gap. Which ones, and where have you seen them?`;};
 $('sqStrip').onclick=()=>{
   const inS=new Set(SQ.s), inD=new Set(SQ.d); let both=0, neither=0, h='';
-  for(let n=1;n<=100;n++){const a=inS.has(n), b=inD.has(n); if(a&&b)both++; if(!a&&!b)neither++; h+=`<span class="${a?'s':b?'d':''}">${n}</span>`;}
-  $('sqGrid').innerHTML=h; $('sqGrid').hidden=false; $('sqLeg').hidden=false; sqGapsOn=true; sqDraw();
-  const ns=SQ.s.filter(n=>n<=100).length;
-  $('sqMsg').innerHTML=`The rule: each gap is the smallest number not used yet, either in the list or as a gap. From 1 to 100, ${ns} numbers are in the list and ${100-ns} are gaps. Numbers in both: ${both}. Numbers in neither: ${neither}.`;};
-$('sqReset').onclick=()=>{sqGapsOn=false;sqDraw();$('sqGrid').hidden=true;$('sqLeg').hidden=true;$('sqMsg').innerHTML='';};
+  for(let n=1;n<=100;n++){const a=inS.has(n), b=inD.has(n); if(a&&b)both++; if(!a&&!b)neither++; h+=`<span class="${a?'c':b?'p':''}">${n}</span>`;}
+  $('sqGrid').innerHTML=h; $('sqGrid').hidden=false; $('sqLeg').hidden=false; $('sqAfter').hidden=false; sqDone=true; sqDraw();
+  const ns=SQ.s.filter(n=>n<=100).length, skipped=SQ.s.filter(n=>n<SQ.d[SHOWN-1]);
+  $('sqMsg').innerHTML=`The gaps never use ${skipped.join(', ')}: the numbers already in the list. The rule: each gap is the smallest number not used yet, either in the list or as a gap. So the next gap is ${SQ.d[SHOWN-1]}, and the next number is ${SQ.s[SHOWN-1]} + ${SQ.d[SHOWN-1]} = <b>${SQ.s[SHOWN]}</b>. From 1 to 100, ${ns} numbers are in the list and ${100-ns} are gaps. Numbers in both: ${both}. Numbers in neither: ${neither}.`;};
+$('sqReset').onclick=()=>{sqGapsOn=sqDone=false;sqDraw();$('sqGrid').hidden=true;$('sqLeg').hidden=true;$('sqAfter').hidden=true;$('sqMsg').innerHTML='';};
 sqDraw();
 
 /* ===== Section 9: DND, DF and P ===== */
@@ -431,7 +517,7 @@ function pDeriv(n){
 function smallestFactor(n){for(let d=2;d<n;d++)if(n%d===0)return d;return 0;}
 const chip=(k,n,hit)=>`<span class="hy${hit?' hit':''}"><span class="k">${k}</span>·${n}</span>`;
 let pTimer=null;
-function pClear(){clearInterval(pTimer);pTimer=null;$('pC').innerHTML='';$('pP').innerHTML='';$('pD').innerHTML='';$('pDl').hidden=true;$('pRun').disabled=false;
+function pClear(){clearInterval(pTimer);pTimer=null;$('pC').innerHTML='';$('pP').innerHTML='';$('pD').innerHTML='';$('pD')._open=false;$('pDl').hidden=true;$('pRun').disabled=false;
   $('pNv').textContent=$('pN').value;$('pMsg').innerHTML='Both machines are waiting.';}
 function pRun(){
   pClear(); $('pRun').disabled=true;
