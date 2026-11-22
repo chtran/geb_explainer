@@ -147,3 +147,7 @@ footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,san
 .gtab{border-collapse:collapse;font:13px Inter,sans-serif}
 .gtab th,.gtab td{padding:3px 12px 3px 0;text-align:left}
 .gtab th{color:var(--ink2);font-weight:600}
+.quine .qsent{font-size:21px;line-height:1.45;padding:14px 16px;border:2px solid var(--rule);border-radius:12px;background:#fff;transition:.3s}
+.quine .qsent.lit{border-color:var(--godel)}
+.quine .qsent.lit .qq,.qq-i{background:#e4ecf6;border-radius:4px}
+.quine .qsent.lit .qp,.qp-i{background:#f7efd9;border-radius:4px}

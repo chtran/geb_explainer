@@ -6,7 +6,7 @@
 <title>GEB · Introduction: A Musico-Logical Offering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=832eafb4">
+<link rel="stylesheet" href="../assets/geb.css?v=3ae22f7a">
 </head>
 <body data-chapter="01-introduction">
 
@@ -260,7 +260,17 @@
     <div class="godelout" id="gOut"></div>
   </div>
 
-  <p><b>d) Why this matters.</b> Every formula now has its own number, and so does every proof (a proof is just a list of formulas). Checking "is this a correct proof?" becomes checking a property of numbers, the same kind of question as "is 270 even?". So number theory can, in effect, talk about which formulas are provable. Gödel then built a formula which, decoded, says "the formula with Gödel number <i>g</i> has no proof", and arranged things so that its own Gödel number is exactly <i>g</i>. That is the sentence from Step 2: a statement about numbers that, read through the code, says <b>"I have no proof."</b></p>
+  <h3>Step 4 — Back to Step 2: building "I have no proof" out of numbers</h3>
+  <p>Step 2 needed a sentence that says "this statement has no proof". Gödel numbering lets Gödel build exactly that, in three moves.</p>
+  <p><b>1. "Has a proof" becomes a question about numbers.</b> A proof is just a list of formulas, so it gets a Gödel number too. Checking that a proof is correct means checking that each line follows the rules, and once everything is numbers, that's ordinary arithmetic: decoding numbers and comparing them. So "the formula with Gödel number <i>n</i> has a proof" can itself be written as a (very long) formula of number theory, just like "<i>n</i> is even".</p>
+  <p><b>2. So number theory can say "the formula with number <i>n</i> has no proof"</b>, for any number <i>n</i> you like.</p>
+  <p><b>3. Make <i>n</i> the formula's own number.</b> This is the clever part. A formula can't simply contain its own number: writing the number into the formula changes the formula, which changes its number. It's like trying to print a photo of a page on that same page. Gödel's way out is to <b>describe</b> the number instead of writing it: "take this template, put its own number into it, and the result has no proof". The same trick works in plain English:</p>
+  <div class="card quine">
+    <div class="qsent" id="qSent"><span class="qq">"is unprovable when written after its own quotation"</span> <span class="qp">is unprovable when written after its own quotation.</span></div>
+    <div class="row"><button id="qGo">Follow the instruction</button><button class="ghost" id="qReset">Reset</button></div>
+    <div class="steps" id="qSteps"></div>
+  </div>
+  <p>Gödel did the same thing with numbers. The result is a formula of number theory, call it <b>G</b>, which, decoded, says "<b>G has no proof</b>". That is Step 2's sentence, now a genuine piece of math, so Step 2's reasoning applies to it. If the system could prove G, it would be proving something false, so in a trustworthy system it can't. And since G can't be proven, what it says is true. <b>G is true but has no proof.</b></p>
   <div class="intuit"><b>The punchline — Gödel's Incompleteness Theorem</b>(A <span class="term">theorem</span> in ordinary math talk just means a proven result.) Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
 </section>
 
@@ -697,6 +707,17 @@ document.getElementById('gKeys').addEventListener('click',e=>{
   godel();
 });
 godel();
+
+/* Gödel step 4: the self-describing English sentence */
+const Q_PHRASE='is unprovable when written after its own quotation';
+$('qGo').onclick=()=>{
+  $('qSent').classList.add('lit');
+  $('qSteps').innerHTML=
+   `→ <b>Take the phrase</b> it talks about: <span class="qp-i">${Q_PHRASE}</span><br>`+
+   `→ <b>Write it after its own quotation</b> (the same phrase, in quote marks): <span class="qq-i">"${Q_PHRASE}"</span> <span class="qp-i">${Q_PHRASE}</span><br>`+
+   `→ That's <b>the whole sentence again</b>. So the sentence says that <i>it itself</i> is unprovable, in other words <b>"I am unprovable"</b>, without having to contain a copy of itself inside the quotes.`;
+};
+$('qReset').onclick=()=>{$('qSent').classList.remove('lit');$('qSteps').innerHTML='';};
 
 /* Section 6: barber */
 $('barberYes').onclick=()=>{$('barberOut').innerHTML='→ He shaves himself… but he only shaves men who <i>don\'t</i> shave themselves. So he <b>doesn\'t</b>. Contradiction! Try the other answer.';};
