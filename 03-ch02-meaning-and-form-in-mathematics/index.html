@@ -12,6 +12,7 @@
 .pq{font-family:"JetBrains Mono",monospace;font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0;letter-spacing:.14em;white-space:nowrap}
 .pq .p{color:var(--godel);font-weight:500;margin:0 .08em} .pq .q{color:var(--bach);font-weight:500;margin:0 .08em}
 .pq.wrap{white-space:normal;word-break:break-all}
+button:disabled{opacity:.45;cursor:default;transform:none}
 .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0}
 @media (max-width:720px){.rules{grid-template-columns:1fr}}
 .rule{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 16px}
@@ -20,7 +21,8 @@
 .rule p{margin:0;font-size:16px}
 .rule .ex{font:13.5px Inter,sans-serif;color:var(--ink2);margin-top:6px}
 .lbl-s{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:14px 0 6px}
-ol.deriv{font:14.5px/1.6 "JetBrains Mono",monospace;margin:0;padding-left:30px}
+ol.deriv{font:14.5px/1.6 "JetBrains Mono",monospace;margin:0;padding-left:30px;overflow-x:auto}
+@media (max-width:560px){ol.deriv{font-size:12px;letter-spacing:.06em;padding-left:24px}.wbstr{font-size:14px!important;letter-spacing:.03em!important;min-height:0!important}}
 ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:8px;letter-spacing:0}
 .wb{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start}
 @media (max-width:820px){.wb{grid-template-columns:1fr}}
@@ -31,9 +33,9 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
 .chips span span{all:unset;font-weight:500}.chips span .p{color:var(--godel)}.chips span .q{color:var(--bach)}
 /* notebook */
 .book{background:#fffdf6;border:1px solid var(--rule);border-radius:10px;padding:10px 16px;font:16.5px/1.5 "EB Garamond",serif;margin:10px 0}
-.book div{padding:3px 0;border-bottom:1px dashed var(--rule)}
+.book div{padding:3px 0;border-bottom:1px dashed var(--rule);display:flex;gap:6px}
 .book div:last-child{border-bottom:0}
-.book b{font:600 13px Inter,sans-serif;color:var(--gold);display:inline-block;width:3.2em}
+.book b{font:600 13px Inter,sans-serif;color:var(--gold);flex:0 0 2.6em;padding-top:3px}
 .book .z b{color:var(--bach)} .book .z{color:var(--ink2)}
 .book .gap{color:var(--ink2);font-style:italic}
 .meter2{font:500 14px Inter,sans-serif;color:var(--ink2);display:flex;gap:22px;flex-wrap:wrap;margin:8px 0}
@@ -44,7 +46,16 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
 .ctable th{color:var(--ink2);font-weight:600}
 .ctable td .pq{font-size:14px}
 .ctable tr.bad td{background:#fbefee}
-@media (max-width:560px){.ctable{font-size:13px}.ctable td .pq{font-size:11.5px;letter-spacing:.02em}.euc .big{font-size:16px}.ctable th,.ctable td{padding-right:8px}}
+@media (max-width:560px){.euc .big{font-size:15px;word-break:normal;overflow-wrap:normal;white-space:nowrap}
+.ctable.stack,.ctable.stack tbody{display:block}
+.ctable.stack tr{display:grid;grid-template-columns:5.2em 1fr 4.2em;column-gap:8px;border-bottom:1px solid var(--rule);padding:4px 0}
+.ctable.stack.s3 tr{grid-template-columns:4.4em 1fr 1fr}
+.ctable.stack th,.ctable.stack td{border:0;padding:2px 0;font-size:13px}
+.ctable.stack th:first-child{display:none}
+.ctable.stack td:first-child{grid-column:1/-1}}
+#ipOut{min-height:3em}
+.seg button,.pick button.small{min-height:34px}
+.euc input[type=range]{accent-color:var(--gold);padding:8px 0}
 .seg{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
 .tester{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .tester input{font:18px "JetBrains Mono",monospace;font-variant-ligatures:none;width:260px;max-width:100%;letter-spacing:.12em;padding:6px 10px;border:1px solid var(--rule);border-radius:8px;background:#fff}
@@ -64,7 +75,7 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
   <div class="kicker">Gödel, Escher, Bach · Explainer 03</div>
   <h1>Two-Part Invention <span style="color:var(--ink2)">+</span> <em>Meaning and Form in Mathematics</em></h1>
   <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
-  <p class="lede">A Tortoise agrees with everything Achilles says and still won't accept what follows from it. Then a game played with hyphens and two letters turns out to be doing sums, though nobody told it to. This page covers the dialogue <i>Two-Part Invention</i> and Chapter II, where Hofstadter asks how meaningless symbols come to mean something.</p>
+  <p class="lede">A Tortoise agrees with everything Achilles says and still won't accept what follows from it. Then a game played with hyphens and two letters turns out to be about something nobody put into it. This page covers the dialogue <i>Two-Part Invention</i> and Chapter II, where Hofstadter asks how meaningless symbols come to mean something.</p>
 </header>
 
 <div class="toolbar"><div class="in">
@@ -91,45 +102,45 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
   <div class="sec-head"><div class="num">1</div><h2>What the Tortoise said to Achilles</h2></div>
   <div class="cols">
     <div>
-      <p><b>The story.</b> The race from the last dialogue is over. Achilles (the Greek hero, fastest runner alive) has caught the Tortoise and now sits comfortably on its shell. The Tortoise offers him a different kind of racecourse: one that most people think they can finish in two or three steps, but that really has no end.</p>
-      <p>The course is a tiny argument from the Greek geometer Euclid. It has two starting statements, called <span class="term">premises</span>, and one statement that follows from them, the <span class="term">conclusion</span>:</p>
+      <p><b>The story.</b> In the last dialogue the Greek thinker Zeno argued that Achilles, the fastest runner alive, could never catch a tortoise that had a head start. That race is over. Achilles has caught the Tortoise and now sits comfortably on his shell. The Tortoise offers him a different kind of racecourse: one that most people think they can finish in two or three steps, but that really has no end.</p>
+      <p>The course is a tiny argument from the Greek mathematician Euclid. It has two starting statements, called <span class="term">premises</span>, and one statement that follows from them, the <span class="term">conclusion</span>:</p>
       <div class="book">
         <div><b>A</b>Things that are equal to the same thing are equal to each other.</div>
         <div><b>B</b>The two sides of this triangle are equal to the same thing.</div>
         <div class="z"><b>Z</b>So the two sides of this triangle are equal to each other.</div>
       </div>
-      <p>The Tortoise says: suppose I accept A and B, but I don't accept Z. Make me. Achilles replies that anyone who accepts A and B has to accept Z. Very well, says the Tortoise, that is a new statement. Write it in your notebook and call it C: "If A and B are true, Z must be true." Achilles writes it down. The Tortoise happily accepts C too, and still doesn't accept Z. What happens next is in <a class="xref" href="#s-regress">section 2</a>.</p>
+      <p>The Tortoise says: suppose I accept A and B, but I don't accept Z. Make me. Achilles replies that anyone who accepts A and B has to accept Z. Very well, says the Tortoise, that is a new statement. Write it in your notebook and call it C: "If A and B are true, Z must be true." Achilles writes it down. The Tortoise happily accepts C too, and still doesn't accept Z.</p>
     </div>
     <div>
       <div class="card">
         <h3 style="margin-top:0">The form: a two-part invention</h3>
         <p class="small-note">An <span class="term">invention</span> is Bach's name for a short keyboard piece built from one small musical idea. In his fifteen two-part inventions (1723) there are just two <span class="term">voices</span>, that is, two lines of melody played together, one by each hand. They take turns with the idea, each answering the other.</p>
-        <p class="small-note">The dialogue has two voices too. The last one had three, but Zeno has left, and Achilles and the Tortoise pass one idea back and forth. Below is the opening of Bach's Invention No. 1: the upper voice plays a seven-note idea, and the lower voice answers with the same idea, lower down. Then they do it again, starting higher.</p>
+        <p class="small-note">The dialogue has two voices too. The last one had three speakers, but Zeno has left, and Achilles and the Tortoise pass one idea back and forth. Below is the opening of Bach's Invention No. 1: the upper voice plays a seven-note idea, and the lower voice answers with the same idea, lower down. Then they do it again, starting higher.</p>
         <canvas id="invCanvas" height="190"></canvas>
         <div class="row"><button id="invPlay">▶ Play the two voices</button>
           <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>upper voice</span><span><i style="background:var(--godel)"></i>lower voice</span></div></div>
-        <p class="small-note" style="margin-bottom:0"><i>First two bars of Invention No. 1 in C major, synthesized. Bach's ornaments are left out.</i></p>
+        <p class="small-note" style="margin-bottom:0"><i>The opening of Bach's Invention No. 1, synthesized, up to the first note of its third bar. Bach's ornaments (small decorative trills) are left out.</i></p>
       </div>
     </div>
   </div>
-  <div class="intuit"><b>The hidden trick</b>Hofstadter didn't write this dialogue. It is "What the Tortoise Said to Achilles", published in 1895 by Lewis Carroll, the author of <i>Alice in Wonderland</i>, who was also a teacher of logic. The last page said Hofstadter borrowed his two characters from Carroll, and this is the piece he borrowed them from. Carroll ends it with two puns. The Tortoise asks Achilles to take the new name "Taught-Us", and Achilles asks the Tortoise to become "A Kill-Ease". Say them aloud: each is given the sound of the other's name.</div>
+  <div class="intuit"><b>The hidden trick</b>Hofstadter didn't write this dialogue. It is "What the Tortoise Said to Achilles", published in 1895 by Lewis Carroll, the author of <i>Alice in Wonderland</i>, who was also a mathematics lecturer and wrote on logic. The last page said Hofstadter borrowed his two characters from Carroll, and this is the piece he borrowed them from.</div>
 </section>
 
 <!-- 2 -->
 <section id="s-regress">
   <div class="sec-head"><div class="num">2</div><h2>The notebook that never fills up</h2></div>
-  <p>Play Achilles. Each time the Tortoise accepts everything in the notebook and still refuses Z, tell him that he <i>must</i> accept Z now, and he will ask for that to be written down as well.</p>
+  <p>Play Achilles. Each time the Tortoise accepts everything in the notebook and still refuses Z, tell him that he <i>must</i> accept Z now. He will ask for that to be written down as well.</p>
   <div class="card">
     <div class="book" id="nbBook"></div>
-    <div class="meter2"><span>Premises the Tortoise accepts: <b id="nbN">2</b></span><span>Does he accept Z? <b id="nbZ">Not yet</b></span></div>
+    <div class="meter2"><span>Lines the Tortoise accepts: <b id="nbN">2</b></span><span>Does he accept Z? <b id="nbZ">Not yet</b></span></div>
     <div class="row"><button id="nbAdd">Achilles: "Then you must accept Z!"</button><button class="ghost" id="nbJump">Come back some months later</button><button class="ghost" id="nbReset">Start over</button></div>
     <div class="steps" id="nbMsg" style="min-height:48px"></div>
   </div>
-  <p>Every new line is true, and the Tortoise accepts every one. None of them helps. The line Achilles needs is always the next one. In Carroll's story the narrator leaves and comes back months later. Achilles is still writing, the Tortoise counts a thousand and one steps so far, and there are millions still to come.</p>
-  <p>It is Zeno's race again, moved from running to reasoning. On the last page Zeno's steps got shorter and shorter, so all of them fitted into 10 seconds. Here each premise is longer than the one before, so the notebook can never be finished. If every step of an argument first had to be written down and agreed to, no argument could ever reach its conclusion.</p>
-  <div class="intuit"><b>What went wrong?</b>Carroll doesn't say. The answer most readers give since is this. An argument needs two different kinds of thing: statements you accept, and <b>rules</b> for getting from statements you accept to a new one. Logicians call such a rule a <span class="term">rule of inference</span>. The Tortoise keeps turning the rule into one more statement. But a statement just sits on the page. Something still has to <i>do</i> the step, and that can't be written into the notebook, any more than a rulebook can make you obey it by adding the rule "obey this rulebook".</div>
-  <p>The <span class="term">formal systems</span> of the last page are built to respect this difference. A formal system is a game played with rows of symbols. It has starting rows, called <span class="term">axioms</span>, and it has rules for making new rows from old ones (each is called a <span class="term">rule of production</span>). The rules are not rows. They are what you do to rows. A rule of production is a rule of inference with the meaning taken out.</p>
-  <p><b>The chapter now takes a new symbol game and asks where the meaning of its rows of symbols comes from.</b> At its end it comes back to the Tortoise's challenge with a better question: can the steps of reasoning themselves be turned into the rules of such a game?</p>
+  <p>Every new line is true, and the Tortoise accepts every one. None of them helps. The line Achilles needs is always the next one. In Carroll's story the narrator leaves and comes back months later. Achilles is still writing, the Tortoise counts a thousand and one steps so far, and there are millions still to come. Carroll ends with two puns: the Tortoise asks Achilles to take the new name "Taught-Us" (it sounds like "Tortoise"), and Achilles asks the Tortoise to become "A Kill-Ease" (it sounds like "Achilles").</p>
+  <p>It is Zeno's race again, moved from running to reasoning. Zeno split the race into endlessly many steps, but each step took less time than the one before, so all of them together fitted into a few seconds. Here every new line takes at least as long to write as the last, and there is always one more, so the notebook can never be finished. If every step of an argument first had to be written down and agreed to, no argument could ever reach its conclusion.</p>
+  <div class="intuit"><b>What went wrong?</b>Carroll doesn't say. The usual answer is this. Z does follow from A and B, and the Tortoise is wrong to refuse it. What he shows is that no written line can make anyone take the step. An argument needs two different kinds of thing: statements you accept, and <b>rules</b> for getting from statements you accept to a new one. Logicians call such a rule a <span class="term">rule of inference</span>. The Tortoise keeps turning the rule into one more statement. But a statement just sits on the page. Something still has to <i>do</i> the step, and that can't be written into the notebook, any more than a rulebook can make you obey it by adding the rule "obey this rulebook". Hofstadter returns to this endless chain several times, and late in the book asks what finally stops it in a mind or a machine.</div>
+  <p>The symbol games of the last page, called <span class="term">formal systems</span>, are built on this difference. Their statements are rows of marks, and their rules are not rows. A rule of inference says: from these statements you may conclude that one. A rule of a formal system says: from this row of marks you may write that one, whether or not the marks mean anything.</p>
+  <p><b>The chapter now takes a new symbol game and asks where the meaning of its rows of symbols comes from.</b> It ends on a question that is the Tortoise's challenge in a better form: can the steps of reasoning themselves be turned into the rules of such a game?</p>
 </section>
 
 <div class="half"><div class="hk">Chapter II</div><div class="ht"><em>Meaning and Form in Mathematics</em></div></div>
@@ -137,14 +148,14 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
 <!-- 3 -->
 <section id="s-pq">
   <div class="sec-head"><div class="num">3</div><h2>A new game: the pq-system</h2></div>
-  <div class="words"><b>Words from the last page.</b> A <span class="term">string</span> is a row of symbols. A <span class="term">formal system</span> is a game that makes strings: it gives you some strings to start with (<span class="term">axioms</span>) and rules for making new strings from ones you have (each is a <span class="term">rule of production</span>). Every string you can make this way is called a <span class="term">theorem</span> of the system. The record of how you made it, one string per line, is its <span class="term">derivation</span>.</div>
+  <div class="words"><b>Words from the last page.</b> A <span class="term">string</span> is a row of symbols. A <span class="term">formal system</span> is a game that makes strings: it gives you some strings to start with (<span class="term">axioms</span>) and rules for making new strings from ones you have (each is a <span class="term">rule of production</span>). Every string you can make this way is called a <span class="term">theorem</span> of the system (the axioms count too). The record of how you made it, one string per line, is its <span class="term">derivation</span>.</div>
   <p>Chapter II opens with a formal system even smaller than the MIU-system of the last page. Hofstadter calls it the <b>pq-system</b>. It has three symbols: the letter <span class="pq">p</span>, the letter <span class="pq">q</span>, and the hyphen <span class="pq">-</span>. For now they mean nothing. They are marks to be moved around.</p>
   <div class="rules">
-    <div class="rule"><div class="rn">The axioms</div><div class="rs">x p - q x -</div><p>Write some hyphens, then <span class="pq">p</span>, one hyphen, <span class="pq">q</span>, then the same hyphens as at the start plus one more.</p><div class="ex">In the pattern, x stands for any row of hyphens. Examples: <span class="pq">-p-q--</span> and <span class="pq">--p-q---</span></div></div>
+    <div class="rule"><div class="rn">The axioms</div><div class="rs">x p - q x -</div><p>Here x stands for any row of one or more hyphens. Write some hyphens, then <span class="pq">p</span>, one hyphen, <span class="pq">q</span>, then the same hyphens as at the start plus one more.</p><div class="ex">Examples: <span class="pq">-p-q--</span> and <span class="pq">--p-q---</span></div></div>
     <div class="rule"><div class="rn">The one rule</div><div class="rs">x p y q z &nbsp;→&nbsp; x p y - q z -</div><p>If you have a theorem, you may add one hyphen just before the <span class="pq">q</span> and one hyphen at the very end.</p><div class="ex">Here x, y and z each stand for a row of hyphens. Example: from <span class="pq">--p-q---</span> you get <span class="pq">--p--q----</span></div></div>
   </div>
   <p>One thing is new. The MIU-system had a single axiom. Here there are infinitely many, one for every number of hyphens you start with. They can't be listed, so they are given by a pattern instead. A pattern for axioms like this is called an <span class="term">axiom schema</span>.</p>
-  <p>Make some theorems. Each one you make is kept in the list on the right. Look for what they all have in common.</p>
+  <p>Make some theorems. Each one you make is added to the list. Look for what they all have in common.</p>
   <div class="card">
     <div class="wb">
       <div>
@@ -153,7 +164,7 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
         <div class="wbstr pq wrap" id="pqStr"></div>
         <div class="row" style="margin-top:10px"><button id="pqRule">Apply the rule</button></div>
         <div class="lbl-s">Derivation</div>
-        <ol class="deriv pq wrap" id="pqDeriv"></ol>
+        <ol class="deriv pq" id="pqDeriv"></ol>
       </div>
       <div>
         <div class="lbl-s" style="margin-top:0">Theorems made so far</div>
@@ -164,102 +175,102 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
   <details class="primer">
     <summary><span class="pm-title">Show what the theorems have in common</span><span class="pm-sub">Try to spot it first: count the hyphens in each group.</span><span class="pm-sub pm-open">Click to hide.</span></summary>
     <div class="primer-body">
-      <p>Every theorem has three groups of hyphens: one before the <span class="pq">p</span>, one between <span class="pq">p</span> and <span class="pq">q</span>, and one after the <span class="pq">q</span>. <b>The first two groups together have exactly as many hyphens as the third.</b> In <span class="pq">--p---q-----</span> that is 2, 3 and 5.</p>
+      <p>Every theorem has three groups of hyphens: one before the <span class="pq">p</span>, one between <span class="pq">p</span> and <span class="pq">q</span>, and one after the <span class="pq">q</span>. <b>The first two groups together have exactly as many hyphens as the third.</b> In <span class="pq">--p---q-----</span> that is 2, 3 and 5. A string is a theorem exactly when this holds.</p>
       <p>Why: every axiom has it (some hyphens and 1 on the left, the same number plus 1 on the right), and the rule adds one hyphen to the middle group and one to the last, so it never breaks it. And every string with this property can be made: start from the axiom with the right first group and apply the rule until the middle group is long enough.</p>
     </div>
   </details>
-  <p>In short: a string is a theorem of the pq-system exactly when it has that shape and its first two hyphen groups add up to its third.</p>
 </section>
 
 <!-- 4 -->
 <section id="s-decide">
   <div class="sec-head"><div class="num">4</div><h2>A test that always finishes</h2></div>
   <p>The last page asked of the MIU-system: is there a <span class="term">decision procedure</span>, a step-by-step test that is guaranteed to finish and say yes or no to "is this string a theorem?" There, the obvious test failed. Some rules made strings shorter, so a short string might be reached by a detour through long ones, and a search could never safely give up.</p>
-  <p>The pq-system is easier, and the reason is worth more than the counting trick in section 3. Its only rule makes strings <b>longer</b>. So a theorem that isn't an axiom can only have come from a theorem two symbols shorter. That gives a test that works backwards:</p>
+  <p>The pq-system is easier, and not only for someone who has spotted the pattern in section 3. A test exists that needs no insight at all, for a reason that will matter again: the only rule makes strings <b>longer</b>, which is exactly what the MIU-system lacked. So a theorem that isn't an axiom can only have come from a theorem two symbols shorter. That gives a test that works backwards:</p>
   <ul class="plain">
     <li><i class="n">1</i>Check the shape: hyphens, <span class="pq">p</span>, hyphens, <span class="pq">q</span>, hyphens. A string with the right shape is called <span class="term">well-formed</span>. If the shape is wrong, the answer is no.</li>
     <li><i class="n">2</i>Is the string an axiom? Then yes.</li>
-    <li><i class="n">3</i>Otherwise undo the rule: take one hyphen from the middle group and one from the end. Go back to step 2 with this shorter string. If there is nothing left to take, the answer is no.</li>
+    <li><i class="n">3</i>Otherwise undo the rule: take one hyphen from the middle group and one from the end. Go back to step 2 with this shorter string. If that would leave a group empty, the answer is no.</li>
   </ul>
   <p>Each round the string gets shorter, so the test has to stop.</p>
   <div class="card">
-    <div class="tester"><input type="text" id="tIn" value="--p---q-----" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="String to test, made of p, q and hyphens"><span class="small-note">or try:</span></div>
+    <div class="tester"><input type="text" id="tIn" maxlength="30" value="--p---q-----" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="String to test, made of p, q and hyphens"><span class="small-note">or try:</span></div>
     <div class="pick" id="tEx" style="margin-top:8px"></div>
-    <ol class="deriv pq wrap" id="tSteps"></ol>
+    <ol class="deriv pq" id="tSteps"></ol>
     <div class="verdict" id="tOut"></div>
   </div>
-  <p>Hofstadter calls this working <b>top-down</b>: start from the string in question and take it apart. There is also a <b>bottom-up</b> way, which makes theorems instead of testing them. Picture a bucket. Throw in the shortest axiom. Then, round after round, apply the rule to everything in the bucket and throw in the next axiom. Every theorem lands in the bucket sooner or later. This works for any formal system; it is the row-by-row search of the last page. For most systems it is only a way of <i>listing</i> theorems. Here it is also a test, because nothing ever gets shorter: once everything new is longer than your string and your string hasn't appeared, it never will.</p>
+  <p>Hofstadter calls this working <span class="term">top-down</span>: start from the string in question and take it apart. The opposite way is <span class="term">bottom-up</span>: make every theorem in turn, shortest first, and watch for your string. For most formal systems that is only a way of <i>listing</i> theorems, as with the MIU-system. Here it is also a test, because nothing ever gets shorter: once everything new is longer than your string and your string hasn't appeared, it never will.</p>
 </section>
 
 <!-- 5 -->
 <section id="s-meaning">
   <div class="sec-head"><div class="num">5</div><h2>Where the meaning comes from</h2></div>
   <p>Anyone who found the pattern in section 3 probably said it to themselves in words: "2 and 3 make 5". That is the step this chapter is about. Nothing in the rules mentions numbers or adding. The rules were fixed first, and they settled which strings are theorems. Only afterwards did we notice that the theorems look like sums.</p>
-  <p>To say it carefully, Hofstadter uses two steps.</p>
+  <p>Hofstadter separates two steps.</p>
   <ul class="plain">
     <li><i class="n">1</i><b>Match symbols with words.</b> Read <span class="pq">p</span> as "plus", <span class="pq">q</span> as "equals", <span class="pq">-</span> as "one", <span class="pq">--</span> as "two", and so on. Such a dictionary from symbols to words is called an <span class="term">interpretation</span>. It turns <span class="pq">--p---q-----</span> into "2 plus 3 equals 5". Anyone can invent an interpretation. So far it is only a way of reading aloud.</li>
-    <li><i class="n">2</i><b>Check that theorems match truths.</b> Under this dictionary, every theorem reads as a true sum, and every well-formed string that is not a theorem reads as a false one. The strings the rules can make line up exactly with the true statements about adding two numbers.</li>
+    <li><i class="n">2</i><b>Check that theorems match truths.</b> Under this dictionary, every theorem reads as a true sum. That is the test. The pq-system passes it with something to spare: every well-formed string that is not a theorem reads as a false sum, so the rules catch every true statement of this kind and nothing else.</li>
   </ul>
-  <p>Two things whose parts line up like this, so that what happens in one is mirrored in the other, are called <b>isomorphic</b>, and the match between them is an <span class="term">isomorphism</span>. The first page used a map and its city as the example. Here one side is the theorems of the pq-system and the other is a small piece of reality: the adding of whole numbers. Hofstadter's claim is that <b>this match is what meaning is</b>. The symbol <span class="pq">p</span> deserves to be read as "plus" because, when you read it that way, what the system does agrees with what adding does. It is step 2 that makes an interpretation <b>meaningful</b>. An interpretation that fails step 2 is <b>meaningless</b>, however sensible its words sound.</p>
-  <p>Try four interpretations on the same seven strings. The "Theorem?" column comes from the rules alone and never changes. Watch whether "True?" agrees with it.</p>
+  <p>Two things whose parts line up like this, so that what happens in one is mirrored in the other, are called <span class="term">isomorphic</span>, and the match between them is an <span class="term">isomorphism</span>. The first page used a map and its city as the example. Here one side is the theorems of the pq-system and the other is a small piece of reality: the adding of whole numbers.</p>
+  <p class="big-idea" style="font-size:21px">Hofstadter's claim is that this match is what meaning is.</p>
+  <p>The symbol <span class="pq">p</span> deserves to be read as "plus" because, when you read it that way, what the system does agrees with what adding does.</p>
+  <p>Try three interpretations, or none, on the same seven strings. The "Theorem?" column comes from the rules alone and never changes. Watch whether "True?" agrees with it.</p>
   <div class="card">
     <div class="seg" id="ipSeg"></div>
-    <div style="overflow-x:auto"><table class="ctable" id="ipTab"></table></div>
+    <table class="ctable stack" id="ipTab"></table>
     <div class="verdict" id="ipOut"></div>
   </div>
-  <p>The horse-and-apple reading is Hofstadter's own example of a meaningless interpretation: the dictionary is perfectly definite, but nothing lines up with anything. The "times" reading (added here, not from the book) is the more instructive failure. It produces proper arithmetic statements, and now and then a theorem even comes out true. But theorems and truths don't go together, so <span class="pq">p</span> does not mean "times".</p>
+  <p>An interpretation that passes step 2 is called <span class="term">meaningful</span>. One whose readings line up with nothing is <span class="term">meaningless</span>. The horse-and-apple reading is Hofstadter's own example: the dictionary is perfectly definite, but its readings say nothing. The "times" reading is this page's example, not the book's. It produces proper arithmetic statements, and exactly one theorem even comes out true (2 times 2 equals 4). But the other theorems read as false, so <span class="pq">p</span> does not mean "times".</p>
   <p>Hofstadter compares finding a meaningful interpretation to deciphering a lost ancient script. Nobody hands you the dictionary. You guess, test the guess against the texts, and you know you have it when everything suddenly makes sense. That is what happened in section 3.</p>
-  <div class="intuit"><b>Form first, meaning second</b>This is the "meaning and form" of the chapter's title. Which strings are theorems depends only on their form: their shape, and the rules. Meaning arrives later, when someone notices that the forms keep step with something in the world. Later chapters lean on this idea heavily, first to explain how a statement about numbers can also say something about itself, and then to ask whether meaning in a brain arises the same way.</div>
+  <div class="intuit"><b>Form first, meaning second</b>This is the "meaning and form" of the chapter's title. Which strings are theorems depends only on their form: their shape, and the rules. Meaning arrives later, when someone notices that the forms keep step with something in the world. Much later, the book asks whether meaning in a brain arises the same way.</div>
 </section>
 
 <!-- 6 -->
 <section id="s-passive">
   <div class="sec-head"><div class="num">6</div><h2>Meaning that only watches</h2></div>
-  <p>In everyday language, meaning is <b>active</b>. Once we know what words mean, we use the meaning to make new true sentences. Knowing what "plus" and "equals" mean, anyone will agree to "2 plus 2 plus 2 plus 2 equals 8" at once.</p>
+  <p>Everyday language has <span class="term">active meaning</span>. Once we know what words mean, we use the meaning to make new true sentences. Knowing what "plus" and "equals" mean, anyone will agree to "2 plus 2 plus 2 plus 2 equals 8" at once.</p>
   <p>So it is tempting to say that this string must be a theorem of the pq-system:</p>
   <p style="text-align:center;font-size:20px"><span class="pq wrap">--p--p--p--q--------</span></p>
-  <p>It isn't. It has three <span class="pq">p</span>'s, so it is not even well-formed, and neither the axioms nor the rule can ever make it. The sentence it "says" is true, but that has no power over the system. In a formal system the meaning is <b>passive</b>: the rules alone decide what is a theorem, and the meaning only watches. We may read a theorem as a sum. We may not add a theorem because the sum is right. That would be changing the system, by adding a new rule or a new axiom.</p>
+  <p>It isn't. It has three <span class="pq">p</span>'s, so it is not even well-formed, and neither the axioms nor the rule can ever make it. The sentence it "says" is true, but that has no power over the system. A formal system has only <span class="term">passive meaning</span>: the rules alone decide what is a theorem, and the meaning only watches. We may read a theorem as a sum. We may not add a theorem because the sum is right. That would be changing the system, by adding a new rule or a new axiom (a later chapter tries it).</p>
   <h3>A second meaning</h3>
   <p>Is "plus" and "equals" at least <i>the</i> meaning of the pq-system? No. Hofstadter gives another interpretation that passes the same test: read <span class="pq">p</span> as "equals" and <span class="pq">q</span> as "taken from".</p>
-  <div style="overflow-x:auto"><table class="ctable" id="deTab"></table></div>
-  <p>Every theorem is true under both readings, and under both, the well-formed strings that are not theorems come out false. Both interpretations are meaningful, and neither is the real one. A string of symbols doesn't carry one meaning inside it. It has as many meanings as there are parts of the world it lines up with.</p>
+  <div class="card"><table class="ctable stack s3" id="deTab"></table></div>
+  <p>Every theorem is true under both readings. Both interpretations are meaningful, and neither is the real one. A string of symbols doesn't carry one meaning inside it. It has as many meanings as there are parts of the world it lines up with.</p>
   <p>This will matter. The centre of the book is a statement about numbers which, read through a second, cleverly built interpretation, also says something about itself.</p>
 </section>
 
 <!-- 7 -->
 <section id="s-reality">
   <div class="sec-head"><div class="num">7</div><h2>Do numbers match the world?</h2></div>
-  <p>The pq-system mirrors one small piece of reality. Hofstadter now asks how far that can go. Could all of reality be a formal system? In a very loose sense, maybe: think of the particles of the universe as the symbols, the laws of physics as the rules, and the state of everything at the beginning of time as the single axiom. But that is far too big to study, so he narrows the question to mathematics, where the mirroring is easiest to examine.</p>
+  <p>The pq-system mirrors one small piece of reality. Hofstadter now asks how far that can go. Could all of reality be a formal system? In a very loose sense, maybe, if the laws of physics leave nothing to chance: the particles would be the symbols, the laws the rules, and the state of everything at the beginning of time the single axiom. But that is far too big to study, so he narrows the question to mathematics, where the mirroring is easiest to examine.</p>
   <p>Start with a fact everyone trusts: 12 × 12 = 144. Hardly anyone has checked it by laying out 12 rows of 12 things and counting them. Now take 987,654,321 × 123,456,789. Certainly nobody has ever counted that rectangle. A person with pencil and paper still gets the answer, 121,932,631,112,635,269, by shuffling digits according to rules learned at school, and we believe it completely.</p>
   <p>That is trust in a formal system. Long multiplication is symbol-pushing, and we trust it because its rules were built to mirror a few plain facts about counting that nobody doubts. For example: count a pile of things in any order, and you get the same number.</p>
   <div class="card" style="max-width:640px">
-    <svg viewBox="0 0 600 150" width="100%" role="img" aria-label="Fifteen dots circled as three rows of five, and the same fifteen dots circled as five columns of three" id="dotFig"></svg>
-    <p class="small-note" style="margin-bottom:0">The same 15 dots, counted as 3 rows of 5 or as 5 columns of 3. That is why 3 × 5 and 5 × 3 must agree, without counting. <i>(An illustration for this page, not a figure from the book.)</i></p>
+    <svg viewBox="0 0 600 158" width="100%" role="img" aria-label="Fifteen dots circled as three rows of five, and the same fifteen dots circled as five columns of three" id="dotFig"></svg>
+    <p class="small-note" style="margin-bottom:0">The same 15 dots, counted as 3 rows of 5 or as 5 columns of 3. That is why 3 × 5 and 5 × 3 must agree, without counting. <i>(This page's picture, not the book's.)</i></p>
   </div>
-  <p>Hofstadter points out that such facts are so basic that they can't be proved from anything simpler. And they are not quite facts about the world. Put one raindrop on a windowpane next to another, and they run together: 1 + 1 = 1. Two clouds merge into one. Arithmetic is not about raindrops. It is about <b>ideal</b> numbers: things that stay separate, never merge and never split while being counted. Where the world behaves like that (coins, steps, votes) arithmetic fits it exactly. Where it doesn't, arithmetic is not wrong; we have picked the wrong piece of reality to line it up with.</p>
-  <p>So "does this formal system mirror reality?" is never a yes-or-no matter about the symbols alone. It is the question from section 5 again: is there a part of reality that its theorems line up with?</p>
+  <p>Hofstadter points out that such facts are too basic to be worth trying to prove from anything simpler. And they are not quite facts about the world. Put one raindrop on a windowpane next to another, and they run together: 1 + 1 = 1. Arithmetic is not about raindrops. It is about <span class="term">ideal numbers</span>: counts of things that stay separate, never merge and never split while being counted. Where the world behaves like that (coins, steps, votes) arithmetic fits it exactly. Where it doesn't, arithmetic is not wrong; we have picked the wrong piece of reality to line it up with.</p>
 </section>
 
 <!-- 8 -->
 <section id="s-euclid">
   <div class="sec-head"><div class="num">8</div><h2>One short proof, endless cases</h2></div>
-  <p>The basic facts of counting are simple. What is built on them is not. The chapter ends with a famous example, and it comes from Euclid, the source of the Tortoise's little argument. Around 300 BC he showed that the <span class="term">primes</span> never run out. (A prime is a whole number bigger than 1 that only 1 and itself divide exactly: 2, 3, 5, 7, 11…) Nobody could check this by looking, because there are infinitely many numbers to look at. Here is the argument in the form Hofstadter gives it.</p>
+  <p>The basic facts of counting are simple. What is built on them is not. The chapter ends with a famous example, and it comes from Euclid, the source of the Tortoise's little argument. Around 300 BC he gave a <span class="term">proof</span> (a chain of steps, each one forced by the ones before) that the <span class="term">primes</span> never run out. (A prime is a whole number bigger than 1 that only 1 and itself divide exactly: 2, 3, 5, 7, 11…) Nobody could check this by looking, because there are infinitely many numbers to look at. Here is the argument in the form Hofstadter gives it.</p>
   <ul class="plain">
     <li><i class="n">1</i>Pick any whole number. Call it N.</li>
     <li><i class="n">2</i>Multiply together all the numbers from 1 up to N. The result is written N! and called "N <span class="term">factorial</span>". For N = 4 it is 1 × 2 × 3 × 4 = 24.</li>
     <li><i class="n">3</i>Add 1. For N = 4 that makes 25.</li>
     <li><i class="n">4</i>Divide this new number by any number from 2 up to N. There is always 1 left over, because N! itself is an exact multiple of each of them. (25 divided by 2, 3 or 4 leaves 1 each time.)</li>
-    <li><i class="n">5</i>Every whole number bigger than 1 is either a prime or can be divided exactly by some prime. So N! + 1 has a prime that divides it, and by step 4 that prime is not among 2, 3, … N. It must be bigger than N. (For 25 it is 5.)</li>
+    <li><i class="n">5</i>Every whole number bigger than 1 is either a prime or can be divided exactly by some prime (keep splitting it into smaller factors until they can't be split). So N! + 1 has a prime that divides it, and by step 4 that prime is not among 2, 3, … N. It must be bigger than N. (For 25 it is 5.)</li>
     <li><i class="n">6</i>So whatever N is, there is a prime bigger than N. There is no biggest prime.</li>
   </ul>
-  <p>Run the same argument for different N. Notice that N! + 1 is not always a prime itself (try 4 and 5). The argument never says it is. It only says that some prime bigger than N divides it.</p>
+  <p>Run the same argument for different N. Notice that N! + 1 is not always a prime itself (try 3 and 4). The argument never says it is. It only says that some prime bigger than N divides it.</p>
   <div class="card euc">
     <label for="eN">N = <b id="eNv">4</b></label><br>
     <input type="range" id="eN" min="2" max="18" value="4" aria-label="N">
     <div id="eOut"></div>
   </div>
-  <p>The slider stops at 18, and trying eighteen cases proves nothing about the nineteenth. The proof is the six lines above. Its power is in the words "any" and "whatever": the steps never use which number N is, so they hold for every N at once. A finite argument has settled infinitely many cases. Hofstadter calls this getting around infinity.</p>
-  <div class="intuit"><b>Back to the Tortoise</b>Each of the six steps feels forced. Once you grant the lines before, you can't refuse the next. That feeling is exactly what the Tortoise refused to have. The chapter closes by asking whether the steps of such reasoning can be written down as the rules of a formal system, so that a proof becomes a <span class="term">derivation</span> and checking it becomes symbol-pushing that needs no feeling of being forced. Achilles tried to do this by adding premises, and it never ended. A formal system does it by building the steps in as rules. Whether that can capture all of reasoning about numbers is the question the next chapters work towards.</div>
+  <p>The slider stops at 18, and trying every N up to 18 proves nothing about 19. The proof is the six lines above. Its power is in the words "any" and "whatever": the steps never use which number N is, so they hold for every N at once. A finite argument has settled infinitely many cases. Hofstadter calls this getting around infinity.</p>
+  <div class="intuit"><b>Back to the Tortoise</b>Each of the six steps feels forced. Once you grant the lines before, you can't refuse the next. That feeling is exactly what the Tortoise refused to have. The chapter closes by asking whether the steps of such reasoning can be written down as the rules of a formal system, so that a proof becomes a <span class="term">derivation</span> and checking it becomes symbol-pushing that needs no feeling of being forced. Achilles tried to do this by adding premises, and it never ended. A formal system builds the steps in as rules, and whoever uses it (a person or a machine) simply follows them. The pq-system showed a small case working perfectly: its rules catch every true sum of two numbers. The next chapter tries the same for primes. And as the first page said, Gödel showed that for arithmetic as a whole no such system can catch every truth.</div>
 </section>
 
 <!-- 9 -->
@@ -269,7 +280,7 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
   <div class="grid3">
     <div class="card"><span class="tag b">Dialogue</span><h4>Two voices, one endless notebook</h4><p>Carroll's Tortoise accepts every premise and asks for each step to be written down as another. A rule of reasoning has to be used, not just stated.</p></div>
     <div class="card"><span class="tag g">Form</span><h4>The pq-system</h4><p>Infinitely many axioms from one pattern, and one rule that only lengthens. Because nothing shrinks, a test for theorems always finishes.</p></div>
-    <div class="card"><span class="tag e">Meaning</span><h4>An isomorphism, found afterwards</h4><p>Read p as plus and q as equals, and theorems match true sums. The meaning is passive, it isn't the only one, and it holds for ideal numbers, not raindrops.</p></div>
+    <div class="card"><span class="tag e">Meaning</span><h4>An isomorphism, found afterwards</h4><p>Read p as plus and q as equals, and theorems match true sums. The meaning is passive, and it isn't the only one. Arithmetic matches ideal numbers, not raindrops, and one finite proof can cover infinitely many of them.</p></div>
   </div>
 </section>
 
@@ -284,7 +295,7 @@ ol.deriv li span.why{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:
 </footer>
 
 <script src="../assets/toc.js?v=04fb8b04"></script>
-<script src="../assets/glossary.js?v=318d77c9"></script>
+<script src="../assets/glossary.js?v=4986abde"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=c12517d0" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -318,14 +329,14 @@ function nbRender(){
   const first=Math.max(0,nbK-4);
   if(first>0) h+=`<div class="gap">… ${first} more line${first===1?'':'s'} …</div>`;
   for(let i=first;i<nbK;i++) h+=`<div><b>${NBL[i]}</b>If ${nbList(i)} are true, Z must be true.</div>`;
-  if(nbLater) h+='<div class="gap">… months of writing …</div><div><b>1,001</b>If every line above is true, Z must be true.</div>';
+  if(nbLater) h+='<div class="gap">… months of writing: a thousand and one steps so far …</div>';
   h+='<div class="z"><b>Z</b>So the two sides of this triangle are equal to each other.</div>';
   $('nbBook').innerHTML=h;
-  $('nbN').textContent=nbLater?'1,001 steps written':String(2+nbK);
+  $('nbN').textContent=nbLater?'more than 1,000':String(2+nbK);$('nbZ').textContent=nbLater?'Still no':'Not yet';
   $('nbAdd').disabled=nbLater||nbK>=NBL.length;
   $('nbJump').disabled=nbLater;
   let m;
-  if(nbLater) m='<b>Tortoise:</b> "Have you got that last step written down? There are several millions more to come."';
+  if(nbLater) m='<b>Tortoise:</b> "Have you got that last step written down? Unless I\'ve lost count, that makes a thousand and one. There are several millions more to come."';
   else if(nbK===0) m='<b>Tortoise:</b> "I accept A and B. I don\'t accept Z. Force me to."';
   else if(nbK>=NBL.length) m='The page has run out of letters. The Tortoise has not run out of patience.';
   else m=`<b>Tortoise:</b> "I accept ${NBL[nbK-1]} as well. But if I accept ${nbList(nbK)}, must I accept Z? That sounds like another statement. Write it down and call it ${NBL[nbK]}."`;
@@ -339,7 +350,7 @@ nbRender();
 /* ===== Section 3: pq maker ===== */
 const pqStr=(x,y,z)=>H(x)+'p'+H(y)+'q'+H(z);
 let pqX=2, pqY=1; const pqMade=[];
-function pqKeep(s){if(!pqMade.includes(s))pqMade.push(s);}
+function pqKeep(s){if(!pqMade.includes(s))pqMade.push(s);if(pqMade.length>10)pqMade.shift();}
 function pqRender(){
   $('pqPick').innerHTML=[1,2,3,4,5].map(n=>`<button class="${n===pqX?'on':'ghost'}" data-n="${n}">${n}</button>`).join('');
   $('pqPick').querySelectorAll('button').forEach(b=>b.onclick=()=>{pqX=+b.dataset.n;pqY=1;pqKeep(pqStr(pqX,1,pqX+1));pqRender();});
@@ -347,9 +358,9 @@ function pqRender(){
   let d='';for(let y=1;y<=pqY;y++)d+=`<li>${pqHTML(pqStr(pqX,y,pqX+y))}<span class="why">${y===1?'axiom':'rule'}</span></li>`;
   $('pqDeriv').innerHTML=d;
   $('pqMade').innerHTML=pqMade.map(s=>`<span class="pq">${pqHTML(s)}</span>`).join('');
-  $('pqRule').disabled=pqY>=7;
+  $('pqRule').disabled=pqY>=6;
 }
-$('pqRule').onclick=()=>{if(pqY<7){pqY++;pqKeep(pqStr(pqX,pqY,pqX+pqY));pqRender();}};
+$('pqRule').onclick=()=>{if(pqY<6){pqY++;pqKeep(pqStr(pqX,pqY,pqX+pqY));pqRender();}};
 pqKeep(pqStr(2,1,3)); pqRender();
 
 /* ===== Section 4: backwards test ===== */
@@ -358,7 +369,7 @@ const isAxiom=(x,y,z)=>y===1&&z===x+1;
 function isTheorem(s){const t=parsePQ(s);if(!t)return false;let [x,y,z]=t;while(!isAxiom(x,y,z)){if(y<2||z<2)return false;y--;z--;}return true;}
 const T_EX=['--p---q-----','---p-q----','--p--q---','-p---q--','--q--p----','-p-p-q---'];
 function testString(){
-  const raw=$('tIn').value, v=raw.replace(/[^pq-]/g,'');
+  const raw=$('tIn').value, v=raw.toLowerCase().replace(/[^pq-]/g,'');
   if(v!==raw)$('tIn').value=v;
   const st=$('tSteps'), out=$('tOut'); st.innerHTML='';
   if(!v){out.innerHTML='Type a string made of p, q and hyphens.';return;}
@@ -367,7 +378,7 @@ function testString(){
   let [x,y,z]=t, h='', n=0, res;
   for(;;){
     const ax=isAxiom(x,y,z);
-    h+=`<li>${pqHTML(pqStr(x,y,z))}<span class="why">${ax?'an axiom':(y<2||z<2)?'not an axiom, and nothing left to take':'not an axiom: take one hyphen before q and one at the end'}</span></li>`;
+    h+=`<li>${pqHTML(pqStr(x,y,z))}<span class="why">${ax?'an axiom':(y<2||z<2)?'not an axiom, and undoing the rule would empty a group':'not an axiom: undo the rule'}</span></li>`;
     if(ax){res=true;break;} if(y<2||z<2){res=false;break;} y--;z--;n++;
   }
   st.innerHTML=h;
@@ -396,15 +407,15 @@ function ipRender(){
     let rd='<span style="color:var(--ink2)">(just marks)</span>', tr='', bad=false;
     if(I.read){rd=I.read(x,y,z);
       if(I.truth){const t=I.truth(x,y,z);tr=t?'<span class="gt">true</span>':'<span class="gfalse">false</span>';if(t===th)agree++;else bad=true;}
-      else tr='<span style="color:var(--ink2)">neither: it says nothing</span>';}
+      else tr='<span style="color:var(--ink2)">neither</span>';}
     h+=`<tr class="${bad?'bad':''}"><td><span class="pq">${pqHTML(s)}</span></td><td>${th?'<span class="gt">yes</span>':'<span class="gfalse">no</span>'}</td><td>${rd}</td><td>${tr}</td></tr>`;
   }
   $('ipTab').innerHTML=h;
   const n=IP_ROWS.length;
   $('ipOut').innerHTML=!I.read?'Without an interpretation there is nothing to be true or false. There are only strings the rules can make and strings they can\'t.'
-    :!I.truth?'A dictionary, but no match. The readings are not statements, so none of them is true or false. A <b>meaningless</b> interpretation.'
-    :agree===n?`"Theorem" and "true" agree on <b>${agree} of ${n}</b> rows, and they would on every other well-formed string. A <b>meaningful</b> interpretation.`
-    :`"Theorem" and "true" agree on only <b>${agree} of ${n}</b> rows (the others are shaded). The words make sense, but the match fails. A <b>meaningless</b> interpretation.`;
+    :!I.truth?'A dictionary, but no match. The readings are not statements, so none of them is true or false. A meaningless interpretation.'
+    :agree===n?`"Theorem" and "true" agree on <b>${agree} of ${n}</b> rows, and they would on every other well-formed string. Every theorem reads as a true statement: a meaningful interpretation.`
+    :`"Theorem" and "true" agree on only <b>${agree} of ${n}</b> rows (the others are shaded). The words make sense, but theorems read as false statements. Not a meaningful interpretation.`;
 }
 ipRender();
 
@@ -425,7 +436,7 @@ ipRender();
   const dots=(ox)=>{let s='';for(let r=0;r<3;r++)for(let c=0;c<5;c++)s+=`<circle cx="${ox+30+c*44}" cy="${30+r*40}" r="7" fill="${ink}"/>`;return s;};
   h+=dots(20); for(let r=0;r<3;r++)h+=`<rect x="34" y="${15+r*40}" width="208" height="30" rx="15" fill="none" stroke="${g}" stroke-width="2"/>`;
   h+=dots(320); for(let c=0;c<5;c++)h+=`<rect x="${335+c*44}" y="14" width="30" height="112" rx="15" fill="none" stroke="${b}" stroke-width="2"/>`;
-  h+=`<text x="138" y="145" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="${g}">3 rows of 5 = 15</text><text x="438" y="145" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="${b}">5 columns of 3 = 15</text>`;
+  h+=`<text x="138" y="150" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" fill="${g}">3 rows of 5 = 15</text><text x="438" y="150" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" fill="${b}">5 columns of 3 = 15</text>`;
   $('dotFig').innerHTML=h;
 })();
 
@@ -440,9 +451,9 @@ function eRender(){
   const prod=N<=6?Array.from({length:N},(_,i)=>i+1).join(' × '):`1 × 2 × 3 × … × ${N}`;
   let h=`<p style="margin:10px 0 4px">N! = ${prod} = <b>${fmt(f)}</b></p>`;
   h+=`<p style="margin:4px 0">N! + 1 = <span class="big">${fmt(m)}</span></p>`;
-  h+=`<p style="margin:4px 0">Divide it by ${N===2?'2':N===3?'2 or 3':`any of 2, 3, … ${N}`}: ${ok?'the remainder is <b>1</b> every time.':'<b>check failed</b>'}</p>`;
+  h+=`<p style="margin:4px 0">Divide it by ${N===2?'2':N===3?'2 or 3':N===4?'2, 3 or 4':`any of 2, 3, … ${N}`}: ${ok?'the remainder is <b>1</b> every time.':'<b>check failed</b>'}</p>`;
   h+=p===m?`<p style="margin:4px 0">This time N! + 1 is itself a prime. It is bigger than ${N}.</p>`
-    :`<p style="margin:4px 0">N! + 1 is not a prime: ${fmt(m)} = ${fmt(p)} × ${fmt(m/p)}. Its smallest prime divisor is <b>${fmt(p)}</b>, which is bigger than ${N}.</p>`;
+    :`<p style="margin:4px 0">N! + 1 is not a prime: ${fmt(m)} = ${fmt(p)} × ${fmt(m/p)}. Its smallest prime divisor is <b>${fmt(p)}</b>, which is bigger than ${N}. (The other factor need not be a prime.)</p>`;
   $('eOut').innerHTML=h;
 }
 $('eN').addEventListener('input',eRender); eRender();
