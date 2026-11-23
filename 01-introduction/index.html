@@ -183,6 +183,9 @@
         <p class="small-note">Each step around the ring is 2 semitones, so six steps make 12: a full octave. Watch the counter: the number keeps going up, but the dot keeps coming back around the same ring. That gap between "always rising" and "back where you started" is exactly the feeling of a Strange Loop.</p>
       </div>
     </div>
+    <h3>What a Shepard tone looks like</h3>
+    <canvas id="shepCv" height="250"></canvas>
+    <p class="small-note">Pitch goes up the side in hertz, vibrations per second. Each gridline doubles the frequency, which is one octave, so the octaves are evenly spaced, the way the ear hears them. Each red line is one copy of the home note, an octave from the next, and every line climbs one step with each key. Darker means louder (the gold curve on the right). A line fades out near the top just as a new one fades in at the bottom. After 6 steps each line has risen into the place of the one above it, so the picture, and the sound, are back where they began. During "Shepard" playback, the gold bar shows where you are. Simplified: it shows each key's home note, not the melody.</p>
     <details class="primer">
     <summary><span class="pm-title">Why one step at a time?</span><span class="pm-sub">Optional: hear why Bach's canon climbs by small steps instead of jumping.</span><span class="pm-sub pm-open">Click to collapse.</span></summary>
     <div class="primer-body">
@@ -658,7 +661,43 @@ function shepardNote(out,pc,t,dur,gain=0.11){
     osc.start(t); osc.stop(hold+0.2);
   }
 }
-function stopShepard(){if(shep){clearInterval(shep.timer);shep=null;}}
+function stopShepard(){if(shep){clearInterval(shep.timer);shep=null;} drawShep(null);}
+function drawShep(pos){
+  const cv=$('shepCv'), dpr=window.devicePixelRatio||1, W=cv.clientWidth, H=+cv.getAttribute('height');
+  cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+'px';
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,W,H);
+  const N=12, padL=68, padR=66, padT=8, padB=30, pw=W-padL-padR, ph=H-padT-padB;
+  const C0=Math.log2(16.352), center=Math.log2(330), sig=1.1, lo=center-2.6, hi=center+2.6;  // same loudness curve as the sound
+  const wt=l=>Math.exp(-Math.pow(l-center,2)/(2*sig*sig));
+  const X=st=>padL+pw*st/N, Y=l=>padT+ph*(1-(l-lo)/(hi-lo));
+  g.strokeStyle='#d8cdb6'; g.lineWidth=1; g.beginPath(); g.moveTo(padL,padT); g.lineTo(padL,padT+ph); g.lineTo(padL+pw,padT+ph); g.stroke();
+  g.fillStyle='#5b5447'; g.font='12px Inter,sans-serif'; g.textAlign='center';
+  for(let st=0;st<=N;st++){g.fillRect(X(st)-0.5,padT+ph,1,4); if(st%6===0) g.fillText(KEYS[0].replace(' minor','m'),X(st),padT+ph+16);}
+  g.fillText('keys climbed →',padL+pw/2,padT+ph+26);
+  g.save(); g.translate(11,padT+ph/2); g.rotate(-Math.PI/2); g.fillText('pitch (frequency) →',0,0); g.restore();
+  g.textAlign='right'; let prevY=null;
+  for(const hz of [55,110,220,440,880,1760]){
+    const y=Y(Math.log2(hz)); g.strokeStyle='#ece4d3'; g.lineWidth=1; g.beginPath(); g.moveTo(padL,y); g.lineTo(padL+pw,y); g.stroke();
+    g.fillStyle='#5b5447'; g.font='11px Inter,sans-serif'; g.fillText(hz.toLocaleString('en')+' Hz',padL-6,y+4);
+    if(prevY!=null){g.fillStyle='#b7862b'; g.fillText('×2',padL-6,(y+prevY)/2+4);} prevY=y;
+  }
+  g.font='12px Inter,sans-serif';
+  const cur=pos==null?null:pos%N, curStep=cur==null?-1:Math.floor(cur);
+  for(let k=-3;k<11;k++){
+    for(let st=0;st<N;st++){
+      const l=C0+k+st/6, l2=l+1/6; if(l<lo||l>hi) continue;
+      const w=wt(l), a=Math.max(w,0.06);
+      g.strokeStyle=`rgba(155,47,47,${a})`; g.lineWidth=1.2+2.8*w;
+      g.beginPath(); g.moveTo(X(st),Y(l)); g.lineTo(X(st+1),Y(l)); if(st<N-1&&l2<=hi) g.lineTo(X(st+1),Y(l2)); g.stroke();
+      if(st===curStep){g.fillStyle=`rgba(183,134,43,${Math.max(w,0.15)})`; g.beginPath(); g.arc(X(cur),Y(l),2+5*w,0,7); g.fill();}
+    }
+  }
+  if(cur!=null){g.fillStyle='rgba(183,134,43,.35)'; g.fillRect(X(cur)-1.5,padT,3,ph);}
+  const bx=padL+pw+14; g.strokeStyle='#b7862b'; g.lineWidth=2; g.beginPath();
+  for(let l=lo;l<=hi;l+=0.05){const x=bx+40*wt(l), y=Y(l); l===lo?g.moveTo(x,y):g.lineTo(x,y);} g.stroke();
+  g.fillStyle='#b7862b'; g.textAlign='left'; g.fillText('loud',bx+20,Y(center)-6); g.fillText('quiet',bx,padT+10); g.fillText('quiet',bx,padT+ph-4);
+}
+drawShep(null); window.addEventListener('resize',()=>{if(!shep)drawShep(null);});
 function startRise(mode){
   stopSound(); const out=newBus(), c=ac(), spb=0.27;
   kb.cur=null;
@@ -685,6 +724,7 @@ function startRise(mode){
     if(shep && shep.endAt && c.currentTime>shep.endAt){stopSound();return;}
     const now=c.currentTime; let cur=null; for(const m of marks){if(m.time<=now)cur=m;}
     if(cur){highlightKey(cur.rep%6,cur.rep);}
+    if(cur&&mode==='shep') drawShep(cur.rep+Math.min(1,(now-cur.time)/(motifLen*spb)));
   },50);
 }
 playToggle($('riseBach'),()=>startRise('bach'));
