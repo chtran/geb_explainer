@@ -27,8 +27,9 @@
 .pqgrid td.tf{background:var(--bach);border-color:var(--bach);color:#fff}
 .pqgrid td.nt{border:2px dashed var(--gold);color:var(--gold);background:#fff8e6}
 .pqgrid td.sel{outline:3px solid var(--ink);outline-offset:1px}
-@media (max-width:520px){.pqgrid{border-spacing:3px}.pqgrid td{width:38px;height:40px;font-size:13px}.pqgrid th.rh{font-size:11px;padding-right:2px}}
-@media (max-width:560px){.seg{gap:8px}.seg button,#gFan,#sPair,#acroBtn{min-height:42px}.geo input[type=range]{height:40px}}
+@media (max-width:520px){.pqgrid{border-spacing:2px}.pqgrid td{min-width:40px;height:42px;font-size:13px}.pqgrid th.rh{font-size:11px;padding-right:1px;letter-spacing:-.03em}}
+@media (max-width:560px){.seg{gap:8px}main button{min-height:44px}.geo input[type=range]{height:44px}}
+#gSvg,#sSvg{display:block;max-width:560px;margin:0 auto}
 .rel-leg{font:13px Inter,sans-serif;margin:4px 0}
 .verdict{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:8px 0}
 .verdict.one{grid-template-columns:1fr}
@@ -54,7 +55,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
   <div class="kicker">Gödel, Escher, Bach · Explainer 05</div>
   <h1>Contracrostipunctus <span style="color:var(--ink2)">+</span> <em>Consistency, Completeness, and Geometry</em></h1>
   <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
-  <p class="lede">A Tortoise keeps bringing his friend a record that shakes the friend's record player to pieces, however good the player. Hofstadter uses the story as a picture of Gödel's theorem, which says that no fixed set of rules for arithmetic can produce every true statement about numbers. This page covers the dialogue <i>Contracrostipunctus</i> and Chapter IV, which asks what it means for a system of rules to be <b>consistent</b> and <b>complete</b>, and finds the answer in a 2,000-year argument about parallel lines.</p>
+  <p class="lede">A Tortoise keeps bringing his friend a record that shakes the friend's record player to pieces, however good the player. Hofstadter uses the story as a picture of Gödel's theorem, which says that no fixed set of rules for arithmetic that never contradicts itself can produce every true statement about numbers. This page covers the dialogue <i>Contracrostipunctus</i> and Chapter IV, which asks what it means for a system of rules to be <b>consistent</b> and <b>complete</b>, and finds the answer in a 2,000-year argument about parallel lines.</p>
 </header>
 
 <div class="toolbar"><div class="in">
@@ -101,7 +102,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <div class="ric" id="acroOut"></div>
     <div class="row"><button id="acroBtn" class="ghost small">Show what the sentence hides</button></div>
   </div>
-  <p>So the dialogue signs itself the way Bach signed his fugue: with a name hidden in the material. Achilles even remarks, in passing, that Lewis Carroll liked to hide words in the first letters of his poems. And the dialogue ends as the fugue does, by breaking off in the middle. Shortly before, the two friends had been talking about how hard it is for an author to surprise anyone with an ending, since the reader can feel how few pages are left.</p>
+  <p>So the dialogue signs itself the way Bach signed his fugue: with a name hidden in the material. The story's three objects are all undone by something that points back at themselves: the record names its player, the goblet carries its own tune, and the fugue breaks off just as its composer writes his name into it. Pointing back at oneself is called <span class="term">self-reference</span>, and the whole book is built on it. Achilles even remarks, in passing, that Lewis Carroll liked to hide words in the first letters of his poems. And the dialogue ends as the fugue does, by breaking off in the middle. Shortly before, the two friends had been talking about how hard it is for an author to surprise anyone with an ending, since the reader can feel how few pages are left.</p>
 </section>
 
 <!-- 2 -->
@@ -141,11 +142,12 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
       <tr><td>a record the player can play</td><td>a theorem</td></tr>
       <tr><td>a record the player can't play</td><td>a string that is not a theorem</td></tr>
       <tr><td>a sound</td><td>a true statement about numbers</td></tr>
-      <tr><td>a sound the player can't reproduce (for the cheap player, a note beyond its speaker; for a good one, the sound that wrecks it before it can finish)</td><td>a true statement that is not a theorem</td></tr>
-      <tr><td>a Perfect player</td><td>a <b>complete</b> system: one where every true statement is a theorem</td></tr>
+      <tr><td>a note beyond the cheap player's speaker</td><td>a truth about numbers that a weak system can't even write down</td></tr>
+      <tr><td>the sound that wrecks a good player before it can finish</td><td>a true statement that a strong system can write down but that is not one of its theorems</td></tr>
+      <tr><td>a Perfect player</td><td>a <b>complete</b> system for number theory: one where every true statement about numbers is a theorem</td></tr>
       <tr><td>the title "I Cannot Be Played on Record Player X"</td><td>Gödel's string, which says "I am not a theorem of system X"</td></tr>
     </table>
-    <p class="small-note">Two things don't match up. The player falling to pieces has no partner in mathematics: a formal system doesn't break, it simply never produces the string. And one thing in mathematics has no partner in the story. Gödel's theorem is about systems that never contradict themselves, and nothing in the Tortoise's game stands for a contradiction. That is the next topic.</p>
+    <p class="small-note">The player falling to pieces has no exact partner, since a formal system doesn't break. One way to read it (this page's reading, not the book's): a good player either never finishes that record, as a system that never contradicts itself never produces its Gödel string, or it finishes and is wrecked, as a system that did produce the string would have proved something false. But the story doesn't say what contradicting yourself means for a formal system. That is the next topic.</p>
   </div>
   <p>Gödel's string has two meanings in the same way the record has. Read one way it is a plain statement about numbers. Read another way it talks about the system it is written in. Later chapters build it; this one prepares the ground by asking how symbols get meanings at all, and what can go wrong.</p>
 </section>
@@ -197,7 +199,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <div class="out" id="gCount" style="min-height:0"></div>
     <p class="small-note">On the sphere, the second postulate holds only if "extended as far as you like" is read as "never comes to an end". A line that goes round and returns never ends, but it isn't infinitely long.</p>
   </div>
-  <p>On flat paper the answer is Euclid's: one line misses. On the sphere, none does. On the saddle-shaped surface, a whole fan of lines misses. The first four postulates, as they stand, don't decide between flat paper and the saddle. The sphere is a harder case. It fits only once some words are read in a new way, and that is the next section.</p>
+  <p>On flat paper the answer is Euclid's: one line misses. On the sphere, none does. On the saddle-shaped surface, a whole fan of lines misses. (Mathematicians call the sphere's geometry <i>elliptic</i> and the saddle's <i>hyperbolic</i>.) The first four postulates, as they stand, don't decide between flat paper and the saddle. The sphere is a harder case. It fits only once some words are read in a new way, and that is the next section.</p>
 </section>
 
 <!-- 6 -->
@@ -271,7 +273,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <li><b>Tighten the interpretation</b>, so fewer statements count as true. The third reading in the grid, "equals, or is 1 more than", does this, and the gap closes.</li>
   </ul>
   <div class="step-h"><span class="sn">3</span><span>Number theory can't close its gap</span></div>
-  <p>For this toy system, tightening is the sensible choice. For number theory it isn't on offer. Its symbols are <i>meant</i> to say plus, times and equals; read them as anything looser and you are no longer doing number theory. That leaves adding rules. And here is the Tortoise again. Gödel showed that whenever a consistent system is strong enough to express number theory (addition and multiplication of whole numbers), there is a true statement it can't prove. His method, as the <a class="xref" href="../01-introduction/#s-godel">Introduction</a> sketched, was to code statements as numbers, so that a system about numbers can make statements about itself, including one that says "I am not a theorem". The proof itself comes in later chapters. Add that statement as a new axiom and you have a new, stronger system, which has a new unprovable truth of its own. Each new record player gets its own record.</p>
+  <p>For this toy system, tightening is the sensible choice. For number theory it isn't on offer. Its symbols are <i>meant</i> to say plus, times and equals; read them as anything looser and you are no longer doing number theory. That leaves adding rules. And here is the Tortoise again. Gödel showed that whenever a consistent system is strong enough to express number theory (addition and multiplication of whole numbers), there is a true statement it can't prove. His method, as the <a class="xref" href="../01-introduction/#s-godel">Introduction</a> sketched, was to code statements as numbers, so that a system about numbers can make statements about itself (self-reference again), including one that says "I am not a theorem". The proof itself comes in later chapters. Add that statement as a new axiom and you have a new, stronger system, which has a new unprovable truth of its own. Each new record player gets its own record. Even the Crab's last player, the one that rebuilds itself, is still one machine following one fixed plan, so a record can be aimed at the plan. The book returns to that player in Chapter XV.</p>
   <div class="intuit"><b>Back to the record players</b>A weak system is the cheap player. It can be complete about the little it can say, as the pq-system is, but most truths about numbers can't even be written in it. A strong system is the high-fidelity player. It can state every truth about numbers, and that same power lets it describe itself, which is what allows a statement to be aimed at it. Neither is a Perfect system for number theory, and no consistent system can be.</div>
 </section>
 
@@ -445,10 +447,11 @@ function rpDraw(shake){
 }
 function rpTable(){
   let h='<tr><th>Player</th><th>Can it reproduce every sound on every record?</th></tr>';
-  for(let k=1;k<=rp.n;k++){
-    const t=rp.tried['hi'+k];
-    h+=`<tr><td>Record Player ${k}</td><td>${t?'<span class="gfalse">No.</span> Its own record shook it apart at note '+t+' of 8.':'Not yet tried with the record made for it.'}</td></tr>`;
-  }
+  // players already broken share one row; the newest player gets its own
+  const done=[]; for(let k=1;k<=rp.n;k++) if(rp.tried['hi'+k]) done.push(k);
+  if(done.length===1) h+=`<tr><td>Record Player ${done[0]}</td><td><span class="gfalse">No.</span> Its own record shook it apart at note ${rp.tried['hi'+done[0]]} of 8.</td></tr>`;
+  if(done.length>1) h+=`<tr><td>Record Players ${done[0]} to ${done[done.length-1]}</td><td><span class="gfalse">No.</span> Each was shaken apart by the record made for it.</td></tr>`;
+  if(!rp.tried['hi'+rp.n]) h+=`<tr><td>Record Player ${rp.n}</td><td>Not yet tried with the record made for it.</td></tr>`;
   h+=`<tr><td>The cheap player</td><td>${rp.lo?'<span class="gfalse">No.</span> It survived, but reproduced only '+rp.lo.got+' of '+rp.lo.of+' notes.':'Not yet tried.'}</td></tr>`;
   $('rpTable').innerHTML=h;
 }
@@ -537,17 +540,17 @@ function pqGrid(rootId,opts){
   const rows=[[1,1],[2,1],[1,2],[2,2],[3,2],[3,3]], cols=[1,2,3,4,5,6], reads=opts.reads||Object.keys(READS);
   root.innerHTML=`<div class="seg"><span class="sl">Axioms</span><span class="seg" data-r="ax"></span></div>
     <div class="seg" style="margin-top:8px"><span class="sl">Read q as</span><span class="seg" data-r="rd"></span></div>
+    <div class="verdict ${opts.both?'':'one'}" data-r="verdict"></div>
     <div style="overflow-x:auto"><table class="pqgrid" data-r="grid"></table></div>
     <div class="legend"><span><i style="background:var(--escher)"></i>theorem, and true</span><span><i style="background:var(--bach)"></i>theorem, but false</span>${opts.both?'<span><i style="background:#fff8e6;border:1.5px dashed var(--gold)"></i>true, but not a theorem</span>':''}<span><i style="background:#fff;border:1px solid var(--rule)"></i>${opts.both?'neither':'not a theorem'}</span></div>
-    <div class="out" data-r="cell"></div>
-    <div class="verdict ${opts.both?'':'one'}" data-r="verdict"></div>`;
+    <div class="out" data-r="cell"></div>`;
   const q=r=>root.querySelector(`[data-r="${r}"]`);
   function render(){
     segButtons(q('ax'),[{v:false,label:'Original pattern only'},{v:true,label:'Add the extra pattern'}],()=>st.extra,v=>{st.extra=v;render();});
     segButtons(q('rd'),reads.map(k=>({v:k,label:'“'+READS[k].label+'”'})),()=>st.read,v=>{st.read=v;render();});
     const th=pqTheorems(st.extra), R=READS[st.read];
     let h='<tr><th></th>'+cols.map(z=>`<th>${z}</th>`).join('')+'</tr>';
-    rows.forEach(([x,y])=>{h+=`<tr><th class="rh">${x} <span style="color:var(--godel)">p</span> ${y} <span style="color:var(--bach)">q</span></th>`+cols.map(z=>{
+    rows.forEach(([x,y])=>{h+=`<tr><th class="rh">${x}<span style="color:var(--godel)"> p </span>${y}<span style="color:var(--bach)"> q</span></th>`+cols.map(z=>{
       const t=th.has(x+','+y+','+z), tr=R.test(x,y,z), cls=t?(tr?'tt':'tf'):(tr&&opts.both?'nt':'');
       return `<td class="${cls}${st.sel===x+','+y+','+z?' sel':''}" data-k="${x},${y},${z}">${z}</td>`;}).join('')+'</tr>';});
     q('grid').innerHTML=h;
@@ -641,8 +644,8 @@ function geoDraw(){
     if(geo.fan)FAN.forEach(d=>s+=circlePath(greatCircle(d).pt,SP,MUTE,1,.5));
     const g=greatCircle(deg); s+=circlePath(g.pt,SP,lineCol,3);
     g.hits.forEach(h=>{const p=proj(h);s+=p.front?dot(p.X,p.Y,BACH):`<circle cx="${p.X}" cy="${p.Y}" r="5" fill="#fff" stroke="${BACH}" stroke-width="2"/>`;});
-    const P=proj(sphereBasis().P); s+=dot(P.X,P.Y,INK)+lab(P.X+10,P.Y-10,'P');
-    const e=proj(equator(rad(172))); s+=lab(e.X+2,e.Y+22,'L');
+    const P=proj(sphereBasis().P); s+=dot(P.X,P.Y,INK)+lab(P.X-22,P.Y-10,'P');
+    s+=lab(SP.cx-SP.R-20,proj(equator(Math.PI)).Y+5,'L');
     out=`<b>Meets L</b> in 2 spots, exactly opposite each other on the ball (red dots; the hollow one is on the far side).`;
   } else {
     s+=`<circle cx="${DK.cx}" cy="${DK.cy}" r="${DK.R}" fill="#f6f1e4" stroke="${RULE}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
@@ -705,9 +708,8 @@ function tzDraw(){
   let s=`<defs><marker id="tza" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="${col}"/></marker></defs>`;
   [['T','Z'],['Z','E'],['E','T']].forEach(([a,b])=>{const [x1,y1]=N[a],[x2,y2]=N[b],dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
     s+=`<line x1="${x1+ux*30}" y1="${y1+uy*30}" x2="${x2-ux*32}" y2="${y2-uy*32}" stroke="${col}" stroke-width="2" marker-end="url(#tza)"/>`;
-    s+=`<text x="${(x1+x2)/2+(a==='Z'?0:(a==='T'?26:-26))}" y="${(y1+y2)/2+(a==='Z'?18:-4)}" text-anchor="middle" font-family="JetBrains Mono" font-size="12.5" fill="${INK2}">${a}b${b}</text>`;});
-  for(const k in N){const [x,y]=N[k];s+=`<circle cx="${x}" cy="${y}" r="26" fill="#fff" stroke="${INK}" stroke-width="1.8"/><text x="${x}" y="${y+4}" text-anchor="middle" font-family="Inter" font-size="11.5" fill="${INK}">${names[k]}</text>`;}
-  s+=`<text x="150" y="112" text-anchor="middle" font-family="Inter" font-size="11.5" fill="${col}">arrow: “${R.verb}”</text>`;
+    s+=`<text x="${(x1+x2)/2+(a==='Z'?0:(a==='T'?26:-26))}" y="${(y1+y2)/2+(a==='Z'?18:-4)}" text-anchor="middle" font-family="JetBrains Mono" font-size="14" fill="${INK2}">${a}b${b}</text>`;});
+  for(const k in N){const [x,y]=N[k];s+=`<circle cx="${x}" cy="${y}" r="26" fill="#fff" stroke="${INK}" stroke-width="1.8"/><text x="${x}" y="${y+4}" text-anchor="middle" font-family="Inter" font-size="12.5" fill="${INK}">${names[k]}</text>`;}
   $('tzSvg').innerHTML=s; $('tzOut').innerHTML=R.msg;
 }
 tzDraw();
