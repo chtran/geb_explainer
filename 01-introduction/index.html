@@ -7,6 +7,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/geb.css?v=56991a91">
+<style>
+.ctable{border-collapse:collapse;font:14px/1.45 Inter,sans-serif;margin:8px 0;width:100%}
+.ctable th,.ctable td{padding:6px 14px 6px 0;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+.ctable th{color:var(--ink2);font-weight:600}
+.ctable td:first-child{color:var(--ink);font-weight:500}
+.ctable td:last-child,.ctable th:last-child{text-align:center;padding-right:0}
+</style>
 </head>
 <body data-chapter="01-introduction">
 
@@ -162,7 +169,7 @@
   </div>
 
   <div class="step-h"><span class="sn">2</span><span>Bach's trick: climbing through the keys</span></div>
-  <p>Now Bach's canon, the <b>Canon per Tonos</b> ("canon through the keys"). Each time through, the music changes key, moving up a whole tone (two piano keys): C minor → D minor → E minor → F♯ minor → A♭ minor → B♭ minor → and, after six steps, <b>C minor again</b>. It has been climbing the whole time, yet it's back home, just one octave higher. Bach even wrote the King a flattering note: may his glory rise like the music.</p>
+  <p>Now Bach's canon, the <b>Canon per Tonos</b> ("canon through the keys"). Each time through, the music changes key, moving up a whole tone (two piano keys): C minor → D minor → E minor → F♯ minor → A♭ minor → B♭ minor → and, after six steps, <b>C minor again</b>. It has been climbing the whole time, yet it's back home, just one octave higher. Each key change is small (the new key keeps 5 of the old key's 7 notes), so every step sounds natural. That smoothness isn't the trick, though; it's what makes each step feel legal. The trick is that you only ever go up, and still arrive home. Bach even wrote the King a flattering note: may his glory rise like the music.</p>
   <p>Real music would eventually climb too high to hear. <span class="term">Shepard tones</span> get around that: every note sounds in several octaves at once, with the highest and lowest faded out, so your ear can't tell which octave you're in. With them, the loop can rise forever and never get anywhere. That's what a loop is good for: it shows an <b>endless</b> process in a <b>finite</b> space.</p>
   <div class="card">
     <div class="loopwrap">
@@ -278,7 +285,18 @@
   </div>
   <p>Gödel did the same thing with numbers. The result is a formula of number theory, call it <b>G</b>, which, decoded, says "<b>G has no proof</b>". That is <a class="xref" href="#g-step2">Step 2</a>'s sentence, now a genuine piece of math, so Step 2's reasoning applies to it. If the system could prove G, it would be proving something false, so in a system that only proves true things, it can't. And since G can't be proven, what it says is true. <b>G is true but has no proof.</b></p>
   <div class="intuit"><b>The punchline — Gödel's Incompleteness <span class="term">Theorem</span></b>We assumed the system only proves true things. Gödel needed less: only that it is <span class="term">consistent</span>. Any consistent formal system powerful enough to do arithmetic contains statements that are <b>true but can't be proven</b> inside the system. Gödel built a statement that, read on one level, is about numbers, and on another level says "I am not provable" — and it's true. Math can never fully capture itself.</div>
-  <p>Here is the Strange Loop. Start with numbers. Climb one level to statements <i>about</i> numbers. Climb again to statements about statements, and, because statements have been coded as numbers, you are back among the numbers where you started.</p>
+  <div class="intuit"><b>How the three loops connect</b>
+    <p style="margin-top:0">Every loop on this page has the same shape: each step is a legal move up, yet the path comes back home. Two things change from Bach to Gödel: what the levels are, and how many steps it takes to get back.</p>
+    <table class="ctable">
+      <tr><th>Loop</th><th>Going "up" means…</th><th>Steps home</th></tr>
+      <tr><td>Bach's Canon per Tonos</td><td>moving to a higher key</td><td>6</td></tr>
+      <tr><td>Escher's Ascending and Descending</td><td>climbing a stair</td><td>many</td></tr>
+      <tr><td>Escher's Drawing Hands</td><td>going from the hand being drawn to the hand drawing it</td><td>2</td></tr>
+      <tr><td>Print Gallery, the Liar</td><td>going from a world to a picture or sentence about it</td><td>1</td></tr>
+      <tr><td>Gödel's G</td><td>going from math to statements about math ("this formula has a proof")</td><td>1</td></tr>
+    </table>
+    <p style="margin-bottom:0">Gödel's is the tightest kind, built inside math itself. Start with numbers. Climb one level to statements <i>about</i> numbers. Climb again to statements about statements, such as "this has no proof". Because statements have been coded as numbers, that top level lands back among the numbers where you started: G is a statement about one number, and that number is G's own code.</p>
+  </div>
 </section>
 
 <!-- 6 -->
