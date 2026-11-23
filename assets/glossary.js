@@ -106,5 +106,7 @@ window.GEB_GLOSSARY = {
   "derived rule":      {def:"A shortcut that is not one of a system’s own rules, but is known, by reasoning about the system, to lead only to theorems.", in:"08"},
   "metatheorem":       {def:"A proven result about a formal system and its theorems, reached by reasoning from outside the system.", in:"08"},
   "semi-interpretation": {def:"A reading of a string in which the logic symbols are read as words (“and”, “or”, “not”, “if… then”) and the atoms are left as letters.", in:"08"},
-  "metalanguage":      {def:"The language used to talk about a formal system from outside it. For the systems in this book, English.", in:"08"}
+  "metalanguage":      {def:"The language used to talk about a formal system from outside it. For the systems in this book, English.", in:"08"},
+  "world":             {def:"In a truth table, one way of assigning true or false to each atom. A string with two atoms has four worlds.", in:"08"},
+  "metatheory":        {def:"The study of a formal system from outside it, in ordinary reasoning.", in:"08"}
 };
