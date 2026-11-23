@@ -47,14 +47,14 @@ window.GEB_TOC = [
   "title": "Chapter V: Recursive Structures and Processes",
   "dialogue": "Little Harmonic Labyrinth",
   "chapter": "Chapter V: Recursive Structures and Processes",
-  "done": false
+  "done": true
  },
  {
   "id": "07-ch06-the-location-of-meaning",
   "title": "Chapter VI: The Location of Meaning",
   "dialogue": "Canon by Intervallic Augmentation",
   "chapter": "Chapter VI: The Location of Meaning",
-  "done": false
+  "done": true
  },
  {
   "id": "08-ch07-the-propositional-calculus",

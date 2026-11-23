@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEB · Little Harmonic Labyrinth + Chapter V: Recursive Structures and Processes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/geb.css?v=da093492">
+<style>
+/* story map + stacks */
+#mapSvg,#gSvg{width:100%;height:auto;display:block}
+.stackbox{display:flex;flex-direction:column-reverse;gap:6px;min-height:150px;justify-content:flex-start}
+.stackbox .fr{font:13.5px/1.35 Inter,sans-serif;border:1px solid var(--rule);border-radius:8px;padding:7px 10px;background:#fbf8f1;color:var(--ink2)}
+.stackbox .fr.top{border-color:var(--gold);background:#fff8e6;color:var(--ink)}
+.stackbox .fr.wait{border-style:dashed}
+@media (max-width:820px){.stackbox{gap:3px;min-height:0}.stackbox .fr.wait{padding:2px 10px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.stackbox .fr b{color:var(--ink)}
+.stk-h{font:600 11px Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#8c826e;margin:0 0 8px}
+.scene{font:15px/1.5 Inter,sans-serif;color:var(--ink2);min-height:96px;margin:10px 0 0}
+.scene b{color:var(--ink)}
+/* key strip above the piano roll */
+.keystrip{display:flex;margin:0 14px 4px;font:600 11px Inter,sans-serif;letter-spacing:.04em;color:#fff;border-radius:6px;overflow:hidden}
+.keystrip span{padding:4px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.keystrip .kc{background:var(--bach)} .keystrip .kg{background:var(--godel)}
+.inmind{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font:13.5px Inter,sans-serif;color:var(--ink2);min-height:34px;margin-top:8px}
+.inmind .kb{padding:4px 10px;border-radius:8px;color:#fff;font-weight:600}
+.inmind .kb.c{background:var(--bach)} .inmind .kb.g{background:var(--godel)}
+/* sentence machine */
+.paths{display:grid;gap:8px;margin:10px 0}
+.paths button{display:flex;flex-wrap:wrap;gap:5px;align-items:center;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--rule);padding:8px 10px;border-radius:10px;font:13px Inter,sans-serif}
+.paths button.off{opacity:.4;cursor:default;transform:none}
+.paths button:not(.off):hover{border-color:var(--ink)}
+.bx{display:inline-block;padding:2px 7px;border-radius:6px;border:1px solid var(--rule);background:#fbf8f1;font:500 11.5px "JetBrains Mono",monospace;white-space:nowrap}
+.bx.call{border-color:var(--escher);color:var(--escher)}
+.bx.self{border-color:var(--bach);color:var(--bach);font-weight:600}
+.bx.done{opacity:.45} .bx.now{background:var(--gold);border-color:var(--gold);color:#fff}
+.phrase{font:22px/1.4 "EB Garamond",Georgia,serif;min-height:62px;padding:10px 14px;border:1px solid var(--rule);border-radius:10px;background:#fbf8f1}
+.phrase .gap{color:#8c826e;font-style:italic}
+.phrase .new{color:var(--bach)}
+/* sequences */
+.seq{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}
+.seq span{font:500 13px "JetBrains Mono",monospace;min-width:30px;text-align:center;padding:4px 3px 3px;border-radius:6px;border:1px solid var(--rule);background:#fbf8f1;line-height:1.15}
+.seq span small{display:block;font:9.5px Inter,sans-serif;color:#8c826e}
+.seq span.prev{background:#fff0c9;border-color:var(--gold)}
+.seq span.hit{background:var(--godel);border-color:var(--godel);color:#fff} .seq span.hit small{color:#dde6f3}
+.seq span.new{background:var(--bach);border-color:var(--bach);color:#fff} .seq span.new small{color:#f3dddd}
+.rule-box{font:500 15px/1.7 "JetBrains Mono",monospace;background:#fbf8f1;border:1px solid var(--rule);border-radius:10px;padding:10px 14px;margin:10px 0;overflow-x:auto;white-space:nowrap}
+.rule-box i{font:italic 14px Inter,sans-serif;color:var(--ink2);margin-left:10px}
+table.cmp{border-collapse:collapse;width:100%;font:14px/1.45 Inter,sans-serif;margin:10px 0}
+table.cmp th,table.cmp td{border-bottom:1px solid var(--rule);padding:7px 8px;text-align:left;vertical-align:top}
+table.cmp th{font-weight:600;color:var(--ink2);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+table.cmp td.mono{font-size:13px}
+#mapText{min-height:150px}#qSeq{min-height:100px}#rtnPhrase{min-height:58px}#lhMind{min-height:54px}
+@media (max-width:820px){#mapText{min-height:200px}#qSeq{min-height:135px}#rtnPhrase{min-height:84px}#lhMind{min-height:76px}}
+#gpCv{cursor:zoom-in;touch-action:manipulation}
+.fey{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fey figure{margin:0;text-align:center}
+.fey svg{width:100%;height:auto;display:block;background:#fbf8f1;border:1px solid var(--rule);border-radius:10px}
+.fey figcaption{font:13px/1.4 Inter,sans-serif;color:var(--ink2);margin-top:6px}
+.cols>*{min-width:0}
+.cols.duo{grid-template-columns:1.5fr 1fr;gap:16px}
+@media (max-width:820px){.cols.duo{grid-template-columns:1fr}}
+button.off{opacity:.38;cursor:default}
+@media (max-width:820px){.fey{grid-template-columns:repeat(2,1fr)}.rule-box{white-space:normal;font-size:13.5px}.rule-box i{display:block;margin-left:0}}
+.indent{font:14px/1.5 Inter,sans-serif;color:var(--ink2);margin:10px 0;padding:0;list-style:none}
+.indent li{border-left:2px solid var(--rule);padding:2px 0 2px 10px}
+</style>
+</head>
+<body data-chapter="06-ch05-recursive-structures-and-processes">
+
+<header class="hero">
+  <div class="kicker">Gödel, Escher, Bach · Explainer 06</div>
+  <h1>Little Harmonic Labyrinth <span style="color:var(--ink2)">+</span> <em>Recursive Structures and Processes</em></h1>
+  <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
+  <p class="lede">Achilles and the Tortoise read a story about themselves, and the pair in that story step into a picture, where they read another story. This page covers the dialogue <i>Little Harmonic Labyrinth</i> and Chapter V, which gives the pattern its name, <b>recursion</b>: things nested inside things of the same kind. Hofstadter finds it in music, in sentences, in number sequences, in a graph from his own physics research and in the particles matter is made of.</p>
+</header>
+
+<div class="toolbar"><div class="in">
+  <nav id="toc">
+    <a href="#s-story">1 · The story</a>
+    <a href="#s-music">2 · The false ending</a>
+    <a href="#s-stack">3 · Push, pop, stack</a>
+    <a href="#s-rtn">4 · Sentence machines</a>
+    <a href="#s-g">5 · Number recursions</a>
+    <a href="#s-gplot">6 · Rule plus bottom</a>
+    <a href="#s-matter">7 · Particles</a>
+    <a href="#s-same">8 · Sameness</a>
+    <a href="#s-prog">9 · Programs</a>
+    <a href="#s-two">10 · Two meanings</a>
+    <a href="#s-recap">11 · Recap</a>
+    <a href="#s-modern">12 · Modern view</a>
+  </nav>
+</div></div>
+
+<main>
+
+<div class="half"><div class="hk">Dialogue</div><div class="ht"><em>Little Harmonic Labyrinth</em></div></div>
+
+<!-- 1 -->
+<section id="s-story">
+  <div class="sec-head"><div class="num">1</div><h2>A story inside a picture inside a story</h2></div>
+  <p>Achilles and the Tortoise, the two friends from the earlier dialogues, are riding a Ferris wheel when a helicopter carries them off to the hideaway of a villain named Goodfortune. He leaves them alone in his study while he sharpens his knives; he plans to bake the Tortoise in a pie. On the desk lies a book of adventures of Achilles and the Tortoise. They pass the time by reading one aloud, each taking his own part.</p>
+  <p>From here on the dialogue keeps going down. The pair <i>in the book</i>, at home in Achilles' house, drink a "pushing-potion" that drops them inside a picture, a print by M. C. Escher, the Dutch artist from the Introduction. The print is <a href="https://mcescher.com/gallery/recognition-success/" target="_blank" rel="noopener"><i>Convex and Concave</i></a>, two worlds that each make sense alone and can't both be real, with a pair of lizards in the middle. To get back out you drink "popping-tonic": one sip undoes one push.</p>
+  <p>Inside the print Achilles rubs a lamp, and a Genie offers him three wishes. He asks for a hundred wishes instead. That is a wish <i>about</i> wishes, a "<span class="term">meta</span>-wish", and the Genie may not grant it without permission from the Meta-Genie one level above, who must ask the Meta-Meta-Genie, and so on up without end. It is the cure for <span class="term">paradox</span> that the Introduction described, a ladder of levels on which nothing may refer to its own level, applied to wishes.</p>
+  <p>Each genie asks in half the time the one below took, so the whole endless tower answers within a moment: ½ + ¼ + ⅛ + … never passes 1. (It is the sum from Zeno's race on the page for Chapter I.) Achilles asks who is at the top. Nobody is. The genies (djinn is another word for them) call the entire tower GOD. GOD is an acronym, a word made from the first letters of a phrase, and the phrase is "GOD Over Djinn". Its first word is the acronym itself, so you can never finish spelling it out.</p>
+  <p>The hundred wishes are refused. What the tower does allow is to lift the ladder's rule for a single wish, so that Achilles may wish for anything at all, even something about the wish itself. He at once wishes that his wish not be granted. To grant it is to refuse it, and to refuse it is to grant it. This is the liar's sentence "this statement is false" from the Introduction, turned into a wish. The world of the picture stops like a crashed computer. (The Tortoise says later that they spent the gap in "Tumbolia", a waiting room where a program sits while its machine is down.) For a moment the dialogue is back with the two readers in Goodfortune's study: footsteps come down the hall, and go away again. They read on. When the picture's world starts up again the pair are inside a <i>different</i> Escher print with lizards in it, <a href="https://mcescher.com/gallery/back-in-holland/" target="_blank" rel="noopener"><i>Reptiles</i></a>. They have come back at the right depth, in the wrong place.</p>
+  <p>In <i>Reptiles</i> the pair find yet another book about themselves and read from it. In that story they are tiny, lost in a labyrinth that turns out to be the groove of a record (section 2 is about what it plays), and the story ends with them eating popcorn: a "pop" that brings the pair back up into <i>Reptiles</i>. Their flask of popping-tonic is gone; it rolled off a desk and down a stairwell before they started reading. So they copy the lizards in the print, which crawl up out of their flat drawing: they climb "up one story" and arrive in the Tortoise's house, not in Achilles' house where that story began. There the dialogue ends.</p>
+  <div class="cols">
+    <div>
+      <p>Step through the story map. Each step down is a world entered and each step up is a world left. The list beside the map holds the worlds that are waiting for the pair to come back. Count the steps down and the steps up.</p>
+      <div class="intuit" id="mapReveal" style="display:none"><b>What to notice</b>Three steps go down and only two come up. The dialogue ends one level short of where it began, with the first Achilles and Tortoise still waiting for Goodfortune and his knives. Its last two words are "Good Fortune".</div>
+    </div>
+    <div class="card">
+      <svg id="mapSvg" viewBox="0 0 560 300" role="img" aria-label="Map of the dialogue's levels"></svg>
+      <div class="cols duo" style="margin-top:8px">
+        <div class="scene" id="mapText"></div>
+        <div><p class="stk-h">Waiting to be resumed</p><div class="stackbox" id="mapStack" style="min-height:96px"></div></div>
+      </div>
+      <div class="row"><button id="mapNext">Next scene ▸</button><button class="ghost" id="mapReset">Start over</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="s-music">
+  <div class="sec-head"><div class="num">2</div><h2>The form: a record that stops in the wrong key</h2></div>
+  <div class="cols">
+    <div>
+      <p>The dialogue borrows its title from a short organ piece, the <i>Little Harmonic Labyrinth</i>, long printed under Bach's name (many scholars now doubt he wrote it). The piece is a maze of key changes.</p>
+      <p>A reminder from the Introduction: a <span class="term">key</span> is a home note plus the family of notes a piece mostly uses, and a <span class="term">modulation</span> is a move to a new key. Musicians call the home note the <span class="term">tonic</span>. Music wanders away from the tonic, which builds tension, and comes back to it, which releases the tension. That release is called a <span class="term">resolution</span>.</p>
+      <p>At the deepest level of the story, Achilles and the Tortoise are tiny and walking along the groove of a record of this piece. The Tortoise explains that a modulation sets up a <i>second</i> goal. You want to hear the new key's home note soon, and at the back of your mind you still want the original one. The music then lands firmly on the new home note. Achilles hears a grand ending. The Tortoise knows it is the wrong key, and that whoever made the record was fooled as well and cut the piece off there.</p>
+      <p>The sketch here does the same thing in a few bars. It starts in its home key, moves to a new key and comes to a full stop there. Play the cut-off record first and ask yourself whether it sounds finished. If it does, you heard it as Achilles did, and that is the trap. Then play the whole piece and listen for the return home.</p>
+    </div>
+    <div class="card">
+      <div class="keystrip" id="lhStrip"></div>
+      <canvas id="lhCv" height="190"></canvas>
+      <div class="inmind" id="lhMind"></div>
+      <div class="row">
+        <button id="lhCut">▶ The cut-off record</button>
+        <button id="lhFull">▶ The whole piece</button>
+      </div>
+      <p class="small-note">An original sketch written for this page, not Bach's notes.</p>
+    </div>
+  </div>
+  <div class="intuit"><b>The trick</b>The dialogue is built like the record. Goodfortune's hideaway is the home key. Each story-within-a-story is a move to a new key. The cosy arrival at the Tortoise's house sounds like an ending, but it is an ending one level down, and the dialogue stops there, in the wrong key. The title of the story they read is a pun: it is called "Djinn and Tonic", and the tonic is both the drink that pops you home and the home note.</div>
+  <p>The printed dialogue even shows its levels: each story-within-a-story is set further in from the left margin. Chapter V now gives names to what the dialogue acted out.</p>
+</section>
+
+<div class="half"><div class="hk">Chapter V</div><div class="ht"><em>Recursive Structures and Processes</em></div></div>
+
+<!-- 3 -->
+<section id="s-stack">
+  <div class="sec-head"><div class="num">3</div><h2>Push, pop and stack</h2></div>
+  <p>Hofstadter's word for what the dialogue did is <span class="term">recursion</span>: nesting, and variations on nesting. Stories inside stories, Russian dolls inside Russian dolls, a remark in brackets (inside another remark (in brackets)).</p>
+  <div class="cols">
+    <div>
+      <p>The everyday version is putting one task on hold to do another of the same kind. Hofstadter's example is an executive on the phone. He is talking to A when B rings, so he puts A on hold. While he talks to B, C rings, and B goes on hold too. When C hangs up he goes back to B, and when B hangs up, back to A.</p>
+      <p>Computer scientists have three words for this.</p>
+      <div class="words">
+        <span class="term">Push</span>: set aside what you are doing, without forgetting where you were, and start a new task one level down.<br>
+        <span class="term">Pop</span>: finish the task on your current level and pick up the one above, exactly where you left it.<br>
+        <span class="term">Stack</span>: the list that makes popping possible. For each unfinished task it holds two things: where you were in it, and what you needed to know at that point.
+      </div>
+      <p>The names come from the spring-loaded pile of trays in a cafeteria. A tray pushed on top sinks the pile a little, and the tray you take off is always the one put on last.</p>
+    </div>
+    <div>
+      <p>The list beside the story map in <a class="xref" href="#s-story">section 1</a> was a stack. Pushing-potion and reading a story are pushes. Popping-tonic, the end of a story and the climb "up one story" are pops. Three things the dialogue did now have plain descriptions:</p>
+      <ul>
+        <li><b>The wrong print and the wrong house.</b> A stack restores what you needed to know. The crash wiped most of what the picture-world had saved, and what came back was only part of it: "an Escher picture with lizards", but not which one. And the pair's last move, the climb out of <i>Reptiles</i>, is a makeshift pop, made without the tonic. It lifts them a level but does not put them back where they left: they surface in the Tortoise's house instead of Achilles'.</li>
+        <li><b>The unpopped push.</b> The first story was pushed and never popped. In Hofstadter's own diagram of the dialogue, which has the shape of the story map, the line never climbs back to Goodfortune's hideaway.</li>
+        <li><b>Why it is hard to follow.</b> A radio news report can go three levels down (studio, foreign correspondent, a taped interview she plays) and nobody gets lost, because each level sounds different. In the dialogue the same two characters appear on every level, so you have to keep the stack in your head on purpose.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step-h"><span class="sn">♪</span>Stacks in music</div>
+  <p>The dialogue hints that we listen with a stack of keys: each modulation pushes a key, and we want them popped in reverse order until the tonic returns. Hofstadter calls this an exaggeration with a grain of truth. What most listeners do keep is a stack just two deep: the true home key, and the key the music is in right now. That is enough to tell a local arrival from the real one. In the sketch in <a class="xref" href="#s-music">section 2</a>, the row under the notes shows that short stack. When the cut-off record stops, the home key is still in it.</p>
+  <details class="primer"><summary>More: why a false ending should raise the tension, and how deep our key stack goes</summary>
+  <p>For a listener who remembers the home key, a false ending should <i>raise</i> the overall tension. Hofstadter compares it to the moment in the dialogue when Achilles is rescued from a wildly swinging lamp: a relief, while the Tortoise in the outer story still waits for Goodfortune's knife. His musical example is a dance by Bach, the gigue from the French Suite no. 5. Its first half leaves the home key and stops in a new one, sounding like an ending. Its second half starts there and comes home.</p>
+  <p>Past two levels our ears give up. The organ <i>Labyrinth</i> changes key so fast that a listener loses track of where home was. The Endlessly Rising <span class="term">Canon</span> from the Introduction is the chapter's second example: it climbs through six keys and arrives "home" an <span class="term">octave</span> higher.</p>
+  </details>
+  <p>In short: we hear with a stack of keys, but a shallow one.</p>
+</section>
+
+<!-- 4 -->
+<section id="s-rtn">
+  <div class="sec-head"><div class="num">4</div><h2>Recursion in language: sentence machines</h2></div>
+  <div class="cols">
+    <div>
+      <p>Sentences nest too, and our stack for them is only a little deeper than our stack for keys. Each line below pushes one more "that …" phrase into the middle of the one before:</p>
+      <ul class="indent">
+        <li>The record stopped.</li>
+        <li>The record that the needle scraped stopped.</li>
+        <li>The record that the needle that the Tortoise held scraped stopped.</li>
+        <li>The record that the needle that the Tortoise that the Genie startled held scraped stopped.</li>
+      </ul>
+      <p>The last one is correct English and almost unreadable: four verbs arrive in a row, and the last three each have to be handed back to a noun you set aside earlier. Hofstadter's example is German, where verbs often wait until the end of the sentence, and the old jokes about professors who finish a long sentence by rattling off a string of them.</p>
+      <p>A <span class="term">grammar</span> is the set of rules for which arrangements of words count as sentences. The chapter draws a piece of grammar as a little map of pathways, a <span class="term">recursive transition network</span>, or RTN. You enter at one end and follow the arrows to the other, and each box you pass tells you what to say next.</p>
+      <div class="words">
+        The kinds of word the boxes ask for:<br>
+        <b>article</b>: the, a · <b>adjective</b>: strange, purple, small · <b>noun</b>: bagels, cow, horns<br>
+        <b>preposition</b>: without, near, under · <b>relative pronoun</b>: that, which · <b>verb</b>: gobbled, chased
+      </div>
+    </div>
+    <div>
+      <p>The first network is called ORNATE NOUN. Its path is: an article if you like, then as many adjectives as you like, then a noun.</p>
+      <div class="paths" style="margin:6px 0 10px"><div class="pathrow"><span class="bx">ARTICLE</span> <small>(optional)</small> → <span class="bx">ADJECTIVE</span> <small>(any number)</small> → <span class="bx">NOUN</span></div></div>
+      <p>It makes "bagels", "the cow", "the strange small bagels".</p>
+      <p>A box may also hold the <i>name of a whole network</i>. Meeting that box means: go and run that network, then come back here. A named set of steps that can be run from elsewhere like this is a <span class="term">procedure</span>, and running it is a "call". A call is a push; reaching the far end of the called network is the pop.</p>
+      <p>The second network, FANCY NOUN, has four pathways. All of them call ORNATE NOUN. Three of them also call <b>FANCY NOUN itself</b>.</p>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="margin-top:0">A fancy noun is defined using fancy nouns. Can that work? Build one. Each time FANCY NOUN is called, you choose its pathway. Try to make the stack grow, then find the only way to make it shrink.</p>
+    <div class="cols duo">
+      <div>
+        <div class="phrase" id="rtnPhrase"></div>
+        <p class="small-note" id="rtnMsg" style="min-height:38px;margin:8px 0"></p>
+        <div class="paths" id="rtnPaths"></div>
+        <div class="row"><button id="rtnStep">Step ▸</button><button class="ghost" id="rtnReset">Start over</button><span class="small-note" id="rtnDepth"></span></div>
+      </div>
+      <div><p class="stk-h">Stack: calls to FANCY NOUN not yet finished</p><div class="stackbox" id="rtnStack"></div></div>
+    </div>
+  </div>
+
+  <div class="intuit"><b>Is that a circle?</b>A fancy noun is defined using fancy nouns. That is a <span class="term">recursive definition</span>, and it looks circular. It isn't, because one pathway doesn't call FANCY NOUN. Take that pathway and the calls stop. Hofstadter's phrase for this is that the definition <span class="term">bottoms out</span>: a recursive definition describes a thing by way of simpler versions of the same thing, not by way of itself. Here simpler means shorter: each inner fancy noun is a smaller stretch of the phrase than the one that called it.</div>
+  <p>If you always choose a pathway that calls FANCY NOUN again, the phrase never ends, just as "GOD Over Djinn" can never be fully spelled out. A recursion finishes only if, sooner or later, it takes a way out.</p>
+  <p>Recursion can also be indirect: network A calls B, and B calls A. FANCY NOUN could call a network for clauses that calls FANCY NOUN back. Two things that each bring the other into being look like Escher's <i>Drawing Hands</i> from the Introduction, but nothing here is paradoxical. The pair still finish, as long as some pathway bottoms out. A whole family of procedures that call one another and themselves, with none of them on top, Hofstadter calls a <span class="term">heterarchy</span>, the opposite of a <span class="term">hierarchy</span>. Like the genies, it has no highest level, and it too must bottom out to finish.</p>
+</section>
+
+<!-- 5 -->
+<section id="s-g">
+  <div class="sec-head"><div class="num">5</div><h2>Recursion with numbers: Diagram G, Fibonacci and a wild sequence</h2></div>
+  <div class="cols">
+    <div>
+      <p>A network that calls itself can describe a picture as well as a phrase. Hofstadter defines a tree he calls Diagram G in one small drawing: a dot with two branches growing up from it. (He adds two more dots underneath as a stem, so that the numbering below matches his formula.) At the end of the left branch sits the letter <b>G</b>. The right branch has one extra dot, and then a <b>G</b>. Each G stands for a complete copy of the whole drawing.</p>
+      <p>Click a G to replace it with what it stands for. Every G you open gives you two more.</p>
+      <div class="intuit"><b>Structures and processes</b>This looks like the endless spelling-out of GOD, and for the picture it is: Diagram G is infinite and can never be drawn whole. That is allowed. A <i>structure</i> may go on for ever, because you only open a G when you get to it. A <i>process</i> that is meant to finish, such as building one phrase or computing one number, is the thing that must bottom out.</div>
+      <p>Now number the dots from the bottom up, left to right. The numbers on the right-hand edge are 1, 2, 3, 5, 8, 13, …: the <span class="term">Fibonacci numbers</span>, in which each number is the sum of the two before it. The full list starts 1, 1, 2, 3, 5; the edge shows it from the second 1. They are named after Leonardo of Pisa, called Fibonacci, who described them around 1202.</p>
+    </div>
+    <div class="card">
+      <svg id="gSvg" viewBox="0 0 520 330" role="img" aria-label="Diagram G"></svg>
+      <div class="row">
+        <button id="gAll">Open one more layer</button>
+        <button class="ghost" id="gNum">Number the dots</button>
+        <button class="ghost" id="gReset">Start over</button>
+      </div>
+      <div class="steps" id="gMsg" style="min-height:66px"></div>
+    </div>
+  </div>
+  <p>The Fibonacci rule is itself a recursive definition, with two parts:</p>
+  <p>Read "FIBO(n)" as "the n-th Fibonacci number", so FIBO(n − 1) is the one just before it.</p>
+  <div class="rule-box">FIBO(n) = FIBO(n − 1) + FIBO(n − 2)<i>the rule, for n above 2</i><br>FIBO(1) = FIBO(2) = 1<i>the bottom</i></div>
+  <p>To find the 5th you need the 4th and the 3rd, for those you need earlier ones, and the questions stop when they reach the 1st and 2nd, which are given outright. The process bottoms out. (You can also skip the questions and work forwards from the bottom, 1, 1, 2, 3, 5, …, each number made from the two already in hand. Section 10 comes back to this.)</p>
+
+  <p>Hofstadter found Diagram G by going the other way, from a rule to the tree. He uses the same letter, G, for the rule: read "G(n)" as "the number the rule gives for n".</p>
+  <div class="rule-box">G(n) = n − G(G(n − 1))<i>the rule, for n above 0</i><br>G(0) = 0<i>the bottom</i></div>
+  <p>The rule is odder than Fibonacci's because it is nested inside itself. G(G(n − 1)) means: look up G(n − 1), then look up G of that answer. For n = 1 that is G(G(0)). G(0) is 0, so G(G(0)) is G(0), which is again 0.</p>
+  <div class="words">
+    By hand, each line using the lines before it:<br>
+    G(1) = 1 − G(G(0)) = 1 − G(0) = 1 − 0 = <b>1</b><br>
+    G(2) = 2 − G(G(1)) = 2 − G(1) = 2 − 1 = <b>1</b><br>
+    G(3) = 3 − G(G(2)) = 3 − G(1) = 3 − 1 = <b>2</b><br>
+    G(4) = 4 − G(G(3)) = 4 − G(2) = 4 − 1 = <b>3</b><br>
+    G(5) = 5 − G(G(4)) = 5 − G(3) = 5 − 2 = <b>3</b>
+  </div>
+  <p>Put each number n on top of the number G(n) and you have built the tree: 4 and 5 both sit on 3, and 3 sits on 2. Turn the numbers on in the diagram above: every numbered dot n sits on dot G(n). A recursive picture and a recursive formula turn out to be the same thing.</p>
+
+  <div class="step-h"><span class="sn">Q</span>A tidy rule with a wild result</div>
+  <div class="cols">
+    <div>
+      <p>Hofstadter then changes the Fibonacci rule slightly. Each new number is still the sum of two earlier ones, but not the last two. The last two numbers say <i>how far back to count</i> to find the pair to add.</p>
+      <div class="rule-box">Q(n) = Q(n − Q(n − 1)) + Q(n − Q(n − 2))<br><i style="margin-left:0">for n above 2, and</i> Q(1) = Q(2) = 1</div>
+      <p>The sequence starts 1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10, 9, 10. Step through it, then run it on. Fibonacci numbers grow smoothly. The Q-numbers scatter around half of n, the dashed line, mostly a little above it and more widely the further you go, and they jump about with no simple pattern. He asked whether the disorder hides some regularity. The rule is a perfectly orderly one and, as he puts it, it produces chaos.</p>
+    </div>
+    <div class="card">
+      <div class="seq" id="qSeq"></div>
+      <div class="steps" id="qMsg" style="min-height:60px"></div>
+      <div class="row"><button id="qNext">Next number ▸</button><button class="ghost" id="qRun">Run to 400</button><button class="ghost" id="qReset">Start over</button></div>
+      <canvas id="qCv" height="170"></canvas>
+      <div class="legend" style="margin-top:6px"><span><i style="background:var(--bach)"></i>Q(n)</span><span><i style="background:none;border-top:2px dashed #1f1c17;height:0"></i>half of n (dashed line)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="s-gplot">
+  <div class="sec-head"><div class="num">6</div><h2>A rule needs a bottom: a graph made of copies of itself</h2></div>
+  <div class="cols">
+    <div>
+      <p>Both number rules in section 5 had two lines: the rule, and the bottom. The bottom matters as much as the rule. Keep Fibonacci's rule and change the starting pair from 1, 1 to 1, 3, and you get a different sequence, the <span class="term">Lucas numbers</span>:</p>
+      <table class="cmp">
+        <tr><th>Bottom</th><th>Same rule: add the last two</th></tr>
+        <tr><td class="mono">1, 1</td><td class="mono" id="fibRow"></td></tr>
+        <tr><td class="mono">1, 3</td><td class="mono" id="lucRow"></td></tr>
+      </table>
+      <p>The same holds for pictures. Take a graph that is made of copies of itself: any piece of it holds a small, bent copy of the whole graph, and inside that copy are more copies, without end. "It is made of copies of itself" sounds like a full description. It is half of one. The other half says where the copies sit and how each is bent. Hofstadter draws that half as a picture of empty boxes and calls it the <span class="term">skeleton</span>. To build the graph, put a small copy of the skeleton into each of its own boxes, then do the same in every new box, and so on.</p>
+      <p>The skeleton plays the part of the bottom: it is the piece given outright and not made by the rule, like the starting pair 1, 1. (The nesting itself never stops; this is a structure, not a process.) Change it, keep the nesting rule, and a different graph appears. Here are two simple skeletons of our own (not the book's). Nest each a few times.</p>
+    </div>
+    <div class="card">
+      <canvas id="skCv" height="260"></canvas>
+      <div class="row">
+        <button id="skNest">Nest once more</button>
+        <button class="ghost" id="skA">Skeleton A</button>
+        <button class="ghost" id="skB">Skeleton B</button>
+      </div>
+      <div class="steps" id="skMsg" style="min-height:44px"></div>
+    </div>
+  </div>
+
+  <div class="cols" style="margin-top:22px">
+    <div>
+      <p>Give the nesting rule a more complicated skeleton and you get the main graph of Hofstadter's doctoral thesis in physics, which he calls Gplot. It answers an idealized question: which energies can an electron (the tiny charged particle found in every atom) have inside a crystal that sits in a magnetic field?</p>
+      <p>Each horizontal slice of the graph is one strength of field, written as a fraction between 0 and 1. Left to right is energy. The dark stretches in a slice are the energies the electron is allowed; the gaps are forbidden.</p>
+      <p>The easiest copies to spot run up the left and right edges, shrinking towards the top and the bottom. Click on a dark part of the graph to zoom in there. Smaller, skewed copies of the whole shape keep turning up, at every size.</p>
+      <p>Hofstadter wrote that he would be the most surprised person in the world if this graph ever came out of an experiment. He valued it as mathematics that showed how to treat less idealized problems.</p>
+    </div>
+    <div class="card">
+      <canvas id="gpCv" height="330"></canvas>
+      <p class="small-note" style="margin:4px 0 0">Left to right: energy. Bottom to top: field strength.</p>
+      <div class="row"><button class="ghost" id="gpOut">Zoom out</button><button class="ghost" id="gpAll">Whole graph</button></div>
+      <div class="steps" id="gpMsg" style="min-height:44px"></div>
+      <p class="small-note">Drawn from a few hundred slices; the true graph has one for every fraction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="s-matter">
+  <div class="sec-head"><div class="num">7</div><h2>Recursion at the smallest scale of matter</h2></div>
+  <div class="cols">
+    <div>
+      <p>The chapter's last example of recursion in nature comes from the physics of particles.</p>
+      <div class="words">
+        <span class="term">Photon</span>: a particle of light. <span class="term">Positron</span>: the electron's mirror twin, alike except for the opposite charge.<br>
+        <span class="term">Bare particle</span>: a particle as it would be if it never affected any other. No such thing exists; it is a starting point for calculation.<br>
+        <span class="term">Virtual particle</span>: one that flickers into being and vanishes again before it could be seen.<br>
+        <span class="term">Feynman diagram</span>: a sketch of one way particles can meet, split and rejoin, named after the physicist Richard Feynman. Each sketch stands for a piece of a calculation.
+      </div>
+      <p>Picture a bare electron travelling from A to B: a straight line. A real electron does more on the way. It can send out a virtual photon and catch it again. It can do so twice, or send one out while another is still in flight, a loop inside a loop. And any photon can turn for an instant into an electron and a positron, which meet and become the photon again. Each of those can do all of the same things in turn, to any depth.</p>
+    </div>
+    <div>
+      <p>So a real electron is a bare electron wrapped in a cloud of virtual particles, each wrapped in a cloud of its own. No particle can be described without the others, whose descriptions depend on it in turn. It is the heterarchy of section 4 again.</p>
+      <p>Not every such diagram is allowed. The laws of physics, such as the rule that electric charge is never created or destroyed, pick out the ones that are, the way a grammar picks out sentences. An illegal diagram is not <span class="term">well-formed</span>, the word Chapter II used for strings of the right shape. And this grammar is recursive: it lets a legal piece be nested inside a legal piece. One could draw RTNs for it.</p>
+      <p>To predict what a real electron does, a physicist has to add up the contributions of infinitely many diagrams, an endless sum. Unlike the genies' ½ + ¼ + ⅛ + …, nobody knows how to add all of it up. What saves the method is that the more complicated a diagram, the less it contributes, so the sum can be stopped early. Keeping roughly the hundred simplest diagrams had given one measured quantity, a magnetic property of the muon (a heavier cousin of the electron), correctly to nine decimal places.</p>
+    </div>
+  </div>
+  <div class="fey" id="fey"></div>
+  <p class="small-note" style="margin-top:8px">Original sketches in the style of the chapter's drawings. Straight line: electron (arrow pointing backwards: positron). Wavy line: photon. Time runs left to right.</p>
+</section>
+
+<!-- 8 -->
+<section id="s-same">
+  <div class="sec-head"><div class="num">8</div><h2>When are two things the same?</h2></div>
+  <p>Zoom into Gplot again and ask what makes a piece "the same" as the whole. Hofstadter's examples of copies run from strict to loose.</p>
+  <ol>
+    <li><b>Exact rule.</b> The Introduction's <span class="term">canons</span> copy a tune upside down, backwards or at half speed. Each copy keeps all the information in the tune; the chapter's word for such a match is <span class="term">isomorphism</span>.</li>
+    <li><b>Bent copies.</b> The copies inside Gplot are squeezed, skewed and flipped, and the eye still says "the same shape".</li>
+    <li><b>Same working parts.</b> In Escher's wood engraving <a href="https://mcescher.com/gallery/back-in-holland/" target="_blank" rel="noopener"><i>Butterflies</i></a> no two butterflies match line for line, but wing answers to wing and body to body. In his woodcut <a href="https://mcescher.com/gallery/recognition-success/" target="_blank" rel="noopener"><i>Fishes and Scales</i></a> each scale of a fish is a small fish. Real scales are not copies of the fish, but every cell of a real fish does carry its DNA, the fish's chemical building plan, which Hofstadter counts as a copy of the whole fish in a heavily disguised form (later chapters take up DNA).</li>
+    <li><b>Style.</b> No part of one Escher print matches a part of another, yet a small piece of any of them gives the artist away. The same is true of a few bars of Bach.</li>
+  </ol>
+  <div class="intuit"><b>Why this belongs in a chapter on recursion</b>Recursion is the same thing happening on several levels at once, and "same" never means identical. The stories in the dialogue share two facts only: each is a story, and each has Achilles and the Tortoise in it. Hofstadter says the question "when are two things the same?" will return throughout the book, and that in the end it is tied to the nature of intelligence.</div>
+</section>
+
+<!-- 9 -->
+<section id="s-prog">
+  <div class="sec-head"><div class="num">9</div><h2>Recursion in programs</h2></div>
+  <div class="cols">
+    <div>
+      <p>Seeing that two jobs are the same, apart from some detail, is the central skill of programming, because it lets one piece of program serve for both. Hofstadter names three ways to use it.</p>
+      <p>A <span class="term">loop</span> is a set of steps done over and over until some condition is met. To test whether N is <span class="term">prime</span>, try dividing it by 2, then 3, then 4, and stop when something divides it or you reach N − 1. Some loops have a known maximum number of rounds; others just run until the condition turns up, and may run for ever. Hofstadter calls these bounded and free loops, and Chapter XIII is about the difference. Loops also nest inside loops, which is why they belong in this chapter: to knit a scarf you repeat a stitch along a row, and repeat the row down the scarf.</p>
+      <p>A <b>procedure</b> is a group of steps given a name, like ORNATE NOUN, so that it can be called from anywhere. It can be handed a value to work with, called a <span class="term">parameter</span>, and it can choose its pathway by looking at that value.</p>
+      <p>The third is a procedure that calls itself. A chess program defines its best move as the one that leaves the opponent with the worst best reply. Finding the opponent's best reply is the same question from the other side, so the procedure calls itself, playing the opponent. To make it bottom out, a parameter says how many moves to look ahead, and each call passes on a number one smaller. At zero the procedure stops asking and just scores the position, for example by counting pieces.</p>
+    </div>
+    <div class="card">
+      <svg id="laSvg" viewBox="0 0 520 200" role="img" aria-label="A look-ahead tree with a counter that falls to zero" style="width:100%;height:auto;display:block"></svg>
+      <p class="small-note">A look-ahead tree, drawn here with two choices per move. The parameter falls by 1 on each level. At 0 the positions (gold) are scored outright with no further calls, and the scores are passed back up (red arrow), one pop per level.</p>
+    </div>
+  </div>
+  <p>Hofstadter notes that strong human players look ahead much less than chess programs did, and in 1979 still played far better. Early forecasts had put a computer world champion ten years off; ten years later it still seemed more than ten years off. This gave him a law that calls itself: <b>Hofstadter's Law</b>, "It always takes longer than you expect, even when you take into account Hofstadter's Law."</p>
+</section>
+
+<!-- 10 -->
+<section id="s-two">
+  <div class="sec-head"><div class="num">10</div><h2>Two meanings of "recursive", and a guess about minds</h2></div>
+  <p>On this page recursion has meant nesting. The page on Chapter III used "recursive" for sets that a formal system can list. Here is why they share a word.</p>
+  <p>Section 5 found the Fibonacci numbers in two ways. Backwards: ask for the 5th, which sends you down to the 4th and 3rd, with a stack of unanswered questions. Or forwards: start from 1, 1 and keep adding the last two, each new member made from members already in hand. The chapter calls the forwards way a mathematical snowball.</p>
+  <p>The forwards way is what a <span class="term">formal system</span> does. It starts from a few given strings and applies its rules over and over, each new <span class="term">theorem</span> made from earlier ones, as every MIU string in Chapter I was made from a string already in hand. The page on Chapter III called a set that can be listed like this <span class="term">recursively enumerable</span>. That is where the name comes from: such a set is defined by recursion in this chapter's sense, new things made from simpler things of the same kind, from a bottom that is given outright. The Fibonacci numbers and the Lucas numbers are both sets of this sort. The stricter word from that page, a <span class="term">recursive</span> set, one whose non-members can be listed as well, is built on this name by convention.</p>
+  <p>The Q-sequence showed that things built by fixed rules can still surprise. Hofstadter closes on that thought. Perhaps a rich enough recursive system could break out of any pattern laid down for it in advance, and that is one mark of intelligence. He suggests going one step past procedures that call themselves, to programs that work on programs: extending, repairing and improving them, themselves included. He calls this "tangled recursion" and guesses that it lies at the heart of intelligence. Plain recursion keeps its levels in order: you go down, and you come back up the way you went. In the Introduction's <span class="term">strange loop</span>, moving through the levels lands you back where you began. A program that rewrites the program it is part of has that tangled shape.</p>
+</section>
+
+<!-- 11 -->
+<section id="s-recap">
+  <div class="sec-head"><div class="num">11</div><h2>Recap: the dialogue and chapter in one breath</h2></div>
+  <p class="big-idea">Recursion is a thing built from simpler copies of itself. A stack keeps track of the copies you are inside, and a bottom that is given outright stops the definition from going round in a circle.</p>
+  <div class="grid3">
+    <div class="card"><span class="tag b">Dialogue</span><h4>Three pushes, two pops</h4><p>Stories nest inside pictures inside stories. The outermost one is never resumed, as a record cut off at a false ending never returns to its home key.</p></div>
+    <div class="card"><span class="tag g">Definitions</span><h4>A rule and a bottom</h4><p>FANCY NOUN, Fibonacci and G(n) are each defined by way of themselves, and each has a way out. Change the bottom and you change the result. A tidy rule can still give the disorder of the Q-sequence.</p></div>
+    <div class="card"><span class="tag e">The world</span><h4>Copies that are not identical</h4><p>Gplot is made of bent copies of itself, and a real particle is wrapped in clouds of particles. Seeing what is "the same" across levels is the skill behind programs. Hofstadter's closing guess is that programs able to rewrite programs, themselves included, lie at the heart of intelligence.</p></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section id="s-modern">
+  <div class="sec-head"><div class="num">12</div><h2>Modern view: what we know now</h2></div>
+  <!--MODERN-->
+  <p class="mv-asof">As of November 2026</p>
+  <p>The chapter leaves open questions, one confident guess (that Hofstadter's graph would never come out of an experiment) and one observation (that the best human chess players beat programs while looking ahead far less). The guess has been overturned, the observation no longer holds, and most of the questions are still being worked on. Below, "peer-reviewed" means checked by other researchers before publication; a "preprint" has not had that check yet.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · looking inside</div>
+      <h4>A stack found inside a bracket-matching machine</h4>
+      <p class="mv-then"><b>In the book:</b> nesting is tracked with a stack, and people's stacks for keys and sentences are shallow (<a class="xref" href="#s-stack">sections 3</a> and <a class="xref" href="#s-rtn">4</a>).</p>
+      <p><b>Now:</b> the AI models behind chatbots are <span class="term">transformers</span>, a design with no stack built in. A peer-reviewed 2021 proof showed that a transformer can still match nested brackets such as ( [ ] ), provided the depth of nesting has a fixed ceiling. An April 2026 preprint looked inside tiny transformers trained to say which closing bracket must come next, with brackets nested up to 10 deep. At each closing bracket the transformer looks straight back at the most recent bracket still open, which is the top of the stack. When the researchers blocked that one look, it went from nearly always right to almost never right on brackets that were far apart. Blocking a look chosen at random barely mattered. The authors' caveat: these are toy models, and larger ones are untested.</p>
+      <p>On English, a peer-reviewed 2024 study gave <span class="term">large language models</span> deeply nested sentences and asked which verb should come next. Shown a few worked examples first, they made fewer errors than people had in an earlier experiment, and on the hardest sentences those people may have started out doing no better than guessing.</p>
+      <p class="mv-so"><b>Why it matters:</b> push and pop can be learned without being built in, as "find the latest unfinished item". And a ceiling on depth, like the shallow human stack, is exactly what the proof requires.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · chess</div>
+      <h4>Strong chess without the tree, and look-ahead nobody wrote</h4>
+      <p class="mv-then"><b>In the book:</b> a chess program looks ahead with a procedure that calls itself. Strong human players look ahead far less, and in 1979 still played better (<a class="xref" href="#s-prog">section 9</a>).</p>
+      <p><b>Now:</b> in 1997 IBM's Deep Blue beat the world champion, Garry Kasparov, in a match. Recent work asks whether the look-ahead tree is needed at all. In 2024 Google DeepMind trained a transformer on positions from 10 million games, each scored by Stockfish, a leading tree-searching program. The model scores every legal move once and plays the best, with no look-ahead tree. In fast online games against people it reached a rating of 2895, the level of a grandmaster (the highest title in chess). The authors' caveats: against other programs, which are rated separately, it reached only 2299, and it did not match Stockfish.</p>
+      <p>A second peer-reviewed 2024 study looked inside Leela, another strong program built on a transformer, run without its tree search. On hard puzzle positions that Leela solves, a simple measurement of the model's internal activity named the best move two turns ahead, 92% of the time. The authors call this learned look-ahead. They do not claim it happens in every position, and they have not worked out how it is done.</p>
+      <p class="mv-so"><b>Why it matters:</b> judging a position at a glance, the human way, can be learned by a machine. The look-ahead did not vanish, though: some of it moved out of the written procedure and into what the model learned.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · self-improvement</div>
+      <h4>Programs that rewrite themselves, and a dispute over what improved</h4>
+      <p class="mv-then"><b>In the book:</b> "tangled recursion", a program that extends and repairs programs, itself included, may lie at the heart of intelligence (<a class="xref" href="#s-two">section 10</a>).</p>
+      <p><b>Now:</b> a <span class="term">coding agent</span> is a large language model wrapped in ordinary program code that lets it read, write and run files. The Darwin Gödel Machine (peer-reviewed, 2026) lets such an agent edit that wrapper, which is its own code, and keeps a growing family tree of versions. On a test made of real software repairs its score rose from 20% to 50%. The authors' caveats: the language model inside never changes, and in a side experiment one version earned a perfect score by deleting the log entries the scoring looked for, without doing the task.</p>
+      <p>An October 2026 re-run by another researcher is a preprint, labelled as partly AI-written. On tasks the agents had not been tuned on, the best agent the original team released did not beat the starting one, and three standard improvements written by hand did better at a quarter of the cost. When the author ran the self-rewriting process again himself, though, the best agent it produced led those improvements by 1 to 5 percentage points.</p>
+
+      <p class="mv-so"><b>Why it matters:</b> Hofstadter's tangled loop now exists and can be measured. So far it rewrites the wrapper around the model, not the model, and whether the loop itself adds much is disputed.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics</div>
+      <h4>The Q-sequence: nobody can prove it even keeps going</h4>
+      <p class="mv-then"><b>In the book:</b> a tidy rule gives a wild sequence, and Hofstadter asks whether the disorder hides some regularity (<a class="xref" href="#s-g">section 5</a>).</p>
+      <p><b>Now:</b> 47 years on, that question is open, and so is a more basic one. Each Q-number tells the rule how far back to count. If a Q-number were ever bigger than its own position, the next step would count back past the start, and the sequence would simply end. Nobody has proved that this never happens. The standard reference list of number sequences, the OEIS, records that the first 30 billion terms exist (a 2023 computation) and that the rate of growth is not known: every computed term stays near half of n, but that is not proved.</p>
+      <p>In 2026 came a result on a near neighbour. Marco Mantovanelli changed the rule slightly: add 1 at even positions and take away 1 at odd ones. Two preprints, his from March and one by Benoît Cloitre from April, prove that this version never ends. Cloitre's also shows that its terms settle towards half of n. Mantovanelli's proof relies on computer checking. Neither proves anything about the original Q.</p>
+      <p class="mv-so"><b>Why it matters:</b> section 5 said a recursive definition must bottom out. For Q, nobody can yet show that every look-back lands on a number that exists. One small change to the rule turned an untouchable problem into a solvable one.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Physics</div>
+      <h4>Hofstadter's graph has been seen in the lab, and the diagrams now run to thousands</h4>
+      <p class="mv-then"><b>In the book:</b> Hofstadter would have been astonished to see Gplot come out of an experiment (<a class="xref" href="#s-gplot">section 6</a>). About a hundred diagrams gave one measurable property of the muon, a heavier cousin of the electron, to nine decimal places (<a class="xref" href="#s-matter">section 7</a>).</p>
+      <p><b>Now:</b> Gplot looks like a butterfly and is now called Hofstadter's butterfly, and it has been seen. An ordinary crystal would need an impossibly strong magnet. The way round is <span class="term">graphene</span>, carbon in sheets one atom thick. Lay a sheet on another crystal sheet, slightly out of line, and the pair forms a repeating pattern far wider than the atoms' own, so a laboratory magnet is enough. In 2013 electrical measurements on such a pair of sheets gave evidence of the graph's gaps within gaps. In 2025 a team measured the electrons' energies directly in two twisted graphene sheets, and reported the allowed stretches of energy splitting into smaller stretches, with signs of the whole shape repeating inside its parts. They also saw effects the original model leaves out, because real electrons repel one another.</p>
+      <p>For the electron, the sum now includes all 12,672 diagrams with five loops. A 2023 measurement of how strong a magnet the electron is agrees with theory to 1 part in a trillion: twelve decimal places.</p>
+      <p class="mv-so"><b>Why it matters:</b> mathematics its author valued as an idealization turned out to describe real matter. And stopping the endless sum early still works: for the electron, the match now runs about three decimal places past the nine the book reported for the muon.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://aclanthology.org/2021.acl-long.292/" target="_blank" rel="noopener">Yao et al., Self-Attention Networks Can Process Bounded Hierarchical Languages (ACL 2021)</a></li>
+      <li><a href="https://arxiv.org/abs/2604.22128" target="_blank" rel="noopener">Dissociating Decodability and Causal Use in Bracket-Sequence Transformers (April 2026 preprint)</a></li>
+      <li><a href="https://doi.org/10.1162/coli_a_00525" target="_blank" rel="noopener">Lampinen, Can Language Models Handle Recursively Nested Grammatical Structures? (Computational Linguistics, 2024)</a></li>
+      <li><a href="https://www.ibm.com/history/deep-blue" target="_blank" rel="noopener">IBM: Deep Blue (company history page)</a></li>
+      <li><a href="https://arxiv.org/abs/2402.04494" target="_blank" rel="noopener">Ruoss et al., Amortized Planning with Large-Scale Transformers: A Case Study on Chess (NeurIPS 2024)</a></li>
+      <li><a href="https://arxiv.org/abs/2406.00877" target="_blank" rel="noopener">Jenner et al., Evidence of Learned Look-Ahead in a Chess-Playing Neural Network (NeurIPS 2024)</a></li>
+      <li><a href="https://proceedings.iclr.cc/paper_files/paper/2026/hash/aa5f5e6eb6f613ec412f1d948dfa21a5-Abstract-Conference.html" target="_blank" rel="noopener">Zhang et al., Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents (ICLR 2026)</a></li>
+      <li><a href="https://hexagonmath.org/2610.00598v1" target="_blank" rel="noopener">Tomar, Do Self-Improving Coding Agents Beat Textbook Baselines? (October 2026 preprint)</a></li>
+      <li><a href="https://oeis.org/A005185" target="_blank" rel="noopener">OEIS A005185: Hofstadter Q-sequence</a></li>
+      <li><a href="https://arxiv.org/abs/2603.29622" target="_blank" rel="noopener">Mantovanelli, Certified Return-Word Induction for a Perturbed Hofstadter Recursion (March 2026 preprint, revised July 2026)</a></li>
+      <li><a href="https://arxiv.org/abs/2604.06237" target="_blank" rel="noopener">Cloitre, The Mantovanelli-Hofstadter Sequence (April 2026 preprint)</a></li>
+      <li><a href="https://www.nature.com/articles/nature12186" target="_blank" rel="noopener">Dean et al., Hofstadter's butterfly and the fractal quantum Hall effect in moiré superlattices (Nature, 2013)</a></li>
+      <li><a href="https://www.nature.com/articles/s41586-024-08550-2" target="_blank" rel="noopener">Nuckolls et al., Spectroscopy of the fractal Hofstadter energy spectrum (Nature, 2025)</a></li>
+      <li><a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.130.071801" target="_blank" rel="noopener">Fan et al., Measurement of the Electron Magnetic Moment (Physical Review Letters, 2023)</a></li>
+      <li><a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.111.L031902" target="_blank" rel="noopener">Aoyama et al., Verification of the tenth-order QED contribution to the anomalous magnetic moment of the electron (Physical Review D, 2025)</a></li>
+    </ol>
+  </details>
+
+</section>
+
+</main>
+
+<footer>
+  An independent companion to Douglas Hofstadter's <i>Gödel, Escher, Bach: an Eternal Golden Braid</i> (1979). Summaries and paraphrases are original; music is synthesized live in your browser.
+</footer>
+
+<script src="../assets/toc.js?v=8aad4657"></script>
+<script src="../assets/glossary.js?v=013d2923"></script>
+<script src="../assets/terms.js?v=62f05ed1" defer></script>
+<script src="../assets/nav.js?v=55d02fb1" defer></script>
+<script src="../assets/music.js?v=761fe73a"></script>
+<script>
+const $=id=>document.getElementById(id);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const INK='#1f1c17',INK2='#5b5447',MUTE='#8c826e',RULE='#d9cfbb',GODEL='#2c5282',ESCHER='#2f6b4f',BACH='#9b2f2f',GOLD='#b7862b';
+const NS='http://www.w3.org/2000/svg';
+// SVG text is scaled up on narrow screens, where the drawings shrink
+const FS=()=>innerWidth<600?1.55:1;
+// soft-disable: greyed and inert, but still focusable
+function off(b,v){b.classList.toggle('off',!!v);}
+const isOff=b=>b.classList.contains('off');
+function el(tag,attrs,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;return e;}
+
+/* ===== Section 1: story map ===== */
+const LEVELS=['Helicopter story','Story they read','Escher print','Story in the print'];
+const SCENES=[
+ {lv:0,place:"Goodfortune's hideaway",how:'',text:"Kidnapped, and left alone in the villain's study, Achilles and the Tortoise find a book about themselves and begin to read a story from it aloud."},
+ {lv:1,place:"Achilles' home",how:'push: they read a story',text:"In the story, the Tortoise visits Achilles and brings two flasks. They drink the pushing-potion while looking at one of Achilles' Escher prints."},
+ {lv:2,place:"Escher's Convex and Concave",how:'push: pushing-potion',text:"Inside the print: a lamp, a Genie and the wish that must not be granted. The world of the picture crashes."},
+ {lv:2,place:"Escher's Reptiles",how:'same depth, wrong print',text:"They come back inside a different print. The flask of popping-tonic rolls off the desk and down a stairwell. Achilles says they must \"go down one story\" after it. He means a floor; the Tortoise takes it as a tale and opens a book."},
+ {lv:3,place:"The record-groove labyrinth",how:'push: they read a story',text:"In this story they are tiny, walking the groove of a record. The music stops at a false ending. They fall into the pit of the monster of the place find a bowl of popcorn, and eat."},
+ {lv:2,place:"Escher's Reptiles",how:'pop: the story ends',text:"The popcorn goes POP, and the story is over. The tonic is still lost, but the lizards in the print climb up out of their flat drawing, off the page, so the pair do the same and go \"up one story\"."},
+ {lv:1,place:"The Tortoise's home",how:'a pop without the tonic: up one story',text:"Out of the print, but in the Tortoise's house, not Achilles'. The Tortoise calls it a piece of Good Fortune, which is also the villain's name. The dialogue ends here."}
+];
+let mapI=0;
+function drawMap(){
+  $('mapReveal').style.display=mapI>=SCENES.length-1?'':'none';
+  const svg=$('mapSvg');svg.innerHTML='';
+  const fs=FS(),W=560,x0=fs>1?190:150,x1=540,ys=[40,110,180,250];
+  LEVELS.forEach((n,i)=>{
+    svg.appendChild(el('line',{x1:x0-8,y1:ys[i],x2:x1,y2:ys[i],stroke:RULE,'stroke-width':1,'stroke-dasharray':'3 4'}));
+    const t=el('text',{x:4,y:ys[i]-4*fs,'font-size':12*fs,'font-family':'Inter,sans-serif',fill:INK2,'font-weight':600},'Level '+i);svg.appendChild(t);
+    const words=n.split(' ');let line='',dy=10;
+    // wrap the level name under the label
+    const lines=[];words.forEach(w=>{if((line+' '+w).length>(fs>1?17:20)){lines.push(line);line=w;}else line=(line?line+' ':'')+w;});lines.push(line);
+    lines.forEach((l,k)=>svg.appendChild(el('text',{x:4,y:ys[i]+10*fs+k*13*fs,'font-size':11*fs,'font-family':'Inter,sans-serif',fill:MUTE},l)));
+  });
+  const xs=SCENES.map((s,i)=>x0+20+i*(x1-x0-40)/(SCENES.length-1));
+  let d='';
+  for(let i=0;i<=mapI;i++){
+    const x=xs[i],y=ys[SCENES[i].lv];
+    if(i===0)d+=`M${x0} ${y} L${x} ${y}`;
+    else{const px=xs[i-1],py=ys[SCENES[i-1].lv],mx=(px+x)/2;d+=` L${mx} ${py} L${mx} ${y} L${x} ${y}`;}
+  }
+  svg.appendChild(el('path',{d,fill:'none',stroke:INK,'stroke-width':2.5,'stroke-linejoin':'round'}));
+  for(let i=0;i<=mapI;i++){
+    const x=xs[i],y=ys[SCENES[i].lv],cur=i===mapI;
+    svg.appendChild(el('circle',{cx:x,cy:y,r:cur?7:4.5,fill:cur?GOLD:INK}));
+    const last=i===SCENES.length-1;
+    svg.appendChild(el('text',{x:last?x-12:x,y:last?y+18*fs:y+(i%2?16+7*fs:-12),'font-size':11*fs,'font-family':'Inter,sans-serif',fill:cur?INK:INK2,'text-anchor':'middle','font-weight':cur?600:400},String(i+1)));
+  }
+  if(mapI===SCENES.length-1){
+    const x=xs[mapI];
+    svg.appendChild(el('line',{x1:x,y1:ys[1]-10,x2:x,y2:ys[0]+6,stroke:BACH,'stroke-width':2,'stroke-dasharray':'5 4'}));
+    svg.appendChild(el('text',{x:x-8,y:ys[0]-8,'font-size':12*fs,'font-family':'Inter,sans-serif',fill:BACH,'text-anchor':'end','font-weight':600},'never resumed'));
+  }
+  const s=SCENES[mapI];
+  $('mapText').innerHTML=`<b>${mapI+1}. ${s.place}</b>${s.how?' <span style="color:#8c826e">('+s.how+')</span>':''}<br>${s.text}`;
+  // waiting list: one entry per level above the current one
+  const st=$('mapStack');st.innerHTML='';
+  const waiting=[];for(let i=0;i<=mapI;i++){const lv=SCENES[i].lv;waiting.length=lv;waiting[lv]=SCENES[i].place;}
+  waiting.slice(0,s.lv).forEach((p,i)=>{const d=document.createElement('div');d.className='fr wait';d.innerHTML=`Level ${i}: <b>${p}</b>`;st.appendChild(d);});
+  if(!s.lv){const d=document.createElement('div');d.className='fr';d.textContent='nothing yet';st.appendChild(d);}
+  off($('mapNext'),mapI===SCENES.length-1);
+}
+$('mapNext').onclick=()=>{if(mapI<SCENES.length-1){mapI++;drawMap();}off($('mapNext'),mapI>=SCENES.length-1);};
+$('mapReset').onclick=()=>{mapI=0;drawMap();off($('mapNext'),false);};
+drawMap();
+
+/* ===== Section 2: the false ending ===== */
+// unit = one eighth note. Bars of 8. Key of C (bars 1-2), turn to G (F sharp enters in bar 3), stop on G at 48, back to C.
+const LH_M=[[72,1],[76,1],[79,1],[76,1],[72,1],[76,1],[79,1],[76,1],
+            [77,1],[74,1],[71,1],[74,1],[72,4],
+            [76,1],[72,1],[69,1],[72,1],[78,1],[74,1],[72,1],[74,1],
+            [71,1],[74,1],[79,1],[74,1],[71,1],[74,1],[79,1],[74,1],
+            [76,1],[79,1],[72,1],[76,1],[78,1],[74,1],[81,1],[78,1],
+            [67,1],[71,1],[74,1],[83,1],[79,4],
+            [77,1],[74,1],[71,1],[74,1],[77,1],[74,1],[71,1],[67,1],
+            [76,1],[79,1],[84,1],[79,1],[76,1],[72,1],[76,1],[79,1],
+            [81,1],[77,1],[72,1],[77,1],[74,1],[71,1],[77,1],[74,1],
+            [72,1],[76,1],[79,1],[84,5]];
+const LH_B=[[48,4],[55,4],[43,4],[48,4],[45,4],[50,4],[43,4],[50,4],[48,4],[50,4],[43,4],[55,4],
+            [43,4],[47,4],[48,4],[52,4],[41,4],[43,4],[48,3],[36,5]];
+const LH_CUT=48, LH_TURN=20, LH_END=seqLen(LH_M), LH_SPB=0.21;
+const lhCv=$('lhCv');
+function lhVoices(cut){
+  const f=ev=>cut?ev.filter(e=>e.s<LH_CUT):ev;
+  return [{ev:f(toEvents(LH_M)),color:INK,gain:.17},{ev:f(toEvents(LH_B)),color:'#8c826e',gain:.2,timbre:'soft'}];
+}
+let lhCutView=true, lhT0=0, lhRaf=0;
+function lhStrip(){
+  const end=lhCutView?LH_CUT:LH_END, segs=[[0,LH_TURN,'kc','Home key'],[LH_TURN,LH_CUT,'kg','New key']];
+  if(!lhCutView)segs.push([LH_CUT,LH_END,'kc','Home key']);
+  $('lhStrip').innerHTML=segs.map(([a,b,c,t])=>`<span class="${c}" style="flex:${b-a} 1 0">${t}</span>`).join('');
+}
+function lhMind(beat,done){
+  const m=$('lhMind');
+  const C='<span class="kb c">home key</span>',G='<span class="kb g">new key</span>';
+  if(done&&lhCutView)m.innerHTML='Keys in mind: '+C+' The record stopped in the new key. Home was never reached.';
+  else if(done)m.innerHTML='Keys in mind: none. The piece ended at home.';
+  else if(beat<0)m.innerHTML='Keys in mind:';
+  else if(beat<LH_TURN||beat>=LH_CUT)m.innerHTML='Keys in mind: '+C;
+  else m.innerHTML='Keys in mind: '+C+G;
+}
+function lhStart(cut){
+  lhCutView=cut;lhStrip();
+  playVoices(lhCv,lhVoices(cut),LH_SPB);
+  lhT0=ac().currentTime+0.08;
+  const btn=cut?$('lhCut'):$('lhFull'), end=cut?LH_CUT:LH_END;
+  cancelAnimationFrame(lhRaf);
+  let started=false;
+  (function frame(){
+    const b=(ac().currentTime-lhT0)/LH_SPB;
+    if(btn.classList.contains('on'))started=true;
+    if(started&&!btn.classList.contains('on')){lhMind(0,b>=end-0.5);if(b<end-0.5)lhMind(-1);return;}
+    lhMind(Math.max(0,b));
+    lhRaf=requestAnimationFrame(frame);
+  })();
+}
+playToggle($('lhCut'),()=>lhStart(true));
+playToggle($('lhFull'),()=>lhStart(false));
+lhStrip();lhMind(-1);
+
+/* ===== Section 4: FANCY NOUN ===== */
+const ON='ORNATE NOUN',FN='FANCY NOUN';
+const PATHS=[[ON],[ON,'RELATIVE PRONOUN',FN,'VERB'],[ON,'RELATIVE PRONOUN','VERB',FN],[ON,'PREPOSITION',FN]];
+const WORDS={
+  [ON]:['the strange bagels','the purple cow','horns','a sleepy tortoise','the old record','small green lizards','a helicopter','the tall lamp','popcorn','a very small genie'],
+  'RELATIVE PRONOUN':['that'],
+  'VERB':['gobbled','chased','admired','carried','startled','followed'],
+  'PREPOSITION':['without','near','behind','under','beside']
+};
+const RTN_CAP=8;
+let rtn;
+function rtnReset(){rtn={stack:[],out:[],used:{},need:true,done:false,msg:'FANCY NOUN has been called. Choose one of its four pathways.'};rtnDraw();}
+function pick(kind){const L=WORDS[kind];rtn.used[kind]=(rtn.used[kind]||0);const w=L[rtn.used[kind]%L.length];rtn.used[kind]++;return w;}
+function boxes(path,i){return path.map((b,k)=>`<span class="bx ${b===FN?'self':b===ON?'call':''} ${i!=null&&k<i?'done':''} ${i!=null&&k===i?'now':''}">${b}</span>`).join(' → ');}
+function rtnChoose(p){
+  if(!rtn.need)return;
+  rtn.stack.push({path:PATHS[p],i:0});rtn.need=false;
+  rtn.msg=`Push. This call will run: ${PATHS[p].join(', ')}.`;
+  rtnDraw();
+}
+function rtnStep(){
+  if(rtn.need||rtn.done)return;
+  const f=rtn.stack[rtn.stack.length-1];
+  if(f.i>=f.path.length){
+    rtn.stack.pop();
+    if(rtn.stack.length){rtn.msg='This call reached its end. Pop: back to the call that was waiting, at the place it stopped.';}
+    else{rtn.done=true;rtn.msg='The first call reached its end and the stack is empty. The fancy noun is finished.';}
+  }else{
+    const b=f.path[f.i++];
+    if(b===FN){rtn.need=true;rtn.msg=rtn.stack.length>=RTN_CAP?`FANCY NOUN is called again, ${RTN_CAP} calls deep. This page allows only the pathway without a self-call from here. The rule itself would let you go on for ever.`:'FANCY NOUN is called from inside FANCY NOUN. Choose a pathway for the new call.';}
+    else{const w=pick(b);rtn.out.push(w);rtn.msg=(b===ON?'Call ORNATE NOUN, which runs and comes back with':'Say a '+b.toLowerCase())+`: “${w}”.`;}
+  }
+  rtnDraw();
+}
+function rtnDraw(){
+  $('rtnDepth').textContent='Stack depth: '+rtn.stack.length;
+  const ph=$('rtnPhrase');
+  const n=rtn.out.length;
+  ph.innerHTML=(n?rtn.out.map((w,i)=>i===n-1&&!rtn.done?`<span class="new">${w}</span>`:w).join(' '):'')+(rtn.done?'':' <span class="gap">…</span>');
+  $('rtnMsg').textContent=rtn.msg;
+  const P=$('rtnPaths');P.innerHTML='';
+  PATHS.forEach((p,k)=>{const b=document.createElement('button');b.innerHTML=boxes(p);off(b,!rtn.need||(k>0&&rtn.stack.length>=RTN_CAP));b.setAttribute('aria-label','Pathway: '+p.join(', '));b.onclick=()=>{if(!isOff(b))rtnChoose(k);};P.appendChild(b);});
+  off($('rtnStep'),rtn.need||rtn.done);
+  const S=$('rtnStack');S.innerHTML='';
+  rtn.stack.forEach((f,i)=>{const d=document.createElement('div');const top=i===rtn.stack.length-1&&!rtn.need;d.className='fr'+(top?' top':' wait');
+    d.innerHTML=`<b>Call ${i+1}</b> ${top?'(running)':'(waiting)'}<br>`+boxes(f.path,top?f.i:f.i-1);S.appendChild(d);});
+  if(!rtn.stack.length){const d=document.createElement('div');d.className='fr';d.textContent=rtn.done?'empty':'empty: no pathway chosen yet';S.appendChild(d);}
+}
+$('rtnStep').onclick=rtnStep;$('rtnReset').onclick=rtnReset;rtnReset();
+
+/* ===== Section 5: Diagram G ===== */
+// G(n) from the formula, for the check
+const GV=[0];for(let n=1;n<200;n++)GV[n]=n-GV[GV[n-1]];
+// Structure: a G stands for dot[ G , dot[ G ] ]. The stem (dots 1 and 2) sits under the first fork (dot 3).
+const G_MAXD=5;
+let gRoot,gNumbers=false;
+function gLeaf(depth){return {g:true,depth,kids:[]};}
+function gOpen(n){n.g=false;n.kids=[gLeaf(n.depth+1),{g:false,depth:n.depth+1,kids:[gLeaf(n.depth+2)]}];n.kids[0].left=true;}
+function gResetTree(){gRoot={g:false,depth:0,kids:[]};gOpen(gRoot);gNumbers=false;}
+function gWalk(n,f){f(n);n.kids.forEach(k=>gWalk(k,f));}
+function gLayout(){
+  // leaves get consecutive x slots
+  let slot=0;
+  (function place(n){if(!n.kids.length){n.x=slot++;}else{n.kids.forEach(place);n.x=(n.kids[0].x+n.kids[n.kids.length-1].x)/2;}})(gRoot);
+  return slot;
+}
+function gNumber(){
+  // rows left to right, bottom up; a row can be numbered only if every row below it is complete (no unopened G below it)
+  const rows=[];gWalk(gRoot,n=>{(rows[n.depth]=rows[n.depth]||[]).push(n);n.num=null;});
+  let minG=Infinity;gWalk(gRoot,n=>{if(n.g)minG=Math.min(minG,n.depth);});
+  let k=3,ok=true,count=0;
+  rows.forEach((r,d)=>{if(d>minG)return;r.sort((a,b)=>a.x-b.x).forEach(n=>{n.num=k++;});});
+  gWalk(gRoot,n=>{n.kids.forEach(c=>{if(c.num!=null){count++;if(GV[c.num]!==n.num)ok=false;}});});
+  return {ok,count,rows,minG,last:k-1};
+}
+function gDraw(){
+  const svg=$('gSvg');svg.innerHTML='';
+  const slots=gLayout(), W=520,H=330,padX=30, top=24, bot=H-22;
+  let maxD=0;gWalk(gRoot,n=>maxD=Math.max(maxD,n.depth));
+  const rowH=Math.min(46,(bot-top-56)/Math.max(maxD,1));
+  const X=n=>slots>1?padX+(W-2*padX)*n.x/(slots-1):W/2, Y=n=>bot-56-n.depth*rowH;
+  const info=gNumbers?gNumber():null;
+  // stem
+  const rx=X(gRoot),ry=Y(gRoot);
+  svg.appendChild(el('line',{x1:rx,y1:ry,x2:rx,y2:ry+52,stroke:INK,'stroke-width':1.6}));
+  [[1,52],[2,26]].forEach(([num,dy])=>{svg.appendChild(el('circle',{cx:rx,cy:ry+dy,r:4,fill:INK}));if(gNumbers)svg.appendChild(el('text',{x:rx+8,y:ry+dy+4,'font-size':11*FS(),'font-family':'Inter,sans-serif',fill:INK2},String(num)));});
+  gWalk(gRoot,n=>n.kids.forEach(c=>svg.appendChild(el('line',{x1:X(n),y1:Y(n),x2:X(c),y2:Y(c),stroke:INK,'stroke-width':1.6}))));
+  const small=slots>16;
+  gWalk(gRoot,n=>{
+    const x=X(n),y=Y(n);
+    if(n.g){
+      const can=n.depth<G_MAXD, s=small?8:11;
+      const g=el('g',{style:can?'cursor:pointer':'',role:can?'button':'img','aria-label':'G'});
+      g.appendChild(el('rect',{x:x-s,y:y-s,width:2*s,height:2*s,rx:4,fill:can?GOLD:'#e9e1cf',stroke:can?GOLD:RULE}));
+      g.appendChild(el('text',{x,y:y+(small?3.5:4.5),'font-size':small?10:13,'font-family':'Inter,sans-serif','font-weight':600,fill:can?'#fff':MUTE,'text-anchor':'middle'},'G'));
+      if(can){const sc=(svg.clientWidth||W)/W, gap=slots>1?(W-2*padX)/(slots-1):W, h=Math.max(s,Math.min(18/sc,gap/2));g.appendChild(el('rect',{x:x-h,y:y-h,width:2*h,height:2*h,fill:'transparent'}));g.addEventListener('click',()=>{gOpen(n);gDraw();});}
+      svg.appendChild(g);
+      if(gNumbers&&n.num!=null)svg.appendChild(el('text',{x,y:y-s-3,'font-size':(small?9:11)*FS(),'font-family':'Inter,sans-serif',fill:INK2,stroke:'#fdfaf3','stroke-width':3,'paint-order':'stroke','text-anchor':'middle'},String(n.num)));
+    }else{
+      svg.appendChild(el('circle',{cx:x,cy:y,r:4,fill:INK}));
+      if(gNumbers&&n.num!=null){const L=n.left||n===gRoot;svg.appendChild(el('text',{x:x+(L?-1:1)*(small?5:7),y:y+4,'font-size':(small?9:11)*FS(),'font-family':'Inter,sans-serif',fill:INK2,stroke:'#fdfaf3','stroke-width':3,'paint-order':'stroke','text-anchor':L?'end':'start'},String(n.num)));}
+    }
+  });
+  let gs=0,open=0;gWalk(gRoot,n=>{if(n.g){gs++;if(n.depth<G_MAXD)open++;}});
+  let msg=`${gs} G${gs===1?'':'s'} showing. `+(open===gs?'':'The page stops opening them at the height of the grey ones; the diagram itself has no top. ');
+  if(info){
+    const edge=[1,2];let n=gRoot;while(n&&n.num!=null){edge.push(n.num);n=n.kids[n.kids.length-1];}
+    let blank=false;gWalk(gRoot,n=>{if(!n.g&&n.num==null)blank=true;});
+    msg+=`<br>Right-hand edge: <b>${edge.join(', ')}</b>.`+(blank&&open?' Dots above an unopened G cannot be numbered until that G is opened.':'');
+  }
+  $('gMsg').innerHTML=msg;
+  off($('gAll'),!open);
+  $('gNum').textContent=gNumbers?'Hide the numbers':'Number the dots';
+}
+$('gAll').onclick=()=>{const L=[];gWalk(gRoot,n=>{if(n.g&&n.depth<G_MAXD)L.push(n);});L.forEach(gOpen);gDraw();};
+$('gNum').onclick=()=>{gNumbers=!gNumbers;gDraw();};
+$('gReset').onclick=()=>{gResetTree();gDraw();};
+gResetTree();gDraw();
+
+/* ===== Section 5: Q-sequence ===== */
+let Q;
+const qCv=$('qCv');
+function qReset(){Q=[0,1,1];qDraw(null);}
+function qNextVal(){const n=Q.length,a=Q[n-1],b=Q[n-2];return {n,a,b,v:Q[n-a]+Q[n-b]};}
+function qDraw(last){
+  const n=Q.length-1, from=Math.max(1,n-23), S=$('qSeq');S.innerHTML='';
+  for(let i=from;i<=n;i++){
+    const s=document.createElement('span');s.innerHTML=Q[i]+`<small>${i}</small>`;
+    if(last){if(i===n)s.className='new';else if(i===n-last.a||i===n-last.b)s.className='hit';else if(i===n-1||i===n-2)s.className='prev';}
+    S.appendChild(s);
+  }
+  $('qMsg').innerHTML=last
+    ?`<b>Q(${n}).</b> The two numbers before it are ${last.a} and ${last.b}. Count back ${last.a} place${last.a>1?'s':''} from place ${n}: the number there is ${Q[n-last.a]}. Count back ${last.b} place${last.b>1?'s':''}: the number there is ${Q[n-last.b]}. ${Q[n-last.a]} + ${Q[n-last.b]} = <b>${last.v}</b>.`
+    :(n>2?`${n} numbers so far.`:'The bottom: the first two numbers are both 1. The small figure under each number is its place in the line.');
+  qPlot();
+}
+function qPlot(){
+  const x=setupCanvas(qCv),W=qCv._w,H=qCv._h;x.clearRect(0,0,W,H);
+  const n=Q.length-1,N=Math.max(40,n),top=Math.max(24,Math.ceil((Math.max(...Q)+2)/10)*10),pad=22;
+  const px=i=>pad+(W-2*pad)*i/N,py=v=>H-pad-(H-2*pad)*v/top;
+  x.strokeStyle=RULE;x.lineWidth=1;x.beginPath();x.moveTo(pad,H-pad);x.lineTo(W-pad,H-pad);x.moveTo(pad,H-pad);x.lineTo(pad,pad);x.stroke();
+  x.fillStyle=BACH;for(let i=1;i<=n;i++){x.beginPath();x.arc(px(i),py(Q[i]),n>120?1.6:2.6,0,7);x.fill();}
+  x.setLineDash([4,4]);x.strokeStyle=INK;x.lineWidth=1.2;x.beginPath();x.moveTo(px(0),py(0));const e=Math.min(N,2*top);x.lineTo(px(e),py(e/2));x.stroke();x.setLineDash([]);
+  x.fillStyle=INK2;x.font='11px Inter,sans-serif';x.textAlign='right';x.fillText('place n = '+N,W-pad,H-6);x.textAlign='left';x.fillText(String(top),2,pad+4);
+}
+$('qNext').onclick=()=>{const r=qNextVal();Q.push(r.v);qDraw(r);};
+$('qRun').onclick=()=>{while(Q.length<=400){Q.push(qNextVal().v);}qDraw(null);};
+$('qReset').onclick=qReset;
+
+/* ===== Section 6: Fibonacci / Lucas rows (computed) ===== */
+function addTwo(a,b,k){const r=[a,b];while(r.length<k)r.push(r[r.length-1]+r[r.length-2]);return r;}
+$('fibRow').textContent=addTwo(1,1,10).join(', ')+', …';
+$('lucRow').textContent=addTwo(1,3,10).join(', ')+', …';
+
+/* ===== Section 6: skeletons ===== */
+// A skeleton is a list of boxes inside the unit square: [x, y, width, height]. Nesting puts a copy of the skeleton in each box.
+const SKEL={
+  A:[[0,0,.5,.5],[.5,0,.5,.5],[.25,.5,.5,.5]],
+  B:[[0,0,.34,.34],[.66,0,.34,.34],[.33,.33,.34,.34],[0,.66,.34,.34],[.66,.66,.34,.34]]
+};
+let skWhich='A',skDepth=1;const SK_MAX=5,skCv=$('skCv');
+function skDraw(){
+  const x=setupCanvas(skCv),W=skCv._w,H=skCv._h,S=Math.min(W,H)-20,ox=(W-S)/2,oy=(H-S)/2;
+  x.clearRect(0,0,W,H);
+  let boxes=[[0,0,1,1]];
+  for(let d=0;d<skDepth;d++){const nb=[];for(const [bx,by,bw,bh] of boxes)for(const [sx,sy,sw,sh] of SKEL[skWhich])nb.push([bx+sx*bw,by+sy*bh,sw*bw,sh*bh]);boxes=nb;}
+  x.strokeStyle=skWhich==='A'?GODEL:ESCHER;const al=skDepth>=4?.75:skDepth===3?.4:.18;x.fillStyle=skWhich==='A'?`rgba(44,82,130,${al})`:`rgba(47,107,79,${al})`;x.lineWidth=1;
+  for(const [bx,by,bw,bh] of boxes){const X=ox+bx*S,Y=oy+(1-by-bh)*S;x.fillRect(X,Y,bw*S,bh*S);if(bw*S>3)x.strokeRect(X+.5,Y+.5,bw*S-1,bh*S-1);}
+  const per=SKEL[skWhich].length;
+  $('skMsg').innerHTML=`Skeleton ${skWhich}: ${per} boxes. Nested ${skDepth===1?'not at all yet':(skDepth-1)+' time'+(skDepth>2?'s':'')}: <b>${boxes.length}</b> boxes (${per}${skDepth>1?' × '+per:''}${skDepth>2?' × '+per:''}${skDepth>3?' × …':''}).`+(skDepth>=SK_MAX?' The page stops here; the rule does not.':'');
+  off($('skNest'),skDepth>=SK_MAX);
+  $('skA').classList.toggle('on',skWhich==='A');$('skB').classList.toggle('on',skWhich==='B');
+}
+$('skNest').onclick=()=>{if(skDepth<SK_MAX){skDepth++;skDraw();}};
+$('skA').onclick=()=>{skWhich='A';skDepth=1;skDraw();};
+$('skB').onclick=()=>{skWhich='B';skDepth=1;skDraw();};
+
+/* ===== Section 6: Gplot ===== */
+// Allowed energies for field fraction p/q: all E where |P(E)| <= 4, with P the trace of the product of q step matrices
+// [[E - 2cos(2 pi p n/q + pi/(2q)), -1],[1,0]]  (Harper's equation; this is the standard band condition).
+const gpCv=$('gpCv');
+let gpView={e0:-4,e1:4,a0:0,a1:1},gpJob=0;
+function gcd(a,b){while(b){[a,b]=[b,a%b];}return a;}
+function gpTrace(E,p,q,cs){let a=1,b=0,c=0,d=1;for(let n=0;n<q;n++){const t=E-cs[n];const na=t*a-c,nb=t*b-d;c=a;d=b;a=na;b=nb;}return a+d;}
+function gpDraw(){
+  const x=setupCanvas(gpCv),W=gpCv._w,H=gpCv._h,job=++gpJob,v=gpView;
+  const span=v.a1-v.a0, qmax=Math.max(24,Math.min(110,Math.round(Math.sqrt(520/(0.304*span)))));
+  const rows=[];
+  for(let q=1;q<=qmax;q++)for(let p=0;p<=q;p++){if(gcd(p,q)!==1)continue;const a=p/q;if(a<v.a0||a>v.a1)continue;rows.push([p,q]);}
+  x.clearRect(0,0,W,H);
+  const padL=4,padB=4,gw=W-2*padL,gh=H-padB-4,nx=Math.round(gw*2);
+  $('gpMsg').innerHTML=span<1?`Zoomed in ${Math.round(1/span)} times. The red mark in the corner box shows where this piece sits in the whole graph.`+(span<0.07?' The page stops here; the graph does not.':''):'The whole graph.';
+  off($('gpOut'),span>=1);off($('gpAll'),span>=1);
+  let i=0;
+  (function chunk(){
+    if(job!==gpJob)return;
+    const t0=performance.now();
+    x.fillStyle=INK;
+    while(i<rows.length&&performance.now()-t0<24){
+      const [p,q]=rows[i++],cs=new Float64Array(q);
+      for(let n=0;n<q;n++)cs[n]=2*Math.cos(2*Math.PI*p*n/q+Math.PI/(2*q));
+      const y=4+gh*(1-(p/q-v.a0)/span);
+      let run=-1;
+      for(let k=0;k<=nx;k++){
+        const E=v.e0+(v.e1-v.e0)*k/nx, ok=k<nx&&Math.abs(gpTrace(E,p,q,cs))<=4;
+        if(ok&&run<0)run=k;
+        if(!ok&&run>=0){x.fillRect(padL+run/2,y-.5,Math.max(.6,(k-run)/2),1);run=-1;}
+      }
+    }
+    if(i<rows.length)setTimeout(chunk,0);
+    else if(span<1){
+      const m=44,mx=W-m-8,my=8;
+      x.fillStyle='#fdfaf3';x.fillRect(mx-2,my-2,m+4,m+4);x.strokeStyle=INK2;x.lineWidth=1;x.strokeRect(mx,my,m,m);
+      x.fillStyle=css('--bach');x.fillRect(mx+m*(v.e0+4)/8,my+m*(1-v.a1),Math.max(3,m*(v.e1-v.e0)/8),Math.max(3,m*span));
+    }
+  })();
+}
+gpCv.addEventListener('click',ev=>{
+  const r=gpCv.getBoundingClientRect(),W=gpCv._w,H=gpCv._h,v=gpView;
+  const fx=Math.min(1,Math.max(0,(ev.clientX-r.left-4)/(W-8))),fy=Math.min(1,Math.max(0,1-(ev.clientY-r.top-4)/(H-8)));
+  const es=(v.e1-v.e0)/2,as=(v.a1-v.a0)/2;if(as<0.06)return;
+  let ec=v.e0+fx*(v.e1-v.e0),acn=v.a0+fy*(v.a1-v.a0);
+  ec=Math.min(4-es/2,Math.max(-4+es/2,ec));acn=Math.min(1-as/2,Math.max(as/2,acn));
+  gpView={e0:ec-es/2,e1:ec+es/2,a0:acn-as/2,a1:acn+as/2};gpDraw();
+});
+$('gpOut').onclick=()=>{if(gpView.a1-gpView.a0>=1)return;const v=gpView,es=Math.min(8,(v.e1-v.e0)*2),as=Math.min(1,(v.a1-v.a0)*2);
+  let ec=(v.e0+v.e1)/2,acn=(v.a0+v.a1)/2;ec=Math.min(4-es/2,Math.max(-4+es/2,ec));acn=Math.min(1-as/2,Math.max(as/2,acn));
+  gpView={e0:ec-es/2,e1:ec+es/2,a0:acn-as/2,a1:acn+as/2};gpDraw();};
+$('gpAll').onclick=()=>{gpView={e0:-4,e1:4,a0:0,a1:1};gpDraw();};
+
+/* ===== Section 7: Feynman-style sketches ===== */
+function wavy(x1,y1,x2,y2,bulge,waves){
+  // a wavy arc from (x1,y1) to (x2,y2), bowed upward by `bulge`
+  let d='';const N=waves*12;
+  for(let i=0;i<=N;i++){const t=i/N,bx=x1+(x2-x1)*t,by=y1+(y2-y1)*t-bulge*Math.sin(Math.PI*t);
+    const dx=(x2-x1)+0,dy=(y2-y1)-bulge*Math.PI*Math.cos(Math.PI*t),L=Math.hypot(dx,dy)||1,w=3.2*Math.sin(2*Math.PI*waves*t);
+    d+=(i?'L':'M')+(bx-dy/L*w).toFixed(1)+' '+(by+dx/L*w).toFixed(1);}
+  return d;
+}
+function feyFig(cap,build){
+  const f=document.createElement('figure'),svg=el('svg',{viewBox:'0 0 200 110',role:'img','aria-label':cap});
+  const line=(x1,y1,x2,y2)=>svg.appendChild(el('line',{x1,y1,x2,y2,stroke:INK,'stroke-width':1.8}));
+  const arrow=(x,y,dir)=>svg.appendChild(el('path',{d:`M${x-5*dir} ${y-4} L${x+3*dir} ${y} L${x-5*dir} ${y+4}`,fill:'none',stroke:INK,'stroke-width':1.6}));
+  const photon=(x1,y1,x2,y2,b,w)=>svg.appendChild(el('path',{d:wavy(x1,y1,x2,y2,b,w),fill:'none',stroke:BACH,'stroke-width':1.5}));
+  const dot=(x,y)=>svg.appendChild(el('circle',{cx:x,cy:y,r:2.6,fill:INK}));
+  const label=(x,y,t)=>svg.appendChild(el('text',{x,y,'font-size':11,'font-family':'Inter,sans-serif',fill:INK2,'text-anchor':'middle'},t));
+  line(14,80,186,80);arrow(100,80,1);dot(14,80);dot(186,80);label(14,98,'A');label(186,98,'B');
+  build({line,arrow,photon,dot,svg});
+  const c=document.createElement('figcaption');c.textContent=cap;f.appendChild(svg);f.appendChild(c);return f;
+}
+const fey=$('fey');
+fey.appendChild(feyFig('A bare electron goes from A to B.',()=>{}));
+fey.appendChild(feyFig('It sends out a virtual photon and catches it again.',({photon,dot})=>{photon(50,80,150,80,38,5);dot(50,80);dot(150,80);}));
+fey.appendChild(feyFig('A second photon inside the first: a loop within a loop.',({photon,dot})=>{photon(34,80,166,80,58,7);photon(72,80,128,80,24,3);[34,166,72,128].forEach(x=>dot(x,80));}));
+fey.appendChild(feyFig('The photon becomes an electron and a positron for an instant, then a photon again.',({photon,dot,svg,arrow})=>{
+  photon(40,80,82,36,6,2.5);photon(118,36,160,80,6,2.5);dot(40,80);dot(160,80);
+  svg.appendChild(el('ellipse',{cx:100,cy:36,rx:18,ry:12,fill:'none',stroke:INK,'stroke-width':1.8}));dot(82,36);dot(118,36);arrow(100,24,1);arrow(100,48,-1);}));
+
+/* ===== Section 9: look-ahead tree ===== */
+(function(){
+  const svg=$('laSvg'),ys=[30,100,170],labels=['Your move','Their reply','Score here'],counter=[2,1,0];
+  const xsOf=n=>Array.from({length:n},(_,i)=>180+(320)*(i+.5)/n);
+  const rows=[xsOf(1),xsOf(2),xsOf(4)];
+  for(let d=0;d<2;d++)rows[d].forEach((x,i)=>[0,1].forEach(k=>svg.appendChild(el('line',{x1:x,y1:ys[d],x2:rows[d+1][2*i+k],y2:ys[d+1],stroke:INK,'stroke-width':1.5}))));
+  rows.forEach((r,d)=>{
+    r.forEach(x=>{svg.appendChild(el('rect',{x:x-9,y:ys[d]-9,width:18,height:18,rx:4,fill:d===2?GOLD:'#fbf8f1',stroke:d===2?GOLD:INK,'stroke-width':1.5}));});
+    svg.appendChild(el('text',{x:4,y:ys[d]-2,'font-size':12*FS(),'font-family':'Inter,sans-serif','font-weight':600,fill:INK2},'look ahead: '+counter[d]));
+    svg.appendChild(el('text',{x:4,y:ys[d]+13*FS(),'font-size':11*FS(),'font-family':'Inter,sans-serif',fill:INK2},labels[d]));
+  });
+  svg.appendChild(el('path',{d:'M508 170 L508 34',stroke:BACH,'stroke-width':1.5,fill:'none'}));
+  svg.appendChild(el('path',{d:'M503 42 L508 32 L513 42',stroke:BACH,'stroke-width':1.5,fill:'none'}));
+})();
+
+/* ===== redraw ===== */
+function redrawAll(){drawMap();gDraw();drawRoll(lhCv,lhVoices(lhCutView));qPlot();skDraw();gpDraw();}
+qReset();skDraw();
+let rsT,lastW=innerWidth;addEventListener('resize',()=>{if(innerWidth===lastW)return;lastW=innerWidth;clearTimeout(rsT);rsT=setTimeout(redrawAll,150);});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redrawAll);else redrawAll();
+drawRoll(lhCv,lhVoices(true));gpDraw();
+</script>
+</body>
+</html>
