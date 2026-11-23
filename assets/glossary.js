@@ -104,5 +104,7 @@ window.GEB_GLOSSARY = {
   "fantasy rule":      {def:"Suppose a string x; if the rules then lead to y, the string <x⊃y> (“if x, then y”) is a theorem.", in:"08"},
   "truth table":       {def:"A list of every way the atoms of a string can be true or false, showing whether the whole string is true in each case.", in:"08"},
   "derived rule":      {def:"A shortcut that is not one of a system’s own rules, but is known, by reasoning about the system, to lead only to theorems.", in:"08"},
-  "metatheorem":       {def:"A proven result about a formal system and its theorems, reached by reasoning from outside the system.", in:"08"}
+  "metatheorem":       {def:"A proven result about a formal system and its theorems, reached by reasoning from outside the system.", in:"08"},
+  "semi-interpretation": {def:"A reading of a string in which the logic symbols are read as words (“and”, “or”, “not”, “if… then”) and the atoms are left as letters.", in:"08"},
+  "metalanguage":      {def:"The language used to talk about a formal system from outside it. For the systems in this book, English.", in:"08"}
 };

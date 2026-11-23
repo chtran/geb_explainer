@@ -13,7 +13,6 @@
 .pc{font-family:"JetBrains Mono",monospace;font-size:.86em;white-space:nowrap;letter-spacing:.02em}
 .pc.wrap{white-space:normal;word-break:break-all}
 /* rule cards */
-.pc,.deriv,.quiz button,.picks button,.apart,.tt th,.flat,.tester input,.keys button,#wbTargets button,#ttPicks button{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
 .rules.two{grid-template-columns:repeat(2,1fr)}
 @media (max-width:820px){.rules,.rules.two{grid-template-columns:1fr}}
@@ -82,6 +81,7 @@
 .flat span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-right:10px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .two>*,.wb>*{min-width:0}
+.two{align-items:start}
 @media (max-width:720px){.two{grid-template-columns:1fr}}
 @media (max-width:820px){.wb>div:last-child{order:-1}}
 @media (max-width:720px){
@@ -89,10 +89,14 @@
   .apart span{display:block;margin-left:0}
   .deriv .dl{flex-wrap:wrap;row-gap:0}
   .deriv .why{flex-basis:100%;padding-left:40px;white-space:normal;margin-bottom:3px}
-  .keys button,#wfClear,#wbUndo,#wbReset,#wbShow,#wbTargets button,#ttPicks button,.picks button{min-height:40px}
+  .tt{font-size:12.5px}.tt th,.tt td{padding:4px 5px}
+  .tester input,#runPlay,#wbRules button{min-height:44px}
+  details.primer>summary{padding:10px 0}
+  .keys button,#wfClear,#wbUndo,#wbReset,#wbShow,#wbTargets button,#ttPicks button,.picks button{min-height:44px}
   .keys{display:inline-flex;flex-wrap:wrap;gap:8px}
   #wbTargets,#ttPicks{display:inline-flex;flex-wrap:wrap;gap:8px}
 }
+.pc,.deriv,.deriv *,.apart *,.flat *,.quiz button,.picks button,.apart,.tt th,.flat,.tester input,.keys button,#wbTargets button,#ttPicks button{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
 </style>
 </head>
 <body data-chapter="08-ch07-the-propositional-calculus">
@@ -129,22 +133,22 @@
   <div class="sec-head"><div class="num">1</div><h2>A green shell that is not green</h2></div>
   <div class="cols">
     <div>
-      <p><b>The story.</b> The Tortoise, fresh from a wash in a pond, tells Achilles to admire how green his clean shell is. Achilles agrees that it is green, and the Tortoise replies that it is not. Achilles thinks he has caught him in a contradiction, which he defines as saying a thing and denying it in one sentence. The Tortoise points out that he used two sentences, so by that definition he is in the clear. It is Achilles whose thinking is inconsistent, he adds, and Achilles cannot see it, because nobody can see their own inconsistency from the inside. From outside it is as plain as day.</p>
-      <p>So Achilles tries to make two sentences into one: if you believe each of two sentences, surely you believe them combined? The Tortoise agrees, provided the way of combining is one everybody accepts, and offers his own. "Politicians lie" is true, and "cast-iron sinks" is a good phrase; together they give "Politicians lie in cast-iron sinks", which is not true. Combining is clearly risky. Achilles protests that the right word is "and", and that joining true sentences with "and" is harmless. If it is harmless, asks the Tortoise, why is Achilles trying so hard to make him do it? Achilles ends up apologising, and the Tortoise leaves without ever agreeing to "my shell is green and my shell is not green".</p>
+      <p><b>The story.</b> The Tortoise, fresh from a wash in a pond, tells Achilles to admire how green his clean shell is. Achilles agrees that it is green, and the Tortoise replies that it is not. Achilles thinks he has caught him in a contradiction, which he defines as saying a thing and denying it in one sentence. The Tortoise points out that he used two sentences, so by that definition he is in the clear. It is Achilles whose thinking is inconsistent, he adds, and Achilles cannot see it from inside his own tangle. From outside it is as plain as day.</p>
+      <p>So Achilles tries to make two sentences into one: if you believe each of two sentences, surely you believe them combined? The Tortoise agrees, provided the way of combining is one everybody accepts, and offers his own. "Politicians lie" is true, and so is "Cast-iron sinks" (cast iron does sink); together they give "Politicians lie in cast-iron sinks", which is not true. Combining is clearly risky. Achilles protests that the right word is "and", and that joining true sentences with "and" is harmless. If it is harmless, asks the Tortoise, why is Achilles trying so hard to make him do it? Achilles ends up apologising, and the Tortoise leaves without ever agreeing to "my shell is green and my shell is not green".</p>
     </div>
     <div>
       <div class="card">
         <h3 style="margin-top:0">The title</h3>
         <p class="small-note">Bach wrote a keyboard piece called the <i>Chromatic Fantasy and Fugue</i>. A <b>fantasy</b>, in music, is a free piece that sounds made up on the spot. <span class="term">Chromatic</span> music moves by the smallest step, one piano key at a time. A <span class="term">fugue</span> is the opposite of free: several voices enter in turn with the same theme, under strict rules.</p>
         <p class="small-note">Hofstadter says himself that the dialogue copies almost nothing from Bach's piece except its title. The title is a pun. "Fugue" has become "Feud", and the feud is over the word "And". "Chromatic" comes from the Greek word for colour, and the quarrel starts with the colour of a shell. <i>(That last reading is ours, not the book's.)</i></p>
-        <p class="small-note">To hear what "chromatic" means, here is a run that takes every piano key in turn, up and back down. <i>(An original sketch, not Bach's notes.)</i></p>
+        <p class="small-note">To hear what "chromatic" means, here is a run that takes every piano key in turn, up and back down. The uneven rhythm is ours, to give it the made-up-on-the-spot feel of a fantasy. <i>(An original sketch, not Bach's notes.)</i></p>
         <canvas id="runCanvas" height="150"></canvas>
         <div class="row"><button id="runPlay">▶ Play a chromatic run</button></div>
       </div>
     </div>
   </div>
   <p>The book has staged this before. In Lewis Carroll's dialogue (<a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/#s-dialogue">page 03</a>) the Tortoise accepted "if A and B, then Z", accepted A and B, and still refused Z. There the stubborn word was "if… then". Here it is "and".</p>
-  <div class="intuit"><b>The idea the dialogue sets up</b>The Tortoise's test for a way of combining sentences is a good one: it must never turn true sentences into a false one. "And" passes and his "in" does not. But a word has no power to make anyone use it properly, and the Tortoise drops the ordinary meaning of "and" the moment it would trap him. So the chapter builds a <span class="term">formal system</span> in which one symbol does exactly what Achilles wished "and" would do, and three more do the same for "not", "or" and "if… then". Symbols in a formal system cannot wriggle, because the rules are all they have. (Whether that finally answers the Tortoise is a question for section 8. His jibe about seeing a muddle only from outside comes back in sections 9 and 10.)</div>
+  <div class="intuit"><b>The idea the dialogue sets up</b>The test hiding in the Tortoise's example is a good one: a way of combining sentences must never turn true sentences into a false one. "And" passes and his "in" does not. But a word has no power to make anyone use it properly, and the Tortoise drops the ordinary meaning of "and" the moment it would trap him. So the chapter builds a <span class="term">formal system</span> (a game of symbols with fixed rules for making new rows of symbols) in which one symbol does exactly what Achilles wished "and" would do, and three more do the same for "not", "or" and "if… then". Symbols in a formal system cannot wriggle, because the rules are all they have. (Whether that finally answers the Tortoise is a question for section 8. His jibe about seeing a muddle only from outside comes back in sections 9 and 10.)</div>
 </section>
 
 <div class="half"><div class="hk">Chapter VII</div><div class="ht"><em>The Propositional Calculus</em></div></div>
@@ -157,14 +161,14 @@
   <div class="card">
     <div class="lbl-s">The alphabet</div>
     <div class="chips"><span class="pc">&lt;</span><span class="pc">&gt;</span><span class="pc">P</span><span class="pc">Q</span><span class="pc">R</span><span class="pc">′</span><span class="pc">∧</span><span class="pc">∨</span><span class="pc">⊃</span><span class="pc">~</span><span class="pc">[</span><span class="pc">]</span></div>
-    <p class="small-note" style="margin-bottom:0">The symbol <span class="pc">~</span> is called a tilde. The square brackets are kept for section 4. They mark off parts of a derivation and are never part of a string.</p>
+    <p class="small-note" style="margin-bottom:0">The symbol <span class="pc">~</span> is called a tilde. The square brackets are kept for section 4. They are used to mark off parts of the working and are never part of a string.</p>
   </div>
   <p>Not every row of these symbols is allowed into the game. As with the <span class="term">pq-system</span> on page 03, there is a test of shape that comes before anything else: a string must be <span class="term">well-formed</span>. The well-formed strings are built up from the smallest ones.</p>
   <div class="rules two">
     <div class="rule"><div class="rn">Atoms</div><p><span class="pc">P</span>, <span class="pc">Q</span> and <span class="pc">R</span> are well-formed. So is any of them followed by one or more of the marks <span class="pc">′</span>, called primes (nothing to do with prime numbers): <span class="pc">Q′</span>, <span class="pc">R′′</span>. The primes are there so the supply never runs out. These simplest strings are called <span class="term">atoms</span>.</p></div>
     <div class="rule"><div class="rn">Formation rules</div><p>If <i>x</i> and <i>y</i> are well-formed, so are these four strings:</p><p><span class="pc">~x</span> &nbsp; <span class="pc">&lt;x∧y&gt;</span> &nbsp; <span class="pc">&lt;x∨y&gt;</span> &nbsp; <span class="pc">&lt;x⊃y&gt;</span></p><div class="ex">Here <i>x</i> and <i>y</i> are not symbols of the system. They stand for whole well-formed strings.</div></div>
   </div>
-  <p>Start with atoms and apply the <span class="term">formation rules</span> again and again, and you can build strings as long as you like. A definition like this, where big cases are built out of smaller cases of the same thing, is called recursive; Chapter V is about them. From <span class="pc">P</span> and <span class="pc">Q′</span>: first <span class="pc">~Q′</span>, then <span class="pc">&lt;P∧~Q′&gt;</span>, then <span class="pc">~&lt;P∧~Q′&gt;</span>, and so on. Notice that a tilde needs no brackets, but each of <span class="pc">∧</span>, <span class="pc">∨</span> and <span class="pc">⊃</span> must come wrapped in its own pair.</p>
+  <p>Start with atoms and apply the <span class="term">formation rules</span> again and again, and you can build strings as long as you like. A definition like this, where big cases are built out of smaller cases of the same thing, is the subject of Chapter V. From <span class="pc">P</span> and <span class="pc">Q′</span>: first <span class="pc">~Q′</span>, then <span class="pc">&lt;P∧~Q′&gt;</span>, then <span class="pc">~&lt;P∧~Q′&gt;</span>, and so on. Notice that a tilde needs no brackets, but each of <span class="pc">∧</span>, <span class="pc">∨</span> and <span class="pc">⊃</span> must come wrapped in its own pair.</p>
   <p>To test a string someone hands you, run the rules backwards. Take the string apart into the pieces it must have been made from, then take those apart, until you reach atoms or get stuck. This is a <span class="term">top-down</span> test, and it always finishes: every formation rule makes strings longer, so every step backwards gives shorter pieces, and that cannot go on forever. It is a <span class="term">decision procedure</span> for being well-formed.</p>
   <p>Hofstadter gives eight strings to practise on. Guess first which are well-formed, then press each one to see it taken apart.</p>
   <div class="card">
@@ -200,7 +204,7 @@
   <p style="text-align:center"><i>If x were a theorem, y would be a theorem.</i></p>
   <p>The fantasy rule lets you write that discovery down as a string, and this string is a genuine theorem:</p>
   <p style="text-align:center;font-size:22px"><span class="pc">&lt;x⊃y&gt;</span></p>
-  <p>The square brackets mark where a fantasy starts and stops. A <span class="pc">[</span> means "<b>push</b> into a fantasy; the next line is its premise". A <span class="pc">]</span> means "<b>pop</b> back out; the line before was its outcome". (Push and pop are the book's words, from <a class="xref" href="../06-ch05-recursive-structures-and-processes/">Chapter V</a>, for going down a level, as into a story told inside a story, and coming back up.) Here is the smallest example, the chapter's first theorem:</p>
+  <p>The square brackets mark where a fantasy starts and stops. A <span class="pc">[</span> means "<b>push</b> into a fantasy; the next line is its premise". A <span class="pc">]</span> means "<b>pop</b> back out; the line before was its outcome". (Push and pop are the book's words, from Chapter V, for going down a level, as into a story told inside a story, and coming back up.) Here is the smallest example, the chapter's first theorem. A line-by-line record like this of how a theorem was made is called a <span class="term">derivation</span>.</p>
   <div class="two">
     <div><div class="deriv" id="dvDn"></div></div>
     <div><p style="margin-top:0">Inside the fantasy we pretended <span class="pc">P</span> and the double-tilde rule gave <span class="pc">~~P</span>. Outside, we are left with a real theorem, <span class="pc">&lt;P⊃~~P&gt;</span>. Note that <span class="pc">P</span> itself is <b>not</b> a theorem. We only asked what would follow if it were.</p>
@@ -208,14 +212,14 @@
   </div>
   <h3 class="step-h"><span class="sn">a</span>Fantasies inside fantasies</h3>
   <p>Inside a fantasy you can push again and start another one, as a film can contain a film. Hofstadter calls the layers <b>levels of reality</b>. Popping out of an inner fantasy puts you back in the outer one, which is more real than where you were but still not the real world. Only lines at the outermost level, inside no brackets at all, are theorems.</p>
-  <p>Inside a fantasy, its lines are treated as if they were theorems: that is the pretence. So wherever a rule says "theorem", read "line at the level you are on". Joining, separation, double-tilde and detachment all work inside a fantasy on the lines of that fantasy.</p>
-  <p>What may cross between levels? One more rule settles it:</p>
+  <p>Inside a fantasy, its lines are treated as if they were theorems: that is the pretence. So wherever a rule says "theorem", read "line at the level you are on". Joining, separation and double-tilde all work inside a fantasy on the lines of that fantasy, and so will every rule still to come.</p>
+  <p>What may cross between levels? The carry-over rule settles it. The rule beside it, detachment, puts to use the "if… then" strings that the fantasy rule makes.</p>
   <div class="rules two">
     <div class="rule"><div class="rn">Carry-over rule</div><p>Inside a fantasy, any line from the level just outside it can be brought in and used.</p><div class="ex">Hofstadter's picture: a "No Smoking" sign in a cinema that applies to the actors in the film too. It works inwards only. If lines could be carried <i>out</i> of a fantasy, you could push, write any string at all as a premise, and carry it out as a theorem.</div></div>
-    <div class="rule"><div class="rn">Rule of detachment</div><p>If <i>x</i> and <span class="pc">&lt;x⊃y&gt;</span> are both theorems, then <i>y</i> is a theorem.</p><div class="ex">The fantasy rule makes "if… then" strings; this rule uses them. It is the very step Carroll's Tortoise refused on page 03: he granted the "if… then" and its first half, and would not grant the second. Logicians call this rule <i>modus ponens</i>.</div></div>
+    <div class="rule"><div class="rn">Rule of detachment</div><p>If <i>x</i> and <span class="pc">&lt;x⊃y&gt;</span> are both theorems, then <i>y</i> is a theorem.</p><div class="ex">The fantasy rule makes "if… then" strings; this rule uses them. It is the very step Carroll's Tortoise refused on page 03: he granted the "if… then" and its first half, and would not grant the second. Logicians call this rule <i>modus ponens</i>, and their name for what the fantasy rule does is the Deduction Theorem.</div></div>
   </div>
   <h3 class="step-h"><span class="sn">b</span>Try it</h3>
-  <p>The derivation below starts empty: no axioms. Make each target appear on a line with no indent. You will have to push first; nothing else can start. If you get stuck, the book's own derivation is one press away. (A <span class="term">derivation</span> is the line-by-line record of how a theorem was made.)</p>
+  <p>The derivation below starts empty: no axioms. Make each target appear on a line with no indent. You will have to push first; nothing else can start. If you get stuck, the book's own derivation is one press away.</p>
   <div class="card">
     <div class="row"><span class="small-note">Target:</span><span id="wbTargets"></span></div>
     <div class="wb">
@@ -241,7 +245,7 @@
     </div>
   </div>
   <p>Every theorem you made began with a push. That is the only way to begin, so every theorem of this system has a fantasy somewhere in its history.</p>
-  <div class="intuit"><b>What the fantasy rule really does</b>"If <i>x</i> were a theorem, <i>y</i> would be" is a remark made in English, from outside, <i>about</i> the system. The fantasy rule turns that remark into a string <i>of</i> the system, <span class="pc">&lt;x⊃y&gt;</span>. An observation about the game becomes a position in the game. Keep an eye on this move. Getting a system to hold statements about itself is where the whole book is heading.</div>
+  <div class="intuit"><b>What the fantasy rule really does</b>"If <i>x</i> were a theorem, <i>y</i> would be" is a remark made in English, from outside, <i>about</i> the system. The fantasy rule turns that remark into a string <i>of</i> the system, <span class="pc">&lt;x⊃y&gt;</span>. An observation about the game becomes a position in the game. Getting a system to hold statements about itself is where the whole book is heading.</div>
 </section>
 <!-- 5 -->
 <section id="s-meaning">
@@ -258,7 +262,7 @@
       <tr><td><span class="pc">P</span>, <span class="pc">Q</span>, …</td><td>any sentence you like</td><td>An atom has no fixed meaning. Give it any sentence, and keep to that sentence throughout.</td></tr>
     </table>
   </div>
-  <p>Hofstadter fills the atoms with lines from Zen <span class="term">koans</span>, short puzzle stories meant to jolt the mind out of ordinary logic, which makes them a mischievous thing to feed to a logic machine. He calls the results "Zentences". Let <span class="pc">P</span> be "this mind is Buddha" and <span class="pc">Q</span> be "this flax weighs three pounds". Then the three theorems from the workbench read:</p>
+  <p>Hofstadter fills the atoms with lines from Zen <span class="term">koans</span>, short puzzle stories meant to jolt the mind out of ordinary logic, which makes them a mischievous thing to feed to a logic machine. He calls the results "Zentences". Let <span class="pc">P</span> be "this mind is Buddha" and <span class="pc">Q</span> be "this flax weighs three pounds". Then the three targets of section 4 read:</p>
   <div class="card">
     <table class="ctable">
       <tr><td><span class="pc">&lt;P⊃~~P&gt;</span></td><td>If this mind is Buddha, then it is not the case that this mind is not Buddha.</td></tr>
@@ -266,10 +270,10 @@
       <tr><td class="pc wrap">&lt;P⊃&lt;Q⊃&lt;P∧Q&gt;&gt;&gt;</td><td>If this mind is Buddha, then, if this flax weighs three pounds, then this mind is Buddha and this flax weighs three pounds.</td></tr>
     </table>
   </div>
-  <p>Each one is true, and so obviously true that it hardly seems worth saying. That is the point. There are plenty of false sentences the system could have produced, such as "this mind is Buddha and this mind is not Buddha", and it produced none of them. Hofstadter compares it to someone crossing a stream on stepping-stones: the system steps from truth to truth and never gets its feet wet. And it does this without anyone inside it thinking about minds or flax. The rules only move shapes.</p>
+  <p>Each one is true, and so obviously true that it hardly seems worth saying. That is the point. There are plenty of false sentences the system could have produced, such as "this mind is Buddha and this mind is not Buddha", and it produced none of them. Hofstadter compares it to someone crossing a stream on stepping-stones: the system steps from truth to truth and never gets its feet wet. And it does this without anyone inside it thinking about minds or flax. The rules only move shapes. (Three examples prove nothing, of course. Section 7 shows how the claim can be checked, and section 8 asks how far to trust the check.)</p>
   <div class="intuit"><b>Where the meaning comes from</b>Nobody told the system that <span class="pc">∧</span> means "and". The joining and separation rules make <span class="pc">∧</span> behave the way "and" behaves, and that behaviour is all the meaning it has. Page 03 called this <span class="term">passive meaning</span>: the symbols mean something to us only because the rules make them act that way. This is the reply to the dialogue. Achilles could not hold the Tortoise to "and". Nobody needs to hold <span class="pc">∧</span> to anything, provided they agree to play by the rules. Section 8 asks what happens if they will not.</div>
-  <h3 class="step-h"><span class="sn">a</span>True whatever the atoms say</h3>
-  <p>You do not even need to choose sentences for the atoms. Read only the other symbols, and <span class="pc">&lt;P⊃~~P&gt;</span> becomes "if P, then not not P". Hofstadter calls this a <b>semi-interpretation</b>. It is not a sentence, since P is not one, yet it already sounds true, because you can see that it will come out true whichever sentence you drop in for P.</p>
+  <h3>True whatever the atoms say</h3>
+  <p>You do not even need to choose sentences for the atoms. Read only the other symbols, and <span class="pc">&lt;P⊃~~P&gt;</span> becomes "if P, then not not P". Hofstadter calls this a <span class="term">semi-interpretation</span>. It is not a sentence, since P is not one, yet it already sounds true, because you can see that it will come out true whichever sentence you drop in for P.</p>
   <p class="big-idea">That is the key idea of the Propositional Calculus. Its theorems are the patterns that come out true no matter what sentences fill the atoms.</p>
   <p>Hofstadter puts it another way: these are statements that would be true in every conceivable world. That is why they sound empty. They tell you nothing about minds, flax or shells. What they show is the <i>form</i> that such always-true statements have, and that every one of them can be turned out by a single small set of shape-moving rules.</p>
 </section>
@@ -281,7 +285,7 @@
   <div class="rules">
     <div class="rule"><div class="rn">Contrapositive rule</div><p><span class="pc">&lt;x⊃y&gt;</span> and <span class="pc">&lt;~y⊃~x&gt;</span> are interchangeable.</p><div class="ex">"If the shell is green, then it is clean" says the same as "if the shell is not clean, then it is not green".</div></div>
     <div class="rule"><div class="rn">De Morgan's rule</div><p><span class="pc">&lt;~x∧~y&gt;</span> and <span class="pc">~&lt;x∨y&gt;</span> are interchangeable.</p><div class="ex">"The shell is not green and the shell is not clean" says the same as "it is not true that the shell is green or clean".</div></div>
-    <div class="rule"><div class="rn">Switcheroo rule</div><p><span class="pc">&lt;x∨y&gt;</span> and <span class="pc">&lt;~x⊃y&gt;</span> are interchangeable.</p><div class="ex">"Either the shell is green or it is clean" says the same as "if the shell is not green, then it is clean".</div></div>
+    <div class="rule"><div class="rn">Switcheroo rule</div><p><span class="pc">&lt;x∨y&gt;</span> and <span class="pc">&lt;~x⊃y&gt;</span> are interchangeable.</p><div class="ex">"The shell is green or it is clean (or both)" says the same as "if the shell is not green, then it is clean".</div></div>
   </div>
   <p class="small-note">De Morgan's rule is named after the British logician Augustus De Morgan. "Switcheroo" is Hofstadter's own joke name.</p>
   <p>That makes nine rules in all: joining, separation, double-tilde, fantasy, carry-over, detachment, and these three. Here they are at work on our first theorem:</p>
@@ -323,25 +327,25 @@
     <div class="ttwrap"><table class="tt" id="ttTable"></table></div>
     <div class="steps" id="ttMsg" style="min-height:44px"></div>
   </div>
-  <p>The first four strings are theorems you have seen derived, and they come out true in every row. The other four fail in at least one. Logicians have proved that this always holds: a well-formed string is a theorem of the Propositional Calculus exactly when it is true in every world. (The book says as much, without proof, and so do we.) Notice that the tables are not part of the system. They are a way of reasoning <i>about</i> it from outside. What a proof made out there is worth is the question of the next section.</p>
-  <p>So to decide whether a string is a theorem you never need to hunt for a derivation. Fill in its table: 2 rows for one atom, 4 for two, 8 for three, doubling with each new atom, but always a finite number. There is a sure test for being in, and for being out.</p>
-  <p>Try <span class="pc">P</span> on its own, then <span class="pc">&lt;P∨~P&gt;</span>. "P or not P" is a theorem, yet <span class="pc">P</span> is not, and <span class="pc">~P</span> is not either. Section 9 comes back to this.</p>
-</section>
+  <p>Try <span class="pc">P</span>, then <span class="pc">~P</span>, then <span class="pc">&lt;P∨~P&gt;</span>. "P or not P" is a theorem, yet <span class="pc">P</span> is not, and <span class="pc">~P</span> is not either.</p>
+  <p>The first four strings are theorems you have seen derived, and they come out true in every row. The other five fail in at least one. Logicians have proved that this always holds: a well-formed string is a theorem of the Propositional Calculus exactly when it is true in every world. (The book implies as much, without proof.) Notice that the tables are not part of the system. They are a way of reasoning <i>about</i> it from outside. What a proof made out there is worth is the question of the next section.</p>
+  <p>So to decide whether a string is a theorem you never need to hunt for a derivation. Fill in its table: 2 rows for one atom, 4 for two, 8 for three, doubling with each new atom, but always a finite number. Making theorems one after another is what page 04 called listing them: a set that can be listed this way is <span class="term">recursively enumerable</span>. Page 04 asked whether the non-theorems of a system can always be listed too. For this system the answer is yes: the table is a sure test for being in, and for being out.</p>
+  </section>
 
 <!-- 8 -->
 <section id="s-consistent">
   <div class="sec-head"><div class="num">8</div><h2>Can we be sure it never goes wrong?</h2></div>
-  <p>Section 7 said logicians have proved that every theorem comes out true. In particular, that the system is <span class="term">consistent</span>: it never produces both a string <i>x</i> and its opposite <span class="pc">~x</span>. Does such a proof let us <i>know</i> it, or did we know it already? Hofstadter stages the question as an argument between two voices.</p>
+  <p>Section 7 said logicians have proved that every theorem comes out true in every world. If <i>x</i> is true in every world then <span class="pc">~x</span> is false in every world, so the two can never both be theorems. A system like that, which never produces a string and its opposite, is <span class="term">consistent</span>. But do we need that proof in order to be sure? Hofstadter stages the question as an argument between two voices.</p>
   <div class="two">
     <div class="card"><span class="tag g">Prudence</span><p>We only know it once it has been proved. Perhaps some rule is subtly wrong and, far down the line, both <i>x</i> and <span class="pc">~x</span> turn up as theorems.</p></div>
-    <div class="card"><span class="tag b">Imprudence</span><p>Look at the rules. Each one plainly does what "and", "not" or "if… then" does. If you doubt that, you doubt your own reasoning. And any proof you gave would itself use "and", "not" and "if… then", in arguments far more tangled than these nine rules. What would it add?</p></div>
+    <div class="card"><span class="tag b">Imprudence</span><p>Look at the rules. Each one plainly does what "and", "not" or "if… then" does. If you doubt that, you doubt your own reasoning. And any proof you gave would itself use "and", "not" and "if… then", in arguments far more tangled than these nine rules. What would it add? It would be like a dictionary that defines simple words by means of complicated ones.</p></div>
   </div>
-  <p>One exchange in their argument is worth pausing on. Imprudence asks why two theorems <i>x</i> and <span class="pc">~x</span> would be so terrible; in the MIU-system of page 02 both MI and MIU are theorems and nobody minds. Prudence answers that MI and MIU do not contradict each other, whereas <i>x</i> and <span class="pc">~x</span> do. But they contradict only if you read <span class="pc">~</span> as "not". That is the lesson of <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/">page 05</a>, where one and the same system was consistent under one reading of its symbols and inconsistent under another: consistency belongs to a system <i>together with</i> an interpretation. And what makes us read <span class="pc">~</span> as "not"? The rules. So Prudence already trusts that the rules capture those words, which is the very thing Prudence wanted proved.</p>
+  <p>One exchange is sharper. Imprudence asks why two theorems <i>x</i> and <span class="pc">~x</span> should be worse than two theorems <i>x</i> and <i>x</i>U in the MIU-system of page 02. Prudence replies that MI and MIU, both theorems there, do not contradict each other. But <i>x</i> and <span class="pc">~x</span> clash only if you read <span class="pc">~</span> as "not", and it is the rules that make us read it so. So Prudence already trusts that the rules capture those words, which is the very thing Prudence wanted proved. (As <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/">page 05</a> put it, consistency belongs to a system together with an interpretation.)</p>
   <p>What about the tables of section 7? <i>(This paragraph is our application of the argument, not the book's.)</i> Checking that each rule only ever leads from always-true strings to always-true strings is a real proof that no false sentence can come out. But look at how you do the check: "if <i>x</i> is true <i>and</i> <i>y</i> is true, <i>then</i>…". The proof leans on the same words the system was built to copy. It can make you more confident. It cannot be a foundation underneath your own reasoning.</p>
-  <div class="intuit"><b>The egg and the boxes</b>Hofstadter compares a system of reasoning to an egg. Its shell protects it, and to ship it you pack it in a box, and for safety put that box inside another. Each proof that your reasoning is sound is one more box. However many you add, you can imagine a disaster big enough to break the egg. You ship it anyway. In the same way there is never a final proof that a proof is correct: you can prove the proof, and prove that proof, but the outermost layer is always taken on trust. Mathematicians do not usually lose sleep over this, Hofstadter says, but when a proof is very long, or made by a computer, people do start to ask what "proved" really means.</div>
+  <div class="intuit"><b>The egg and the boxes</b>Hofstadter compares a system of reasoning to an egg. Its shell protects it, and to ship it you pack it in a box, and for safety put that box inside another. Each proof that your reasoning is sound (never leads from true to false) is one more box. However many you add, you can imagine a disaster big enough to break the egg. You ship it anyway. In the same way there is never a final proof that a proof is correct: you can prove the proof, and prove that proof, but the outermost layer is always taken on trust. Mathematicians do not usually lose sleep over this, Hofstadter says, but when a proof is very long, or made by a computer, people do start to ask what "proved" really means.</div>
   <p>This is Carroll's dialogue once more. There, each time Achilles stated a rule of reasoning, the Tortoise wrote it down as one more sentence to be accepted, and asked for a rule to get past that one. Hofstadter suggests writing their quarrel in the new notation. Achilles says: if you have <span class="pc">&lt;&lt;A∧B&gt;⊃Z&gt;</span> and you have <span class="pc">&lt;A∧B&gt;</span>, then you have <span class="pc">Z</span>. The Tortoise writes the rule down as a string, putting <span class="pc">∧</span> for its "and" and <span class="pc">⊃</span> for its "if… then", and asks: you mean this?</p>
   <div class="flat"><span>Achilles' rule, written as a string</span>&lt;&lt;&lt;&lt;A∧B&gt;⊃Z&gt;∧&lt;A∧B&gt;&gt;⊃Z&gt;</div>
-  <p class="small-note">(A, B and Z are borrowed from Carroll's dialogue; they are not atoms of our system. Page 03, section 2, lets you play the whole exchange out.)</p>
+  <p class="small-note">(A, B and Z are borrowed from Carroll's dialogue; they are not atoms of our system. <a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/#s-regress">Page 03, section 2</a>, lets you play the whole exchange out.)</p>
   <p>Now there are three strings on the table and still no <span class="pc">Z</span>. If Achilles states a rule for getting <span class="pc">Z</span> from those three, the Tortoise writes that down too, in the same way. Whatever Achilles offers as a rule, the Tortoise turns into a mere string, and a string cannot make anyone do anything. Each new rule becomes a longer string, and Z never arrives. A rule has to be <i>used</i>; it cannot be replaced by a sentence saying it may be used. At some point, Hofstadter says, you cannot defend your ways of reasoning any further, and trust takes over.</p>
 </section>
 
@@ -351,18 +355,18 @@
   <p>Anyone who makes a few derivations starts taking shortcuts. Having derived <span class="pc">&lt;P∨~P&gt;</span>, you would not bother to derive <span class="pc">&lt;Q∨~Q&gt;</span> step by step. You know the same steps would work with <span class="pc">Q</span> in place of <span class="pc">P</span>, so you treat the first theorem as a mould for a whole family. A shortcut of this kind is called a <span class="term">derived rule</span>.</p>
   <p>Derived rules are safe. But notice where the knowledge that they are safe comes from. It is not a string, and no rule of the system produced it. You reasoned <i>about</i> the system, in ordinary language. Page 02 called this stepping outside the system. Hofstadter now gives the outside view its proper names.</p>
   <div class="two">
-    <div class="card"><span class="tag g">Inside</span><h4>The system</h4><p>Its language is strings such as <span class="pc">&lt;P∨~P&gt;</span>. Its results are theorems with a small t: strings the rules produce. Its proofs are derivations.</p></div>
-    <div class="card"><span class="tag e">Outside</span><h4>The metatheory</h4><p>Its language is English, the <b>metalanguage</b> ("meta" is Greek for "after" or "beyond"; here it means "about"). Its results are <span class="term">metatheorems</span>: Theorems, with a capital T as on page 02, about theorems. "Every theorem is true in every world" is one. So is every derived rule. The study of a system from outside is its <b>metatheory</b>.</p></div>
+    <div class="card"><span class="tag g">Inside</span><h4>The system</h4><p>Working here is what page 02 called the M-mode. Its language is strings such as <span class="pc">&lt;P∨~P&gt;</span>. Its results are theorems with a small t: strings the rules produce. Its stand-in for a proof is a derivation.</p></div>
+    <div class="card"><span class="tag e">Outside</span><h4>The metatheory</h4><p>Thinking here is page 02's I-mode. Its language is English, the <span class="term">metalanguage</span> ("meta" is Greek for "after" or "beyond"; here it means "about"). Its results are <span class="term">metatheorems</span>: Theorems with a capital T, results proved by ordinary reasoning, about theorems. "Every theorem is true in every world" is one. So is every derived rule. The study of a system from outside is its <b>metatheory</b>.</p></div>
   </div>
   <p><b>Why not just allow the shortcuts?</b> Because of what formal systems are for. They exist so that every step is written out inside one rigid framework and anyone, or any machine, can check a derivation without having to think. A derived rule was justified by thinking. Use it, and you have stepped outside the framework you built in order not to step outside.</p>
   <p><b>Then why not make the outside formal too?</b> You could build a second, bigger formal system whose theorems are the derived rules of the first. But soon you would want shortcuts in <i>that</i> system, and a third to justify them. This is the third time the chapter has met the same staircase: the Tortoise's ever-longer strings, the proof of a proof of a proof, and now a theory about a theory about a theory. Each time, the top step is something you do and do not prove.</p>
-  <p>Could a system be its own metatheory, so that the staircase folds into a single step? Hofstadter promises that the book will soon meet a system that can talk about itself, and that it comes to do so by accident, without anyone planning it. Even then, he warns, the system does not get outside itself. You, looking on, still see it differently from the way it sees itself.</p>
+  <p>Could a system be its own metatheory, so that the staircase folds into a single step? Hofstadter promises that the book will soon meet a system that can talk about itself, and that it comes to do so by accident, without anyone planning it. Even then, he warns, the system does not get outside itself. You, looking on, still see it differently from the way it sees itself. That was the Tortoise's jibe at Achilles: what cannot be seen from inside may be plain from outside.</p>
   <div class="intuit"><b>A mistake that comes from mixing the levels</b><span class="pc">&lt;P∨~P&gt;</span> is a theorem, and it reads "P or not P". So surely either <span class="pc">P</span> is a theorem or <span class="pc">~P</span> is? No. Neither is, as the tables in section 7 showed. The <span class="pc">∨</span> inside the string is a symbol of the system. The "or" in "either this is a theorem or that is" belongs to English, outside. Sliding a symbol from one level to the other is exactly the kind of move that goes wrong.</div>
-  <h3 class="step-h"><span class="sn">a</span>Proofs and derivations</h3>
+  <h3>Proofs and derivations</h3>
   <p>Earlier pages used <span class="term">proof</span> loosely. Hofstadter now separates two things. A <b>proof</b> is what mathematicians write for each other: ordinary thought in ordinary language. A <b>derivation</b> is its artificial twin inside a formal system.</p>
   <div class="two">
     <div class="card"><span class="tag e">Proof</span><p>Short. Each step "sounds right", though you may not be able to say exactly why. Its hidden complication is the thing it rests on: the whole of human language and thought.</p></div>
-    <div class="card"><span class="tag g">Derivation</span><p>Each step is so small that nobody could doubt it. Its complication is sheer size. Ganto's Ax in section 6 took two dozen lines to reach one small conclusion, and derivations of real mathematics are far too long to take in.</p></div>
+    <div class="card"><span class="tag g">Derivation</span><p>Each step is so small that nobody could doubt it. Its complication is sheer size. Ganto's Ax, the optional example in section 6, took two dozen lines to reach one small conclusion, and derivations of real mathematics are far too long to take in.</p></div>
   </div>
   <p>The Propositional Calculus is a method for building these proof-like structures. Hofstadter is careful to add that its rules are not the rules of human thought.</p>
   <p class="small-note">It is also only one of many versions. Hofstadter notes that his is related to a system invented by the German logician Gerhard Gentzen in the early 1930s. Other versions do have axioms, and often just one rule, detachment. Rules can be traded for axioms and back.</p>
@@ -374,15 +378,15 @@
   <p>The dialogue began with a contradiction. The chapter ends by feeding one to the system. Take as the premise of a fantasy the string <span class="pc">&lt;P∧~P&gt;</span>, "P and not P". With <span class="pc">P</span> as "my shell is green" it is the sentence Achilles was trying to extract. To the system it is just another well-formed string.</p>
   <div class="two">
     <div><div class="deriv" id="dvBoom" style="max-height:none"></div></div>
-    <div><p style="margin-top:0">Line 14 is a theorem: <span class="pc">&lt;&lt;P∧~P&gt;⊃Q&gt;</span>. Its semi-interpretation is "P and not P together imply Q". But <span class="pc">Q</span> never appeared in the premise. It can be any sentence at all.</p>
+    <div><p style="margin-top:0">Line 14 is a theorem: <span class="pc">&lt;&lt;P∧~P&gt;⊃Q&gt;</span>. Its semi-interpretation (section 5: read the symbols, leave the atoms alone) is "if P and not P, then Q". But <span class="pc">Q</span> never appeared in the premise. It can be any sentence at all.</p>
     <p class="big-idea" style="font-size:20px">From a contradiction, anything follows.</p>
     <p>If my shell is green and my shell is not green, then politicians lie in cast-iron sinks.</p>
     <p class="small-note">Line 11 uses the contrapositive rule from right to left. Line 10 has the shape <span class="pc">&lt;~y⊃~x&gt;</span> with <i>x</i> as <span class="pc">~P</span> and <i>y</i> as <span class="pc">Q</span>, so it can be swapped for <span class="pc">&lt;x⊃y&gt;</span>, which is <span class="pc">&lt;~P⊃Q&gt;</span>.</p>
     <p class="small-note">The table test of section 7 agrees. <span class="pc">&lt;x⊃y&gt;</span> is false only in a world where <i>x</i> is true and <i>y</i> false, and there is no world where <span class="pc">&lt;P∧~P&gt;</span> is true.</p></div>
   </div>
-  <p>This is why consistency matters so much. If any system built on these rules ever proved both <i>x</i> and <span class="pc">~x</span>, joining would give <span class="pc">&lt;x∧~x&gt;</span>, and then this theorem and detachment would give every string whatsoever. One contradiction and the whole system is worthless. Hofstadter says it spreads like an instant cancer.</p>
-  <h3 class="step-h"><span class="sn">a</span>People do not work like this</h3>
-  <p>If you found that two of your beliefs contradicted each other, you would not conclude that you now believe everything. You would step back, look for the belief or the habit of reasoning that caused the trouble, and repair it. This is page 02's jumping out of the system: the Propositional Calculus cannot do it, and people do it by habit. Hofstadter goes further and calls contradiction a major source of progress in every field. Mathematics is his example. In past centuries people "proved" that the endless sum 1 − 1 + 1 − 1 + … equals 0, and that it equals 1, and that it equals ½. Mathematics did not collapse. The clash led to a better understanding of what an endless sum is.</p>
+  <p>This is why consistency matters so much. If any system built on these rules ever proved both <i>x</i> and <span class="pc">~x</span>, joining would give <span class="pc">&lt;x∧~x&gt;</span>, and then this theorem and detachment would give every well-formed string whatsoever. One contradiction and the whole system is worthless. Hofstadter says it spreads like an instant cancer.</p>
+  <h3>People do not work like this</h3>
+  <p>If you found that two of your beliefs contradicted each other, you would not conclude that you now believe everything. (The Tortoise said two opposite things about his shell, and even he did not start believing everything.) You would step back, look for the belief or the habit of reasoning that caused the trouble, and repair it. This is page 02's jumping out of the system: the Propositional Calculus cannot do it, and people do it by habit. Hofstadter goes further and calls contradiction a major source of progress in every field. Mathematics is his example. In past centuries people "proved" that the endless sum 1 − 1 + 1 − 1 + … equals 0, and that it equals 1, and that it equals ½. Mathematics did not collapse. The clash led to a better understanding of what an endless sum is.</p>
   <p>So here is a gap between the Propositional Calculus and real thinking, and logicians have tried to close it. One attempt Hofstadter mentions is <b>relevant implication</b>, worked out by the logicians Alan Ross Anderson and Nuel Belnap. Its aim is an "if… then" that holds only when the two halves have something to do with each other. The Propositional Calculus makes no such demand. These are all theorems:</p>
   <div class="card">
     <table class="ctable">
@@ -391,9 +395,9 @@
       <tr><td><span class="pc">&lt;&lt;P∧~P&gt;⊃Q&gt;</span></td><td>If P and not P, then Q.</td></tr>
       <tr><td><span class="pc">&lt;&lt;P⊃Q&gt;∨&lt;Q⊃P&gt;&gt;</span></td><td>Either P implies Q, or Q implies P.</td></tr>
     </table>
-    <p class="small-note" style="margin-bottom:0">Take the last one with P as "the shell is green" and Q as "the flax weighs three pounds". Neither has anything to do with the other, yet the theorem reads "if the shell is green then the flax weighs three pounds, or if the flax weighs three pounds then the shell is green". (As section 9 warned, neither half is a theorem on its own.) Relevant implication forbids steps like line 10 above, where <span class="pc">~Q</span> was "used" to get something that never needed it. Other researchers, Hofstadter adds, go further and give up consistency altogether, in order to imitate human reasoning with all its faults.</p>
   </div>
-    <div class="intuit"><b>Where this leaves us</b>For all its stiffness, the Propositional Calculus does its one job perfectly. Placed inside a larger system that is free of contradictions, it supplies every correct step of "and / or / not / if… then" reasoning, and no incorrect one. So if a larger system ever turns out to have a gap or a flaw, the fault will lie in what was added, not in this part. The next chapter does exactly that: it takes these nine rules whole into a system that can talk about numbers.</div>
+  <p>Take the last one with P as "the shell is green" and Q as "the flax weighs three pounds". Neither has anything to do with the other, yet the theorem reads "if the shell is green then the flax weighs three pounds, or if the flax weighs three pounds then the shell is green". (As section 9 warned, neither half is a theorem on its own.) Relevant implication is designed to rule such theorems out. Other researchers, Hofstadter adds, go further and give up consistency altogether, in order to imitate human reasoning with all its faults.</p>
+    <div class="intuit"><b>Where this leaves us</b>For all its stiffness, the Propositional Calculus does its one job perfectly. Placed inside a larger system that is free of contradictions, it supplies every correct step of "and / or / not / if… then" reasoning, and no incorrect one. So if a larger system ever turns out to have a gap or a flaw, the fault will lie in what was added, not in this part. The next chapter builds such a larger system: it takes these nine rules whole into a system that can talk about numbers.</div>
 </section>
 
 <!-- 11 -->
@@ -411,13 +415,13 @@
 <section id="s-modern">
   <div class="sec-head"><div class="num">12</div><h2>Modern view: what we know now</h2></div>
   <p class="mv-asof">As of November 2026</p>
-  <p>Hofstadter was careful to say that these rules are not the rules of human thought. Since 1979 that remark has become something researchers can test, in brains and in AI systems. And the chapter's two practical questions, how to decide a string and how far to trust the system, are now daily work for people who prove theorems by computer.</p>
+  <p>Hofstadter was careful to say that these rules are not the rules of human thought. Since 1979 that remark has become something researchers can test, in brains and in AI systems. And the chapter's question of how far to trust a system of rules is now daily work for people who check proofs by computer.</p>
 
   <div class="mv">
     <div class="mv-card">
       <div class="mv-k">AI · looking inside</div>
       <h4>Where a language model keeps its "or" and "if… then"</h4>
-      <p class="mv-then"><b>In the book:</b> the rules for ∧, ∨ and ⊃ are written out, so anyone can check every step (<a href="#s-rules">sections 3</a> and <a href="#s-fantasy">4</a>).</p>
+      <p class="mv-then"><b>In the book:</b> the rules for ∧, ∨ and ⊃ are written out, so anyone can check every step (sections <a href="#s-rules">3</a>, <a href="#s-fantasy">4</a> and <a href="#s-more">6</a>).</p>
       <p><b>Now:</b> a <span class="term">large language model</span> (the kind of AI system behind chatbots) has no written rules, only a huge pile of arithmetic tuned on text. A study published at the NeurIPS 2025 conference gave three openly available models a few worked examples and then tiny problems such as: A or B implies C; D implies E; A is true, B is false, D is true; what is the truth value of C? The researchers swapped the activity of single parts with their activity on a slightly different problem, to see which ones matter. All three models showed a similar, though not identical, division of labour among four small groups of parts (the largest model was only partly analysed): one finds the rule being asked about, one carries it forward, one handles the facts, one decides. The caveats: each problem needed only one rule to be applied, the models wrote a correct proof only 70% to 86% of the time, and the authors say longer chains still need checking.</p>
       <p class="mv-so"><b>Why it matters:</b> nobody gave these models a detachment rule. Something that does its job grew during training, and can be located. But it is a habit that sometimes fails, where the chapter's rule cannot.</p>
     </div>
@@ -426,31 +430,23 @@
       <div class="mv-k">AI · reasoning</div>
       <h4>Models, like people, mix "valid" with "sounds true"</h4>
       <p class="mv-then"><b>In the book:</b> a theorem holds whatever sentences fill the atoms, koan lines included. The rules look only at shape (<a href="#s-meaning">section 5</a>).</p>
-      <p><b>Now:</b> people find this hard. They more readily accept an argument whose conclusion sounds true, whatever its form. Psychologists call this a <b>content effect</b>, and a 2024 study from Google DeepMind found it in language models too. A 2026 paper looked for the cause inside the models. It built 1,280 arguments from "all", "some" and "no", half ending in something true such as "some dogs are canines", half in something false such as "some dogs are cats". On a held-back test set one model, answering at once, got every valid argument with a true conclusion right, but only 61% of the valid ones with a false conclusion. Told to reason step by step first, it reached 93%. Inside, the model's signal for "valid" and its signal for "believable" pointed in broadly similar directions, and pushing on one moved the other. Pulling them apart cut that model's bias to about a fifth. The authors studied mid-sized open models and do not claim to know why the two signals merge.</p>
+      <p><b>Now:</b> people find this hard. An argument is <b>valid</b> if its conclusion follows from its starting statements by form alone, whether or not any of them is true. People more readily call an argument valid when its conclusion sounds true. Psychologists call this a <b>content effect</b>, and a 2024 study from Google DeepMind found it in language models too. A 2026 paper looked for the cause inside the models. It built 1,280 arguments from "all", "some" and "no", half ending in something true such as "some dogs are canines", half in something false such as "some dogs are cats". On examples it had not seen, one model, answering at once, got every valid argument with a true conclusion right, but only 61% of the valid ones with a false conclusion. Told to reason step by step first, it reached 93%. Inside, the model's signal for "valid" and its signal for "believable" overlapped, so that pushing on one moved the other. Pulling them apart cut that model's bias to about a fifth. The authors studied mid-sized open models and do not claim to know why the two signals merge.</p>
       <p class="mv-so"><b>Why it matters:</b> the system's blindness to content, which makes its theorems sound so empty, is a strength that neither people nor these models have by default.</p>
     </div>
 
     <div class="mv-card">
       <div class="mv-k">Neuroscience</div>
-      <h4>The brain does logic outside its language areas</h4>
+      <h4>A brain study finds logic working outside the language areas</h4>
       <p class="mv-then"><b>In the book:</b> words cannot enforce their own logic (<a href="#s-dialogue">section 1</a>), and the system's rules are not offered as the rules of human thought (<a href="#s-levels">section 9</a>).</p>
-      <p><b>Now:</b> if we reasoned in words, the brain areas that handle sentences should work harder when the logic gets harder. A study in the journal <i>PNAS</i> in July 2026 tested this. Twenty-nine adults were scanned, some of them while judging "if… then" arguments. Easy ones used detachment ("if the block is large, then it is not yellow; the block is large; so…"). Hard ones ran backwards, from "the block is yellow" to "it is not large". The language areas were busy reading, but no busier for the hard arguments. Other regions were, separate both from the language areas and from the areas that serve demanding tasks in general. The team also tested two men with badly damaged language areas, who scored at or near chance on grammar tests. On puzzles about number lists and shape patterns they did as well as healthy adults. The authors' caveats: two patients is few; the patients could not be given the "if… then" task, which needs reading, so wordless versions are still to be tried; and whether children need language to learn logic is open.</p>
-      <p class="mv-so"><b>Why it matters:</b> the Tortoise can wriggle with words because the logic was never in the words. In our heads, too, the sentence and the inference seem to run on different machinery.</p>
-    </div>
-
-    <div class="mv-card">
-      <div class="mv-k">Mathematics · computing</div>
-      <h4>The truth table's question, asked of real mathematics</h4>
-      <p class="mv-then"><b>In the book:</b> a table of all possible worlds decides any string, but the table doubles with every new atom (<a href="#s-worlds">section 7</a>).</p>
-      <p><b>Now:</b> programs called <b>SAT solvers</b> answer the table's question, "is there a world where this string comes out true?", without writing out the table. Checking one proposed world is quick. Whether finding one can always be quick is exactly the famous open problem called P versus NP. Yet solvers settle old questions in mathematics, once someone rewrites the question using only "and", "or" and "not". In 1930 Ott-Heinrich Keller conjectured that when equal cubes fill space with no gaps, two of them must share a whole face. That is false in eight or more dimensions. The last open case, seven, was settled in 2020 with a SAT solver: there it holds. In 2026 a team finished checking the whole Keller argument by machine, including the translation into and/or/not: most of it in Lean, a <span class="term">proof assistant</span> (a program that checks every step of a proof), and part with a separate verified checker. An April 2026 paper, not yet peer-reviewed, used a solver plus code written by a language model to answer a 1982 question about networks.</p>
-      <p class="mv-so"><b>Why it matters:</b> the chapter's logic looks too simple to say anything. A surprising amount of mathematics can be said in it, and then decided by machine.</p>
+      <p><b>Now:</b> if we reasoned in words, the brain areas that handle sentences should work harder when the logic gets harder. A study in the journal <i>PNAS</i> in July 2026 tested this. Twenty-nine adults were scanned, some of them while judging "if… then" arguments. Easy ones used detachment ("if the block is large, then it is not yellow; the block is large; so…"). Hard ones ran backwards, like section 6's contrapositive, from "the block is yellow" to "it is not large". The language areas were busy reading, but no busier for the hard arguments. Other regions were, separate both from the language areas and from the areas that serve demanding tasks in general. The team also tested two men with badly damaged language areas, who did no better than guessing on grammar tests. On puzzles about number lists and shape patterns they did as well as healthy adults. The authors' caveats: two patients is few; the patients could not be given the "if… then" task, which needs reading, so wordless versions are still to be tried; and whether children need language to learn logic is open.</p>
+      <p class="mv-so"><b>Why it matters:</b> this suggests that the logic is not in the words. In our heads, too, the sentence and the inference seem to run on different machinery, which may be why the Tortoise can wriggle with words.</p>
     </div>
 
     <div class="mv-card">
       <div class="mv-k">Mathematics · trust</div>
       <h4>A proof that the proof checker is sound</h4>
       <p class="mv-then"><b>In the book:</b> any proof that the rules are sound leans on the reasoning it is meant to guarantee. Each is another box around the egg (<a href="#s-consistent">section 8</a>).</p>
-      <p><b>Now:</b> <a href="../05-ch04-consistency-completeness-and-geometry/#s-modern">Page 05</a> told how, in 2026, AI models found programming mistakes in the core of Lean, the part that accepts or rejects each step. In October 2026 Lean's chief architect announced an additional core, shipped alongside the official one, written in Lean itself and proved consistent: whatever it accepts fits a known mathematical picture of Lean's logic. The AI model Claude wrote and proved it, under "heavy supervision" by a Lean developer. The announcement states the limits. The proof was checked by Lean's official core, the one that had the mistakes, since fixed. It assumes that a set theory somewhat stronger than the usual foundation of mathematics is itself consistent. And the added core is "not bulletproof", because the software that turns it into a running program may have faults. So it was also translated into another programming language, and users are urged to run several cores and report any disagreement. This is the developers' own account, weeks old.</p>
+      <p><b>Now:</b> <a href="../05-ch04-consistency-completeness-and-geometry/#s-modern">Page 05</a> told how, in 2026, AI models found programming mistakes in the core of Lean, a <span class="term">proof assistant</span> (a program that checks every step of a mathematical proof by machine). The core is the part that accepts or rejects each step. In October 2026 Lean's chief architect announced an additional core, shipped alongside the official one, written in Lean itself and proved consistent: whatever it accepts fits a known mathematical picture of Lean's logic. The AI model Claude wrote and proved it, under "heavy supervision" by a Lean developer. The announcement states the limits. The proof was checked by Lean's official core, the one that had the mistakes, since fixed. It assumes that a set theory somewhat stronger than the usual foundation of mathematics is itself consistent. And the added core is "not bulletproof", because the software that turns it into a running program may have faults. So it was also translated into another programming language, and users are urged to run several cores and report any disagreement. This is the developers' own account, dated 15 October 2026, and not independently reviewed.</p>
       <p class="mv-so"><b>Why it matters:</b> this is Prudence's programme carried out with great care, and it ends where Imprudence said it would: with one more box, and something outside it taken on trust.</p>
     </div>
   </div>
@@ -462,9 +458,6 @@
       <li><a href="https://academic.oup.com/pnasnexus/article/3/7/pgae233/7712372" target="_blank" rel="noopener">Lampinen, Dasgupta et al., Language models, like humans, show content effects on reasoning tasks, PNAS Nexus, July 2024</a></li>
       <li><a href="https://aclanthology.org/2026.findings-acl.454/" target="_blank" rel="noopener">Bertolazzi, Pezzelle and Bernardi, How Language Models Conflate Logical Validity with Plausibility, Findings of ACL 2026</a></li>
       <li><a href="https://doi.org/10.1073/pnas.2520095123" target="_blank" rel="noopener">Kean et al., Evidence from formal logical reasoning reveals that the language of thought is not natural language, PNAS, July 2026</a></li>
-      <li><a href="https://www.claymath.org/millennium/p-vs-np/" target="_blank" rel="noopener">Clay Mathematics Institute: P vs NP (official problem page)</a></li>
-      <li><a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2026.26" target="_blank" rel="noopener">Gallicchio, Codel, Avigad and Heule, An End-To-End Verification of Keller's Conjecture, ITP 2026</a></li>
-      <li><a href="https://arxiv.org/abs/2604.21187" target="_blank" rel="noopener">Przybocki, Mackey, Heule and Subercaseaux, Doubly Saturated Ramsey Graphs, preprint, April 2026</a></li>
       <li><a href="https://leodemoura.github.io/blog/2026-10-15-lean-now-ships-with-verified-kernels/" target="_blank" rel="noopener">Leonardo de Moura: Lean Now Ships with Verified Kernels (15 October 2026)</a></li>
     </ol>
   </details>
@@ -477,7 +470,7 @@
 </footer>
 
 <script src="../assets/toc.js?v=8401aad5"></script>
-<script src="../assets/glossary.js?v=d6cca8ea"></script>
+<script src="../assets/glossary.js?v=0171ed29"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -621,9 +614,8 @@ const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 /* Section 1: a chromatic run in free style (original, not Bach's notes). [midi or null, beats] */
 const RUN=[[62,.5],[63,.25],[64,.25],[65,.25],[66,.25],[67,.25],[68,.25],[69,.5],[70,.25],[71,.25],[72,.25],[73,.25],[74,1],
   [73,.25],[72,.25],[71,.25],[70,.25],[69,.25],[68,.25],[67,.25],[66,.25],[65,.5],[64,.25],[63,.25],[62,1.5]];
-const RUN_BASS=[[50,4.25],[45,2.5],[38,2.5]];
 const runCv=$('runCanvas');
-function runVoices(){return [{ev:toEvents(RUN),color:css('--bach'),gain:.17},{ev:toEvents(RUN_BASS),color:css('--godel'),gain:.2,timbre:'soft'}];}
+function runVoices(){return [{ev:toEvents(RUN),color:css('--bach'),gain:.17}];}
 drawRoll(runCv,runVoices());
 addEventListener('resize',()=>drawRoll(runCv,runVoices()));
 playToggle($('runPlay'),()=>playVoices(runCv,runVoices(),0.34));
@@ -727,14 +719,14 @@ $('wbShow').onclick=()=>{
 wbStart(0);
 
 /* Section 6: every possible world */
-const TT=[{s:'<P⊃~~P>',th:1},{s:'<<P∧Q>⊃<Q∧P>>',th:1},{s:'<P∨~P>',th:1},{s:'<<P∧~P>⊃Q>',th:1},{s:'P',th:0},{s:'<P∧~P>',th:0},{s:'<P⊃Q>',th:0},{s:'<<P⊃Q>⊃<Q⊃P>>',th:0}];
+const TT=[{s:'<P⊃~~P>',th:1},{s:'<<P∧Q>⊃<Q∧P>>',th:1},{s:'<P∨~P>',th:1},{s:'<P⊃<Q⊃<P∧Q>>>',th:1},{s:'P',th:0},{s:'~P',th:0},{s:'<P∧~P>',th:0},{s:'<P⊃Q>',th:0},{s:'<<P⊃Q>⊃<Q⊃P>>',th:0}];
 const ZEN={P:['this mind is Buddha','this mind is not Buddha'],Q:['this flax weighs three pounds','this flax does not weigh three pounds']};
 let tt={i:0,w:{P:true,Q:true}};
 // read a tree aloud with the Zentences plugged in
 function say(n,top){
   if(n.t==='atom')return ZEN[n.s][0];
   if(n.t==='not')return n.x.t==='atom'?ZEN[n.x.s][1]:'it is not the case that '+say(n.x);
-  const body=n.t==='∧'?say(n.x)+' and '+say(n.y):n.t==='∨'?'either '+say(n.x)+' or '+say(n.y):'if '+say(n.x)+', then '+say(n.y);
+  const body=n.t==='∧'?say(n.x)+' and '+say(n.y):n.t==='∨'?say(n.x)+' or '+say(n.y):'if '+say(n.x)+', then '+say(n.y);
   return top?body:'('+body+')';
 }
 const tf=v=>v?'true':'false';
