@@ -289,7 +289,68 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
 <!-- 10 -->
 <section id="s-modern">
   <div class="sec-head"><div class="num">10</div><h2>Modern view: what we know now</h2></div>
-  <!--MODERN-->
+    <p class="mv-asof">As of November 2026</p>
+  <p>The Tortoise's game is now played for real: against AI systems, and even against the programs that check mathematical proofs. And the question this chapter handed to physics, which geometry space has, is still being measured. Here is where this page's ideas stand today.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · security</div>
+      <h4>The record-player game, played against AI</h4>
+      <p class="mv-then"><b>In the book:</b> every good record player has a record made to break it, and each better player gets a new record of its own (<a class="xref" href="#s-records">section 2</a>).</p>
+      <p><b>Now:</b> AI systems meet such "records" all the time. In a study published in 2023, researchers trained a program whose only job was to beat KataGo, a Go-playing AI far stronger than any human. It won more than 97% of its games, not by playing Go well but by tricking KataGo into serious blunders. A follow-up study (2025) tested three defences, including retraining KataGo on the attack. Some stopped the old attacks. None withstood a newly trained attacker. AI systems built on language show the same pattern. A <i>jailbreak</i> is a message written to make a <span class="term">large language model</span> break its own safety rules. In a study presented in 2026, researchers from Anthropic, Google DeepMind, OpenAI, universities and other groups took 12 published defences against jailbreaks and against prompt injections (text hidden in a web page or email that hijacks an AI assistant), most of which had reported that almost no attacks got through, and built attacks aimed at each one. For most of the 12, more than 90% of those attacks succeeded. A cousin of the Crab's last idea, a player that looks at each record first, is also in use: Anthropic puts a second AI in front of its chatbot to screen what goes in and out. In a first test of a prototype, which also refused too many harmless questions, 183 people spent more than 3,000 hours and found no single trick that got all ten forbidden questions answered. In a one-week public test in February 2025, with eight questions, four participants got all eight answered, and Anthropic judged that one of them had done it with a single trick. For a newer version (January 2026) the company reports one high-risk weakness found in more than 1,700 hours of testing, but no single trick that works across all the questions yet, and it says itself that no AI system on the market has perfectly robust defences.</p>
+      <p class="mv-so"><b>Why it matters:</b> the Tortoise's pattern holds in practice: defend against one record, and a new one is made for the new machine. But this is experience, not proof. Gödel proved that no strong formal system can be Perfect; nobody has proved that a well-defended AI is impossible.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · hidden meaning</div>
+      <h4>Lists of numbers that carry a second message, for one machine only</h4>
+      <p class="mv-then"><b>In the book:</b> the same grooves are music to a listener and, to one particular player, instructions for shaking itself apart (<a class="xref" href="#s-meaning">section 3</a>).</p>
+      <p><b>Now:</b> a study published in <i>Nature</i> in April 2026 found a double meaning of this kind in AI training data. The researchers gave a "teacher" language model a trait, such as a fondness for owls, and had it write nothing but lists of numbers. A second, "student" model was then trained on those lists. Afterwards the student picked the owl as its favourite animal more than 60% of the time, up from 12%. Nothing in the lists mentions owls. Harmful traits passed the same way, even after numbers with bad associations, such as 666, were filtered out. And the hidden message is aimed, like the Tortoise's records: it got through only when teacher and student were built on the same underlying model (or on ones that behave alike). A student built on a different model read the same lists and showed no reliable effect.</p>
+      <p class="mv-so"><b>Why it matters:</b> an implicit meaning doesn't sit in the symbols alone. It appears when one particular machine reads them. That was Hofstadter's point about records, and it is now a practical worry, because AI models are often trained on text written by other AI models.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · consistency</div>
+      <h4>Each answer sensible, the set impossible</h4>
+      <p class="mv-then"><b>In the book:</b> TbZ, ZbE and EbT can each be true alone; only together are they impossible. Inconsistency can hide in the combination (<a class="xref" href="#s-worlds">section 7</a>).</p>
+      <p><b>Now:</b> researchers test language models for this kind of circle. A 2026 study offered 20 openly available models pairs of bets (for example, a small prize that is likely against a bigger one that is less likely) and asked which they preferred. A circle here means preferring bet A to B, B to C, and then C to A. The authors report substantial and systematic circles in many models. In the published, peer-reviewed paper, all but one of the 20 models produced at least one circle: 330 circles in the 6,000 triples checked. About two thirds of them, 222, were of a kind that people are known to produce in the same experiments. One caveat: the best-known commercial chatbots were left out, because the companies keep updating them, so results can't be repeated, and may adjust their answers in ways they don't disclose.</p>
+      <p class="mv-so"><b>Why it matters:</b> checking answers one at a time can't find this fault, in a formal system or in an AI. Being <span class="term">consistent</span> is a property of the whole set.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics · AI</div>
+      <h4>AI aimed at the proof checker, and it "proved" False</h4>
+      <p class="mv-then"><b>In the book:</b> consistency is the least a system needs. And each of the Tortoise's records is made for one machine (<a class="xref" href="#s-records">section 2</a>).</p>
+      <p><b>Now:</b> Lean is a <span class="term">proof assistant</span>, a program that checks every step of a proof by machine. Mathematicians, and the AI provers that write proofs in Lean, trust its small core, the part that does the checking. Between 30 July and 20 August 2026, a researcher at OpenAI set the company's internal AI models to hunt for inputs that would make this core accept a proof of <code>False</code>, a statement that is false by definition. A system that proves it can prove anything. The models found six routes: four through faults in the checking code, and two through the software underneath it. All needed deliberately built inputs, not ordinary proofs, and all six have been fixed. Later releases closed further possible routes of the same kind in the software underneath. For the faults in one much-debated part of the checker, Lean's developers say they were programming mistakes, not gaps in the theory behind it. One more detail matches the dialogue. The fake proofs for five of the six faults were rejected by a separately written checker. The sixth fooled that checker too, and was caught only by a third, newer check. Since version 4.35 (October 2026), Lean ships with several independently written checkers, and one command re-checks a proof with all of them.</p>
+      <p class="mv-so"><b>Why it matters:</b> this is the record-player game played against a formal system's own referee. And the defence follows the dialogue's logic: a record made for Record Player 1 usually does nothing to Record Player 2. Usually: one of the six broke both.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Physics</div>
+      <h4>Which geometry is space? Still being measured</h4>
+      <p class="mv-then"><b>In the book:</b> several geometries are consistent, so which one fits real space is a question for measurement, not proof (<a class="xref" href="#s-terms">section 6</a>).</p>
+      <p><b>Now:</b> cosmologists measure it. They sum up the answer in one number, called the <i>curvature parameter</i>: zero means flat, as on paper (Euclid's geometry); below zero means closed, like the sphere; above zero means open, like the saddle. (Its sign runs opposite to the everyday sense of "curvature".) The triangles they check span the visible universe. Their far sides are patterns of known size, in the oldest light in the sky and in the spacing of galaxies. The Planck satellite team's result (published 2020), joined with galaxy surveys, was 0.001, give or take 0.002, which fits flat space. In 2025 the DESI project, using more than 14 million galaxies and quasars (very bright, very distant galaxy cores), reported no significant preference for curved space. One preprint from September 2026, not yet reviewed, uses only exploding stars and galaxy spacing, not the oldest light, and gets between 0.22 and 0.33, give or take about 0.1, depending on which set of exploding stars is used. Its authors call that a mild lean toward the saddle, about two error bars from flat, and note that one variant of the analysis shifts a result below zero. The question is not closed, and all of this covers only the part of the universe we can see.</p>
+      <p class="mv-so"><b>Why it matters:</b> the fifth postulate became something you measure with telescopes. Euclid's answer still fits the best data, but only as a measurement that a better one could overturn.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://arxiv.org/abs/2211.00241" target="_blank" rel="noopener">Wang et al., Adversarial Policies Beat Superhuman Go AIs (ICML 2023)</a></li>
+      <li><a href="https://arxiv.org/abs/2406.12843" target="_blank" rel="noopener">Tseng et al., Can Go AIs be adversarially robust? (AAAI 2025)</a></li>
+      <li><a href="https://www.usenix.org/conference/usenixsecurity26/presentation/nasr" target="_blank" rel="noopener">Nasr et al., The Attacker Moves Second (USENIX Security 2026)</a> · <a href="https://arxiv.org/abs/2510.09023" target="_blank" rel="noopener">preprint</a></li>
+      <li><a href="https://www.anthropic.com/research/constitutional-classifiers" target="_blank" rel="noopener">Anthropic: Constitutional Classifiers, with the February 2025 demo results</a></li>
+      <li><a href="https://www.anthropic.com/research/next-generation-constitutional-classifiers" target="_blank" rel="noopener">Anthropic: Next-generation Constitutional Classifiers (January 2026)</a></li>
+      <li><a href="https://www.nature.com/articles/s41586-026-10319-8" target="_blank" rel="noopener">Cloud et al., Language models transmit behavioural traits through hidden signals in data, Nature, April 2026</a></li>
+      <li><a href="https://link.springer.com/article/10.1007/s42113-026-00342-3" target="_blank" rel="noopener">Song et al., Benchmarking Choice Consistency in Large Language Models (Computational Brain &amp; Behavior, November 2026)</a></li>
+      <li><a href="https://leodemoura.github.io/blog/2026-8-24-postmortem-for-the-kernel-soundness-bug-hunt/" target="_blank" rel="noopener">Leonardo de Moura: Postmortem for the Kernel Soundness Bug Hunt (August 2026)</a></li>
+      <li><a href="https://lean-lang.org/doc/reference/latest/releases/v4.34.0/" target="_blank" rel="noopener">Lean 4.34.0 release notes (September 2026)</a> · <a href="https://lean-lang.org/doc/reference/latest/releases/v4.35.0/" target="_blank" rel="noopener">4.35.0 release notes (October 2026)</a></li>
+      <li><a href="https://arxiv.org/abs/1807.06209" target="_blank" rel="noopener">Planck Collaboration, Planck 2018 results VI: Cosmological parameters (Astronomy &amp; Astrophysics, 2020)</a></li>
+      <li><a href="https://arxiv.org/abs/2503.14738" target="_blank" rel="noopener">DESI Collaboration, DESI DR2 Results II (Physical Review D, 2025)</a></li>
+      <li><a href="https://arxiv.org/abs/2609.22470" target="_blank" rel="noopener">Turner et al., Stress-testing the spatially flat Universe (preprint, September 2026)</a></li>
+    </ol>
+  </details>
 </section>
 
 </main>
