@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEB · Chromatic Fantasy, And Feud + Chapter VII: The Propositional Calculus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/geb.css?v=da093492">
+<style>
+[hidden]{display:none!important}
+/* strings of the Propositional Calculus */
+.pc{font-family:"JetBrains Mono",monospace;font-size:.86em;white-space:nowrap;letter-spacing:.02em}
+.pc.wrap{white-space:normal;word-break:break-all}
+/* rule cards */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.rules.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:820px){.rules,.rules.two{grid-template-columns:1fr}}
+.rule{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 16px}
+.rule .rn{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.rule p{margin:4px 0 0;font-size:16px}
+.rule .ex{font:13.5px/1.5 Inter,sans-serif;color:var(--ink2);margin-top:6px}
+.lbl-s{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:4px 0 6px}
+/* symbol table */
+.ctable{border-collapse:collapse;font:14.5px Inter,sans-serif;margin:8px 0}
+.ctable th,.ctable td{padding:6px 16px 6px 0;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+.ctable th{color:var(--ink2);font-weight:600}
+/* well-formed checker */
+.tester{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tester input{font:17px "JetBrains Mono",monospace;width:min(100%,330px);letter-spacing:.03em}
+.keys button{font-family:"JetBrains Mono",monospace;min-width:40px}
+.apart{font:14.5px/1.7 "JetBrains Mono",monospace;margin:10px 0 0;min-height:28px;overflow-x:auto}
+.apart div{white-space:nowrap}
+.apart span{font:13px Inter,sans-serif;color:var(--ink2);margin-left:10px}
+.apart .bad{color:var(--bach)} .apart .bad span{color:var(--bach)}
+.verdict{font:600 14.5px Inter,sans-serif;margin-top:8px;min-height:22px}
+.verdict.y{color:var(--escher)} .verdict.n{color:var(--bach)}
+.quiz{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin:8px 0}
+@media (max-width:720px){.quiz{grid-template-columns:1fr}}
+.quiz button{font-family:"JetBrains Mono",monospace;font-size:14px;text-align:left;width:100%}
+.quiz button.y{border-color:var(--escher);color:var(--escher)} .quiz button.n{border-color:var(--bach);color:var(--bach)}
+/* derivations */
+.wb{display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:start}
+@media (max-width:820px){.wb{grid-template-columns:1fr}}
+.wbmsg{font:14.5px/1.5 Inter,sans-serif;color:var(--ink2);min-height:44px;margin:8px 0}
+.wbmsg b{color:var(--ink)}
+.wbmsg.win{color:var(--escher)} .wbmsg.win b{color:var(--escher)}
+.picks{margin-bottom:8px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;max-height:230px;overflow:auto}
+.picks button{font-family:"JetBrains Mono",monospace;font-size:13.5px;text-align:left}
+.picks button span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:8px}
+.picks input{font:16px "JetBrains Mono",monospace;width:min(100%,260px)}
+.deriv{font:14.5px/1.6 "JetBrains Mono",monospace;margin:0;overflow-x:auto;max-height:420px;overflow-y:auto;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 10px;min-height:60px}
+.deriv .dl{display:flex;gap:8px;white-space:nowrap;align-items:baseline}
+.deriv .ln{font:12px Inter,sans-serif;color:#a2977f;min-width:20px;text-align:right}
+.deriv .ds{border-left:3px solid transparent;padding-left:8px}
+.deriv .d1 .ds{margin-left:14px;border-color:#e3c98f}
+.deriv .d2 .ds{margin-left:28px;border-color:#d9a0a0}
+.deriv .d3 .ds{margin-left:42px;border-color:#9db8d6}
+.deriv .d4 .ds{margin-left:56px;border-color:#9fc9b1}
+.deriv .why{font:12.5px Inter,sans-serif;color:var(--ink2)}
+.deriv .thm .ds{font-weight:500;background:#eef7f1;border-radius:4px;padding-right:6px}
+.deriv .empty{font:14px Inter,sans-serif;color:var(--ink2)}
+.levels{font:13px Inter,sans-serif;color:var(--ink2);margin:6px 0 0}
+.levels i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}
+/* every possible world */
+.worlds{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.worlds button{font:14px Inter,sans-serif}
+.worlds button b{font-family:"JetBrains Mono",monospace;font-weight:500}
+.worlds button.t{border-color:var(--escher);color:var(--escher)} .worlds button.f{border-color:var(--bach);color:var(--bach)}
+.reading{font-size:18px;line-height:1.45;margin:8px 0;padding:10px 14px;border-left:4px solid var(--rule);background:#fff;border-radius:0 8px 8px 0}
+.reading.t{border-color:var(--escher)} .reading.f{border-color:var(--bach)}
+.reading small{display:block;font:600 12.5px Inter,sans-serif;margin-top:4px}
+.reading.t small{color:var(--escher)} .reading.f small{color:var(--bach)}
+.tt{border-collapse:collapse;font:14px Inter,sans-serif;margin:6px 0}
+.tt th,.tt td{padding:4px 14px;text-align:center;border-bottom:1px solid var(--rule)}
+.tt th{font-family:"JetBrains Mono",monospace;font-weight:500}
+.tt td.t{color:var(--escher)} .tt td.f{color:var(--bach);font-weight:600}
+.tt tr.cur td{background:#f7e3b0}
+.ttwrap{overflow-x:auto}
+.flat{font:14px/1.9 "JetBrains Mono",monospace;overflow-x:auto;white-space:nowrap;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
+.flat span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-right:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two>*,.wb>*{min-width:0}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-chapter="08-ch07-the-propositional-calculus">
+
+<header class="hero">
+  <div class="kicker">Gödel, Escher, Bach · Explainer 08</div>
+  <h1>Chromatic Fantasy, And Feud <span style="color:var(--ink2)">+</span> <em>The Propositional Calculus</em></h1>
+  <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
+  <p class="lede">The Tortoise says his shell is green, and that it is not green, and Achilles cannot make him admit he has contradicted himself, because nothing forces anyone to use the word "and" properly. So Chapter VII builds symbols that have no choice. This page covers the dialogue <i>Chromatic Fantasy, And Feud</i> and Chapter VII, where Hofstadter turns "and", "or", "not" and "if… then" into a small formal system you can work by hand.</p>
+</header>
+
+<div class="toolbar"><div class="in">
+  <nav id="toc">
+    <a href="#s-dialogue">1 · The dialogue</a>
+    <a href="#s-strings">2 · Symbols</a>
+    <a href="#s-rules">3 · First rules</a>
+    <a href="#s-fantasy">4 · The fantasy rule</a>
+    <a href="#s-meaning">5 · What it means</a>
+    <a href="#s-worlds">6 · Every possible world</a>
+    <a href="#s-consistent">7 · Can we trust it?</a>
+    <a href="#s-levels">8 · In it &amp; about it</a>
+    <a href="#s-boom">9 · Contradiction</a>
+    <a href="#s-recap">10 · Recap</a>
+    <a href="#s-modern">11 · Modern view</a>
+  </nav>
+</div></div>
+
+<main>
+<div class="half"><div class="hk">Dialogue</div><div class="ht"><em>Chromatic Fantasy, And Feud</em></div></div>
+
+<!-- 1 -->
+<section id="s-dialogue">
+  <div class="sec-head"><div class="num">1</div><h2>A green shell that is not green</h2></div>
+  <div class="cols">
+    <div>
+      <p><b>The story.</b> The Tortoise climbs out of a pond, freshly washed, and meets Achilles. He promises there will be no logic traps today; he only wants to talk about his shell. Now that the dirt is off, he says, you can see how green it is. Achilles agrees that it is a fine green shell. "It's not green," says the Tortoise.</p>
+      <p>Achilles is sure he has caught him. But the Tortoise slides away at every turn. He denies having said both things, then agrees he did, then denies that either. Achilles tries to pin it down: a contradiction, he says, is when someone says a thing and denies it in one single sentence. The Tortoise pounces. He spoke <b>two</b> sentences, not one, so by Achilles' own definition there is no contradiction, and Achilles is the muddled one.</p>
+      <p>So Achilles looks for a way to turn the two sentences into one. Surely, he says, if you believe sentence 1 and you believe sentence 2, you believe the two combined? The Tortoise agrees, as long as the way of combining is one everybody accepts. Then he offers a way of his own. "Politicians lie" is true. "Cast-iron sinks" is a perfectly good phrase. Put together: "Politicians lie in cast-iron sinks." That is not true, so combining sentences is clearly a risky business.</p>
+      <p>Achilles protests that the right word is "and", and that joining two true sentences with "and" is harmless. The Tortoise calls this a plot: if it were harmless, why would Achilles be trying so hard to make him do it? Achilles ends up apologising. The Tortoise forgives him and goes on his way, never having said "my shell is green and my shell is not green".</p>
+    </div>
+    <div>
+      <div class="card">
+        <h3 style="margin-top:0">The title</h3>
+        <p class="small-note">Bach wrote a keyboard piece called the <i>Chromatic Fantasy and Fugue</i>. A <b>fantasy</b>, in music, is a free piece that sounds made up on the spot. <span class="term">Chromatic</span> music moves by the smallest step, one piano key at a time. A <span class="term">fugue</span> is the opposite of free: several voices enter in turn with the same theme, under strict rules.</p>
+        <p class="small-note">Hofstadter says himself that the dialogue copies almost nothing from Bach's piece except its title. The title is a pun. "Fugue" has become "Feud", and the feud is over the word "And". "Chromatic" comes from the Greek word for colour, and the quarrel starts with the colour of a shell. <i>(That last reading is ours, not the book's.)</i></p>
+        <p class="small-note">To hear what the two musical words mean, here is a short chromatic run in the free style of a fantasy. <i>(An original sketch, not Bach's notes.)</i></p>
+        <canvas id="runCanvas" height="150"></canvas>
+        <div class="row"><button id="runPlay">▶ Play a chromatic run</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="intuit"><b>The hidden point</b>The Tortoise's test for a way of combining sentences is a good one: it must never turn true sentences into a false one. "And" passes that test and his "in" does not. But knowing this does Achilles no good. A word has no power to make anyone use it properly. The Tortoise follows the ordinary meaning of "and" when it suits him and drops it when it would trap him, and no further sentence from Achilles can stop him.</div>
+  <p>If this feels familiar, it should. In Lewis Carroll's dialogue (<a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/#s-dialogue">page 03</a>) the Tortoise accepted "if A and B, then Z", accepted A and B, and still refused Z. There the stubborn word was "if… then". Here it is "and".</p>
+  <div class="intuit"><b>The idea the dialogue sets up</b>Achilles cannot make the Tortoise's <i>words</i> behave. The chapter now builds a <span class="term">formal system</span> in which one symbol does exactly what Achilles wished "and" would do, and three more do the same for "not", "or" and "if… then". Symbols in a formal system cannot wriggle, because the rules are all they have.</div>
+</section>
+
+<div class="half"><div class="hk">Chapter VII</div><div class="ht"><em>The Propositional Calculus</em></div></div>
+
+<!-- 2 -->
+<section id="s-strings">
+  <div class="sec-head"><div class="num">2</div><h2>The symbols, and which strings count</h2></div>
+  <p>A lot of everyday reasoning depends only on how four small words are used: "and", "or", "not" and "if… then". From "it is raining and it is cold" you may conclude "it is cold", whatever the weather is actually like. Hofstadter calls reasoning of this kind <b>propositional reasoning</b> (a proposition is a statement that is either true or false). The <span class="term">Propositional Calculus</span> is a formal system built to imitate it. "Calculus" here just means a method of calculating with symbols; it has nothing to do with the calculus taught in school.</p>
+  <p>Like the systems on earlier pages, it is a game played with <span class="term">strings</span> (rows of symbols). Hofstadter presents it as a puzzle: he gives the symbols and rules first and lets you work out what they stand for. We will do the same, so for now the symbols are only shapes.</p>
+  <div class="card">
+    <div class="lbl-s">The alphabet</div>
+    <div class="chips"><span class="pc">&lt;</span><span class="pc">&gt;</span><span class="pc">P</span><span class="pc">Q</span><span class="pc">R</span><span class="pc">′</span><span class="pc">∧</span><span class="pc">∨</span><span class="pc">⊃</span><span class="pc">~</span><span class="pc">[</span><span class="pc">]</span></div>
+    <p class="small-note" style="margin-bottom:0">The symbol <span class="pc">~</span> is called a tilde. The square brackets are kept for section 4.</p>
+  </div>
+  <p>Not every row of these symbols is allowed into the game. As with the pq-system on page 03, there is a test of shape that comes before anything else: a string must be <span class="term">well-formed</span>. The well-formed strings are built up from the smallest ones.</p>
+  <div class="rules two">
+    <div class="rule"><div class="rn">Atoms</div><p><span class="pc">P</span>, <span class="pc">Q</span> and <span class="pc">R</span> are well-formed. So is any of them followed by one or more primes: <span class="pc">Q′</span>, <span class="pc">R′′</span>. The primes are there so the supply never runs out. These simplest strings are called <span class="term">atoms</span>.</p></div>
+    <div class="rule"><div class="rn">Formation rules</div><p>If <i>x</i> and <i>y</i> are well-formed, so are these four strings:</p><p><span class="pc">~x</span> &nbsp; <span class="pc">&lt;x∧y&gt;</span> &nbsp; <span class="pc">&lt;x∨y&gt;</span> &nbsp; <span class="pc">&lt;x⊃y&gt;</span></p><div class="ex">Here <i>x</i> and <i>y</i> are not symbols of the system. They stand for whole well-formed strings.</div></div>
+  </div>
+  <p>Start with atoms and apply the <span class="term">formation rules</span> again and again, and you can build strings as long as you like. From <span class="pc">P</span> and <span class="pc">Q′</span>: first <span class="pc">~Q′</span>, then <span class="pc">&lt;P∧~Q′&gt;</span>, then <span class="pc">~&lt;P∧~Q′&gt;</span>, and so on. Notice that a tilde needs no brackets, but each of <span class="pc">∧</span>, <span class="pc">∨</span> and <span class="pc">⊃</span> must come wrapped in its own pair.</p>
+  <p>To test a string someone hands you, run the rules backwards. Take the string apart into the pieces it must have been made from, then take those apart, until you reach atoms or get stuck. This is a <span class="term">top-down</span> test, and it always finishes: every formation rule makes strings longer, so every step backwards gives shorter pieces, and that cannot go on forever. It is a <span class="term">decision procedure</span> for being well-formed.</p>
+  <p>Hofstadter gives eight strings to practise on. Guess first which are well-formed, then press each one to see it taken apart.</p>
+  <div class="card">
+    <div class="quiz" id="wfQuiz"></div>
+    <div class="row tester"><span class="small-note">Or type your own:</span><input id="wfIn" aria-label="A string to test" spellcheck="false" autocomplete="off" autocapitalize="off">
+      <span class="keys" id="wfKeys"></span><button class="ghost small" id="wfClear">Clear</button></div>
+    <div class="apart" id="wfOut"></div>
+    <div class="verdict" id="wfVerdict"></div>
+    <div class="steps" id="wfJoke" style="min-height:0"></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s-rules">
+  <div class="sec-head"><div class="num">3</div><h2>Three rules, and two symbols to guess</h2></div>
+  <p>Being well-formed only gets a string into the game. The strings that matter are the <span class="term">theorems</span>: the ones the rules can produce. Here are the first three rules. In all of them <i>x</i> and <i>y</i> stand for well-formed strings.</p>
+  <div class="rules">
+    <div class="rule"><div class="rn">Joining rule</div><p>If <i>x</i> and <i>y</i> are theorems, then <span class="pc">&lt;x∧y&gt;</span> is a theorem.</p></div>
+    <div class="rule"><div class="rn">Separation rule</div><p>If <span class="pc">&lt;x∧y&gt;</span> is a theorem, then <i>x</i> and <i>y</i> are both theorems.</p></div>
+    <div class="rule"><div class="rn">Double-tilde rule</div><p>The pair <span class="pc">~~</span> can be deleted from any theorem. It can also be inserted, as long as the result is still well-formed.</p></div>
+  </div>
+  <p>Can you guess what <span class="pc">∧</span> is going to stand for? Two theorems can be joined with it into one theorem, and a theorem made with it can be split back into its two halves. That is exactly how the troublesome word of the dialogue ought to behave: <span class="pc">∧</span> is the system's "and". The joining rule is the step Achilles could not make the Tortoise take. Here it is a rule of the game, and no player can refuse it.</p>
+  <p>And the tilde? Two of them in a row cancel out, the way "it is not the case that the shell is not green" just says the shell is green. The tilde is the system's "not".</p>
+  <p>So far these are guesses, and nothing in the system depends on them. The rules never mention "and" or "not". They only say which shapes may be written after which.</p>
+  <div class="intuit"><b>Something is missing</b>Every formal system on earlier pages started from <span class="term">axioms</span>: strings handed to you as theorems for free. This one has none. But all three rules above need a theorem to start from. With no axioms, how does the first theorem ever get made?</div>
+</section>
+
+<!-- 4 -->
+<section id="s-fantasy">
+  <div class="sec-head"><div class="num">4</div><h2>The fantasy rule: theorems out of thin air</h2></div>
+  <p>The answer is one special rule that needs no theorem to start from. Hofstadter calls it the <span class="term">fantasy rule</span>. It works like saying "let's pretend".</p>
+  <p>Write down any well-formed string <i>x</i> you like, and ask: <i>what if x were a theorem?</i> Then use the rules to see what follows. Suppose that after some steps you arrive at a string <i>y</i>. Everything from <i>x</i> to <i>y</i> is the <b>fantasy</b>; <i>x</i> is its <b>premise</b> (the thing supposed) and <i>y</i> is its <b>outcome</b>. Nothing inside the fantasy is a theorem, because it all rests on a pretence. But you have learned something real:</p>
+  <p style="text-align:center"><i>If x were a theorem, y would be a theorem.</i></p>
+  <p>The fantasy rule lets you write that discovery down as a string, and this string is a genuine theorem:</p>
+  <p style="text-align:center;font-size:22px"><span class="pc">&lt;x⊃y&gt;</span></p>
+  <p>The square brackets mark where a fantasy starts and stops. A <span class="pc">[</span> means "<b>push</b> into a fantasy; the next line is its premise". A <span class="pc">]</span> means "<b>pop</b> back out; the line before was its outcome". (Push and pop are the words for going down a level and coming back up.) Here is the smallest example, the chapter's first theorem:</p>
+  <div class="two">
+    <div><div class="deriv" id="dvDn"></div></div>
+    <div><p style="margin-top:0">Inside the fantasy we pretended <span class="pc">P</span> and the double-tilde rule gave <span class="pc">~~P</span>. Outside, we are left with a real theorem, <span class="pc">&lt;P⊃~~P&gt;</span>. Note that <span class="pc">P</span> itself is <b>not</b> a theorem. We only asked what would follow if it were.</p>
+    <p>This gives away the third symbol. <span class="pc">&lt;x⊃y&gt;</span> records "if <i>x</i>, then <i>y</i>": <span class="pc">⊃</span> is the system's "if… then".</p></div>
+  </div>
+  <h3 class="step-h"><span class="sn">a</span>Fantasies inside fantasies</h3>
+  <p>Inside a fantasy you can push again and start another one, as a film can contain a film. Hofstadter calls the layers <b>levels of reality</b>. Popping out of an inner fantasy puts you back in the outer one, which is more real than where you were but still not the real world. Only lines at the outermost level, inside no brackets at all, are theorems.</p>
+  <p>What may cross between levels? One more rule settles it:</p>
+  <div class="rules two">
+    <div class="rule"><div class="rn">Carry-over rule</div><p>Inside a fantasy, any theorem from the level just outside it can be brought in and used.</p><div class="ex">Hofstadter's picture: a "No Smoking" sign in a cinema that applies to the actors in the film too. It works inwards only. If lines could be carried <i>out</i> of a fantasy, you could push, write any string at all as a premise, and carry it out as a theorem.</div></div>
+    <div class="rule"><div class="rn">Rule of detachment</div><p>If <i>x</i> and <span class="pc">&lt;x⊃y&gt;</span> are both theorems, then <i>y</i> is a theorem.</p><div class="ex">The fantasy rule makes "if… then" strings; this rule uses them. It is the very step Carroll's Tortoise refused on page 03: he granted the "if… then" and its first half, and would not grant the second. Logicians call this rule <i>modus ponens</i>.</div></div>
+  </div>
+  <h3 class="step-h"><span class="sn">b</span>Try it</h3>
+  <p>Below, the page is blank: no axioms. Make each target appear on a line with no indent. You will have to push first; nothing else can start. If you get stuck, the book's own derivation is one press away. (A <span class="term">derivation</span> is the line-by-line record of how a theorem was made.)</p>
+  <div class="card">
+    <div class="row"><span class="small-note">Target:</span><span id="wbTargets"></span></div>
+    <div class="wb">
+      <div>
+        <div class="row" id="wbRules">
+          <button class="ghost" data-rule="push">[ Push</button>
+          <button class="ghost" data-rule="pop">] Pop</button>
+          <button class="ghost" data-rule="join">Joining</button>
+          <button class="ghost" data-rule="sep">Separation</button>
+          <button class="ghost" data-rule="dbl">Double-tilde</button>
+          <button class="ghost" data-rule="carry">Carry-over</button>
+          <button class="ghost" data-rule="detach">Detachment</button>
+        </div>
+        <div class="row" id="wbRules2" hidden>
+          <button class="ghost" data-rule="contra">Contrapositive</button>
+          <button class="ghost" data-rule="demorgan">De Morgan</button>
+          <button class="ghost" data-rule="switcheroo">Switcheroo</button>
+        </div>
+        <div class="wbmsg" id="wbMsg"></div>
+        <div class="picks" id="wbPick"></div>
+        <div class="row"><button class="ghost small" id="wbUndo">↶ Undo</button><button class="ghost small" id="wbReset">Start over</button><button class="ghost small" id="wbShow">Show the book's derivation</button></div>
+      </div>
+      <div>
+        <div class="lbl-s">Your derivation</div>
+        <div class="deriv" id="wbList"></div>
+        <div class="levels">Indent shows the level:<i style="background:#eef7f1;border:1px solid #9fc9b1"></i>real world (theorems)<i style="background:#e3c98f"></i>fantasy<i style="background:#d9a0a0"></i>fantasy in a fantasy</div>
+      </div>
+    </div>
+  </div>
+  <p>Every theorem you made began with a push. That is the only way to begin, so every theorem of this system has a fantasy somewhere in its history.</p>
+  <div class="intuit"><b>What the fantasy rule really does</b>"If <i>x</i> were a theorem, <i>y</i> would be" is a remark made in English, from outside, <i>about</i> the system. The fantasy rule turns that remark into a string <i>of</i> the system, <span class="pc">&lt;x⊃y&gt;</span>. An observation about the game becomes a position in the game. Keep an eye on this move. Getting a system to hold statements about itself is where the whole book is heading.</div>
+</section>
+<!-- 5 -->
+<section id="s-meaning">
+  <div class="sec-head"><div class="num">5</div><h2>What the symbols are meant to mean</h2></div>
+  <p>Time to say it outright. An <span class="term">interpretation</span>, as on page 03, is a dictionary that matches symbols with words. Here is the one this system was designed for.</p>
+  <div class="card">
+    <table class="ctable">
+      <tr><th>Symbol</th><th>Read as</th><th>Note</th></tr>
+      <tr><td><span class="pc">∧</span></td><td>and</td><td></td></tr>
+      <tr><td><span class="pc">~</span></td><td>not</td><td></td></tr>
+      <tr><td><span class="pc">∨</span></td><td>or</td><td>"One or the other, or both." (The shape comes from <i>vel</i>, a Latin word for "or".)</td></tr>
+      <tr><td><span class="pc">⊃</span></td><td>if… then</td><td><span class="pc">&lt;x⊃y&gt;</span> reads "if <i>x</i>, then <i>y</i>".</td></tr>
+      <tr><td><span class="pc">&lt;</span> <span class="pc">&gt;</span></td><td>(grouping)</td><td>Like brackets in arithmetic, except that here you may never leave them out.</td></tr>
+      <tr><td><span class="pc">P</span>, <span class="pc">Q</span>, …</td><td>any sentence you like</td><td>An atom has no fixed meaning. Give it any sentence, and keep to that sentence throughout.</td></tr>
+    </table>
+  </div>
+  <p>Hofstadter fills the atoms with lines from Zen <span class="term">koans</span>, and calls the results "Zentences". Let <span class="pc">P</span> be "this mind is Buddha" and <span class="pc">Q</span> be "this flax weighs three pounds". Then the three theorems from the workbench read:</p>
+  <div class="card">
+    <table class="ctable">
+      <tr><td><span class="pc">&lt;P⊃~~P&gt;</span></td><td>If this mind is Buddha, then it is not the case that this mind is not Buddha.</td></tr>
+      <tr><td><span class="pc">&lt;&lt;P∧Q&gt;⊃&lt;Q∧P&gt;&gt;</span></td><td>If this mind is Buddha and this flax weighs three pounds, then this flax weighs three pounds and this mind is Buddha.</td></tr>
+      <tr><td class="pc wrap">&lt;P⊃&lt;Q⊃&lt;P∧Q&gt;&gt;&gt;</td><td>If this mind is Buddha, then, if this flax weighs three pounds, then this mind is Buddha and this flax weighs three pounds.</td></tr>
+    </table>
+  </div>
+  <p>Each one is true, and so obviously true that it hardly seems worth saying. That is the point. There are plenty of false sentences the system could have produced, such as "this mind is Buddha and this mind is not Buddha", and it produced none of them. Hofstadter compares it to someone crossing a stream on stepping-stones: the system steps from truth to truth and never gets its feet wet. And it does this without anyone inside it thinking about minds or flax. The rules only move shapes.</p>
+  <div class="intuit"><b>Where the meaning comes from</b>Nobody told the system that <span class="pc">∧</span> means "and". The joining and separation rules make <span class="pc">∧</span> behave the way "and" behaves, and that behaviour is all the meaning it has. Page 03 called this <span class="term">passive meaning</span>: meaning a symbol earns from how the rules treat it. This is the reply to the dialogue. Achilles could not hold the Tortoise to "and". Nobody needs to hold <span class="pc">∧</span> to anything.</div>
+
+  <h3 class="step-h"><span class="sn">a</span>The last three rules</h3>
+  <p>Three more rules complete the system. Each says that two shapes are <b>interchangeable</b>: wherever one occurs, as a whole theorem or as a piece inside one, you may swap in the other.</p>
+  <div class="rules">
+    <div class="rule"><div class="rn">Contrapositive rule</div><p><span class="pc">&lt;x⊃y&gt;</span> and <span class="pc">&lt;~y⊃~x&gt;</span> are interchangeable.</p><div class="ex">"If you are studying it, then you are far from the Way" says the same as "if you are close to the Way, then you are not studying it".</div></div>
+    <div class="rule"><div class="rn">De Morgan's rule</div><p><span class="pc">&lt;~x∧~y&gt;</span> and <span class="pc">~&lt;x∨y&gt;</span> are interchangeable.</p><div class="ex">"The flag is not moving and the wind is not moving" says the same as "it is not true that either the flag or the wind is moving".</div></div>
+    <div class="rule"><div class="rn">Switcheroo rule</div><p><span class="pc">&lt;x∨y&gt;</span> and <span class="pc">&lt;~x⊃y&gt;</span> are interchangeable.</p><div class="ex">"Either a cloud hangs over the mountain, or the moonlight reaches the lake" says the same as "if no cloud hangs over the mountain, then the moonlight reaches the lake".</div></div>
+  </div>
+  <p class="small-note">De Morgan's rule is named after the English logician Augustus De Morgan (1806–1871). "Switcheroo" is Hofstadter's own joke name.</p>
+  <p>That makes nine rules in all: joining, separation, double-tilde, fantasy, carry-over, detachment, and these three. Here they are at work on our first theorem:</p>
+  <div class="two">
+    <div><div class="deriv" id="dvExcl"></div></div>
+    <div><p style="margin-top:0">The new theorem <span class="pc">&lt;P∨~P&gt;</span> reads "either this mind is Buddha, or this mind is not Buddha". True again, whatever you think about minds.</p>
+    <p class="small-note">The <a class="xref" href="#s-fantasy">workbench in section 4</a> has these three rules too: choose the target <span class="pc">&lt;P∨~P&gt;</span> there and they appear.</p></div>
+  </div>
+
+  <h3 class="step-h"><span class="sn">b</span>True whatever the atoms say</h3>
+  <p>You do not even need to choose sentences for the atoms. Read only the other symbols, and <span class="pc">&lt;P∨~P&gt;</span> becomes "P or not P". Hofstadter calls this a <b>semi-interpretation</b>. It is not a sentence, since P is not one, yet it already sounds true, because you can see that it will come out true whichever sentence you drop in for P.</p>
+  <p class="big-idea">That is the key idea of the Propositional Calculus. Its theorems are the patterns that come out true no matter what sentences fill the atoms.</p>
+  <p>Hofstadter puts it another way: these are statements that would be true in every conceivable world. That is why they sound empty. They tell you nothing about minds, flax or shells. What they show is the <i>form</i> that such always-true statements have, and that every one of them can be turned out by a single small set of shape-moving rules.</p>
+  <p>Why Zen? Koans are stories built to defeat ordinary logic, so they make a pointed test load for a logic machine. Hofstadter asks, half joking, whether koans too might all come from one set of rules. He takes Zen up properly two chapters later.</p>
+  <details class="primer">
+    <summary>A longer derivation: Ganto's Ax</summary>
+    <p>In one koan the monk Ganto raises an ax over two meditating monks and says: if you say a word, I will cut off your heads; and if you do not say a word, I will also cut off your heads. Let <span class="pc">P</span> be "you say a word" and <span class="pc">Q</span> be "I will cut off your heads". The threat is the string <span class="pc">&lt;&lt;P⊃Q&gt;∧&lt;~P⊃Q&gt;&gt;</span>. What if it were a theorem? Push it as a premise and see.</p>
+    <div class="deriv" id="dvGanto" style="max-height:none"></div>
+    <p>About two dozen thoughtless steps, and out comes <span class="pc">Q</span>: the heads come off. (Hofstadter stops at line 24. Line 25 is what the fantasy rule then gives.) Along the way the system used <span class="pc">&lt;P∨~P&gt;</span>, "you say a word or you don't", exactly as a person would.</p>
+    <p>The koan itself ends differently. The monks go on meditating as if nothing had been said, and Ganto puts down the ax and praises them. The logic is flawless, and the koan steps around it.</p>
+  </details>
+</section>
+
+<!-- 6 -->
+<section id="s-worlds">
+  <div class="sec-head"><div class="num">6</div><h2>Every possible world: a test that always finishes</h2></div>
+  <p>Page 02 asked of the MIU-system: is there a <span class="term">decision procedure</span> for theorems, a test that always finishes and says yes or no? Making theorems one after another can tell you "yes" if your string turns up, but it can never tell you "no".</p>
+  <p>For the Propositional Calculus there is such a test. Hofstadter names it, the method of <span class="term">truth tables</span>, and leaves the details to logic textbooks. It follows so directly from the last section that we show it here. <i>(This demo goes one step beyond the book.)</i></p>
+  <p>The idea: each atom stands for a sentence, and a sentence is either true or false. So for a string with two atoms there are only four cases to consider, however many sentences there are in the world: both true, first only, second only, neither. Call each case a <b>world</b>. In each world, work out whether the whole string is true, using the meanings of the symbols:</p>
+  <div class="card">
+    <table class="ctable">
+      <tr><td><span class="pc">~x</span></td><td>is true when <i>x</i> is false.</td></tr>
+      <tr><td><span class="pc">&lt;x∧y&gt;</span></td><td>is true when both are true.</td></tr>
+      <tr><td><span class="pc">&lt;x∨y&gt;</span></td><td>is true when at least one is true.</td></tr>
+      <tr><td><span class="pc">&lt;x⊃y&gt;</span></td><td>is false in just one case: <i>x</i> true and <i>y</i> false. Otherwise it is true.</td></tr>
+    </table>
+    <p class="small-note" style="margin-bottom:0">The last line surprises people. Think of a promise: "if it rains, I will bring an umbrella". The only way to break it is for it to rain and for me to turn up without one. On a dry day I have kept my word whatever I carry. So when <i>x</i> is false, <span class="pc">&lt;x⊃y&gt;</span> counts as true.</p>
+  </div>
+  <p>Pick a string, then flip the atoms between true and false and watch the sentence.</p>
+  <div class="card">
+    <div class="row"><span class="small-note">String:</span><span id="ttPicks"></span></div>
+    <div class="worlds" id="ttAtoms"></div>
+    <div class="reading" id="ttRead"></div>
+    <div class="lbl-s">All the worlds at once</div>
+    <div class="ttwrap"><table class="tt" id="ttTable"></table></div>
+    <div class="steps" id="ttMsg" style="min-height:44px"></div>
+  </div>
+  <p>The strings marked as theorems come out true in every row. The others fail in at least one. Logicians have proved that this always holds: a well-formed string is a theorem of the Propositional Calculus exactly when it is true in every world. (The book states this without proof, and so do we.)</p>
+  <p>So to decide whether a string is a theorem you never need to hunt for a derivation. Fill in its table: 2 rows for one atom, 4 for two, 8 for three, doubling with each new atom, but always a finite number. In the words of page 04, the theorems form a <span class="term">recursive</span> set: there is a sure test for being in, and for being out.</p>
+  <p>Try <span class="pc">P</span> on its own, then <span class="pc">&lt;P∨~P&gt;</span>. "P or not P" is a theorem, yet <span class="pc">P</span> is not, and <span class="pc">~P</span> is not either. Section 8 comes back to this.</p>
+</section>
+
+<!-- 7 -->
+<section id="s-consistent">
+  <div class="sec-head"><div class="num">7</div><h2>Can we be sure it never goes wrong?</h2></div>
+  <p>We have been assuming that every theorem, read as "and", "not", "or" and "if… then", comes out true. In particular, that the system is <span class="term">consistent</span>: it never produces both a string <i>x</i> and its opposite <span class="pc">~x</span>. Do we <i>know</i> that? Hofstadter stages the question as an argument between two voices.</p>
+  <div class="two">
+    <div class="card"><span class="tag g">Prudence</span><p>We only know it once it has been proved. Perhaps some rule is subtly wrong and, far down the line, both <i>x</i> and <span class="pc">~x</span> turn up as theorems.</p></div>
+    <div class="card"><span class="tag b">Imprudence</span><p>Look at the rules. Each one plainly does what "and", "not" or "if… then" does. If you doubt that, you doubt your own reasoning. And any proof you gave would itself use "and", "not" and "if… then", in arguments far more tangled than these nine rules. What would it add?</p></div>
+  </div>
+  <p>One exchange in their argument is worth pausing on. Imprudence asks why two theorems <i>x</i> and <span class="pc">~x</span> would be so terrible; in the MIU-system both MI and MIU are theorems and nobody minds. Prudence answers that MI and MIU do not contradict each other, whereas <i>x</i> and <span class="pc">~x</span> do. But they contradict only if you read <span class="pc">~</span> as "not". That is the lesson of <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/">page 05</a>: consistency belongs to a system <i>together with</i> an interpretation. And what makes us read <span class="pc">~</span> as "not"? The rules. So Prudence already trusts that the rules capture those words, which is the very thing she wanted proved.</p>
+  <p>What about the tables of section 6? Checking that each rule only ever leads from always-true strings to always-true strings is a real proof that no false sentence can come out. But look at how you do the check: "if <i>x</i> is true <i>and</i> <i>y</i> is true, <i>then</i>…". The proof leans on the same words the system was built to copy. It can make you more confident. It cannot be a foundation underneath your own reasoning.</p>
+  <div class="intuit"><b>The egg and the boxes</b>Hofstadter compares a system of reasoning to an egg. Its shell protects it, and to ship it you pack it in a box, and for safety put that box inside another. Each proof that your reasoning is sound is one more box. However many you add, you can imagine a disaster big enough to break the egg. You ship it anyway. In the same way there is never a final proof that a proof is correct: you can prove the proof, and prove that proof, but the outermost layer is always taken on trust.</div>
+  <p>This is Carroll's dialogue once more. There, each time Achilles stated a rule of reasoning, the Tortoise wrote it down as one more sentence to be accepted, and asked for a rule to get past that one. Hofstadter suggests writing their quarrel in the new notation. Achilles says: if you have <span class="pc">&lt;&lt;A∧B&gt;⊃Z&gt;</span> and you have <span class="pc">&lt;A∧B&gt;</span>, then you have <span class="pc">Z</span>. The Tortoise replies: you mean this string?</p>
+  <div class="flat"><span>Achilles' rule, flattened once</span>&lt;&lt;&lt;&lt;A∧B&gt;⊃Z&gt;∧&lt;A∧B&gt;&gt;⊃Z&gt;<br><span>and again</span>&lt;&lt;&lt;&lt;&lt;&lt;A∧B&gt;⊃Z&gt;∧&lt;A∧B&gt;&gt;⊃Z&gt;∧&lt;&lt;&lt;A∧B&gt;⊃Z&gt;∧&lt;A∧B&gt;&gt;&gt;⊃Z&gt;</div>
+  <p class="small-note">(A, B and Z are borrowed from Carroll's dialogue; they are not atoms of our system. Page 03, section 2, lets you play this regress out.)</p>
+  <p>Whatever Achilles offers as a rule, the Tortoise turns into a mere string, and a string cannot make anyone do anything. The strings grow forever and Z never arrives. A rule has to be <i>used</i>; it cannot be replaced by a sentence saying it may be used. At some point, Hofstadter says, you cannot defend your ways of reasoning any further, and trust takes over.</p>
+</section>
+
+<!-- 8 -->
+<section id="s-levels">
+  <div class="sec-head"><div class="num">8</div><h2>Working in the system, and talking about it</h2></div>
+  <p>Anyone who makes a few derivations starts taking shortcuts. Having derived <span class="pc">&lt;P∨~P&gt;</span>, you would not bother to derive <span class="pc">&lt;Q∨~Q&gt;</span> step by step. You know the same steps would work with <span class="pc">Q</span> in place of <span class="pc">P</span>, so you treat the first theorem as a mould for a whole family. Hofstadter calls such a mould a <b>theorem schema</b>, and a shortcut of this kind a <span class="term">derived rule</span>.</p>
+  <p>Derived rules are safe. But notice where the knowledge that they are safe comes from. It is not a string, and no rule of the system produced it. You reasoned <i>about</i> the system, in ordinary language. Page 02 called this stepping outside: working inside a system is the M-mode, thinking about it is the I-mode. Hofstadter now gives the outside view its proper names.</p>
+  <div class="two">
+    <div class="card"><span class="tag g">Inside</span><h4>The system</h4><p>Its language is strings such as <span class="pc">&lt;P∨~P&gt;</span>. Hofstadter calls it the <b>object language</b>. Its results are theorems with a small t: strings the rules produce. Its proofs are derivations.</p></div>
+    <div class="card"><span class="tag e">Outside</span><h4>The metatheory</h4><p>Its language is English, the <b>metalanguage</b> ("meta" is Greek for "beyond" or "about"). Its results are <span class="term">metatheorems</span>: Theorems, with a capital T as on page 02, about theorems. "Every theorem is true in every world" is one. So is every derived rule.</p></div>
+  </div>
+  <p><b>Why not just allow the shortcuts?</b> Because of what formal systems are for. They exist so that every step is written out inside one rigid framework and anyone, or any machine, can check a derivation without having to think. A derived rule was justified by thinking. Use it, and you have stepped outside the framework you built in order not to step outside.</p>
+  <p><b>Then why not make the outside formal too?</b> You could build a second, bigger formal system whose theorems are the derived rules of the first. But soon you would want shortcuts in <i>that</i> system, and a third to justify them. This is the third time the chapter has met the same staircase: the Tortoise's ever-longer strings, the proof of a proof of a proof, and now a theory about a theory about a theory. Each time, the top step is something you do and do not prove.</p>
+  <p>Could a system be its own metatheory, so that the staircase folds into a single step? Hofstadter promises that the book will soon meet a system that can talk about itself, and that it comes to do so by accident, without anyone planning it. Even then, he warns, the system does not get outside itself. You, looking on, still see it differently from the way it sees itself.</p>
+  <div class="intuit"><b>A mistake that comes from mixing the levels</b><span class="pc">&lt;P∨~P&gt;</span> is a theorem, and it reads "P or not P". So surely either <span class="pc">P</span> is a theorem or <span class="pc">~P</span> is? No. Neither is, as the tables in section 6 showed. The <span class="pc">∨</span> inside the string is a symbol of the system. The "or" in "either this is a theorem or that is" belongs to English, outside. Sliding a symbol from one level to the other is exactly the kind of move that goes wrong.</div>
+  <h3 class="step-h"><span class="sn">a</span>Proofs and derivations</h3>
+  <p>Earlier pages used <span class="term">proof</span> loosely. Hofstadter now separates two things. A <b>proof</b> is what mathematicians write for each other: ordinary thought in ordinary language. A <b>derivation</b> is its artificial twin inside a formal system.</p>
+  <div class="two">
+    <div class="card"><span class="tag e">Proof</span><p>Short. Each step "sounds right", though you may not be able to say exactly why. Its hidden complication is the thing it rests on: the whole of human language and thought.</p></div>
+    <div class="card"><span class="tag g">Derivation</span><p>Each step is so small that nobody could doubt it. Its complication is sheer size. It took 14 lines to reach the theorem in section 9, and derivations of real mathematics are far too long to take in.</p></div>
+  </div>
+  <p>The Propositional Calculus is a method for building these proof-like structures. Hofstadter is careful to add that its rules are not the rules of human thought.</p>
+  <p class="small-note">It is also only one of many versions. Hofstadter notes that his is related to a system invented by the German logician Gerhard Gentzen in the early 1930s. Other versions do have axioms, and often just one rule, detachment. Rules can be traded for axioms and back.</p>
+</section>
+
+<!-- 9 -->
+<section id="s-boom">
+  <div class="sec-head"><div class="num">9</div><h2>What happens when a contradiction gets in</h2></div>
+  <p>The dialogue began with a contradiction. The chapter ends by feeding one to the system. Take as the premise of a fantasy the string <span class="pc">&lt;P∧~P&gt;</span>, "P and not P". With <span class="pc">P</span> as "my shell is green" it is the sentence Achilles was trying to extract. To the system it is just another well-formed string.</p>
+  <div class="two">
+    <div><div class="deriv" id="dvBoom" style="max-height:none"></div></div>
+    <div><p style="margin-top:0">Line 14 is a theorem: <span class="pc">&lt;&lt;P∧~P&gt;⊃Q&gt;</span>. Its semi-interpretation is "P and not P together imply Q". But <span class="pc">Q</span> never appeared in the premise. It can be any sentence at all.</p>
+    <p class="big-idea" style="font-size:20px">From a contradiction, anything follows.</p>
+    <p>If my shell is green and my shell is not green, then politicians lie in cast-iron sinks.</p>
+    <p class="small-note">The table test of section 6 agrees. <span class="pc">&lt;x⊃y&gt;</span> is false only in a world where <i>x</i> is true and <i>y</i> false, and there is no world where <span class="pc">&lt;P∧~P&gt;</span> is true.</p></div>
+  </div>
+  <p>This is why consistency matters so much. If any system built on these rules ever proved both <i>x</i> and <span class="pc">~x</span>, joining would give <span class="pc">&lt;x∧~x&gt;</span>, and then this theorem and detachment would give every string whatsoever. One contradiction and the whole system is worthless. Hofstadter says it spreads like an instant cancer.</p>
+  <h3 class="step-h"><span class="sn">a</span>People do not work like this</h3>
+  <p>If you found that two of your beliefs contradicted each other, you would not conclude that you now believe everything. You would step back, look for the belief or the habit of reasoning that caused the trouble, and repair it. Mathematics has done the same. In past centuries people "proved" that the endless sum 1 − 1 + 1 − 1 + … equals 0, and that it equals 1, and that it equals ½. Mathematics did not collapse. The clash led to a better understanding of what an endless sum is.</p>
+  <p>So here is a gap between the Propositional Calculus and real thinking, and logicians have tried to close it. One attempt Hofstadter mentions is <b>relevant implication</b>, from the book <i>Entailment</i> by Alan Ross Anderson and Nuel Belnap (1975). Its aim is an "if… then" that holds only when the two halves have something to do with each other. The Propositional Calculus makes no such demand. These are all theorems:</p>
+  <div class="card">
+    <table class="ctable">
+      <tr><td><span class="pc">&lt;P⊃&lt;Q⊃P&gt;&gt;</span></td><td>If P, then: if Q, then P.</td></tr>
+      <tr><td><span class="pc">&lt;P⊃&lt;Q∨~Q&gt;&gt;</span></td><td>If P, then Q or not Q.</td></tr>
+      <tr><td><span class="pc">&lt;&lt;P∧~P&gt;⊃Q&gt;</span></td><td>If P and not P, then Q.</td></tr>
+      <tr><td><span class="pc">&lt;&lt;P⊃Q&gt;∨&lt;Q⊃P&gt;&gt;</span></td><td>Either P implies Q, or Q implies P.</td></tr>
+    </table>
+    <p class="small-note" style="margin-bottom:0">Take the last one with P as "the shell is green" and Q as "the flax weighs three pounds". Neither has anything to do with the other, yet the system says one of them implies the other. Relevant implication forbids steps like line 10 above, where <span class="pc">~Q</span> was "used" to get something that never needed it. Other researchers, Hofstadter adds, go further and give up consistency altogether, in order to imitate human reasoning with all its faults.</p>
+  </div>
+  <p><b>Back to the Tortoise.</b> Achilles was right about "and", and the chapter has built the symbol he wanted. But notice what the Tortoise did when cornered: he changed the subject, redefined his terms, and walked away with a contradiction in his pocket and his beliefs otherwise intact. A formal system cannot do that, and a person can. People can also do what the Tortoise would not: admit the clash and mend it. <i>(This reading of the dialogue is ours.)</i></p>
+  <div class="intuit"><b>Where this leaves us</b>For all its stiffness, the Propositional Calculus does its one job perfectly. Placed inside a larger system that is free of contradictions, it supplies every correct step of "and / or / not / if… then" reasoning, and no incorrect one. So if a larger system ever turns out to have a gap or a flaw, the fault will lie in what was added, not in this part. The next chapter does exactly that: it takes these nine rules whole into a system that can talk about numbers.</div>
+</section>
+
+<!-- 10 -->
+<section id="s-recap">
+  <div class="sec-head"><div class="num">10</div><h2>Recap: the dialogue and chapter in one breath</h2></div>
+  <p class="big-idea">Words cannot force anyone to reason properly, as the Tortoise shows with "and". Symbols governed by rules can: nine rules of shape make ∧, ∨, ~ and ⊃ act like "and", "or", "not" and "if… then", and every theorem comes out true whatever its atoms mean.</p>
+  <div class="grid3">
+    <div class="card"><span class="tag b">Dialogue</span><h4>A feud over "and"</h4><p>The Tortoise says his shell is green and not green, and Achilles cannot make him join the two. A word does not enforce its own use.</p></div>
+    <div class="card"><span class="tag g">The system</span><h4>No axioms, one fantasy</h4><p>Suppose <i>x</i>, reach <i>y</i>, and keep <span class="pc">&lt;x⊃y&gt;</span>. Theorems are the patterns true in every world, and a table decides which strings they are.</p></div>
+    <div class="card"><span class="tag e">Outside the system</span><h4>Trust, levels, limits</h4><p>No proof of soundness gets beneath your own reasoning. Shortcuts live outside the system. And one contradiction inside it proves everything.</p></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section id="s-modern">
+  <div class="sec-head"><div class="num">11</div><h2>Modern view: what we know now</h2></div>
+  
+</section>
+
+</main>
+<footer>
+  An independent companion to Douglas Hofstadter's <i>Gödel, Escher, Bach: an Eternal Golden Braid</i> (1979). Summaries and paraphrases are original; music is synthesized live in your browser.
+</footer>
+
+<script src="../assets/toc.js?v=8401aad5"></script>
+<script src="../assets/glossary.js?v=d6cca8ea"></script>
+<script src="../assets/terms.js?v=62f05ed1" defer></script>
+<script src="../assets/nav.js?v=55d02fb1" defer></script>
+<script src="../assets/music.js?v=761fe73a"></script>
+<script>
+/* ===== The Propositional Calculus: parser, rules, truth tables ===== */
+const OPS='∧∨⊃';
+// parse a string into a tree, or return null. Tree: {t:'atom',s} | {t:'not',x} | {t:'∧'|'∨'|'⊃',x,y}
+function parse(s){
+  let i=0;
+  function wf(){
+    const c=s[i];
+    if(c==='P'||c==='Q'||c==='R'){let a=c;i++;while(s[i]==='′'){a+='′';i++;}return {t:'atom',s:a};}
+    if(c==='~'){i++;const x=wf();return x&&{t:'not',x};}
+    if(c==='<'){i++;const x=wf();if(!x)return null;const o=s[i];if(!o||OPS.indexOf(o)<0)return null;i++;const y=wf();if(!y||s[i]!=='>')return null;i++;return {t:o,x,y};}
+    return null;
+  }
+  const r=wf(); return r&&i===s.length?r:null;
+}
+const show=n=>n.t==='atom'?n.s:n.t==='not'?'~'+show(n.x):'<'+show(n.x)+n.t+show(n.y)+'>';
+const isWf=s=>!!parse(s);
+const clean=s=>s.replace(/\s+/g,'').replace(/'/g,'′').replace(/&|\^/g,'∧').replace(/v|\|/g,'∨').replace(/[pqr]/g,c=>c.toUpperCase());
+
+/* Top-down check: take a string apart, reporting each step. Returns {ok, steps:[{s,depth,msg,ok}]} */
+function takeApart(s){
+  const steps=[]; let ok=true;
+  function go(s,d){
+    if(/^[PQR]′*$/.test(s)){steps.push({s,d,ok:true,msg:'an atom'});return;}
+    if(s===''){ok=false;steps.push({s:'(nothing)',d,ok:false,msg:'nothing here, where a well-formed string is needed'});return;}
+    if(s[0]==='~'){steps.push({s,d,ok:true,msg:'a tilde in front of…'});go(s.slice(1),d+1);return;}
+    if(s[0]==='<'){
+      // find the bracket that closes the first one, and the connectives directly inside it
+      let depth=0,close=-1,ops=[];
+      for(let k=0;k<s.length;k++){const c=s[k];if(c==='<')depth++;else if(c==='>'){depth--;if(depth===0){close=k;break;}}else if(depth===1&&OPS.indexOf(c)>=0)ops.push(k);}
+      if(close<0){ok=false;steps.push({s,d,ok:false,msg:'the opening < is never closed by a >'});return;}
+      if(close<s.length-1){ok=false;steps.push({s,d,ok:false,msg:'the first < closes before the end, so the whole string has no outer brackets around it'});return;}
+      if(ops.length===0){ok=false;steps.push({s,d,ok:false,msg:'brackets must hold two strings with ∧, ∨ or ⊃ between them; here there is no such symbol'});return;}
+      if(ops.length>1){ok=false;steps.push({s,d,ok:false,msg:'two of ∧ ∨ ⊃ inside one pair of brackets; each needs brackets of its own'});return;}
+      const k=ops[0];steps.push({s,d,ok:true,msg:'two strings joined by '+s[k]+' inside brackets:'});
+      go(s.slice(1,k),d+1);go(s.slice(k+1,-1),d+1);return;
+    }
+    ok=false;steps.push({s,d,ok:false,msg:/^[PQR]/.test(s)?'an atom with something stuck after it':'does not start with an atom, a tilde or a <'});
+  }
+  go(s,0); return {ok,steps};
+}
+
+/* All subtrees with a way to rebuild the whole string around a replacement */
+function spots(n){
+  const out=[];
+  (function walk(n,wrap){
+    out.push({n,wrap});
+    if(n.t==='not')walk(n.x,x=>wrap({t:'not',x}));
+    else if(n.t!=='atom'){walk(n.x,x=>wrap({t:n.t,x,y:n.y}));walk(n.y,y=>wrap({t:n.t,x:n.x,y}));}
+  })(n,x=>x);
+  return out;
+}
+const not=x=>({t:'not',x});
+// the three "interchangeable" rules: each gives a replacement for a subtree, or null
+const SWAPS={
+  contra:[n=>n.t==='⊃'?{t:'⊃',x:not(n.y),y:not(n.x)}:null,
+          n=>n.t==='⊃'&&n.x.t==='not'&&n.y.t==='not'?{t:'⊃',x:n.y.x,y:n.x.x}:null],
+  demorgan:[n=>n.t==='∧'&&n.x.t==='not'&&n.y.t==='not'?not({t:'∨',x:n.x.x,y:n.y.x}):null,
+            n=>n.t==='not'&&n.x.t==='∨'?{t:'∧',x:not(n.x.x),y:not(n.x.y)}:null],
+  switcheroo:[n=>n.t==='∨'?{t:'⊃',x:not(n.x),y:n.y}:null,
+              n=>n.t==='⊃'&&n.x.t==='not'?{t:'∨',x:n.x.x,y:n.y}:null]
+};
+
+/* A derivation: lines {k:'push'|'pop'|'line', s, d (fantasy depth), why}. */
+function newDeriv(){return {lines:[]};}
+function depthNow(D){let d=0;for(const l of D.lines){if(l.k==='push')d++;if(l.k==='pop')d--;}return d;}
+// lines usable now: those of the current fantasy (or of the real world), not inside a closed inner fantasy
+function usable(D,up=0){
+  const cur=depthNow(D)-up, out=[]; if(cur<0)return out;
+  let d=cur, i=D.lines.length-1;
+  // when looking one level up, first walk back out of the current fantasy
+  for(let lev=depthNow(D);lev>cur;i--){if(D.lines[i].k==='push')lev--;else if(D.lines[i].k==='pop')lev++;}
+  for(let lev=cur;i>=0;i--){const l=D.lines[i];
+    if(l.k==='pop')lev++;
+    else if(l.k==='push'){if(lev===cur)break;lev--;}
+    else if(lev===cur)out.unshift({s:l.s,i});}
+  return out;
+}
+const RULE_NAMES={join:'joining',sep:'separation',dbl:'double-tilde',carry:'carry-over',detach:'detachment',contra:'contrapositive',demorgan:'De Morgan',switcheroo:'switcheroo',premise:'premise',fantasy:'fantasy rule'};
+// every string the rule can add right now: [{s, from:[line indexes], why}]
+function options(D,rule){
+  const U=usable(D), out=[], seen=new Set();
+  const add=(s,from,why)=>{const key=s+'|'+from.join(',');if(!seen.has(key)){seen.add(key);out.push({s,from,why});}};
+  const ln=i=>'line '+(i+1);
+  if(rule==='join')for(const a of U)for(const b of U)add('<'+a.s+'∧'+b.s+'>',[a.i,b.i],'joining ('+(a.i===b.i?ln(a.i)+' with itself':'lines '+(a.i+1)+' and '+(b.i+1))+')');
+  if(rule==='sep')for(const a of U){const n=parse(a.s);if(n.t==='∧'){add(show(n.x),[a.i],'separation ('+ln(a.i)+')');add(show(n.y),[a.i],'separation ('+ln(a.i)+')');}}
+  if(rule==='dbl')for(const a of U){const n=parse(a.s);
+    for(const sp of spots(n)){if(sp.n.t==='not'&&sp.n.x.t==='not')add(show(sp.wrap(sp.n.x.x)),[a.i],'double-tilde: remove ~~ ('+ln(a.i)+')');}
+    for(const sp of spots(n))add(show(sp.wrap(not(not(sp.n)))),[a.i],'double-tilde: insert ~~ ('+ln(a.i)+')');}
+  if(rule==='carry'){const have=new Set(U.map(a=>a.s));for(const a of usable(D,1))if(!have.has(a.s))add(a.s,[a.i],'carry-over of '+ln(a.i));}
+  if(rule==='detach')for(const a of U){const n=parse(a.s);if(n.t==='⊃'){const x=show(n.x);const b=U.find(b=>b.s===x);if(b)add(show(n.y),[b.i,a.i],'detachment (lines '+(b.i+1)+' and '+(a.i+1)+')');}}
+  if(SWAPS[rule])for(const a of U){const n=parse(a.s);for(const sp of spots(n))for(const f of SWAPS[rule]){const r=f(sp.n);if(r)add(show(sp.wrap(r)),[a.i],RULE_NAMES[rule]+' ('+ln(a.i)+')');}}
+  return out;
+}
+function push(D,premise){if(!isWf(premise))return false;const d=depthNow(D);D.lines.push({k:'push',s:'[',d,why:'push into a fantasy'});D.lines.push({k:'line',s:premise,d:d+1,why:'premise'});return true;}
+function canPop(D){return depthNow(D)>0;}
+function pop(D){
+  if(!canPop(D))return false;
+  const U=usable(D), d=depthNow(D), prem=U[0].s, outc=U[U.length-1].s;
+  D.lines.push({k:'pop',s:']',d:d-1,why:'pop out'});
+  D.lines.push({k:'line',s:'<'+prem+'⊃'+outc+'>',d:d-1,why:'fantasy rule'});return true;
+}
+function apply(D,rule,s,from){
+  const o=options(D,rule).find(o=>o.s===s&&(!from||o.from.join()===from.join()));if(!o)return false;
+  D.lines.push({k:'line',s:o.s,d:depthNow(D),why:o.why,from:o.from});return true;
+}
+// run a script [[rule, string?], ...]; throws if any step is not allowed
+function runScript(script){
+  const D=newDeriv();
+  script.forEach(([r,s],k)=>{const ok=r==='push'?push(D,s):r==='pop'?pop(D):apply(D,r,s);if(!ok)throw new Error('step '+(k+1)+' not allowed: '+r+' '+(s||''));});
+  return D;
+}
+const theoremsOf=D=>D.lines.filter(l=>l.k==='line'&&l.d===0).map(l=>l.s);
+
+/* Truth: the value of a tree when each atom is given true or false */
+function atomsOf(n,acc=[]){if(n.t==='atom'){if(acc.indexOf(n.s)<0)acc.push(n.s);}else{atomsOf(n.x,acc);if(n.y)atomsOf(n.y,acc);}return acc;}
+function value(n,w){switch(n.t){case 'atom':return w[n.s];case 'not':return !value(n.x,w);case '∧':return value(n.x,w)&&value(n.y,w);case '∨':return value(n.x,w)||value(n.y,w);default:return !value(n.x,w)||value(n.y,w);}}
+function table(n){const A=atomsOf(n).sort(),rows=[];for(let m=0;m<(1<<A.length);m++){const w={};A.forEach((a,k)=>w[a]=!(m>>(A.length-1-k)&1));rows.push({w,v:value(n,w)});}return {atoms:A,rows};}
+const alwaysTrue=n=>table(n).rows.every(r=>r.v);
+
+/* The book's derivations, as scripts */
+const SCRIPTS={
+  dn:[['push','P'],['dbl','~~P'],['pop']],
+  swap:[['push','<P∧Q>'],['sep','P'],['sep','Q'],['join','<Q∧P>'],['pop']],
+  nest:[['push','P'],['push','Q'],['carry','P'],['join','<P∧Q>'],['pop'],['pop']],
+  excl:[['push','P'],['dbl','~~P'],['pop'],['contra','<~~~P⊃~P>'],['dbl','<~P⊃~P>'],['switcheroo','<P∨~P>']],
+  boom:[['push','<P∧~P>'],['sep','P'],['sep','~P'],['push','~Q'],['carry','P'],['dbl','~~P'],['pop'],['contra','<~P⊃Q>'],['detach','Q'],['pop']],
+  ganto:[['push','<<P⊃Q>∧<~P⊃Q>>'],['sep','<P⊃Q>'],['contra','<~Q⊃~P>'],['sep','<~P⊃Q>'],['contra','<~Q⊃~~P>'],
+    ['push','~Q'],['carry','<~Q⊃~P>'],['detach','~P'],['carry','<~Q⊃~~P>'],['detach','~~P'],['join','<~P∧~~P>'],['demorgan','~<P∨~P>'],['pop'],
+    ['contra','<<P∨~P>⊃Q>'],['push','~P'],['pop'],['switcheroo','<P∨~P>'],['detach','Q'],['pop']]
+};
+
+/* ===== Page wiring ===== */
+const $=id=>document.getElementById(id);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* Section 1: a chromatic run in free style (original, not Bach's notes). [midi or null, beats] */
+const RUN=[[62,.5],[63,.25],[64,.25],[65,.25],[66,.25],[67,.25],[68,.25],[69,.5],[70,.25],[71,.25],[72,.25],[73,.25],[74,1],
+  [73,.25],[72,.25],[71,.25],[70,.25],[69,.25],[68,.25],[67,.25],[66,.25],[65,.5],[64,.25],[63,.25],[62,1.5]];
+const RUN_BASS=[[50,4.25],[45,2.5],[38,2.5]];
+const runCv=$('runCanvas');
+function runVoices(){return [{ev:toEvents(RUN),color:css('--bach'),gain:.17},{ev:toEvents(RUN_BASS),color:css('--godel'),gain:.2,timbre:'soft'}];}
+drawRoll(runCv,runVoices());
+addEventListener('resize',()=>drawRoll(runCv,runVoices()));
+playToggle($('runPlay'),()=>playVoices(runCv,runVoices(),0.34));
+
+/* A derivation drawn as indented lines */
+function derivHTML(D,emptyMsg){
+  if(!D.lines.length)return '<div class="empty">'+(emptyMsg||'')+'</div>';
+  return D.lines.map((l,i)=>{
+    const d=l.k==='line'?l.d:(l.k==='push'?l.d+1:l.d+1);
+    const thm=l.k==='line'&&l.d===0;
+    return '<div class="dl d'+Math.min(d,4)+(thm?' thm':'')+'"><span class="ln">'+(i+1)+'</span><span class="ds">'+esc(l.s)+'</span><span class="why">'+l.why+(thm?' · a theorem':'')+'</span></div>';
+  }).join('');
+}
+$('dvDn').innerHTML=derivHTML(runScript(SCRIPTS.dn));
+$('dvExcl').innerHTML=derivHTML(runScript(SCRIPTS.excl));
+$('dvGanto').innerHTML=derivHTML(runScript(SCRIPTS.ganto));
+$('dvBoom').innerHTML=derivHTML(runScript(SCRIPTS.boom));
+
+/* Section 2: the well-formed checker */
+const WF_TESTS=['<P>','<~P>','<P∧Q∧R>','<P∧Q>','<<P∧Q>∧<Q~∧P>>','<P∧~P>','<<P∨<Q⊃R>>∧<~P∨~R′>>','<P∧Q>∧<Q∧P>'];
+const wfSeen=new Set();
+function wfShow(s){
+  s=clean(s);
+  if(!s){$('wfOut').innerHTML='';$('wfVerdict').textContent='';$('wfVerdict').className='verdict';return null;}
+  const bad=s.match(/[^PQR′~<>∧∨⊃]/);
+  if(bad){$('wfOut').innerHTML='';$('wfVerdict').className='verdict n';$('wfVerdict').textContent='“'+bad[0]+'” is not a symbol of the system.';return false;}
+  const r=takeApart(s);
+  $('wfOut').innerHTML=r.steps.map(st=>'<div class="'+(st.ok?'':'bad')+'" style="padding-left:'+(st.d*22)+'px">'+esc(st.s)+'<span>'+(st.ok?'':'✗ ')+st.msg+'</span></div>').join('');
+  $('wfVerdict').className='verdict '+(r.ok?'y':'n');
+  $('wfVerdict').textContent=r.ok?'Well-formed: every piece ends in atoms.':'Not well-formed: the taking-apart gets stuck.';
+  return r.ok;
+}
+WF_TESTS.forEach((s,i)=>{
+  const b=document.createElement('button');b.className='ghost';b.textContent='('+(i+1)+')  '+s;
+  b.onclick=()=>{$('wfIn').value=s;const ok=wfShow(s);b.classList.add(ok?'y':'n');b.textContent='('+(i+1)+')  '+s+(ok?'  ✓':'  ✗');wfSeen.add(i);
+    if(wfSeen.size===WF_TESTS.length)$('wfJoke').innerHTML='Numbers 1, 2, 3, 5 and 8 are the ones that fail. Hofstadter hides a joke here: those are Fibonacci numbers, the sequence 1, 2, 3, 5, 8, … in which each number is the sum of the two before it.';};
+  $('wfQuiz').appendChild(b);
+});
+['<','>','P','Q','R','′','~','∧','∨','⊃'].forEach(c=>{const b=document.createElement('button');b.className='ghost small';b.textContent=c;b.setAttribute('aria-label','Type '+c);
+  b.onclick=()=>{$('wfIn').value+=c;wfShow($('wfIn').value);};$('wfKeys').appendChild(b);});
+$('wfIn').addEventListener('input',()=>wfShow($('wfIn').value));
+$('wfClear').onclick=()=>{$('wfIn').value='';wfShow('');};
+
+/* Section 4: the workbench */
+const TARGETS=[{s:'<P⊃~~P>',k:'dn'},{s:'<<P∧Q>⊃<Q∧P>>',k:'swap'},{s:'<P⊃<Q⊃<P∧Q>>>',k:'nest'},{s:'<P∨~P>',k:'excl',more:true,note:'needs section 5'},{s:'<<P∧~P>⊃Q>',k:'boom',more:true,note:'section 9'}];
+const PREMISES=['P','Q','~P','~Q','<P∧Q>','<P∧~P>'];
+let wb={D:newDeriv(),t:0,hist:[],timer:null};
+const RULE_HELP={join:'Joining: choose the first line, then the second.',sep:'Separation needs a line of the form <x∧y> at this level.',dbl:'Double-tilde: choose what to write.',carry:'Carry-over brings in a line from the level just outside this fantasy.',detach:'Detachment needs a line x and a line <x⊃y> at this level.',contra:'Contrapositive needs a line containing <x⊃y>.',demorgan:'De Morgan needs a line containing <~x∧~y> or ~<x∨y>.',switcheroo:'Switcheroo needs a line containing <x∨y> or <~x⊃y>.'};
+function wbMsg(h,win){$('wbMsg').innerHTML=h;$('wbMsg').className='wbmsg'+(win?' win':'');}
+function wbDraw(){
+  $('wbList').innerHTML=derivHTML(wb.D,'Nothing yet. There are no axioms: start with Push.');
+  $('wbList').scrollTop=$('wbList').scrollHeight;
+  [...$('wbTargets').children].forEach((b,i)=>b.classList.toggle('on',i===wb.t));
+  $('wbRules2').hidden=!TARGETS[wb.t].more;
+  const T=TARGETS[wb.t].s;
+  if(theoremsOf(wb.D).includes(T))wbMsg('<b>'+esc(T)+' is a theorem.</b> It stands at the outer level, inside no fantasy. Every indented line above it is not a theorem.',true);
+}
+function wbDo(f){wb.hist.push(JSON.stringify(wb.D));f();$('wbPick').innerHTML='';wbMsg('');wbDraw();}
+function wbPicks(list,label){
+  $('wbPick').innerHTML='';
+  list.forEach(o=>{const b=document.createElement('button');b.className='ghost small';b.innerHTML=esc(o.s)+(o.why?'<span>'+o.why+'</span>':'');b.onclick=o.go;$('wbPick').appendChild(b);});
+  if(label)wbMsg(label);
+}
+function wbRule(rule){
+  clearInterval(wb.timer);
+  const D=wb.D;
+  if(rule==='push'){
+    if(depthNow(D)>=4){wbMsg('This screen stops at four levels. The rule itself has no limit.');return;}
+    wbPicks(PREMISES.map(s=>({s,go:()=>wbDo(()=>push(D,s))})),'Push: choose a premise. Any well-formed string is allowed; pick one or type your own.');
+    const inp=document.createElement('input');inp.placeholder='type a premise';inp.setAttribute('aria-label','Premise');inp.spellcheck=false;inp.autocapitalize='off';
+    const ok=document.createElement('button');ok.className='ghost small';ok.textContent='Use typed premise';
+    ok.onclick=()=>{const s=clean(inp.value);if(isWf(s))wbDo(()=>push(D,s));else wbMsg('<b>'+esc(s||'(empty)')+'</b> is not well-formed, so it cannot be a premise. (Symbols: & for ∧, v for ∨, ⊃ from the keys in section 2.)');};
+    $('wbPick').appendChild(inp);$('wbPick').appendChild(ok);return;
+  }
+  if(rule==='pop'){
+    if(!canPop(D)){$('wbPick').innerHTML='';wbMsg('You are in the real world: there is no fantasy to pop out of.');return;}
+    wbDo(()=>pop(D));if(!theoremsOf(D).includes(TARGETS[wb.t].s))wbMsg('Popped out. The fantasy rule wrote down what the fantasy showed: its premise, ⊃, its outcome.');return;
+  }
+  if(!usable(D).length){$('wbPick').innerHTML='';wbMsg(depthNow(D)?'':'No lines to work on yet. With no axioms, only <b>Push</b> can start.');if(depthNow(D))wbMsg('Nothing at this level yet.');return;}
+  let opts=options(D,rule);
+  if(rule==='dbl'){const U=usable(D);opts=opts.filter(o=>o.why.indexOf('remove')>0||U.some(u=>o.from[0]===u.i&&o.s==='~~'+u.s));}
+  if(!opts.length){$('wbPick').innerHTML='';wbMsg(rule==='carry'?(depthNow(D)?'Nothing new to carry in: the level outside has no lines you lack.':'Carry-over only works inside a fantasy. Lines cannot be carried out of one.'):RULE_HELP[rule]);return;}
+  if(rule==='join'){
+    const U=usable(D);
+    wbPicks(U.map(a=>({s:a.s,why:'line '+(a.i+1),go:()=>wbPicks(U.map(b=>({s:b.s,why:'line '+(b.i+1),go:()=>wbDo(()=>apply(D,'join','<'+a.s+'∧'+b.s+'>',[a.i,b.i]))})),'Joining: now the second line.')})),RULE_HELP.join);return;
+  }
+  if(opts.length===1&&rule!=='dbl'){wbDo(()=>apply(D,rule,opts[0].s,opts[0].from));return;}
+  wbPicks(opts.map(o=>({s:o.s,why:o.why,go:()=>wbDo(()=>apply(D,rule,o.s,o.from))})),RULE_NAMES[rule][0].toUpperCase()+RULE_NAMES[rule].slice(1)+': choose what to write.'+(rule==='dbl'?' (This screen only offers to insert ~~ at the front of a line.)':''));
+}
+function wbStart(t){clearInterval(wb.timer);wb={D:newDeriv(),t,hist:[],timer:null};$('wbPick').innerHTML='';wbMsg(TARGETS[t].more?'Three more rules are now on the second row. They are explained in section 5.':'');wbDraw();}
+TARGETS.forEach((T,i)=>{const b=document.createElement('button');b.className='ghost small pc';b.textContent=T.s;if(T.note)b.title=T.note;b.onclick=()=>wbStart(i);$('wbTargets').appendChild(b);$('wbTargets').appendChild(document.createTextNode(' '));});
+document.querySelectorAll('#wbRules button,#wbRules2 button').forEach(b=>b.onclick=()=>wbRule(b.dataset.rule));
+$('wbUndo').onclick=()=>{clearInterval(wb.timer);if(wb.hist.length){wb.D=JSON.parse(wb.hist.pop());$('wbPick').innerHTML='';wbMsg('');wbDraw();}};
+$('wbReset').onclick=()=>wbStart(wb.t);
+$('wbShow').onclick=()=>{
+  const t=wb.t,sc=SCRIPTS[TARGETS[t].k];wbStart(t);let k=0;
+  wbMsg('The book’s derivation, one step at a time…');
+  wb.timer=setInterval(()=>{
+    if(k>=sc.length){clearInterval(wb.timer);return;}
+    const [r,s]=sc[k++];wb.hist.push(JSON.stringify(wb.D));
+    if(r==='push')push(wb.D,s);else if(r==='pop')pop(wb.D);else apply(wb.D,r,s);
+    wbDraw();if(k<sc.length)wbMsg('The book’s derivation, one step at a time…');
+  },900);
+};
+wbStart(0);
+
+/* Section 6: every possible world */
+const TT=[{s:'<P⊃~~P>',th:1},{s:'<<P∧Q>⊃<Q∧P>>',th:1},{s:'<P∨~P>',th:1},{s:'<<P∧~P>⊃Q>',th:1},{s:'P',th:0},{s:'<P∧~P>',th:0},{s:'<P⊃Q>',th:0},{s:'<<P⊃Q>⊃<Q⊃P>>',th:0}];
+const ZEN={P:['this mind is Buddha','this mind is not Buddha'],Q:['this flax weighs three pounds','this flax does not weigh three pounds']};
+let tt={i:0,w:{P:true,Q:true}};
+// read a tree aloud with the Zentences plugged in
+function say(n,top){
+  if(n.t==='atom')return ZEN[n.s][0];
+  if(n.t==='not')return n.x.t==='atom'?ZEN[n.x.s][1]:'it is not the case that '+say(n.x);
+  const body=n.t==='∧'?say(n.x)+' and '+say(n.y):n.t==='∨'?'either '+say(n.x)+' or '+say(n.y):'if '+say(n.x)+', then '+say(n.y);
+  return top?body:'('+body+')';
+}
+const tf=v=>v?'true':'false';
+function ttDraw(){
+  const T=TT[tt.i],n=parse(T.s),tab=table(n);
+  [...$('ttPicks').querySelectorAll('button')].forEach((b,i)=>b.classList.toggle('on',i===tt.i));
+  $('ttAtoms').innerHTML='';
+  tab.atoms.forEach(a=>{const b=document.createElement('button');b.className='ghost '+(tt.w[a]?'t':'f');b.innerHTML='<b>'+a+'</b> “'+ZEN[a][0]+'” is '+tf(tt.w[a]);b.setAttribute('aria-label','Flip '+a);b.onclick=()=>{tt.w[a]=!tt.w[a];ttDraw();};$('ttAtoms').appendChild(b);});
+  const v=value(n,tt.w),txt=say(n,true);
+  $('ttRead').className='reading '+(v?'t':'f');
+  $('ttRead').innerHTML=txt[0].toUpperCase()+txt.slice(1)+'.<small>In this world the sentence is '+tf(v)+'.</small>';
+  let h='<tr>'+tab.atoms.map(a=>'<th>'+a+'</th>').join('')+'<th>'+esc(T.s)+'</th></tr>';
+  tab.rows.forEach(r=>{const cur=tab.atoms.every(a=>r.w[a]===tt.w[a]);h+='<tr'+(cur?' class="cur"':'')+'>'+tab.atoms.map(a=>'<td>'+tf(r.w[a])+'</td>').join('')+'<td class="'+(r.v?'t':'f')+'">'+tf(r.v)+'</td></tr>';});
+  $('ttTable').innerHTML=h;
+  const bad=tab.rows.filter(r=>!r.v).length,N=tab.rows.length;
+  $('ttMsg').innerHTML=bad===0?'<b>True in '+(N===2?'both':'all '+N)+' worlds.</b> So it is a theorem'+(T.th?'':'')+': some derivation produces it.':'<b>False in '+bad+' of '+N+' worlds.</b> So it is not a theorem: no derivation will ever produce it.';
+}
+TT.forEach((T,i)=>{const b=document.createElement('button');b.className='ghost small pc';b.textContent=T.s;b.onclick=()=>{tt.i=i;ttDraw();};$('ttPicks').appendChild(b);$('ttPicks').appendChild(document.createTextNode(' '));});
+ttDraw();
+</script>
+</body>
+</html>

@@ -61,7 +61,7 @@ window.GEB_TOC = [
   "title": "Chapter VII: The Propositional Calculus",
   "dialogue": "Chromatic Fantasy, And Feud",
   "chapter": "Chapter VII: The Propositional Calculus",
-  "done": false
+  "done": true
  },
  {
   "id": "09-ch08-typographical-number-theory",
