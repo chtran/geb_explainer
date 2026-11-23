@@ -112,6 +112,9 @@ window.GEB_GLOSSARY = {
   "fibonacci number":  {def:"The sequence 1, 1, 2, 3, 5, 8, 13, …, in which each number is the sum of the two before it.", in:"06"},
   "lucas number":      {def:"The sequence 1, 3, 4, 7, 11, 18, …: Fibonacci's rule with a different starting pair.", in:"06"},
   "skeleton":          {def:"In this chapter: the plan saying where each copy of a graph sits inside the graph. The non-recursive half of its definition.", in:"06"},
+  "push":              {def:"To set aside what you are doing, remembering where you were, and start a new task one level down.", in:"06"},
+  "pop":               {def:"To finish the task on the current level and pick up the one above, exactly where it was left.", in:"06"},
+  "stack":             {def:"The record of unfinished tasks, last set aside first resumed, that makes popping possible.", in:"06"},
   "transformer":       {def:"The kind of neural network behind today's chatbots; at each word it looks back over everything so far and picks out what matters.", in:"06"},
   "coding agent":      {def:"A large language model wrapped in ordinary program code that lets it read, write and run files to finish a programming job.", in:"06"},
   "graphene":          {def:"Carbon in a sheet one atom thick, with the atoms in a honeycomb pattern.", in:"06"}
