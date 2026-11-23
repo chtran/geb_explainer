@@ -97,5 +97,21 @@ window.GEB_GLOSSARY = {
   "cursively drawable":{def:"Hofstadter’s name for a figure you can draw directly, whatever its background turns out to be.", in:"04"},
   "recursive":         {def:"In this chapter: a figure whose background is also a figure, or a set whose members and non-members can each be listed by a formal system.", in:"04"},
   "recursively enumerable": {def:"Said of a set whose members some formal system can list one by one, missing none and adding no others.", in:"04"},
-  "border ownership":  {def:"A nerve cell's signal of which side of an edge the object is on.", in:"04"}
+  "border ownership":  {def:"A nerve cell's signal of which side of an edge the object is on.", in:"04"},
+
+  /* 06 · Chapter V: Recursive Structures and Processes */
+  "recursion":         {def:"Nesting: a thing that contains, or is defined by, simpler versions of itself, like a story inside a story.", in:"06"},
+  "meta":              {def:"A prefix meaning “about”: a meta-wish is a wish about wishes, one level above ordinary wishes.", in:"06"},
+  "tonic":             {def:"The home note of a key, the note on which the music sounds finished.", in:"06"},
+  "resolution":        {def:"The moment tension in music lets go, most fully when the music arrives back on its home note.", in:"06"},
+  "grammar":           {def:"The rules for which arrangements of words (or symbols) count as properly formed.", in:"06"},
+  "recursive transition network": {def:"A map of pathways for building a phrase, in which a box may call a whole other network, or the network itself. RTN for short.", in:"06"},
+  "node":              {def:"One box or dot in a diagram of pathways or branches.", in:"06"},
+  "procedure":         {def:"A named group of steps that can be called from elsewhere; when it finishes, you carry on where you left off.", in:"06"},
+  "recursive definition": {def:"A definition that uses the thing being defined, but only in simpler versions, so that it is not circular.", in:"06"},
+  "bottoms out":       {def:"Said of a recursion that reaches a case answered outright, with no further call to itself.", in:"06"},
+  "heterarchy":        {def:"A set of procedures that call one another with no single one on top.", in:"06"},
+  "fibonacci number":  {def:"The sequence 1, 1, 2, 3, 5, 8, 13, …, in which each number is the sum of the two before it.", in:"06"},
+  "lucas number":      {def:"The sequence 1, 3, 4, 7, 11, 18, …: Fibonacci's rule with a different starting pair.", in:"06"},
+  "skeleton":          {def:"In this chapter: the plan saying where each copy of a graph sits inside the graph. The non-recursive half of its definition.", in:"06"}
 };
