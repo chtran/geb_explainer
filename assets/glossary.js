@@ -106,6 +106,8 @@ window.GEB_GLOSSARY = {
   "ideal numbers":     {def:"Numbers as arithmetic treats them: counts of things that stay separate and never merge or split.", in:"03"},
   "peer-reviewed":     {def:"Checked by other researchers before publication. Results without that check are more provisional.", in:"02"},
   "preprint":          {def:"A paper posted publicly before other researchers have reviewed it.", in:"02"},
+  "four-colour theorem":{def:"Any map on a flat surface can be coloured with at most four colours so that no two neighbouring regions share a colour.", in:"02"},
+  "kepler conjecture": {def:"Kepler's 1611 claim that the way grocers pile oranges, in a pyramid, packs equal balls as tightly as possible.", in:"02"},
   "prompt injection":  {def:"An attack on an AI system in which text hidden in the material it is given to work on gets treated as an instruction.", in:"03"},
   "neural network":    {def:"What an AI model is made of: a web of simple connected units, each passing numbers on to the next.", in:"03"},
   "sonata":            {def:"A piece of music in several separate parts (movements) for one or two instruments.", in:"04"},
