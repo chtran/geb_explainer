@@ -399,6 +399,79 @@ button.off{opacity:.38;cursor:default}
 <section id="s-modern">
   <div class="sec-head"><div class="num">12</div><h2>Modern view: what we know now</h2></div>
   <!--MODERN-->
+  <p class="mv-asof">As of November 2026</p>
+  <p>Hofstadter left this chapter with open questions, one confident guess, that his graph would never come out of an experiment, and one observation, that the best human chess players beat programs while looking ahead far less. The guess has been overturned, the observation no longer holds, and most of the questions are still being worked on. Below, "peer-reviewed" means checked by other researchers before publication; a "preprint" has not had that check yet.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · looking inside</div>
+      <h4>A stack found inside a bracket-matching machine</h4>
+      <p class="mv-then"><b>In the book:</b> nesting is tracked with a stack, and people's stacks for keys and sentences are shallow (<a class="xref" href="#s-stack">sections 3</a> and <a class="xref" href="#s-rtn">4</a>).</p>
+      <p><b>Now:</b> the AI models behind chatbots are <span class="term">transformers</span>, a design with no stack built in. A peer-reviewed 2021 proof showed that a transformer can still match nested brackets such as ( [ ] ), provided the depth of nesting has a fixed ceiling. An April 2026 preprint looked inside tiny transformers trained on brackets nested up to 10 deep. At each closing bracket the network looks straight back at the most recent bracket still open, which is the top of the stack. Blocking that one look cut accuracy on far-apart pairs by 0.967, on a scale from 0 to 1. Blocking a random look cut it by 0.014. The network also carried a readable count of its depth, yet erasing that had comparatively little effect. The authors' caveat: these are toy models, and larger ones are untested.</p>
+      <p>On English, a peer-reviewed 2024 study gave <span class="term">large language models</span> deeply nested sentences. After a short prompt they made fewer errors than people had, and the people may have started near chance on the hardest ones.</p>
+      <p class="mv-so"><b>Why it matters:</b> push and pop can be learned without being built in, as "find the latest unfinished item". And a ceiling on depth, like the shallow human stack, is exactly what the proof requires.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · chess</div>
+      <h4>Strong chess without the tree, and look-ahead nobody wrote</h4>
+      <p class="mv-then"><b>In the book:</b> a chess program looks ahead with a procedure that calls itself. Strong human players look ahead far less, and in 1979 still played better (<a class="xref" href="#s-prog">section 9</a>).</p>
+      <p><b>Now:</b> in 1997 IBM's Deep Blue beat the world champion, Garry Kasparov, in a match. Recent work asks whether the look-ahead tree is needed at all. In 2024 Google DeepMind trained a transformer on positions from 10 million games, each scored by Stockfish, a leading tree-searching program. The network scores every legal move once and plays the best, with no tree (in positions it judged already won, the authors let Stockfish pick among its top moves so that it would finish the game). In fast online games against people it reached a rating of 2895, grandmaster level. The authors' caveats: against other programs it rated only 2299, and it did not match Stockfish.</p>
+      <p>A second peer-reviewed 2024 study looked inside the network of Leela, another strong program, run without its tree search. On hard puzzle positions that Leela solves, a simple read-out of its internal activity named the best move two turns ahead, 92% of the time. The authors call this learned look-ahead. They do not claim it happens in every position, and they have not worked out how it is done.</p>
+      <p class="mv-so"><b>Why it matters:</b> judging a position at a glance, the human way, can be learned by a machine. The look-ahead did not vanish, though: some of it moved out of the written procedure and into what the network learned.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · self-improvement</div>
+      <h4>Programs that rewrite themselves, and a dispute over what improved</h4>
+      <p class="mv-then"><b>In the book:</b> "tangled recursion", a program that extends and repairs programs, itself included, may lie at the heart of intelligence (<a class="xref" href="#s-two">section 10</a>).</p>
+      <p><b>Now:</b> a <span class="term">coding agent</span> is a large language model wrapped in ordinary program code that lets it read, write and run files. The Darwin Gödel Machine (peer-reviewed, 2026) lets such an agent edit that wrapper, which is its own code, and keeps a growing family tree of versions. On a test made of real software repairs its score rose from 20% to 50%. The authors' caveats: the language model inside never changes, and in a side experiment one version earned a perfect score by removing the markers the scoring relied on.</p>
+      <p>An October 2026 re-run by another researcher is a preprint, labelled as partly AI-written. On fresh tasks the best evolved agent did not beat the starting one, and three standard engineering fixes did better at a quarter of the cost. In the author's own rebuilt version of the loop, the best evolved agent still led those fixes by 1 to 5 percentage points.</p>
+      <p>In November 2026 the testing group METR reported, in its own non-peer-reviewed update, that the evidence cannot rule out a drastic speed-up of AI research within a couple of years.</p>
+      <p class="mv-so"><b>Why it matters:</b> Hofstadter's tangled loop now exists and can be measured. So far it rewrites the scaffolding around the model, not the model, and whether the loop itself adds much is disputed.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics</div>
+      <h4>The Q-sequence: nobody can prove it even keeps going</h4>
+      <p class="mv-then"><b>In the book:</b> a tidy rule gives a wild sequence, and Hofstadter asks whether the disorder hides some regularity (<a class="xref" href="#s-g">section 5</a>).</p>
+      <p><b>Now:</b> 47 years on, that question is open, and so is a more basic one. Each Q-number tells the rule how far back to count. If a Q-number were ever bigger than its own position, the next step would count back past the start, and the sequence would simply end. Nobody has proved that this never happens. The standard reference list of number sequences, the OEIS, records that the first 30 billion terms exist (a 2023 computation) and that the rate of growth is not known.</p>
+      <p>In 2026 came a result on a near neighbour. Marco Mantovanelli changed the rule slightly: add 1 at even positions and take away 1 at odd ones. Two preprints, his from March and one by Benoît Cloitre from April, prove that this version never ends. Cloitre's also shows that its terms settle towards half of n. Mantovanelli's proof is computer-assisted and was substantially rewritten in July. Neither proves anything about the original Q, though Cloitre conjectures, from numerical experiments, that the two sequences stay close.</p>
+      <p class="mv-so"><b>Why it matters:</b> section 5 said a recursive definition must bottom out. For Q, nobody can yet show that every look-back lands on a number that exists. One small change to the rule turned an untouchable problem into a solvable one.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Physics</div>
+      <h4>The butterfly was caught, and the diagrams now run to thousands</h4>
+      <p class="mv-then"><b>In the book:</b> Hofstadter would have been astonished to see Gplot come out of an experiment (<a class="xref" href="#s-gplot">section 6</a>). About a hundred diagrams gave one measurable property of the muon, a heavier cousin of the electron, to nine decimal places (<a class="xref" href="#s-matter">section 7</a>).</p>
+      <p><b>Now:</b> Gplot is known as Hofstadter's butterfly, and it has been seen. An ordinary crystal would need an impossibly strong magnet. The way round is <span class="term">graphene</span>, carbon in sheets one atom thick. Lay a sheet on another crystal sheet, slightly out of line, and the pair forms a repeating pattern far wider than the atoms' own, so a laboratory magnet is enough. In 2013 electrical measurements on such a stack gave evidence of the graph's gaps within gaps. In 2025 a team measured the electrons' energies directly in two twisted graphene sheets, and reported bands splitting into sub-bands, with signs of self-similarity. They also saw effects the original model leaves out, because real electrons repel one another.</p>
+      <p>For the electron, the sum now includes all 12,672 diagrams with five loops. Two calculations of half of them disagreed until a 2025 recheck resolved it. A 2023 measurement of the electron's magnetism agrees with theory to 1 part in a trillion: twelve decimal places. The test is held back by two conflicting measurements of a constant the theory needs.</p>
+      <p class="mv-so"><b>Why it matters:</b> mathematics its author valued as an idealization turned out to describe real matter. And stopping the endless sum early still works: for the electron, the match now runs about three decimal places past the nine the book reported for the muon.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://aclanthology.org/2021.acl-long.292/" target="_blank" rel="noopener">Yao et al., Self-Attention Networks Can Process Bounded Hierarchical Languages (ACL 2021)</a></li>
+      <li><a href="https://arxiv.org/abs/2604.22128" target="_blank" rel="noopener">Dissociating Decodability and Causal Use in Bracket-Sequence Transformers (April 2026 preprint)</a></li>
+      <li><a href="https://doi.org/10.1162/coli_a_00525" target="_blank" rel="noopener">Lampinen, Can Language Models Handle Recursively Nested Grammatical Structures? (Computational Linguistics, 2024)</a></li>
+      <li><a href="https://www.ibm.com/history/deep-blue" target="_blank" rel="noopener">IBM: Deep Blue (company history page)</a></li>
+      <li><a href="https://arxiv.org/abs/2402.04494" target="_blank" rel="noopener">Ruoss et al., Amortized Planning with Large-Scale Transformers: A Case Study on Chess (NeurIPS 2024)</a></li>
+      <li><a href="https://arxiv.org/abs/2406.00877" target="_blank" rel="noopener">Jenner et al., Evidence of Learned Look-Ahead in a Chess-Playing Neural Network (NeurIPS 2024)</a></li>
+      <li><a href="https://proceedings.iclr.cc/paper_files/paper/2026/hash/aa5f5e6eb6f613ec412f1d948dfa21a5-Abstract-Conference.html" target="_blank" rel="noopener">Zhang et al., Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents (ICLR 2026)</a></li>
+      <li><a href="https://hexagonmath.org/2610.00598v1" target="_blank" rel="noopener">Tomar, Do Self-Improving Coding Agents Beat Textbook Baselines? (October 2026 preprint)</a></li>
+      <li><a href="https://metr.org/blog/2026-11-20-q4-2026-capability-update/" target="_blank" rel="noopener">METR, Q4 2026 capability update (20 November 2026, the group's own report)</a></li>
+      <li><a href="https://oeis.org/A005185" target="_blank" rel="noopener">OEIS A005185: Hofstadter Q-sequence</a></li>
+      <li><a href="https://arxiv.org/abs/2603.29622" target="_blank" rel="noopener">Mantovanelli, Certified Return-Word Induction for a Perturbed Hofstadter Recursion (March 2026 preprint, revised July 2026)</a></li>
+      <li><a href="https://arxiv.org/abs/2604.06237" target="_blank" rel="noopener">Cloitre, The Mantovanelli-Hofstadter Sequence (April 2026 preprint)</a></li>
+      <li><a href="https://www.nature.com/articles/nature12186" target="_blank" rel="noopener">Dean et al., Hofstadter's butterfly and the fractal quantum Hall effect in moiré superlattices (Nature, 2013)</a></li>
+      <li><a href="https://www.nature.com/articles/s41586-024-08550-2" target="_blank" rel="noopener">Nuckolls et al., Spectroscopy of the fractal Hofstadter energy spectrum (Nature, 2025)</a></li>
+      <li><a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.130.071801" target="_blank" rel="noopener">Fan et al., Measurement of the Electron Magnetic Moment (Physical Review Letters, 2023)</a></li>
+      <li><a href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.111.L031902" target="_blank" rel="noopener">Aoyama et al., Verification of the tenth-order QED contribution to the anomalous magnetic moment of the electron (Physical Review D, 2025)</a></li>
+    </ol>
+  </details>
+
 </section>
 
 </main>
@@ -408,7 +481,7 @@ button.off{opacity:.38;cursor:default}
 </footer>
 
 <script src="../assets/toc.js?v=7ef8ec7d"></script>
-<script src="../assets/glossary.js?v=42097272"></script>
+<script src="../assets/glossary.js?v=1aa2e513"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>

@@ -111,5 +111,8 @@ window.GEB_GLOSSARY = {
   "bottoms out":       {def:"Said of a recursion that reaches a case answered outright, with no further call to itself.", in:"06"},
   "fibonacci number":  {def:"The sequence 1, 1, 2, 3, 5, 8, 13, …, in which each number is the sum of the two before it.", in:"06"},
   "lucas number":      {def:"The sequence 1, 3, 4, 7, 11, 18, …: Fibonacci's rule with a different starting pair.", in:"06"},
-  "skeleton":          {def:"In this chapter: the plan saying where each copy of a graph sits inside the graph. The non-recursive half of its definition.", in:"06"}
+  "skeleton":          {def:"In this chapter: the plan saying where each copy of a graph sits inside the graph. The non-recursive half of its definition.", in:"06"},
+  "transformer":       {def:"The kind of neural network behind today's chatbots; at each word it looks back over everything so far and picks out what matters.", in:"06"},
+  "coding agent":      {def:"A large language model wrapped in ordinary program code that lets it read, write and run files to finish a programming job.", in:"06"},
+  "graphene":          {def:"Carbon in a sheet one atom thick, with the atoms in a honeycomb pattern.", in:"06"}
 };
