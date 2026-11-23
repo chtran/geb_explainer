@@ -274,7 +274,7 @@ button.off{opacity:.38;cursor:default}
     <div>
       <p>Hofstadter then changes the Fibonacci rule slightly. Each new number is still the sum of two earlier ones, but not the last two. The last two numbers say <i>how far back to count</i> to find the pair to add.</p>
       <div class="rule-box">Q(n) = Q(n − Q(n − 1)) + Q(n − Q(n − 2))<br><i style="margin-left:0">for n above 2, and</i> Q(1) = Q(2) = 1</div>
-      <p>The sequence starts 1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10, 9, 10. Step through it, then run it on. Fibonacci numbers grow smoothly. The Q-numbers stay near half of n, the dashed line, mostly a little above it, but they jump about with no simple pattern. He asked whether the disorder hides some regularity. The rule is a perfectly orderly one and, as he puts it, it produces chaos.</p>
+      <p>The sequence starts 1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10, 9, 10. Step through it, then run it on. Fibonacci numbers grow smoothly. The Q-numbers scatter around half of n, the dashed line, mostly a little above it and more widely the further you go, and they jump about with no simple pattern. He asked whether the disorder hides some regularity. The rule is a perfectly orderly one and, as he puts it, it produces chaos.</p>
     </div>
     <div class="card">
       <div class="seq" id="qSeq"></div>
@@ -345,7 +345,7 @@ button.off{opacity:.38;cursor:default}
     <div>
       <p>So a real electron is a bare electron wrapped in a cloud of virtual particles, each wrapped in a cloud of its own. No particle can be described without the others, whose descriptions depend on it in turn. It is the heterarchy of section 4 again.</p>
       <p>Not every such diagram is allowed. The laws of physics, such as the rule that electric charge is never created or destroyed, pick out the ones that are, the way a grammar picks out sentences. An illegal diagram is not <span class="term">well-formed</span>, the word Chapter II used for strings of the right shape. And this grammar is recursive: it lets a legal piece be nested inside a legal piece. One could draw RTNs for it.</p>
-      <p>To predict what a real electron does, a physicist has to add up the contributions of infinitely many diagrams, an endless sum like the genies' ½ + ¼ + ⅛ + …, only far more tangled. What saves the method is that the more complicated a diagram, the less it contributes, so the sum can be stopped early. Keeping roughly the hundred simplest diagrams had given one measured quantity, a magnetic property of the muon (a heavier cousin of the electron), correctly to nine decimal places.</p>
+      <p>To predict what a real electron does, a physicist has to add up the contributions of infinitely many diagrams, an endless sum. Unlike the genies' ½ + ¼ + ⅛ + …, nobody knows how to add all of it up. What saves the method is that the more complicated a diagram, the less it contributes, so the sum can be stopped early. Keeping roughly the hundred simplest diagrams had given one measured quantity, a magnetic property of the muon (a heavier cousin of the electron), correctly to nine decimal places.</p>
     </div>
   </div>
   <div class="fey" id="fey"></div>
@@ -444,7 +444,7 @@ button.off{opacity:.38;cursor:default}
       <h4>The Q-sequence: nobody can prove it even keeps going</h4>
       <p class="mv-then"><b>In the book:</b> a tidy rule gives a wild sequence, and Hofstadter asks whether the disorder hides some regularity (<a class="xref" href="#s-g">section 5</a>).</p>
       <p><b>Now:</b> 47 years on, that question is open, and so is a more basic one. Each Q-number tells the rule how far back to count. If a Q-number were ever bigger than its own position, the next step would count back past the start, and the sequence would simply end. Nobody has proved that this never happens. The standard reference list of number sequences, the OEIS, records that the first 30 billion terms exist (a 2023 computation) and that the rate of growth is not known: every computed term stays near half of n, but that is not proved.</p>
-      <p>In 2026 came a result on a near neighbour. Marco Mantovanelli changed the rule slightly: add 1 at even positions and take away 1 at odd ones. Two preprints, his from March and one by Benoît Cloitre from April, prove that this version never ends. Cloitre's also shows that its terms settle towards half of n. Mantovanelli's proof relies on computer checking. Neither proves anything about the original Q, though Cloitre guesses, from numerical experiments, that the two sequences stay close.</p>
+      <p>In 2026 came a result on a near neighbour. Marco Mantovanelli changed the rule slightly: add 1 at even positions and take away 1 at odd ones. Two preprints, his from March and one by Benoît Cloitre from April, prove that this version never ends. Cloitre's also shows that its terms settle towards half of n. Mantovanelli's proof relies on computer checking. Neither proves anything about the original Q.</p>
       <p class="mv-so"><b>Why it matters:</b> section 5 said a recursive definition must bottom out. For Q, nobody can yet show that every look-back lands on a number that exists. One small change to the rule turned an untouchable problem into a solvable one.</p>
     </div>
 
@@ -488,7 +488,7 @@ button.off{opacity:.38;cursor:default}
 </footer>
 
 <script src="../assets/toc.js?v=7ef8ec7d"></script>
-<script src="../assets/glossary.js?v=8b09e8d9"></script>
+<script src="../assets/glossary.js?v=11bed7b9"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -752,7 +752,7 @@ function qDraw(last){
 }
 function qPlot(){
   const x=setupCanvas(qCv),W=qCv._w,H=qCv._h;x.clearRect(0,0,W,H);
-  const n=Q.length-1,N=Math.max(40,n),top=Math.max(24,Math.max(...Q)+2),pad=22;
+  const n=Q.length-1,N=Math.max(40,n),top=Math.max(24,Math.ceil((Math.max(...Q)+2)/10)*10),pad=22;
   const px=i=>pad+(W-2*pad)*i/N,py=v=>H-pad-(H-2*pad)*v/top;
   x.strokeStyle=RULE;x.lineWidth=1;x.beginPath();x.moveTo(pad,H-pad);x.lineTo(W-pad,H-pad);x.moveTo(pad,H-pad);x.lineTo(pad,pad);x.stroke();
   x.fillStyle=BACH;for(let i=1;i<=n;i++){x.beginPath();x.arc(px(i),py(Q[i]),n>120?1.6:2.6,0,7);x.fill();}
