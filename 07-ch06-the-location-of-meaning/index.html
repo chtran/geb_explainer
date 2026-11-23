@@ -352,7 +352,79 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
 <!-- 11 -->
 <section id="s-modern">
   <div class="sec-head"><div class="num">11</div><h2>Modern view: what we know now</h2></div>
-<!--MODERN-->
+  <p class="mv-asof">As of November 2026</p>
+  <p>In 1979 the chapter's questions were thought experiments. Since then people have built machines that read text and DNA, staged a pretend message from aliens, and flown a real record out of the solar system. Here is where the chapter's ideas stand today.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · looking inside</div>
+      <h4>Do different machines get the same meaning out?</h4>
+      <p class="mv-then"><b>In the book:</b> meaning belongs to a message to the extent that every intelligence gets the same thing out of it (section 8).</p>
+      <p><b>Now:</b> this can be tested on machines. An AI model turns each text or picture it is given into a long list of numbers, called an <i>embedding</i>. Things it treats as alike get lists that are close together. In 2024 researchers argued that as models grow, their embeddings come to agree about what is close to what, even between a model trained only on pictures and one trained only on text. A 2025 study then translated one model's embeddings into another's with no matched examples: no Rosetta Stone. It did assume knowing that the hidden material was text, in English. The claim is contested. A 2026 study found that the usual similarity scores can be inflated simply by making models bigger. After correcting for that, most of the overall agreement disappeared. What remained was agreement about which items are each item's nearest neighbours, and an October 2026 preprint found that this too weakens on sets of millions of items.</p>
+      <p class="mv-so"><b>Why it matters:</b> Hofstadter's test has become an experiment, with no settled answer yet. His own doubt applies too: these models all learned from data made by humans, so their agreement may be Earth chauvinism again.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · lost scripts</div>
+      <h4>A machine matches Linear B words to Greek, with a hint</h4>
+      <p class="mv-then"><b>In the book:</b> a decipherment finds meaning, because another team would have reached the same reading. Success depends on how much text survives (sections 8 and 9).</p>
+      <p><b>Now:</b> in 2019 researchers at MIT and Google had a program match Linear B words to their Greek relatives. It was given a hint: a list of 455 Greek proper nouns (places, gods, people), each known to have a Linear B counterpart, since Linear B writes an early form of Greek. It was not told which sign stands for which sound, or which words match. It matched 67.3% of the related words as scholars do. In 2021 a follow-up from the same lab took on scripts that don't mark where words end, so the program must place the cuts itself, as with the fortune slip. They tried it on Iberian, a language that is still undeciphered and has no agreed relative. The program found no strong evidence that Iberian is related to Basque, which is what most scholars already thought. It did not read Iberian.</p>
+      <p class="mv-so"><b>Why it matters:</b> a second decoder, built quite differently, reached much of the scholars' reading, which fits "found, not added". But it started from a hint about the language, a piece of the outer message. Without such a hint, machines are stuck where people are.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Biology · AI</div>
+      <h4>Reading DNA as a row of letters</h4>
+      <p class="mv-then"><b>In the book:</b> print DNA as the letters A, C, G and T, and a finder has almost no chance of getting its meaning out. Without a cell it does nothing (sections 5 and 9).</p>
+      <p><b>Now:</b> The first AlphaGenome, from Google DeepMind (published in <i>Nature</i>, January 2026), takes up to a million letters of human or mouse DNA and predicts thousands of measurements of what cells do with that stretch, such as which genes get switched on. Its makers say it does not give the full path from DNA to traits or disease. Another team had two models, one trained on DNA from over 100,000 species, write new genomes (a genome is one organism's complete DNA) modelled on one small, well-studied virus that infects bacteria. They made nearly 300 of the designs as real DNA, and sixteen worked in bacteria (<i>Science</i>, August 2026). Meanwhile a lab-built bacterium with the smallest known genome of anything that reproduces by itself has 455 protein-making genes, and nobody knows what about 90 of them do.</p>
+      <p class="mv-so"><b>Why it matters:</b> a reader can get more from the bare letters than the book expected, but not unaided. AlphaGenome learned from DNA paired with lab measurements on cells, so the context was supplied. And a designed genome did nothing until it was made chemically and put in a cell.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Space</div>
+      <h4>The record in space is real</h4>
+      <p class="mv-then"><b>In the book:</b> a record of Bach drifts out of the solar system. A finder must see that it is a message, then how to play it, then what it means (section 6).</p>
+      <p><b>Now:</b> NASA's two Voyager probes, launched in 1977, two years before the book, each carry a gold-plated copper record with three pieces by Bach on it. On 18 November 2026 Voyager 1 reached one light-day from Earth: its radio signal now takes 24 hours to arrive. Since 14 November it has sent only a bare signal with no data. The record's makers tried to draw the outer message: the cover shows the needle in place and gives the playing speed in a unit of time taken from the hydrogen atom. In 2023 an art project backed by the SETI Institute and the European Space Agency had a spacecraft orbiting Mars beam a made-up alien message to Earth. Volunteers pulled the message out of the raw radio signal in ten days. Decoding it took a year: a father and daughter found a picture of five amino acids (the units proteins are made of). What it means, the organisers said, remains open.</p>
+      <p class="mv-so"><b>Why it matters:</b> the three layers came apart as the book describes, each harder than the last. And this message was made by humans for humans.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · defining intelligence</div>
+      <h4>A description of intelligence that leaves us out</h4>
+      <p class="mv-then"><b>In the book:</b> the argument needs a description of intelligence that doesn't mention humans. Hofstadter had none, and hoped for one within a few decades (section 8).</p>
+      <p><b>Now:</b> one was proposed in 2007 by Shane Legg and Marcus Hutter. In their definition, intelligence measures how well an agent (a person or a program) achieves goals across a wide range of environments. They make this exact by scoring the agent in every environment a computer could simulate, with simple environments counting for more. They say that this is a definition and not a test: the score cannot be computed. Practical tests still lean on us. The ARC-AGI-3 test drops an AI into unfamiliar games with no instructions. Its makers define the target as learning any skill a human can, as efficiently as a human. People can solve every game. By November 2026 the best score under the standard set-up was 81.2% (Claude Fable 5.2, from Anthropic), and OpenAI's GPT-6.2 Astra reached 100.0% under a set-up that lets it keep its hidden working between moves. Of an earlier version of Astra, the makers said they were not claiming human-level general intelligence.</p>
+      <p class="mv-so"><b>Why it matters:</b> the circle of section 8 is half broken. A description that leaves us out exists, but it can't be measured, and whatever we can measure still uses humans as the ruler.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://proceedings.mlr.press/v235/huh24a.html" target="_blank" rel="noopener">Huh, Cheung, Wang, Isola: The Platonic Representation Hypothesis (ICML 2024, position paper)</a></li>
+      <li><a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/4175dee33d6145cb8f0323703d138a53-Abstract-Conference.html" target="_blank" rel="noopener">Jha, Zhang, Shmatikov, Morris: Harnessing the Universal Geometry of Embeddings (NeurIPS 2025)</a></li>
+      <li><a href="https://proceedings.mlr.press/v306/groger26a.html" target="_blank" rel="noopener">Gröger, Wen, Brbic: Revisiting the Platonic Representation Hypothesis: An Aristotelian View (ICML 2026)</a></li>
+      <li><a href="https://arxiv.org/abs/2604.18572" target="_blank" rel="noopener">Koepke and others: nearest-neighbour alignment at the scale of millions of samples (preprint, version of October 2026)</a></li>
+      <li><a href="https://aclanthology.org/P19-1303/" target="_blank" rel="noopener">Luo, Cao, Barzilay: Neural Decipherment via Minimum-Cost Flow: from Ugaritic to Linear B (ACL 2019)</a></li>
+      <li><a href="https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00354/97780/Deciphering-Undersegmented-Ancient-Scripts-Using" target="_blank" rel="noopener">Luo and others: Deciphering Undersegmented Ancient Scripts Using Phonetic Prior (TACL 2021)</a></li>
+      <li><a href="https://news.mit.edu/2020/translating-lost-languages-using-machine-learning-1021" target="_blank" rel="noopener">MIT News: Translating lost languages using machine learning (October 2020)</a></li>
+      <li><a href="https://doi.org/10.1038/s41586-025-10014-0" target="_blank" rel="noopener">Avsec and others: Advancing regulatory variant effect prediction with AlphaGenome (Nature, January 2026)</a></li>
+      <li><a href="https://deepmind.google/blog/alphagenome-ai-for-better-understanding-the-genome/" target="_blank" rel="noopener">Google DeepMind: AlphaGenome, including its current limitations (June 2025)</a></li>
+      <li><a href="https://www.science.org/doi/10.1126/science.aec2657" target="_blank" rel="noopener">King and others: Generative design of bacteriophages with genome language models (Science, August 2026)</a></li>
+      <li><a href="https://arcinstitute.org/news/evo2" target="_blank" rel="noopener">Arc Institute: Evo 2, a DNA model trained on over 100,000 species</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12794154/" target="_blank" rel="noopener">Fu and others: whole-cell model of the minimal cell JCVI-syn3A (Journal of Physical Chemistry B, December 2025)</a></li>
+      <li><a href="https://www.nasa.gov/news-release/nasas-voyager-1-makes-history-reaching-one-light-day-from-earth/" target="_blank" rel="noopener">NASA: Voyager 1 reaches one light-day from Earth (November 2026)</a></li>
+      <li><a href="https://science.nasa.gov/blogs/voyager/2026/11/18/voyager-1-engineers-analyze-data-issue-ready-to-confirm-light-day/" target="_blank" rel="noopener">NASA Voyager blog: engineers analyze Voyager 1 data issue (18 November 2026)</a></li>
+      <li><a href="https://science.nasa.gov/mission/voyager/golden-record-cover/" target="_blank" rel="noopener">NASA: The Golden Record cover and its playing instructions</a></li>
+      <li><a href="https://science.nasa.gov/mission/voyager/golden-record-contents/sounds/" target="_blank" rel="noopener">NASA: Golden Record sounds and music (track list)</a></li>
+      <li><a href="https://blogs.esa.int/to-mars-and-back/2024/10/23/father-daughter-team-decodes-alien-signal/" target="_blank" rel="noopener">European Space Agency: Father-daughter team decodes "alien" signal (October 2024)</a></li>
+      <li><a href="https://www.seti.org/news/decoding-the-message-from-a-sign-in-space-a-year-long-journey/" target="_blank" rel="noopener">SETI Institute: Decoding the message from "A Sign in Space" (June 2024)</a></li>
+      <li><a href="https://arxiv.org/abs/0712.3329" target="_blank" rel="noopener">Legg and Hutter: Universal Intelligence: A Definition of Machine Intelligence (Minds and Machines, 2007)</a></li>
+      <li><a href="https://arcprize.org/blog/astra" target="_blank" rel="noopener">ARC Prize Foundation: OpenAI's GPT-6 Astra on ARC-AGI-3 (September 2026)</a></li>
+      <li><a href="https://arcprize.org/leaderboard" target="_blank" rel="noopener">ARC Prize Foundation: ARC-AGI-3 leaderboard (read November 2026)</a></li>
+      <li><a href="https://archive.org/details/GEBen_201706" target="_blank" rel="noopener">Hofstadter: Gödel, Escher, Bach (1979), Chapter VI, for the “In the book” lines</a></li>
+    </ol>
+  </details>
+
 </section>
 
 </main>
