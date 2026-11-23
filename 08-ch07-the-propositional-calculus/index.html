@@ -168,7 +168,7 @@
     <div class="rule"><div class="rn">Atoms</div><p><span class="pc">P</span>, <span class="pc">Q</span> and <span class="pc">R</span> are well-formed. So is any of them followed by one or more of the marks <span class="pc">′</span>, called primes (nothing to do with prime numbers): <span class="pc">Q′</span>, <span class="pc">R′′</span>. The primes are there so the supply never runs out. These simplest strings are called <span class="term">atoms</span>.</p></div>
     <div class="rule"><div class="rn">Formation rules</div><p>If <i>x</i> and <i>y</i> are well-formed, so are these four strings:</p><p><span class="pc">~x</span> &nbsp; <span class="pc">&lt;x∧y&gt;</span> &nbsp; <span class="pc">&lt;x∨y&gt;</span> &nbsp; <span class="pc">&lt;x⊃y&gt;</span></p><div class="ex">Here <i>x</i> and <i>y</i> are not symbols of the system. They stand for whole well-formed strings.</div></div>
   </div>
-  <p>Start with atoms and apply the <span class="term">formation rules</span> again and again, and you can build strings as long as you like. A definition like this, where big cases are built out of smaller cases of the same thing, is the subject of Chapter V. From <span class="pc">P</span> and <span class="pc">Q′</span>: first <span class="pc">~Q′</span>, then <span class="pc">&lt;P∧~Q′&gt;</span>, then <span class="pc">~&lt;P∧~Q′&gt;</span>, and so on. Notice that a tilde needs no brackets, but each of <span class="pc">∧</span>, <span class="pc">∨</span> and <span class="pc">⊃</span> must come wrapped in its own pair.</p>
+  <p>Start with atoms and apply the <span class="term">formation rules</span> again and again, and you can build strings as long as you like. A definition like this, where big cases are built out of smaller cases of the same thing, is called recursive, the subject of Chapter V (<a class="xref" href="../06-ch05-recursive-structures-and-processes/">page 06</a>). From <span class="pc">P</span> and <span class="pc">Q′</span>: first <span class="pc">~Q′</span>, then <span class="pc">&lt;P∧~Q′&gt;</span>, then <span class="pc">~&lt;P∧~Q′&gt;</span>, and so on. Notice that a tilde needs no brackets, but each of <span class="pc">∧</span>, <span class="pc">∨</span> and <span class="pc">⊃</span> must come wrapped in its own pair.</p>
   <p>To test a string someone hands you, run the rules backwards. Take the string apart into the pieces it must have been made from, then take those apart, until you reach atoms or get stuck. This is a <span class="term">top-down</span> test, and it always finishes: every formation rule makes strings longer, so every step backwards gives shorter pieces, and that cannot go on forever. It is a <span class="term">decision procedure</span> for being well-formed.</p>
   <p>Hofstadter gives eight strings to practise on. Guess first which are well-formed, then press each one to see it taken apart.</p>
   <div class="card">
@@ -204,7 +204,7 @@
   <p style="text-align:center"><i>If x were a theorem, y would be a theorem.</i></p>
   <p>The fantasy rule lets you write that discovery down as a string, and this string is a genuine theorem:</p>
   <p style="text-align:center;font-size:22px"><span class="pc">&lt;x⊃y&gt;</span></p>
-  <p>The square brackets mark where a fantasy starts and stops. A <span class="pc">[</span> means "<b>push</b> into a fantasy; the next line is its premise". A <span class="pc">]</span> means "<b>pop</b> back out; the line before was its outcome". (Push and pop are the book's words, from Chapter V, for going down a level, as into a story told inside a story, and coming back up.) Here is the smallest example, the chapter's first theorem. A line-by-line record like this of how a theorem was made is called a <span class="term">derivation</span>.</p>
+  <p>The square brackets mark where a fantasy starts and stops. A <span class="pc">[</span> means "<span class="term">push</span> into a fantasy; the next line is its premise". A <span class="pc">]</span> means "<span class="term">pop</span> back out; the line before was its outcome". (Push and pop are the book's words, from Chapter V, for going down a level, as into a story told inside a story, and coming back up.) Here is the smallest example, the chapter's first theorem. A line-by-line record like this of how a theorem was made is called a <span class="term">derivation</span>.</p>
   <div class="two">
     <div><div class="deriv" id="dvDn"></div></div>
     <div><p style="margin-top:0">Inside the fantasy we pretended <span class="pc">P</span> and the double-tilde rule gave <span class="pc">~~P</span>. Outside, we are left with a real theorem, <span class="pc">&lt;P⊃~~P&gt;</span>. Note that <span class="pc">P</span> itself is <b>not</b> a theorem. We only asked what would follow if it were.</p>
@@ -469,8 +469,8 @@
   An independent companion to Douglas Hofstadter's <i>Gödel, Escher, Bach: an Eternal Golden Braid</i> (1979). Summaries and paraphrases are original; music is synthesized live in your browser.
 </footer>
 
-<script src="../assets/toc.js?v=8401aad5"></script>
-<script src="../assets/glossary.js?v=d93856b8"></script>
+<script src="../assets/toc.js?v=f96592a5"></script>
+<script src="../assets/glossary.js?v=7fe00b60"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
