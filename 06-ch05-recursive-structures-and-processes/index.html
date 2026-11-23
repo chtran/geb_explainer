@@ -161,9 +161,9 @@ button.off{opacity:.38;cursor:default}
       <p>The names come from the spring-loaded pile of trays in a cafeteria. A tray pushed on top sinks the pile a little, and the tray you take off is always the one put on last.</p>
     </div>
     <div>
-      <p>The list beside the story map in <a class="xref" href="#s-story">section 1</a> was a stack. Pushing-potion and reading a story are pushes. Popping-tonic and the popcorn are pops. Three things the dialogue did now have plain descriptions:</p>
+      <p>The list beside the story map in <a class="xref" href="#s-story">section 1</a> was a stack. Pushing-potion and reading a story are pushes. Popping-tonic, the end of a story and the climb "up one story" are pops. Three things the dialogue did now have plain descriptions:</p>
       <ul>
-        <li><b>The wrong print and the wrong house.</b> A stack restores what you needed to know. After the crash it restored only part: "an Escher picture with lizards", but not which one. And the pair's last move, the climb out of <i>Reptiles</i>, is not a pop at all. It lifts them a level and restores nothing, and they surface in the Tortoise's house instead of Achilles'.</li>
+        <li><b>The wrong print and the wrong house.</b> A stack restores what you needed to know. After the crash it restored only part: "an Escher picture with lizards", but not which one. And the pair's last move, the climb out of <i>Reptiles</i>, is a makeshift pop, made without the tonic. It lifts them a level but does not put them back where they left: they surface in the Tortoise's house instead of Achilles'.</li>
         <li><b>The unpopped push.</b> The first story was pushed and never popped. In Hofstadter's own diagram of the dialogue, which has the shape of the story map, the line never climbs back to Goodfortune's hideaway.</li>
         <li><b>Why it is hard to follow.</b> A radio news report can go three levels down (studio, foreign correspondent, a taped interview she plays) and nobody gets lost, because each level sounds different. In the dialogue the same two characters appear on every level, so you have to keep the stack in your head on purpose.</li>
       </ul>
@@ -191,7 +191,7 @@ button.off{opacity:.38;cursor:default}
         <li>The record that the needle that the Tortoise held scraped stopped.</li>
         <li>The record that the needle that the Tortoise that the Genie startled held scraped stopped.</li>
       </ul>
-      <p>The last one is correct English and almost unreadable: four verbs arrive in a row, and each has to be handed back to a noun you set aside earlier. Hofstadter's example is German, where verbs often wait until the end of the sentence, and the old jokes about professors who finish a long sentence by rattling off a string of them.</p>
+      <p>The last one is correct English and almost unreadable: four verbs arrive in a row, and the last three each have to be handed back to a noun you set aside earlier. Hofstadter's example is German, where verbs often wait until the end of the sentence, and the old jokes about professors who finish a long sentence by rattling off a string of them.</p>
       <p>A <span class="term">grammar</span> is the set of rules for which arrangements of words count as sentences. The chapter draws a piece of grammar as a little map of pathways, a <span class="term">recursive transition network</span>, or RTN. You enter at one end and follow the arrows to the other, and each box you pass tells you what to say next.</p>
       <div class="words">
         The kinds of word the boxes ask for:<br>
@@ -267,14 +267,14 @@ button.off{opacity:.38;cursor:default}
     <div>
       <p>Hofstadter then changes the Fibonacci rule slightly. Each new number is still the sum of two earlier ones, but not the last two. The last two numbers say <i>how far back to count</i> to find the pair to add.</p>
       <div class="rule-box">Q(n) = Q(n − Q(n − 1)) + Q(n − Q(n − 2))<br><i style="margin-left:0">for n above 2, and</i> Q(1) = Q(2) = 1</div>
-      <p>The sequence starts 1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10, 9, 10. Step through it, then run it on. Fibonacci numbers grow smoothly. The Q-numbers stay near half of n, the dashed line, but they jump above and below it with no pattern Hofstadter could see. He asked whether the disorder hides some regularity. The rule is a perfectly orderly one and, as he puts it, it produces chaos.</p>
+      <p>The sequence starts 1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10, 9, 10. Step through it, then run it on. Fibonacci numbers grow smoothly. The Q-numbers stay near half of n, the dashed line, mostly a little above it, but they jump about with no simple pattern. He asked whether the disorder hides some regularity. The rule is a perfectly orderly one and, as he puts it, it produces chaos.</p>
     </div>
     <div class="card">
       <div class="seq" id="qSeq"></div>
       <div class="steps" id="qMsg" style="min-height:60px"></div>
       <div class="row"><button id="qNext">Next number ▸</button><button class="ghost" id="qRun">Run to 400</button><button class="ghost" id="qReset">Start over</button></div>
       <canvas id="qCv" height="170"></canvas>
-      <div class="legend" style="margin-top:6px"><span><i style="background:var(--bach)"></i>Q(n)</span><span><i style="background:#8c826e"></i>half of n</span></div>
+      <div class="legend" style="margin-top:6px"><span><i style="background:var(--bach)"></i>Q(n)</span><span><i style="background:#1f1c17;height:2px"></i>half of n (dashed)</span></div>
     </div>
   </div>
 </section>
@@ -308,7 +308,7 @@ button.off{opacity:.38;cursor:default}
     <div>
       <p>Give INT's rule a different, more complicated skeleton and you get the main graph of Hofstadter's doctoral thesis in physics, which he calls Gplot. It answers an idealized question: which energies can an electron (the tiny charged particle found in every atom) have inside a crystal that sits in a magnetic field?</p>
       <p>Each horizontal slice of the graph is one strength of field, written as a fraction between 0 and 1. Left to right is energy. The dark stretches in a slice are the energies the electron is allowed; the gaps are forbidden.</p>
-      <p>Click anywhere on the graph to zoom in. Smaller, skewed copies of the whole shape keep turning up, at every size.</p>
+      <p>Click on a dark part of the graph to zoom in. Smaller, skewed copies of the whole shape keep turning up, at every size.</p>
       <p>Hofstadter wrote that he would be the most surprised person in the world if this graph ever came out of an experiment. He valued it as mathematics that showed how to treat less idealized problems.</p>
     </div>
     <div class="card">
@@ -432,8 +432,8 @@ const SCENES=[
  {lv:2,place:"Escher's Convex and Concave",how:'push: pushing-potion',text:"Inside the print: a lamp, a Genie and the wish that must not be granted. The world of the picture crashes."},
  {lv:2,place:"Escher's Reptiles",how:'same depth, wrong print',text:"They come back inside a different print. The flask of popping-tonic rolls off the desk and down a stairwell. The Tortoise picks up a book and suggests they \"go down one story\"."},
  {lv:3,place:"The record-groove labyrinth",how:'push: they read a story',text:"In this story they are tiny, walking the groove of a record. The music stops at a false ending. They fall into the pit of the monster of the place, the Majotaur, find a bowl of popcorn, and eat."},
- {lv:2,place:"Escher's Reptiles",how:'pop: the popcorn',text:"POP. The story is over. The tonic is still lost, but the lizards in the print climb out of their flat drawing by going up a staircase of books, so the pair do the same and go \"up one story\"."},
- {lv:1,place:"The Tortoise's home",how:'up one story, without a pop',text:"Out of the print, but in the Tortoise's house, not Achilles'. The Tortoise calls it a piece of Good Fortune. The dialogue ends here."}
+ {lv:2,place:"Escher's Reptiles",how:'pop: the story ends',text:"The popcorn goes POP, and the story is over. The tonic is still lost, but the lizards in the print climb out of their flat drawing by going up a staircase of books, so the pair do the same and go \"up one story\"."},
+ {lv:1,place:"The Tortoise's home",how:'a pop without the tonic: up one story',text:"Out of the print, but in the Tortoise's house, not Achilles'. The Tortoise calls it a piece of Good Fortune. The dialogue ends here."}
 ];
 let mapI=0;
 function drawMap(){
@@ -636,7 +636,7 @@ function gDraw(){
     }
   });
   let gs=0,open=0;gWalk(gRoot,n=>{if(n.g){gs++;if(n.depth<G_MAXD)open++;}});
-  let msg=`${gs} G${gs===1?'':'s'} showing. `+(open?'':'The page stops opening them at this height; the diagram itself has no top. ');
+  let msg=`${gs} G${gs===1?'':'s'} showing. `+(open===gs?'':'The page stops opening them at the height of the grey ones; the diagram itself has no top. ');
   if(info){
     const edge=[1,2];let n=gRoot;while(n&&n.num!=null){edge.push(n.num);n=n.kids[n.kids.length-1];}
     msg+=`<br>Right-hand edge: <b>${edge.join(', ')}</b>.`+(info.ok?'':' (numbering mismatch)');
@@ -672,8 +672,8 @@ function qPlot(){
   const n=Q.length-1,N=Math.max(40,n),top=Math.max(24,Math.max(...Q)+2),pad=22;
   const px=i=>pad+(W-2*pad)*i/N,py=v=>H-pad-(H-2*pad)*v/top;
   x.strokeStyle=RULE;x.lineWidth=1;x.beginPath();x.moveTo(pad,H-pad);x.lineTo(W-pad,H-pad);x.moveTo(pad,H-pad);x.lineTo(pad,pad);x.stroke();
-  x.setLineDash([4,4]);x.strokeStyle=MUTE;x.beginPath();x.moveTo(px(0),py(0));const e=Math.min(N,2*top);x.lineTo(px(e),py(e/2));x.stroke();x.setLineDash([]);
   x.fillStyle=BACH;for(let i=1;i<=n;i++){x.beginPath();x.arc(px(i),py(Q[i]),n>120?1.6:2.6,0,7);x.fill();}
+  x.setLineDash([4,4]);x.strokeStyle=INK;x.lineWidth=1.2;x.beginPath();x.moveTo(px(0),py(0));const e=Math.min(N,2*top);x.lineTo(px(e),py(e/2));x.stroke();x.setLineDash([]);
   x.fillStyle=INK2;x.font='11px Inter,sans-serif';x.textAlign='right';x.fillText('place n = '+N,W-pad,H-6);x.textAlign='left';x.fillText(String(top),2,pad+4);
 }
 $('qNext').onclick=()=>{const r=qNextVal();Q.push(r.v);qDraw(r);};
