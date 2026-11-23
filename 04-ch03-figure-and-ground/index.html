@@ -114,7 +114,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
     <div>
       <div class="card">
         <h3 style="margin-top:0">The form: a sonata for one instrument</h3>
-        <p class="small-note">A <span class="term">sonata</span> is a piece of music in several movements (separate parts) for one or two instruments. A violin sonata normally comes with a keyboard playing along: the accompaniment. Around 1720 Bach wrote six pieces, three of them called sonatas, for a violin with nothing playing along at all. Musicians call such a piece <span class="term">unaccompanied</span>.</p>
+        <p class="small-note">A violin <span class="term">sonata</span> normally comes with a keyboard playing along: the accompaniment. Around 1720 Bach wrote six pieces, three of them called sonatas, for <span class="term">unaccompanied</span> violin.</p>
         <p class="small-note">A violin mostly plays one note at a time, so these pieces are mostly a single line of notes. Yet listeners hear a tune <i>and</i> a second, lower line under it. Section 2 lets you hear how.</p>
         <p class="small-note">The dialogue copies this. It is a piece for two speakers with only one written down.</p>
       </div>
@@ -139,7 +139,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   </div>
   <p>Play the single line, then each half. Neither half is written as a separate part. Each is what remains when you take the other away, and each makes sense by itself.</p>
   <p>Painters have words for this. The thing a picture shows is its <span class="term">figure</span>. Everything around it is the <span class="term">ground</span>, short for background. In the single line above you can treat the high notes as figure and the low notes as ground, or the other way round.</p>
-  <div class="intuit"><b>The idea the dialogue sets up</b>When you make one thing, you also make its leftover. The Tortoise's half of the call, the low line under the violin's tune, the gaps between Escher's animals: each leftover here was a real thing with its own shape. The chapter now asks whether that is always so. Its test case is a <span class="term">formal system</span>, the rule-following symbol game of <a class="xref" href="../02-ch01-the-mu-puzzle/">Chapter I (page 02)</a>. The rules produce some rows of symbols and never produce others. Is everything they never produce also something that some other set of rules could produce?</div>
+  <div class="intuit"><b>The idea the dialogue sets up</b>When you make one thing, you also make its leftover. The Tortoise's half of the call, the low line under the violin's tune, the gaps between Escher's animals: each leftover here was a real thing with its own shape. The chapter now asks whether that is always so. Its test case is a <span class="term">formal system</span>, as in <a class="xref" href="../02-ch01-the-mu-puzzle/">Chapter I (page 02)</a>. The rules produce some rows of symbols and never produce others. Is everything they never produce also something that some other set of rules could produce?</div>
 </section>
 
 <div class="half"><div class="hk">Chapter III</div><div class="ht"><em>Figure and Ground</em></div></div>
@@ -147,7 +147,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
 <!-- 3 -->
 <section id="s-tq">
   <div class="sec-head"><div class="num">3</div><h2>A system that multiplies</h2></div>
-  <p>The example Hofstadter tries the question on is the <span class="term">prime</span> numbers: whole numbers bigger than 1 that no smaller number except 1 divides evenly, such as 2, 3, 5 and 7. Hofstadter's question: can a formal system, which only shuffles symbols, produce the primes and nothing else? The primes will turn out to be a leftover: what remains when rules have produced all the other numbers. He builds up to it in three steps: first multiplication, then the numbers that are <i>not</i> prime, then the primes themselves.</p>
+  <p>The example Hofstadter tries the question on is the <span class="term">prime</span> numbers. His question: can a formal system, which only shuffles symbols, produce the primes and nothing else? The primes will turn out to be a leftover: what remains when rules have produced all the other numbers. He builds up to it in three steps: first multiplication, then the numbers that are <i>not</i> prime, then the primes themselves.</p>
   <p>The words are those of <a class="xref" href="../02-ch01-the-mu-puzzle/">Chapter I (page 02)</a>: a formal system starts from <span class="term">axioms</span>, each <span class="term">rule of production</span> makes new <span class="term">strings</span> from old, and every string made this way is a <span class="term">theorem</span>, with a <span class="term">derivation</span> recording how. A theorem is only a string the rules allow. It need not mean anything.</p>
   <p><a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/">Chapter II (page 03)</a> has a system built from the letters <b class="hy">p</b>, <b class="hy">q</b> and hyphens, whose theorems look like <span class="hy">--p---q-----</span>: two hyphens, three hyphens, five hyphens. Read <b class="hy">p</b> as "plus" and <b class="hy">q</b> as "equals", count the hyphens, and every theorem is a correct addition. The system knows nothing about adding. Its rules only shuffle symbols, and the sums come out right all the same.</p>
   <h3>The tq-system</h3>
@@ -228,7 +228,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
   <div class="step-h"><span class="sn">2</span>Recursive: figure and ground both</div>
   <p>A set is <span class="term">recursive</span> if it is recursively enumerable <i>and</i> everything outside it is recursively enumerable too. One machine lists the members; a second machine lists the non-members. This is the recursive figure: one whose ground is also a figure. (The two names are easy to mix up. "Recursively enumerable" is the weaker property; "recursive", drawable twice over, is the stronger.)</p>
   <div class="step-h"><span class="sn">3</span>Two lists make a test that always finishes</div>
-  <p>A <span class="term">decision procedure</span> (<a class="xref" href="../02-ch01-the-mu-puzzle/">page 02</a>) is a test that is guaranteed to finish and say yes or no. One machine listing theorems is not such a test: as section 5 said, it can give a "yes" and never a "no".</p>
+  <p>One machine listing theorems is not a <span class="term">decision procedure</span> (<a class="xref" href="../02-ch01-the-mu-puzzle/">page 02</a>): as section 5 said, it can give a "yes" and never a "no".</p>
   <p>A second machine fixes this. Run both side by side, a step of one and then a step of the other. Your string is either a member or a non-member, so it must turn up on one of the two lists. Wait until it does, and see which list it is on. The "no" you could never get from the first machine arrives as a "yes" from the second.</p>
   <p>For example: is 7 composite? The C-system never says no. But if some second system listed the numbers that are not composite, 7 would turn up on its list, and that would settle it. Section 9 builds that second system.</p>
   <p>It works the other way round as well. If you have a decision procedure, you can build the second machine from it: go through every possible string in turn, test each, and print the ones that get a "no". So "the ground is a figure" and "there is a decision procedure" are the same thing.</p>
@@ -340,7 +340,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
       <div class="mv-k">AI · dialogue</div>
       <h4>Machines asked to write the Tortoise's half</h4>
       <p class="mv-then"><b>In the book:</b> only Achilles' side of the call is printed, and the reader rebuilds the Tortoise's side from the gaps (<a class="xref" href="#s-dialogue">section 1</a>).</p>
-      <p><b>Now:</b> this is a named research task. A 2026 conference paper calls it the "one-sided conversation problem": a <span class="term">large language model</span> (the kind of AI system behind chatbots) is shown one speaker's lines and must write the other's. It matters in practice, because call centres and smart glasses often record only one person. In a small test, 16 human judges compared the real reply with one written by a large model, without being told which was which. For 25 conversations about bookings, a clear majority chose the model's reply as the better fit in 56% of them and the real reply in 12%; the rest were ties or split votes. The authors' caveat: a reply that fits is not the reply that was given. Scores for matching the real meaning stayed low, and the models sometimes invented details.</p>
+      <p><b>Now:</b> this is a named research task. A 2026 conference paper calls it the "one-sided conversation problem": a <span class="term">large language model</span> is shown one speaker's lines and must write the other's. It matters in practice, because call centres and smart glasses often record only one person. In a small test, 16 human judges compared the real reply with one written by a large model, without being told which was which. For 25 conversations about bookings, a clear majority chose the model's reply as the better fit in 56% of them and the real reply in 12%; the rest were ties or split votes. The authors' caveat: a reply that fits is not the reply that was given. Scores for matching the real meaning stayed low, and the models sometimes invented details.</p>
       <p class="mv-so"><b>Why it matters:</b> half a conversation does carry a great deal of the other half, enough for a machine to write something people accept. But the ground is only fully readable when the figure was made that way. Hofstadter wrote Achilles' lines so that the Tortoise's could be recovered; ordinary speakers don't.</p>
     </div>
 
@@ -400,7 +400,7 @@ ol.deriv li.last{font-weight:500;background:#f7e3b0;border-radius:4px}
 
 <script src="../assets/toc.js?v=8aad4657"></script>
 <script src="../assets/glossary.js?v=18c3283a"></script>
-<script src="../assets/terms.js?v=62f05ed1" defer></script>
+<script src="../assets/terms.js?v=056fc7ec" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
 <script>

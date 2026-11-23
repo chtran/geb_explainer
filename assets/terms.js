@@ -7,7 +7,7 @@
     for(const s of [t.replace(/es$/,''),t.replace(/s$/,'')]) if(G[s])return G[s];
     return null;
   }
-  const tip=document.createElement('div'); tip.className='termtip'; tip.hidden=true; document.body.appendChild(tip);
+  const tip=document.createElement('div'); tip.className='termtip'; tip.id='termtip'; tip.setAttribute('role','tooltip'); tip.hidden=true; document.body.appendChild(tip);
   let cur=null;
   function show(el){
     const g=lookup(el.textContent); if(!g)return;
@@ -20,7 +20,7 @@
   function hide(){tip.hidden=true;cur=null;}
   document.querySelectorAll('.term').forEach(el=>{
     if(!lookup(el.textContent))return;
-    el.tabIndex=0;
+    el.tabIndex=0; el.setAttribute('aria-describedby','termtip');
     el.addEventListener('mouseenter',()=>show(el));
     el.addEventListener('mouseleave',hide);
     el.addEventListener('focus',()=>show(el));

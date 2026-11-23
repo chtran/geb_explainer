@@ -39,7 +39,7 @@ The full list, with each page's dialogue and chapter, is in `assets/toc.js`.
 
 ### 1. Explain in order, and never skip a step
 The most common feedback was "I don't understand X", where X used an idea that hadn't been explained yet, or two parts didn't visibly connect.
-- **Define every term at its first use**, in plain words. Inline in parentheses, or in a short "words" box right before the paragraph that needs it. Examples that had to be fixed: "fugue" used before being explained; "C minor" used with readers who didn't know notes have letter names; `S0+S0=SS0` shown before saying what `S` means.
+- **Define every term at its first use**, in plain words, through its hover definition (section 5). Where a concept is what the paragraph is teaching, explain it in the text, or in a short "words" box right before the paragraph that needs it. Examples that had to be fixed: "fugue" used before being explained; "C minor" used with readers who didn't know notes have letter names; `S0+S0=SS0` shown before saying what `S` means.
 - **Build prerequisites first, simplest first.** When an idea rests on others, lay them out as small numbered steps, each using only what came before. Section 3 became: note names → what a key is → changing key → Bach's climbing canon. Gödel became: liar paradox → "this has no proof" → Gödel numbering ((a) a tiny language, (b) symbol codes, (c) packing with prime powers, worked on a small example) → how that builds "I have no proof".
 - **Spell out the connection between steps.** If step 3 is a tool for step 2, say so, and show how it's used. "Gödel then built a formula whose number is *g*" was too big a jump. It needed its own step showing *why* self-reference is hard and *how* it's achieved, with an everyday analogy (Quine's self-describing English sentence).
 - **Answer the reader's real question directly.** "A key is the setting a piece lives in: a home note plus a family of 7 notes" beat a vague one-liner.
@@ -70,7 +70,8 @@ Rules:
 
 ### 5. Definitions by hover, not glossary lists
 - Mark every defined word `<span class="term">word</span>` and put its definition in `assets/glossary.js` (key = lowercase singular; plurals like "primes" match automatically). Hovering or tapping shows it.
-- Terms first defined in earlier explainers still get `class="term"` at their first use on a new page, plus a short inline reminder if the page depends on them.
+- Terms first defined in earlier explainers still get `class="term"` at their first use on a new page. A reminder may add what the hover can't (where the term came from, how it applies here), but must not restate its definition.
+- **Don't repeat the hover in the text.** No parenthetical or appositive gloss that restates a term's definition ("a theme (the main melody…)", "Lean, a program that checks every step…"). Write the sentence so a reader who knows the word reads straight through, and one who doesn't can hover.
 - No glossary sections, glossary pages or glossary links.
 
 ### 6. Copyright and sources
