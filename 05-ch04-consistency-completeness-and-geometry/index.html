@@ -21,13 +21,15 @@
 /* pq grid */
 .pqgrid{border-collapse:separate;border-spacing:4px;margin:10px 0;font:13px Inter,sans-serif}
 .pqgrid th{font-weight:500;color:var(--ink2);text-align:center;padding:0 2px}
-.pqgrid th.rh{text-align:right;padding-right:6px;white-space:nowrap}
+.pqgrid th.rh,.pqgrid th.ch{font:500 12px "JetBrains Mono",monospace;white-space:nowrap}
+.pqgrid th.rh{text-align:right;padding-right:6px}
+.pqgrid th.ch{font-size:10px;letter-spacing:0}
 .pqgrid td{width:40px;height:40px;text-align:center;border-radius:8px;border:1.5px solid var(--rule);background:#fff;color:#b9ae99;cursor:pointer;font:500 14px Inter,sans-serif;padding:0}
 .pqgrid td.tt{background:var(--escher);border-color:var(--escher);color:#fff}
 .pqgrid td.tf{background:var(--bach);border-color:var(--bach);color:#fff}
 .pqgrid td.nt{border:2px dashed var(--gold);color:var(--gold);background:#fff8e6}
 .pqgrid td.sel{outline:3px solid var(--ink);outline-offset:1px}
-@media (max-width:520px){.pqgrid{border-spacing:2px}.pqgrid td{min-width:40px;height:42px;font-size:13px}.pqgrid th.rh{font-size:11px;padding-right:1px;letter-spacing:-.03em}}
+@media (max-width:520px){.pqgrid{border-spacing:2px}.pqgrid td{min-width:36px;height:42px;font-size:13px}.pqgrid th.rh{font-size:10px;padding-right:1px}.pqgrid th.ch{font-size:9px}}
 @media (max-width:560px){.seg{gap:8px}main button{min-height:44px}.geo input[type=range]{height:44px}}
 #gSvg,#sSvg{display:block;max-width:560px;margin:0 auto}
 .rel-leg{font:13px Inter,sans-serif;margin:4px 0}
@@ -84,25 +86,26 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <div>
       <p><b>The story.</b> Achilles visits the Tortoise, who tells him about a long contest with his friend the Crab. The Crab had bought a record player that the salesman called Perfect: it could reproduce any sound at all. The Tortoise came to visit with a record titled "I Cannot Be Played on Record Player 1". A few notes in, the player began to shake, and then it fell to pieces. The Tortoise had studied how the player was built and had put on the record exactly the sounds that would make it rattle itself apart.</p>
       <p>The Crab bought a better player. The Tortoise came back with "I Cannot Be Played on Record Player 2". And so on. In the end the Crab orders a player that looks at each record first and rebuilds itself if the record seems dangerous. Does that one win? The Tortoise won't say. He only asks whether Achilles knows Gödel's theorem.</p>
-      <p>Then the roles turn around. As Achilles gets up to leave, he gives the Tortoise a present: a goblet, said to be the last piece made by a glassblower named Bach, with the letters B, A, C, H cut into it. The Tortoise admits that he has a search of his own, for a Perfect goblet. He notices that the four letters are also four notes, picks up his violin and plays them. On the last note the goblet shatters, and the dialogue stops dead. The goblet has met the Crab's fate: it was broken by a tune made for it, the one spelled on its own side. This time the Tortoise is the one left holding the pieces.</p>
+      <p>Then the roles turn around. As Achilles gets up to leave, he gives the Tortoise a present: a goblet, said to be the last piece made by a glassblower named Bach, with the letters B, A, C, H cut into it. The Tortoise admits that he has a search of his own, for a Perfect goblet. He notices that the four letters are also four notes, picks up his violin and plays them. On the last note the goblet shatters, and the dialogue stops dead. The goblet has met the Crab's fate: it was broken by a tune made for it, the one etched into its own glass. This time the Tortoise is the one left holding the pieces.</p>
     </div>
     <div>
       <div class="card">
         <h3 style="margin-top:0">The form: Bach's last fugue</h3>
-        <p class="small-note">A <span class="term">fugue</span> is a piece where several <span class="term">voices</span> (separate melody lines) enter one after another with the same tune and weave together. The craft of fitting melodies against each other is called <span class="term">counterpoint</span>. In his last years Bach wrote <i>The Art of Fugue</i>, a set of fugues and canons all built on one tune, and gave each fugue the Latin title <i>Contrapunctus</i>.</p>
-        <p class="small-note">The last one is unfinished. Near the point where the manuscript breaks off, Bach brings in a new tune made of his own name. Musicians name notes by letters. In the German way of naming them, four notes that sit side by side on the piano are called B, A, C and H. So Bach's name is a four-note tune:</p>
+        <p>A <span class="term">fugue</span> is a piece where several <span class="term">voices</span> (separate melody lines) enter one after another with the same tune and weave together. The craft of fitting melodies against each other is called <span class="term">counterpoint</span>. In his last years Bach wrote <i>The Art of Fugue</i>, a set of fugues and <span class="term">canon</span>s all built on one tune, and gave each fugue the Latin title <i>Contrapunctus</i>.</p>
+        <p>The last one is unfinished. Near the point where the manuscript breaks off, Bach brings in a new tune made of his own name. Musicians name notes by letters. In the German way of naming them, four notes that sit side by side on the piano are called B, A, C and H. So Bach's name is a four-note tune:</p>
         <canvas id="bachCanvas" height="150"></canvas>
         <div class="row"><button id="bachPlay">▶ Play B-A-C-H</button><button id="bachFlip" class="ghost">▶ Then upside down and backwards</button></div>
         <p class="small-note" id="bachNote">In the dialogue the Tortoise says this tune is the same played upside down (every step up becomes a step down) and backwards (last note first). Is he right? Press the second button.</p>
       </div>
     </div>
   </div>
-  <div class="intuit"><b>The hidden trick</b>The title joins <i>Contrapunctus</i> to <span class="term">acrostic</span>, a text whose first letters spell a message. Take the first letter of each speech in the dialogue, in order, and they spell a sentence. The sentence hides something in turn.
+  <div class="intuit"><b>The hidden trick</b>The title joins <i>Contrapunctus</i> to <span class="term">acrostic</span>, a text whose first letters spell a message. Take the first letter of each speech in the dialogue, in order, and they spell a sentence. The sentence says what it hides. To find it, read its capital letters from right to left.
     <div class="acro" id="acro" style="margin-top:8px"><span><i>H</i>ofstadter's </span><span><i>C</i>ontracrostipunctus </span><span><i>A</i>crostically </span><span><i>B</i>ackwards </span><span><i>S</i>pells </span><span>'<i>J</i>. S. Bach'</span></div>
     <div class="ric" id="acroOut"></div>
+    <p class="small-note" id="acroWhy" style="visibility:hidden;margin:6px 0 0">The capitals are H, C, A, B, S, J. Backwards, that is J, S, B, A, C, H.</p>
     <div class="row"><button id="acroBtn" class="ghost small">Show what the sentence hides</button></div>
   </div>
-  <p>So the dialogue signs itself the way Bach signed his fugue: with a name hidden in the material. The story's three objects are all undone by something that points back at themselves: the record names its player, the goblet carries its own tune, and the fugue breaks off just as its composer writes his name into it. Pointing back at oneself is called <span class="term">self-reference</span>, and the whole book is built on it. Achilles even remarks, in passing, that Lewis Carroll liked to hide words in the first letters of his poems. And the dialogue ends as the fugue does, by breaking off in the middle. Shortly before, the two friends had been talking about how hard it is for an author to surprise anyone with an ending, since the reader can feel how few pages are left.</p>
+  <p>So the dialogue signs itself the way Bach signed his fugue: with a name hidden in the material. The story's three objects are all undone by something that points back at themselves: the record names its player, the goblet carries its own tune, and the fugue breaks off just as its composer writes his name into it. Pointing back at oneself is called <span class="term">self-reference</span>, and the whole book is built on it. Achilles even remarks, in passing, that Lewis Carroll liked to hide words in the first letters of his poems. And the dialogue ends as the fugue does, by breaking off in the middle. Just before, the Tortoise had described how Bach's last fugue stops without warning, followed by dead silence. The dialogue's closing stage direction uses the same words.</p>
 </section>
 
 <!-- 2 -->
@@ -116,10 +119,10 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <div class="row"><button id="rpPlay">▶ Play the record</button><button id="rpBuy" class="ghost" style="display:none"></button></div>
     <div class="out" id="rpMsg"></div>
     <table class="ctable" id="rpTable"></table>
-    <p class="small-note">A sketch. The tunes, and each player's "weak note", are made up for this demo; the dialogue doesn't give that detail.</p>
+    <p class="small-note">The tunes, and each player's "weak note", are made up for this demo. The dialogue doesn't give that detail.</p>
   </div>
-  <p>Once each player has met the record made for it, every row of the table ends in "no", for two different reasons. The cheap player is safe from the Tortoise, but only because it can't make the sounds that would hurt it, and it can't make many other sounds either. Each high-fidelity player is good enough to start making the sounds that destroy it, so there is one sound it never finishes reproducing: the one on its own record. And if you buy Record Player 2 and give it the record that broke Record Player 1, it plays without trouble. No record is unplayable in general. Each one is aimed at a single machine.</p>
-  <p>The Tortoise's moral is that the fault isn't in any one player. It is in the hope for a Perfect one. Mathematicians once had the same hope: the <a class="xref" href="../01-introduction/#s-godel">Introduction</a> told how, around 1900, they set out to build one perfect system of rules for all of mathematics.</p>
+  <p>Play on until every row of the table ends in "no". The rows get there for two different reasons. The cheap player is safe from the Tortoise, but only because it can't make the sounds that would hurt it, and it can't make many other sounds either. Each high-fidelity player is good enough to start making the sounds that destroy it, so there is one sound it never finishes reproducing: the one on its own record. And if you buy Record Player 2 and give it the record that broke Record Player 1, it plays without trouble. No record is unplayable in general. Each one is aimed at a single machine.</p>
+  <p>The Tortoise's moral is that the fault isn't in any one player. It is in the hope for a Perfect one. Mathematicians once had the same hope: the <a class="xref" href="../01-introduction/#s-godel">Introduction</a> told how, in the early 1900s, they set out to build one perfect system of rules for all of mathematics.</p>
   <div class="intuit"><b>The idea the dialogue sets up</b>Gödel's theorem ended that hope: in any <span class="term">formal system</span> (starting statements plus mechanical rules for making new ones) that is strong enough to talk about whole numbers, and that never contradicts itself, there is a true statement the rules can never produce. The Tortoise's game is a picture of that theorem, with record players standing for formal systems. The chapter now asks what the picture shows: what it means for a formal system to be <b>consistent</b> (roughly: it never contradicts itself), what it means for it to be <b>complete</b> (roughly: it can produce every true statement), and what it is about a strong one that keeps it from being Perfect.</div>
 </section>
 
@@ -129,21 +132,18 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
 <section id="s-meaning">
   <div class="sec-head"><div class="num">3</div><h2>One object, two meanings</h2></div>
   <p>A record's grooves have an obvious meaning: music. That is the meaning the record was made for, and Hofstadter calls it the <span class="term">explicit meaning</span>. The Tortoise's records carry a second one. The same grooves, played on one particular machine, are a set of instructions for shaking that machine apart. Nobody would see this by listening. It is an <span class="term">implicit meaning</span>, and it only appears when you line the sounds up against the design of the player.</p>
-  <p>Lining things up like this has come up before. An <span class="term">isomorphism</span> is a match between two things whose parts correspond one-to-one, like a map and its city. Chapter II built a tiny formal system, the <span class="term">pq-system</span>, whose <span class="term">theorems</span> (the <span class="term">strings</span> of symbols its rules can produce) are things like <span class="pq">--<span class="p">p</span>---<span class="q">q</span>-----</span>. The symbols mean nothing by themselves. But read <span class="pq p">p</span> as "plus", <span class="pq q">q</span> as "equals" and each group of hyphens as a number, and that theorem says "2 plus 3 equals 5". A way of reading symbols like this is called an <span class="term">interpretation</span>. This one fits, because every theorem turns into a true sentence about addition.</p>
-  <p>The chapter's first point is that one object can have several interpretations at once, each through a different isomorphism. The dialogue itself is an example. On the surface it is a story. Its two halves match each other: record player and goblet, record and violin tune, Crab and Tortoise. Its first letters spell a message. And the whole thing lines up with Gödel's theorem:</p>
+  <p>The book has a word for lining things up like this. An <span class="term">isomorphism</span> is a match between two things whose parts correspond one-to-one, like a map and its city. Chapter II built a tiny formal system, the <span class="term">pq-system</span> (the next section spells out its rules), whose <span class="term">theorems</span> (the <span class="term">strings</span> of symbols its rules can produce) are things like <span class="pq">--<span class="p">p</span>---<span class="q">q</span>-----</span>. The symbols mean nothing by themselves. But read <span class="pq p">p</span> as "plus", <span class="pq q">q</span> as "equals" and each group of hyphens as a number, and that theorem says "2 plus 3 equals 5". A way of reading symbols like this is called an <span class="term">interpretation</span>. This one fits, because every theorem turns into a true sentence about addition.</p>
+  <p>The chapter's first point is that one object can have several interpretations at once, each through a different isomorphism. The dialogue itself is an example. On the surface it is a story. Its two halves match each other: record player and goblet, record and violin tune, Crab and Tortoise. Its first letters spell a message. And the whole thing lines up with Gödel's theorem. A string states something, as a record holds a sound. Playing a record through stands for the system producing that string as a theorem.</p>
   <div class="card">
     <table class="ctable">
       <tr><th>In the story</th><th>In mathematics</th></tr>
       <tr><td>a record player</td><td>a formal system for <span class="term">number theory</span> (the mathematics of whole numbers)</td></tr>
-      <tr><td>the player's blueprint, which the Tortoise studies</td><td>the system's axioms and rules</td></tr>
-      <tr><td>a low-fidelity player</td><td>a weak system, with few rules</td></tr>
-      <tr><td>a high-fidelity player</td><td>a strong system</td></tr>
+      <tr><td>the player's blueprint, which the Tortoise studies</td><td>the system's starting strings and rules</td></tr>
       <tr><td>a record</td><td>a string of the system's symbols</td></tr>
       <tr><td>a record the player can play</td><td>a theorem</td></tr>
       <tr><td>a record the player can't play</td><td>a string that is not a theorem</td></tr>
       <tr><td>a sound</td><td>a true statement about numbers</td></tr>
-      <tr><td>a note beyond the cheap player's speaker</td><td>a truth about numbers that a weak system can't even write down</td></tr>
-      <tr><td>the sound that wrecks a good player before it can finish</td><td>a true statement that a strong system can write down but that is not one of its theorems</td></tr>
+      <tr><td>the sound that wrecks a good player before it can finish</td><td>a true statement that is not one of the system's theorems</td></tr>
       <tr><td>a Perfect player</td><td>a <b>complete</b> system for number theory: one where every true statement about numbers is a theorem</td></tr>
       <tr><td>the title "I Cannot Be Played on Record Player X"</td><td>Gödel's string, which says "I am not a theorem of system X"</td></tr>
     </table>
@@ -158,7 +158,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
   <div class="step-h"><span class="sn">1</span><span>The system, and a reading that fits</span></div>
   <p>Here is the whole pq-system. It has a pattern for its <span class="term">axioms</span> (the strings you are given for free) and one rule.</p>
   <div class="pair">
-    <div class="card"><div class="lbl-s" style="margin-top:0">Axioms</div><p style="margin:0">Any string of the shape <span class="pq">x<span class="p">p</span>-<span class="q">q</span>x-</span>, where <span class="pq">x</span> stands for any number of hyphens, the same number both times. For example <span class="pq">--<span class="p">p</span>-<span class="q">q</span>---</span>.</p></div>
+    <div class="card"><div class="lbl-s" style="margin-top:0">Axioms</div><p style="margin:0">Any string of the shape <span class="pq">x<span class="p">p</span>-<span class="q">q</span>x-</span>, where <span class="pq">x</span> stands for any number of hyphens (at least one), the same number both times. For example <span class="pq">--<span class="p">p</span>-<span class="q">q</span>---</span>.</p></div>
     <div class="card"><div class="lbl-s" style="margin-top:0">Rule</div><p style="margin:0">From a theorem, make a new one by adding one hyphen just before the <span class="pq q">q</span> and one at the very end. From <span class="pq">--<span class="p">p</span>-<span class="q">q</span>---</span> you get <span class="pq">--<span class="p">p</span>--<span class="q">q</span>----</span>.</p></div>
   </div>
   <p>Under the reading "plus" and "equals", the axioms say "x plus 1 equals x + 1" and the rule keeps both sides in step, so every theorem is a true addition.</p>
@@ -197,16 +197,16 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <div class="out" id="gOut"></div>
     <div class="row"><button id="gFan" class="ghost">Show 30 lines at once</button></div>
     <div class="out" id="gCount" style="min-height:0"></div>
-    <p class="small-note">On the sphere, the second postulate holds only if "extended as far as you like" is read as "never comes to an end". A line that goes round and returns never ends, but it isn't infinitely long.</p>
+    <p class="small-note" id="gSphNote">On the sphere, the second postulate holds only if "extended as far as you like" is read as "never comes to an end". A line that goes round and returns never ends, but it isn't infinitely long.</p>
   </div>
-  <p>On flat paper the answer is Euclid's: one line misses. On the sphere, none does. On the saddle-shaped surface, a whole fan of lines misses. (Mathematicians call the sphere's geometry <i>elliptic</i> and the saddle's <i>hyperbolic</i>.) The first four postulates, as they stand, don't decide between flat paper and the saddle. The sphere is a harder case. It fits only once some words are read in a new way, and that is the next section.</p>
+  <p>On flat paper the answer is Euclid's: one line misses. On the sphere, none does. On the saddle-shaped surface, a whole fan of lines misses. (Mathematicians call the sphere's geometry <i>elliptic</i> and the saddle's <i>hyperbolic</i>.) Both curved worlds read "line" as "straightest path". With that reading, the first four postulates hold on the saddle as well as on flat paper, so they don't decide between the two. The sphere is a harder case. It needs more words read in a new way, and that is the next section.</p>
 </section>
 
 <!-- 6 -->
 <section id="s-terms">
   <div class="sec-head"><div class="num">6</div><h2>What does "line" mean?</h2></div>
-  <p>You may have objected to the last demo: those curves on the sphere aren't <i>straight</i>. That objection is exactly what stopped Saccheri. The word "line" came to him with a picture attached, and when his results stopped fitting the picture he trusted the picture.</p>
-  <p>But look at what Euclid's postulates actually pin down. They never say what a point or a line <i>is</i>. They only say how points and lines behave toward each other: two points have a line through them, lines can be extended, and so on. "Point" and "line" are <span class="term">undefined terms</span>. Like <span class="pq p">p</span> and <span class="pq q">q</span>, they are symbols, and anything that behaves as the postulates demand is entitled to the names. The pq-system carries the same warning: it is easy to read "plus" into <span class="pq p">p</span> and then believe things about <span class="pq p">p</span> that the rules never said.</p>
+  <p>You may have objected to the last demo: those curves on the sphere and the saddle aren't <i>straight</i>. That objection is exactly what stopped Saccheri. The word "line" came to him with a picture attached, and when his results stopped fitting the picture he trusted the picture.</p>
+  <p>But look at what Euclid's postulates actually pin down. They never say what a point or a line <i>is</i>. (Euclid did offer definitions, but they are too vague to settle anything. Only the postulates do any work.) They only say how points and lines behave toward each other: two points have a line through them, lines can be extended, and so on. "Point" and "line" are <span class="term">undefined terms</span>. Like <span class="pq p">p</span> and <span class="pq q">q</span>, they are symbols, and anything that behaves as the postulates demand is entitled to the names. The pq-system carries the same warning: it is easy to read "plus" into <span class="pq p">p</span> and then believe things about <span class="pq p">p</span> that the rules never said.</p>
   <p>On a sphere, the shortest path between two places runs along a <span class="term">great circle</span>, a circle as big as the sphere allows, like the equator. Planes fly along them. So read "line" as "great circle". One problem remains, and the drawing shows it.</p>
   <div class="card geo">
     <svg id="sSvg" viewBox="0 0 640 300" width="100%"></svg>
@@ -216,13 +216,14 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <div class="out" id="sOut"></div>
   </div>
   <p>So the mending takes two re-readings: "line" means great circle, and "point" means a pair of opposite spots. With those, two points fix one line again, and every two lines meet in exactly one point, so there are no parallels at all. It is the move from section 4. There, a new axiom clashed with the old reading of <span class="pq q">q</span>, and a new reading removed the clash. Here, a new fifth postulate ("through a point beside a line, <i>no</i> line can be drawn that never meets the first") clashes with the old reading of "line", and a new reading removes it.</p>
-  <p>One more piece of the picture. Drop the fifth postulate and keep the other four, and you have a smaller geometry, called <span class="term">absolute geometry</span>. Everything it proves holds on flat paper and on the saddle alike, since both obey those four as they stand. (The sphere is left out, because it needed the words re-read.) Absolute geometry is the shared core. It can't settle the fifth postulate either way, so geometry forks: add the fifth and you get Euclid's geometry, add a rival and you get another.</p>
+  <p>One more piece of the picture. Drop the fifth postulate and keep the other four, and you have a smaller geometry, called <span class="term">absolute geometry</span>. Everything it proves holds on flat paper and on the saddle alike, since both obey those four. (The sphere is left out, because it needed "point" and "extended" re-read as well.) Absolute geometry is the shared core. It can't settle the fifth postulate either way, so geometry forks: add the fifth and you get Euclid's geometry, add a rival and you get another.</p>
   <div class="intuit"><b>What geometry learned</b>There isn't one true geometry that mathematics can prove. There are several, each consistent, and the fifth postulate is a choice between them. Which one describes the space we live in is a question for measurement, not proof. It became a question for physics, and physics has since found that space is very slightly curved near heavy objects such as the Sun.</div>
 </section>
 
 <!-- 7 -->
 <section id="s-worlds">
   <div class="sec-head"><div class="num">7</div><h2>Kinds of consistency</h2></div>
+  <div class="step-h"><span class="sn">1</span><span>Agreeing with the world, or with each other</span></div>
   <p>Section 4 called a system consistent when every theorem "comes out true". True of what? Hofstadter splits that definition in two.</p>
   <p><span class="term">External consistency</span>: the theorems agree with the world. <span class="term">Internal consistency</span>: the theorems agree with each other. The second is the one that matters in mathematics, and it has a neat form: a system (with its interpretation) is internally consistent if you can <i>imagine a world</i> in which all its theorems are true together. Non-Euclidean geometry clashed with everyone's picture of the real world, yet it was internally consistent, because there are worlds (a sphere, a saddle) where it holds.</p>
   <p>Hofstadter's example has just three theorems: <span class="pq">TbZ</span>, <span class="pq">ZbE</span> and <span class="pq">EbT</span>. Let T, Z and E be the Tortoise, Zeno (an ancient Greek philosopher who turns up in the book's dialogues) and a third character, Egbert. Choose a reading for <span class="pq">b</span>.</p>
@@ -236,17 +237,10 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     </div>
   </div>
   <p>Under the second reading, each theorem on its own could be true. Only the three together are impossible. Inconsistency can hide in the combination.</p>
-  <p>"Imaginable" comes in degrees, so consistency does too. Hofstadter sorts imagined worlds by which rules they are allowed to break. (The examples are this page's own.)</p>
-  <ul class="layers">
-    <li><b>Logically consistent</b>: no statement is both true and false. Almost any story passes.</li>
-    <li><b>Mathematically consistent</b>: it also keeps the facts of mathematics. A world where 2 plus 1 equals 2 fails here.</li>
-    <li><b>Physically consistent</b>: it also keeps the laws of physics. A story with a machine that runs for ever without fuel fails here.</li>
-    <li><b>Biologically consistent</b>: it also keeps the facts of biology. A story with a talking tortoise fails here.</li>
-  </ul>
-  <p>That raises a question. Logic must be the same in every world we can talk about sensibly. Geometry, we have just seen, need not be. What about number theory: could there be worlds with different arithmetic? The chapter's answer is yes, in the way geometry allowed it. This is why geometry is in a chapter about Gödel. Number theory has a shared core, like absolute geometry, that holds in every such world. But Gödel's theorem will show that the core leaves some statements undecided, as the four postulates leave the fifth. Add such a statement, or add its opposite, and you get rival number theories. The book works this out in Chapter XIV.</p>
+  <div class="step-h"><span class="sn">2</span><span>A clash you can look at</span></div>
   <div class="cols">
     <div>
-      <p><b>Escher's <i>Relativity</i></b> is a picture of a clash that hides in the combination, like the three theorems above. In this 1953 <span class="term">lithograph</span> (a print made from a drawing on stone), people climb staircases in one building, but "down" points in three different directions. Each staircase with its walker makes sense. The building as a whole could not exist. <a class="xref" href="https://mcescher.com/gallery/impossible-constructions/" target="_blank" rel="noopener">See the print at mcescher.com</a>.</p>
+      <p><b>Escher's <i>Relativity</i></b> is a picture of a clash that hides in the combination, like the three theorems above. In this 1953 <span class="term">lithograph</span> (a print made from a drawing on stone), people climb staircases in one building, but "down" points in three different directions. Each staircase with its walker makes sense. The building itself could be built. A world in which all those people walk it at once could not exist: gravity would have to pull three ways. <a class="xref" href="https://mcescher.com/gallery/impossible-constructions/" target="_blank" rel="noopener">See the print at mcescher.com</a>.</p>
       <p>Hofstadter's point is about us, the viewers. We recognise a staircase instantly, and once we have, we can't un-see it. So when the whole picture clashes, we don't escape by deciding the staircases are something else. We keep the small, familiar readings and accept an impossible world. It is Saccheri's problem in a picture: a familiar meaning that won't let go, even when letting go would dissolve the clash.</p>
     </div>
     <div class="card" style="align-self:center">
@@ -255,6 +249,15 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
       <p class="small-note">An original sketch of the trick, not Escher's picture. One zigzag serves two walkers. The steps one of them treads on are walls to the other.</p>
     </div>
   </div>
+  <div class="step-h"><span class="sn">3</span><span>Degrees of consistency</span></div>
+  <p>"Imaginable" comes in degrees, so consistency does too. Hofstadter sorts imagined worlds by which rules they are allowed to break. The examples below are ours, not his.</p>
+  <ul class="layers">
+    <li><b>Logically consistent</b>: no statement is both true and false. Almost any story passes.</li>
+    <li><b>Mathematically consistent</b>: it also keeps the facts of mathematics. A world where 2 plus 1 equals 2 fails here.</li>
+    <li><b>Physically consistent</b>: it also keeps the laws of physics. A story with a machine that runs for ever without fuel fails here.</li>
+    <li><b>Biologically consistent</b>: it also keeps the facts of biology. A story with a talking tortoise fails here.</li>
+  </ul>
+  <p>From here on, "consistent" means internally consistent: some imaginable world makes all the theorems true together. For a system meant to describe whole numbers, that world is the ordinary numbers, so this comes to the same thing as section 4's "every theorem is true".</p>
 </section>
 
 <!-- 8 -->
@@ -273,8 +276,9 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
     <li><b>Tighten the interpretation</b>, so fewer statements count as true. The third reading in the grid, "equals, or is 1 more than", does this, and the gap closes.</li>
   </ul>
   <div class="step-h"><span class="sn">3</span><span>Number theory can't close its gap</span></div>
-  <p>For this toy system, tightening is the sensible choice. For number theory it isn't on offer. Its symbols are <i>meant</i> to say plus, times and equals; read them as anything looser and you are no longer doing number theory. That leaves adding rules. And here is the Tortoise again. Gödel showed that whenever a consistent system is strong enough to express number theory (addition and multiplication of whole numbers), there is a true statement it can't prove. His method, as the <a class="xref" href="../01-introduction/#s-godel">Introduction</a> sketched, was to code statements as numbers, so that a system about numbers can make statements about itself (self-reference again), including one that says "I am not a theorem". The proof itself comes in later chapters. Add that statement as a new axiom and you have a new, stronger system, which has a new unprovable truth of its own. Each new record player gets its own record. Even the Crab's last player, the one that rebuilds itself, is still one machine following one fixed plan, so a record can be aimed at the plan. The book returns to that player in Chapter XV.</p>
-  <div class="intuit"><b>Back to the record players</b>A weak system is the cheap player. It can be complete about the little it can say, as the pq-system is, but most truths about numbers can't even be written in it. A strong system is the high-fidelity player. It can state every truth about numbers, and that same power lets it describe itself, which is what allows a statement to be aimed at it. Neither is a Perfect system for number theory, and no consistent system can be.</div>
+  <p>For this toy system, tightening is the sensible choice. For number theory it isn't on offer. Its symbols are <i>meant</i> to say plus, times and equals; read them as anything looser and you are no longer doing number theory. That leaves adding rules. And here is the Tortoise again. Gödel showed that whenever a consistent system is strong enough to express number theory (addition and multiplication of whole numbers), there is a true statement it can't prove. (The statement says "I am not a theorem". It has to be true: if it were a theorem, the system would have proved something false.) His method, as the <a class="xref" href="../01-introduction/#s-godel">Introduction</a> sketched, was to code statements as numbers, so that a system about numbers can make statements about itself (self-reference again), including that one. The proof itself comes in later chapters. Add that statement as a new axiom and you have a new, stronger system, which has a new unprovable truth of its own. Each new record player gets its own record. Even the Crab's last player, the one that rebuilds itself, is still one machine following one fixed plan, so a record can be aimed at the plan. The book returns to that player in Chapter XV.</p>
+  <div class="intuit"><b>Why geometry is in a chapter about Gödel</b>Section 7 sorted imagined worlds by the rules they keep. Logic must be the same in every world we can talk about sensibly. Geometry, we have just seen, need not be. What about number theory: could there be worlds with different arithmetic? The chapter's answer is yes, in the way geometry allowed it. Number theory has a shared core, like absolute geometry, that holds in every such world. But Gödel's theorem will show that the core leaves some statements undecided, as the four postulates leave the fifth. Add such a statement, or add its opposite, and you get rival number theories. The rivals agree on every ordinary sum: 2 plus 1 is 3 in all of them. They differ only on unusual statements like Gödel's. How the opposite of a true statement can be added without causing a contradiction is a puzzle the book takes up in Chapter XIV.</div>
+  <div class="intuit"><b>Back to the record players</b>A weak system is like the cheap player. It can be complete about the little it can say, as the pq-system is, but most truths about numbers can't even be written in it. A strong system is like the high-fidelity player. It can state every truth about numbers, and that same power lets it describe itself, which is what allows a statement to be aimed at it. Neither is a Perfect system for number theory, and no consistent system can be.</div>
 </section>
 
 <!-- 9 -->
@@ -284,7 +288,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
   <div class="grid3">
     <div class="card"><span class="tag b">Dialogue</span><h4>A record for every player</h4><p>Each good player is broken by a record aimed at it; the cheap one is safe only because it can do so little. The goblet replays the trick on the Tortoise, and the first letters hide a name, as Bach's last fugue does.</p></div>
     <div class="card"><span class="tag g">Formal systems</span><h4>Consistent and complete</h4><p>Consistent: every theorem is true under the interpretation. Complete: every truth the symbols can state is a theorem. Both depend on how the symbols are read.</p></div>
-    <div class="card"><span class="tag e">Geometry</span><h4>"Line" is an undefined term</h4><p>Deny Euclid's fifth postulate and no contradiction follows, only new geometries. A clash between axioms and meanings can be cured by changing the meanings.</p></div>
+    <div class="card"><span class="tag e">Geometry</span><h4>"Line" is an undefined term</h4><p>Deny Euclid's fifth postulate and no contradiction follows, only new geometries. A clash between axioms and meanings can be cured by changing the meanings. The other four postulates can't settle the fifth, as the core of number theory can't settle Gödel's statement.</p></div>
   </div>
 </section>
 
@@ -299,7 +303,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
       <div class="mv-k">AI · security</div>
       <h4>The record-player game, played against AI</h4>
       <p class="mv-then"><b>In the book:</b> every good record player has a record made to break it, and each better player gets a new record of its own (<a class="xref" href="#s-records">section 2</a>).</p>
-      <p><b>Now:</b> AI systems meet such "records" all the time. In a study published in 2023, researchers trained a program whose only job was to beat KataGo, a Go-playing AI far stronger than any human. It won more than 97% of its games, not by playing Go well but by tricking KataGo into serious blunders. A follow-up study (2025) tested three defences, including retraining KataGo on the attack. Some stopped the old attacks. None withstood a newly trained attacker. AI systems built on language show the same pattern. A <i>jailbreak</i> is a message written to make a <span class="term">large language model</span> break its own safety rules. In a study presented in 2026, researchers from Anthropic, Google DeepMind, OpenAI, universities and other groups took 12 published defences against jailbreaks and against prompt injections (text hidden in a web page or email that hijacks an AI assistant), most of which had reported that almost no attacks got through, and built attacks aimed at each one. For most of the 12, more than 90% of those attacks succeeded. A cousin of the Crab's last idea, a player that looks at each record first, is also in use: Anthropic puts a second AI in front of its chatbot to screen what goes in and out. In a first test of a prototype, which also refused too many harmless questions, 183 people spent more than 3,000 hours and found no single trick that got all ten forbidden questions answered. In a one-week public test in February 2025, with eight questions, four participants got all eight answered, and Anthropic judged that one of them had done it with a single trick. For a newer version (January 2026) the company reports one high-risk weakness found in more than 1,700 hours of testing, but no single trick that works across all the questions yet, and it says itself that no AI system on the market has perfectly robust defences.</p>
+      <p><b>Now:</b> AI systems meet such "records" all the time. In a study published in 2023, researchers trained a program whose only job was to beat KataGo, an AI that plays the board game Go far better than any human. It won more than 97% of its games, not by playing Go well but by tricking KataGo into serious blunders. A follow-up study (2025) tested three defences, including retraining KataGo on the attack. Some stopped the old attacks. None withstood a newly trained attacker. AI systems built on language show the same pattern. A <i>jailbreak</i> is a message written to make a <span class="term">large language model</span> break its own safety rules. In a study presented in 2026, researchers from Anthropic, Google DeepMind, OpenAI, universities and other groups took 12 published defences against jailbreaks and against prompt injections (text hidden in a web page or email that hijacks an AI assistant), most of which had reported that almost no attacks got through, and built attacks aimed at each one. For most of the 12, more than 90% of those attacks succeeded. A cousin of the Crab's last idea, a player that looks at each record first, is also in use: Anthropic puts a second AI in front of its chatbot to screen what goes in and out. In a one-week public test in February 2025, testers tried to get eight forbidden questions answered, and Anthropic judged that one participant had managed all eight with a single trick. For a newer version (January 2026) the company reports one serious weakness found in testing but no such trick yet, and it says itself that no AI system on the market has perfectly robust defences.</p>
       <p class="mv-so"><b>Why it matters:</b> the Tortoise's pattern holds in practice: defend against one record, and a new one is made for the new machine. But this is experience, not proof. Gödel proved that no strong formal system can be Perfect; nobody has proved that a well-defended AI is impossible.</p>
     </div>
 
@@ -313,17 +317,17 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
 
     <div class="mv-card">
       <div class="mv-k">AI · consistency</div>
-      <h4>Each answer sensible, the set impossible</h4>
+      <h4>Each choice sensible, the set impossible to rank</h4>
       <p class="mv-then"><b>In the book:</b> TbZ, ZbE and EbT can each be true alone; only together are they impossible. Inconsistency can hide in the combination (<a class="xref" href="#s-worlds">section 7</a>).</p>
-      <p><b>Now:</b> researchers test language models for this kind of circle. A 2026 study offered 20 openly available models pairs of bets (for example, a small prize that is likely against a bigger one that is less likely) and asked which they preferred. A circle here means preferring bet A to B, B to C, and then C to A. The authors report substantial and systematic circles in many models. In the published, peer-reviewed paper, all but one of the 20 models produced at least one circle: 330 circles in the 6,000 triples checked. About two thirds of them, 222, were of a kind that people are known to produce in the same experiments. One caveat: the best-known commercial chatbots were left out, because the companies keep updating them, so results can't be repeated, and may adjust their answers in ways they don't disclose.</p>
-      <p class="mv-so"><b>Why it matters:</b> checking answers one at a time can't find this fault, in a formal system or in an AI. Being <span class="term">consistent</span> is a property of the whole set.</p>
+      <p><b>Now:</b> researchers test language models for this kind of circle. A 2026 study offered 20 openly available models pairs of bets (for example, a small prize that is likely against a bigger one that is less likely) and asked which they preferred. A circle here means preferring bet A to B, B to C, and then C to A. This kind of circle is a fault, as "was invented by" was and "beats at chess" was not: whichever bet you hold, there is another you would rather have, so no bet is best. All but one of the 20 models produced at least one circle: 330 circles in the 6,000 sets of three bets checked. About two thirds of them, 222, were of a kind that people are known to produce in the same experiments. One caveat: the best-known commercial chatbots were left out, because the companies keep updating them, so results can't be repeated, and may adjust their answers in ways they don't disclose.</p>
+      <p class="mv-so"><b>Why it matters:</b> checking answers one at a time can't find this fault, in a formal system or in an AI. Being consistent is a property of the whole set.</p>
     </div>
 
     <div class="mv-card">
       <div class="mv-k">Mathematics · AI</div>
       <h4>AI aimed at the proof checker, and it "proved" False</h4>
-      <p class="mv-then"><b>In the book:</b> consistency is the least a system needs. And each of the Tortoise's records is made for one machine (<a class="xref" href="#s-records">section 2</a>).</p>
-      <p><b>Now:</b> Lean is a <span class="term">proof assistant</span>, a program that checks every step of a proof by machine. Mathematicians, and the AI provers that write proofs in Lean, trust its small core, the part that does the checking. Between 30 July and 20 August 2026, a researcher at OpenAI set the company's internal AI models to hunt for inputs that would make this core accept a proof of <code>False</code>, a statement that is false by definition. A system that proves it can prove anything. The models found six routes: four through faults in the checking code, and two through the software underneath it. All needed deliberately built inputs, not ordinary proofs, and all six have been fixed. Later releases closed further possible routes of the same kind in the software underneath. For the faults in one much-debated part of the checker, Lean's developers say they were programming mistakes, not gaps in the theory behind it. One more detail matches the dialogue. The fake proofs for five of the six faults were rejected by a separately written checker. The sixth fooled that checker too, and was caught only by a third, newer check. Since version 4.35 (October 2026), Lean ships with several independently written checkers, and one command re-checks a proof with all of them.</p>
+      <p class="mv-then"><b>In the book:</b> consistency is the least a system needs (<a class="xref" href="#s-complete">section 8</a>). And each of the Tortoise's records is made for one machine (<a class="xref" href="#s-records">section 2</a>).</p>
+      <p><b>Now:</b> Lean is a <span class="term">proof assistant</span>, a program that checks every step of a proof by machine. Mathematicians, and the AI provers that write proofs in Lean, trust its small core, the part that does the checking. Between 30 July and 20 August 2026, a researcher at OpenAI set the company's internal AI models to hunt for inputs that would make this core accept a proof of <code>False</code>, a statement that is false by definition. A system that proves it can prove anything, because anything at all follows from a false starting point. The models found six routes: four through faults in the checking code, and two through the software underneath it. All needed deliberately built inputs, not ordinary proofs, and all six have been fixed, though later releases closed more possible routes of the same kind. For the faults in one part of the checker, Lean's developers say they were programming mistakes, not gaps in the theory behind it. One more detail matches the dialogue. The fake proofs for five of the six faults were rejected by a separately written checker. The sixth fooled that checker too, and was caught only by a third, newer check. Since October 2026, Lean ships with several independently written checkers, and one command re-checks a proof with all of them.</p>
       <p class="mv-so"><b>Why it matters:</b> this is the record-player game played against a formal system's own referee. And the defence follows the dialogue's logic: a record made for Record Player 1 usually does nothing to Record Player 2. Usually: one of the six broke both.</p>
     </div>
 
@@ -331,7 +335,7 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
       <div class="mv-k">Physics</div>
       <h4>Which geometry is space? Still being measured</h4>
       <p class="mv-then"><b>In the book:</b> several geometries are consistent, so which one fits real space is a question for measurement, not proof (<a class="xref" href="#s-terms">section 6</a>).</p>
-      <p><b>Now:</b> cosmologists measure it. They sum up the answer in one number, called the <i>curvature parameter</i>: zero means flat, as on paper (Euclid's geometry); below zero means closed, like the sphere; above zero means open, like the saddle. (Its sign runs opposite to the everyday sense of "curvature".) The triangles they check span the visible universe. Their far sides are patterns of known size, in the oldest light in the sky and in the spacing of galaxies. The Planck satellite team's result (published 2020), joined with galaxy surveys, was 0.001, give or take 0.002, which fits flat space. In 2025 the DESI project, using more than 14 million galaxies and quasars (very bright, very distant galaxy cores), reported no significant preference for curved space. One preprint from September 2026, not yet reviewed, uses only exploding stars and galaxy spacing, not the oldest light, and gets between 0.22 and 0.33, give or take about 0.1, depending on which set of exploding stars is used. Its authors call that a mild lean toward the saddle, about two error bars from flat, and note that one variant of the analysis shifts a result below zero. The question is not closed, and all of this covers only the part of the universe we can see.</p>
+      <p><b>Now:</b> cosmologists measure it. They sum up the answer in one number, called the <i>curvature parameter</i>: zero means flat, as on paper (Euclid's geometry); below zero means closed, like the sphere; above zero means open, like the saddle. On flat paper the three angles of a triangle add up to 180 degrees; on a sphere they add up to more, and on a saddle to less. So measuring a big enough triangle tells you which world you are in. The triangles cosmologists check span the visible universe. Their far sides are patterns of known size, in the oldest light in the sky and in the spacing of galaxies. The Planck satellite team's result (published 2020), joined with galaxy surveys, was 0.001, give or take 0.002, which fits a space that is flat on the largest scale. In 2025 the DESI project, using more than 14 million galaxies and quasars (very bright, very distant galaxy cores), reported no significant preference for curved space. One preprint (a paper posted before other scientists have reviewed it) from September 2026 uses only exploding stars and galaxy spacing, not the oldest light, and gets between 0.22 and 0.33, give or take about 0.1, depending on which set of exploding stars is used. Its authors call that a mild lean toward the saddle, about twice its give-or-take away from flat, and note that one version of their analysis leans the other way. The question is not closed, and all of this covers only the part of the universe we can see.</p>
       <p class="mv-so"><b>Why it matters:</b> the fifth postulate became something you measure with telescopes. Euclid's answer still fits the best data, but only as a measurement that a better one could overturn.</p>
     </div>
   </div>
@@ -389,22 +393,23 @@ function bachVoices(flip){
   return v;
 }
 let bachShown=false;
-function drawBach(){
-  drawRoll(bachCv,bachVoices(bachShown));
+const _drawRoll=drawRoll;
+drawRoll=function(cv,voices,beat){_drawRoll(cv,voices,beat); if(cv===bachCv)bachLetters();};
+function bachLetters(){
   const x=bachCv.getContext('2d'), names=['B','A','C','H'];
-  // letters above the four notes (German names)
   const all=bachVoices(bachShown).flatMap(v=>v.ev), lo=Math.min(...all.map(e=>e.p))-2, hi=Math.max(...all.map(e=>e.p))+2, end=Math.max(...all.map(e=>e.s+e.d));
   const W=bachCv._w,H=bachCv._h,pad=14;
   x.font='600 13px Inter';x.fillStyle=BACH;
   BACH_N.forEach((p,i)=>{x.fillText(names[i],pad+(W-2*pad)*(i*2+0.15)/end,H-pad-(H-2*pad)*(p-lo)/(hi-lo)-9);});
 }
+function drawBach(){drawRoll(bachCv,bachVoices(bachShown));}
 playToggle($('bachPlay'),()=>{bachShown=false;playVoices(bachCv,bachVoices(false),0.42);});
 playToggle($('bachFlip'),()=>{bachShown=true;playVoices(bachCv,bachVoices(true),0.42);
   $('bachNote').innerHTML=(bachSame&&bachShift===0)?'Red: B-A-C-H. Gold: the same tune turned upside down (around its own middle) and played backwards. It lands on exactly the same four notes in the same order. The Tortoise is right.':'Red: B-A-C-H. Gold: the tune turned upside down and played backwards. It is not the same tune.';});
 (function(){
   const words=[...document.querySelectorAll('#acro span i')].map(i=>i.textContent);
   $('acroOut').textContent=words.slice().reverse().join(' ');
-  const tog=()=>{const on=$('acro').classList.toggle('show');$('acroBtn').textContent=on?'Hide it again':'Show what the sentence hides';};
+  const tog=()=>{const on=$('acro').classList.toggle('show');$('acroBtn').textContent=on?'Hide it again':'Show what the sentence hides';$('acroWhy').style.visibility=on?'visible':'hidden';};
   $('acro').onclick=tog; $('acroBtn').onclick=tog; $('acro').style.cursor='pointer';
 })();
 
@@ -549,8 +554,8 @@ function pqGrid(rootId,opts){
     segButtons(q('ax'),[{v:false,label:'Original pattern only'},{v:true,label:'Add the extra pattern'}],()=>st.extra,v=>{st.extra=v;render();});
     segButtons(q('rd'),reads.map(k=>({v:k,label:'“'+READS[k].label+'”'})),()=>st.read,v=>{st.read=v;render();});
     const th=pqTheorems(st.extra), R=READS[st.read];
-    let h='<tr><th></th>'+cols.map(z=>`<th>${z}</th>`).join('')+'</tr>';
-    rows.forEach(([x,y])=>{h+=`<tr><th class="rh">${x}<span style="color:var(--godel)"> p </span>${y}<span style="color:var(--bach)"> q</span></th>`+cols.map(z=>{
+    let h='<tr><th></th>'+cols.map(z=>`<th class="ch">${hy(z)}</th>`).join('')+'</tr>';
+    rows.forEach(([x,y])=>{h+=`<tr><th class="rh">${hy(x)}<span style="color:var(--godel)">p</span>${hy(y)}<span style="color:var(--bach)">q</span></th>`+cols.map(z=>{
       const t=th.has(x+','+y+','+z), tr=R.test(x,y,z), cls=t?(tr?'tt':'tf'):(tr&&opts.both?'nt':'');
       return `<td class="${cls}${st.sel===x+','+y+','+z?' sel':''}" data-k="${x},${y},${z}">${z}</td>`;}).join('')+'</tr>';});
     q('grid').innerHTML=h;
@@ -663,13 +668,13 @@ function geoDraw(){
     $('gCount').innerHTML=`Of these 30 lines through P, evenly spaced, <b>${miss} never ${miss===1?'meets':'meet'} L</b>${miss?' (gold)':''}. `+
       (w==='flat'?'Any other tilt, however slight, meets L somewhere. So exactly <b>one</b> line through P never meets L, as Euclid’s fifth postulate says.'
       :w==='sphere'?'Every line through P crosses the equator. There are <b>no</b> lines through P that never meet L.'
-      :`Every line tilted less than ${diskEdge.toFixed(1)}° from level misses L, on either side: a fan ${(2*diskEdge).toFixed(1)}° wide in all. <b>Infinitely many</b> lines through P never meet L.`);
+      :`Every line inside that gold fan misses L, not just the ones drawn. <b>Infinitely many</b> lines through P never meet L.`);
   } else $('gCount').innerHTML='';
   $('gFan').classList.toggle('on',geo.fan);
 }
 function geoUI(){
   segButtons($('gWorlds'),Object.keys(WORLDS).map(k=>({v:k,label:WORLDS[k].label})),()=>geo.world,v=>{geo.world=v;geoUI();});
-  $('gCap').textContent=WORLDS[geo.world].cap; geoDraw();
+  $('gCap').textContent=WORLDS[geo.world].cap; $('gSphNote').style.display=geo.world==='sphere'?'':'none'; geoDraw();
 }
 $('gAng').addEventListener('input',geoDraw);
 $('gFan').onclick=()=>{geo.fan=!geo.fan;geoDraw();};
@@ -688,7 +693,7 @@ function s6Draw(){
   $('sSvg').innerHTML=s;
   $('sOut').innerHTML=s6pair
     ?'<b>One point, with many lines through it.</b> That is what a point should have. Now pick any two different points (two different pairs of spots) and exactly one great circle passes through both, as the first postulate asks.'
-    :'<b>Every line through A also passes through A′</b>, the spot exactly opposite. So here are two spots with many lines through both. Euclid’s first postulate is used to mean that two points fix <i>one</i> line. If spots are points, the sphere breaks it.';
+    :'<b>Every line through A also passes through A′</b>, the spot exactly opposite. So here are two spots with many lines through both. Euclid’s first postulate is taken to promise exactly <i>one</i> line through two points. If spots are points, the sphere breaks it.';
   $('sPair').classList.toggle('on',s6pair);
 }
 $('sAng').addEventListener('input',s6Draw);
