@@ -410,7 +410,65 @@
 <!-- 12 -->
 <section id="s-modern">
   <div class="sec-head"><div class="num">12</div><h2>Modern view: what we know now</h2></div>
-  
+  <p class="mv-asof">As of November 2026</p>
+  <p>Hofstadter was careful to say that these rules are not the rules of human thought. Since 1979 that remark has become something researchers can test, in brains and in AI systems. And the chapter's two practical questions, how to decide a string and how far to trust the system, are now daily work for people who prove theorems by computer.</p>
+
+  <div class="mv">
+    <div class="mv-card">
+      <div class="mv-k">AI · looking inside</div>
+      <h4>Where a language model keeps its "or" and "if… then"</h4>
+      <p class="mv-then"><b>In the book:</b> the rules for ∧, ∨ and ⊃ are written out, so anyone can check every step (<a href="#s-rules">sections 3</a> and <a href="#s-fantasy">4</a>).</p>
+      <p><b>Now:</b> a <span class="term">large language model</span> (the kind of AI system behind chatbots) has no written rules, only a huge pile of arithmetic tuned on text. A study published at the NeurIPS 2025 conference gave three openly available models a few worked examples and then tiny problems such as: A or B implies C; D implies E; A is true, B is false, D is true; what is the truth value of C? The researchers swapped the activity of single parts with their activity on a slightly different problem, to see which ones matter. All three models showed a similar, though not identical, division of labour among four small groups of parts (the largest model was only partly analysed): one finds the rule being asked about, one carries it forward, one handles the facts, one decides. The caveats: each problem needed only one rule to be applied, the models wrote a correct proof only 70% to 86% of the time, and the authors say longer chains still need checking.</p>
+      <p class="mv-so"><b>Why it matters:</b> nobody gave these models a detachment rule. Something that does its job grew during training, and can be located. But it is a habit that sometimes fails, where the chapter's rule cannot.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">AI · reasoning</div>
+      <h4>Models, like people, mix "valid" with "sounds true"</h4>
+      <p class="mv-then"><b>In the book:</b> a theorem holds whatever sentences fill the atoms, koan lines included. The rules look only at shape (<a href="#s-meaning">section 5</a>).</p>
+      <p><b>Now:</b> people find this hard. They more readily accept an argument whose conclusion sounds true, whatever its form. Psychologists call this a <b>content effect</b>, and a 2024 study from Google DeepMind found it in language models too. A 2026 paper looked for the cause inside the models. It built 1,280 arguments from "all", "some" and "no", half ending in something true such as "some dogs are canines", half in something false such as "some dogs are cats". On a held-back test set one model, answering at once, got every valid argument with a true conclusion right, but only 61% of the valid ones with a false conclusion. Told to reason step by step first, it reached 93%. Inside, the model's signal for "valid" and its signal for "believable" pointed in broadly similar directions, and pushing on one moved the other. Pulling them apart cut that model's bias to about a fifth. The authors studied mid-sized open models and do not claim to know why the two signals merge.</p>
+      <p class="mv-so"><b>Why it matters:</b> the system's blindness to content, which makes its theorems sound so empty, is a strength that neither people nor these models have by default.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Neuroscience</div>
+      <h4>The brain does logic outside its language areas</h4>
+      <p class="mv-then"><b>In the book:</b> words cannot enforce their own logic (<a href="#s-dialogue">section 1</a>), and the system's rules are not offered as the rules of human thought (<a href="#s-levels">section 9</a>).</p>
+      <p><b>Now:</b> if we reasoned in words, the brain areas that handle sentences should work harder when the logic gets harder. A study in the journal <i>PNAS</i> in July 2026 tested this. Twenty-nine adults were scanned, some of them while judging "if… then" arguments. Easy ones used detachment ("if the block is large, then it is not yellow; the block is large; so…"). Hard ones ran backwards, from "the block is yellow" to "it is not large". The language areas were busy reading, but no busier for the hard arguments. Other regions were, separate both from the language areas and from the areas that serve demanding tasks in general. The team also tested two men with badly damaged language areas, who scored at or near chance on grammar tests. On puzzles about number lists and shape patterns they did as well as healthy adults. The authors' caveats: two patients is few; the patients could not be given the "if… then" task, which needs reading, so wordless versions are still to be tried; and whether children need language to learn logic is open.</p>
+      <p class="mv-so"><b>Why it matters:</b> the Tortoise can wriggle with words because the logic was never in the words. In our heads, too, the sentence and the inference seem to run on different machinery.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics · computing</div>
+      <h4>The truth table's question, asked of real mathematics</h4>
+      <p class="mv-then"><b>In the book:</b> a table of all possible worlds decides any string, but the table doubles with every new atom (<a href="#s-worlds">section 7</a>).</p>
+      <p><b>Now:</b> programs called <b>SAT solvers</b> answer the table's question, "is there a world where this string comes out true?", without writing out the table. Checking one proposed world is quick. Whether finding one can always be quick is exactly the famous open problem called P versus NP. Yet solvers settle old questions in mathematics, once someone rewrites the question using only "and", "or" and "not". In 1930 Ott-Heinrich Keller conjectured that when equal cubes fill space with no gaps, two of them must share a whole face. That is false in eight or more dimensions. The last open case, seven, was settled in 2020 with a SAT solver: there it holds. In 2026 a team finished checking the whole Keller argument by machine, including the translation into and/or/not: most of it in Lean, a <span class="term">proof assistant</span> (a program that checks every step of a proof), and part with a separate verified checker. An April 2026 paper, not yet peer-reviewed, used a solver plus code written by a language model to answer a 1982 question about networks.</p>
+      <p class="mv-so"><b>Why it matters:</b> the chapter's logic looks too simple to say anything. A surprising amount of mathematics can be said in it, and then decided by machine.</p>
+    </div>
+
+    <div class="mv-card">
+      <div class="mv-k">Mathematics · trust</div>
+      <h4>A proof that the proof checker is sound</h4>
+      <p class="mv-then"><b>In the book:</b> any proof that the rules are sound leans on the reasoning it is meant to guarantee. Each is another box around the egg (<a href="#s-consistent">section 8</a>).</p>
+      <p><b>Now:</b> <a href="../05-ch04-consistency-completeness-and-geometry/#s-modern">Page 05</a> told how, in 2026, AI models found programming mistakes in the core of Lean, the part that accepts or rejects each step. In October 2026 Lean's chief architect announced an additional core, shipped alongside the official one, written in Lean itself and proved consistent: whatever it accepts fits a known mathematical picture of Lean's logic. The AI model Claude wrote and proved it, under "heavy supervision" by a Lean developer. The announcement states the limits. The proof was checked by Lean's official core, the one that had the mistakes, since fixed. It assumes that a set theory somewhat stronger than the usual foundation of mathematics is itself consistent. And the added core is "not bulletproof", because the software that turns it into a running program may have faults. So it was also translated into another programming language, and users are urged to run several cores and report any disagreement. This is the developers' own account, weeks old.</p>
+      <p class="mv-so"><b>Why it matters:</b> this is Prudence's programme carried out with great care, and it ends where Imprudence said it would: with one more box, and something outside it taken on trust.</p>
+    </div>
+  </div>
+
+  <details class="mv-src">
+    <summary>Sources</summary>
+    <ol>
+      <li><a href="https://proceedings.neurips.cc/paper_files/paper/2025/hash/2c4477572f06102b2ae3bd2b2ffcebf9-Abstract-Conference.html" target="_blank" rel="noopener">Hong et al., A Implies B: Circuit Analysis in LLMs for Propositional Logical Reasoning, NeurIPS 2025</a> (<a href="https://arxiv.org/abs/2411.04105" target="_blank" rel="noopener">full text</a>)</li>
+      <li><a href="https://academic.oup.com/pnasnexus/article/3/7/pgae233/7712372" target="_blank" rel="noopener">Lampinen, Dasgupta et al., Language models, like humans, show content effects on reasoning tasks, PNAS Nexus, July 2024</a></li>
+      <li><a href="https://aclanthology.org/2026.findings-acl.454/" target="_blank" rel="noopener">Bertolazzi, Pezzelle and Bernardi, How Language Models Conflate Logical Validity with Plausibility, Findings of ACL 2026</a></li>
+      <li><a href="https://doi.org/10.1073/pnas.2520095123" target="_blank" rel="noopener">Kean et al., Evidence from formal logical reasoning reveals that the language of thought is not natural language, PNAS, July 2026</a></li>
+      <li><a href="https://www.claymath.org/millennium/p-vs-np/" target="_blank" rel="noopener">Clay Mathematics Institute: P vs NP (official problem page)</a></li>
+      <li><a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2026.26" target="_blank" rel="noopener">Gallicchio, Codel, Avigad and Heule, An End-To-End Verification of Keller's Conjecture, ITP 2026</a></li>
+      <li><a href="https://arxiv.org/abs/2604.21187" target="_blank" rel="noopener">Przybocki, Mackey, Heule and Subercaseaux, Doubly Saturated Ramsey Graphs, preprint, April 2026</a></li>
+      <li><a href="https://leodemoura.github.io/blog/2026-10-15-lean-now-ships-with-verified-kernels/" target="_blank" rel="noopener">Leonardo de Moura: Lean Now Ships with Verified Kernels (15 October 2026)</a></li>
+    </ol>
+  </details>
+
 </section>
 
 </main>
