@@ -460,7 +460,7 @@ const jkCv=$('jkCanvas');
 function jkVoices(){
   const v=PLAYERS.filter(p=>p.v!==player).map(p=>({ev:toEvents(p.notes.map(n=>[n,2])),color:'var(--faint)',gain:0.0001}));
   const p=PLAYERS[player];
-  v.push({ev:toEvents(p.notes.map(n=>[n,2])),color:css('--bach'),gain:.22});
+  v.push({ev:toEvents(p.notes.map(n=>[n,2])),color:'var(--bach)',gain:.22});
   return v;
 }
 function jkCells(a){return a.map(x=>'<i>'+x+'</i>').join('');}
@@ -493,7 +493,7 @@ playToggle($('jkPlay'),()=>playVoices(jkCv,jkVoices(),0.36));
 const augCv=$('augCanvas');
 function augVoices(){
   const n=PLAYERS[0].notes;
-  return [{ev:toEvents(n.map(x=>[x,1])),color:css('--bach'),gain:.22},{ev:toEvents(n.map(x=>[x,2]),5),color:css('--gold'),gain:.22}];
+  return [{ev:toEvents(n.map(x=>[x,1])),color:'var(--bach)',gain:.22},{ev:toEvents(n.map(x=>[x,2]),5),color:'var(--gold)',gain:.22}];
 }
 drawRoll(augCv,augVoices());
 playToggle($('jkTime'),()=>playVoices(augCv,augVoices(),0.36));
@@ -511,9 +511,9 @@ const SONGS=[
 const mcCv=$('mcCanvas');
 function mcVoices(){
   const anchor={ev:[{p:59,s:0,d:.01},{p:73,s:0,d:.01}],color:'rgba(0,0,0,0)',gain:0.0001}; // keeps the picture's scale fixed
-  if(mach==='jukebox'){const S=SONGS[song];return [anchor,{ev:toEvents(S.n.map((x,i)=>[x,S.long&&i===S.n.length-1?2:1])),color:css('--godel'),gain:.22}];}
+  if(mach==='jukebox'){const S=SONGS[song];return [anchor,{ev:toEvents(S.n.map((x,i)=>[x,S.long&&i===S.n.length-1?2:1])),color:'var(--godel)',gain:.22}];}
   const ev=toEvents(groove.map(h=>[SCALE[h],1]));
-  return [anchor,{ev:ev.filter((e,i)=>i!==lastStep),color:css('--bach'),gain:.22},{ev:ev.filter((e,i)=>i===lastStep),color:css('--gold'),gain:.22}];
+  return [anchor,{ev:ev.filter((e,i)=>i!==lastStep),color:'var(--bach)',gain:.22},{ev:ev.filter((e,i)=>i===lastStep),color:'var(--gold)',gain:.22}];
 }
 function drawMc(){
   segButtons($('mcSeg'),[{v:'player',label:'Record player'},{v:'jukebox',label:'Jukebox'}],()=>mach,v=>{stopSound();mach=v;drawMc();});

@@ -432,7 +432,7 @@
 <script>
 /* Section 1: theme */
 const themeCv=document.getElementById('themeCanvas');
-const themeVoices=[{ev:toEvents(ROYAL),color:getCss('--bach'),gain:.25}];
+const themeVoices=[{ev:toEvents(ROYAL),color:'var(--bach)',gain:.25}];
 function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
 playToggle(document.getElementById('playTheme'),()=>playVoices(themeCv,themeVoices,0.36));
 document.getElementById('acro').onclick=function(){this.classList.toggle('show');};
@@ -452,7 +452,7 @@ function buildCanon(){
   if(st.aug) s2=s2.map(([p,d])=>[p,d*2]);
   s2=s2.map(([p,d])=>[p==null?null:p+tr,d]);
   const v2=toEvents(s2,delay);
-  const arr=[{ev:v1,color:getCss('--bach'),gain:.18},{ev:v2,color:getCss('--godel'),gain:.18,timbre:'soft'}];
+  const arr=[{ev:v1,color:'var(--bach)',gain:.18},{ev:v2,color:'var(--godel)',gain:.18,timbre:'soft'}];
   arr.clashes=clashInfo(v1,v2); return arr;
 }
 function clashInfo(v1,v2){
@@ -665,7 +665,7 @@ function shepardNote(out,pc,t,dur,gain=0.11){
 }
 function stopShepard(){if(shep){clearInterval(shep.timer);shep=null;} drawShep(null);}
 function drawShep(pos){
-  const cv=$('shepCv'), dpr=window.devicePixelRatio||1, W=cv.clientWidth, H=+cv.getAttribute('height');
+  const cv=$('shepCv'), dpr=window.devicePixelRatio||1, W=cv.clientWidth, H=+(cv.dataset.h||=cv.getAttribute('height'));
   cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+'px';
   const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,W,H);
   const N=12, padL=68, padR=66, padT=8, padB=30, pw=W-padL-padR, ph=H-padT-padB;

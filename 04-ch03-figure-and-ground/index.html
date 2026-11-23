@@ -414,7 +414,7 @@ const vCv=$('vCanvas');
 vCv.getContext('2d').fillText=()=>{}; // this roll needs no note-letter labels
 // one sound for every note, so that only the hopping separates the two strands
 function vVoices(mode){
-  const hi={color:css('--bach'),gain:.18,ev:toEvents(lineHi)}, lo={color:css('--godel'),gain:.18,ev:toEvents(lineLo)};
+  const hi={color:'var(--bach)',gain:.18,ev:toEvents(lineHi)}, lo={color:'var(--godel)',gain:.18,ev:toEvents(lineLo)};
   const mute=v=>({...v,gain:.0001,color:'var(--faint)'});
   return mode==='hi'?[mute(lo),hi]:mode==='lo'?[mute(hi),lo]:[hi,lo];
 }

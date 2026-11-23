@@ -607,7 +607,7 @@ const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const RUN=[[62,.5],[63,.25],[64,.25],[65,.25],[66,.25],[67,.25],[68,.25],[69,.5],[70,.25],[71,.25],[72,.25],[73,.25],[74,1],
   [73,.25],[72,.25],[71,.25],[70,.25],[69,.25],[68,.25],[67,.25],[66,.25],[65,.5],[64,.25],[63,.25],[62,1.5]];
 const runCv=$('runCanvas');
-function runVoices(){return [{ev:toEvents(RUN),color:css('--bach'),gain:.17}];}
+function runVoices(){return [{ev:toEvents(RUN),color:'var(--bach)',gain:.17}];}
 drawRoll(runCv,runVoices());
 addEventListener('resize',()=>drawRoll(runCv,runVoices()));
 playToggle($('runPlay'),()=>playVoices(runCv,runVoices(),0.34));

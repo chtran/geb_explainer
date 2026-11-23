@@ -367,9 +367,9 @@ const bachShift=BACH_FLIP[0]-BACH_N[0];
 const bachSame=BACH_FLIP.every((p,i)=>p-BACH_N[i]===bachShift);
 const bachCv=$('bachCanvas');
 function bachVoices(flip){
-  const v=[{ev:toEvents(BACH_N.map(p=>[p,2])),color:css('--bach'),gain:.22}];
-  if(flip)v.push({ev:toEvents(BACH_FLIP.map(p=>[p,2]),10),color:css('--gold'),gain:.22});
-  else v.push({ev:[],color:css('--gold')});
+  const v=[{ev:toEvents(BACH_N.map(p=>[p,2])),color:'var(--bach)',gain:.22}];
+  if(flip)v.push({ev:toEvents(BACH_FLIP.map(p=>[p,2]),10),color:'var(--gold)',gain:.22});
+  else v.push({ev:[],color:'var(--gold)'});
   return v;
 }
 let bachShown=false;

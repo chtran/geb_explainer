@@ -337,7 +337,7 @@ const INV=[
   [[null,8]].concat(idea(48),[[43,2],[48,2]])
 ];
 const invCv=$('invCanvas');
-function invVoices(){return [{ev:toEvents(INV[0]),color:css('--bach'),gain:.16},{ev:toEvents(INV[1]),color:css('--escher'),gain:.16},{ev:toEvents(INV[2]),color:css('--godel'),gain:.2,timbre:'soft'}];}
+function invVoices(){return [{ev:toEvents(INV[0]),color:'var(--bach)',gain:.16},{ev:toEvents(INV[1]),color:'var(--escher)',gain:.16},{ev:toEvents(INV[2]),color:'var(--godel)',gain:.2,timbre:'soft'}];}
 playToggle($('invPlay'),()=>playVoices(invCv,invVoices(),0.32));
 
 /* ===== Section 2: Zeno's race ===== */

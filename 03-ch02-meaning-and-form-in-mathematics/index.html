@@ -359,7 +359,7 @@ const INV=[
   [[null,2.25]].concat(s16([48,50,52,53,50,52,48]),e8([55,43]),[[null,1.25]],s16([55,57,59,60,57,59,55]),[[60,1]])
 ];
 const invCv=$('invCanvas');
-function invVoices(){return [{ev:toEvents(INV[0]),color:css('--bach'),gain:.17},{ev:toEvents(INV[1]),color:css('--godel'),gain:.2}];}
+function invVoices(){return [{ev:toEvents(INV[0]),color:'var(--bach)',gain:.17},{ev:toEvents(INV[1]),color:'var(--godel)',gain:.2}];}
 playToggle($('invPlay'),()=>playVoices(invCv,invVoices(),0.62));
 
 /* ===== Section 2: the notebook ===== */
@@ -478,7 +478,7 @@ ipRender();
 
 /* ===== Section 7: dots ===== */
 (function(){
-  const ink=css('--ink'), g=css('--godel'), b=css('--bach'); let h='';
+  const ink='var(--ink)', g='var(--godel)', b='var(--bach)'; let h='';
   const dots=(ox)=>{let s='';for(let r=0;r<3;r++)for(let c=0;c<5;c++)s+=`<circle cx="${ox+30+c*44}" cy="${30+r*40}" r="7" fill="${ink}"/>`;return s;};
   h+=dots(20); for(let r=0;r<3;r++)h+=`<rect x="34" y="${15+r*40}" width="208" height="30" rx="15" fill="none" stroke="${g}" stroke-width="2"/>`;
   h+=dots(320); for(let c=0;c<5;c++)h+=`<rect x="${335+c*44}" y="14" width="30" height="112" rx="15" fill="none" stroke="${b}" stroke-width="2"/>`;
