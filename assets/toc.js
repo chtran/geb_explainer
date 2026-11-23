@@ -26,14 +26,14 @@ window.GEB_TOC = [
   "title": "Chapter II: Meaning and Form in Mathematics",
   "dialogue": "Two-Part Invention",
   "chapter": "Chapter II: Meaning and Form in Mathematics",
-  "done": false
+  "done": true
  },
  {
   "id": "04-ch03-figure-and-ground",
   "title": "Chapter III: Figure and Ground",
   "dialogue": "Sonata for Unaccompanied Achilles",
   "chapter": "Chapter III: Figure and Ground",
-  "done": false
+  "done": true
  },
  {
   "id": "05-ch04-consistency-completeness-and-geometry",
