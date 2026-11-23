@@ -346,6 +346,7 @@
     <div class="row"><button class="ghost small on" data-lv="general">In general</button><button class="ghost small" data-lv="godel">In Gödel's proof</button><button class="ghost small" data-lv="brain">In a brain</button></div>
     <svg id="levels" viewBox="0 0 520 330" width="100%" style="max-width:560px;display:block;margin:6px auto 0"></svg>
     <p class="small-note">Read from the bottom up: rule-following parts give rise to patterns, the patterns carry meaning, and the meaning turns back to describe the system itself. The gold arrow is the loop.</p>
+    <div class="intuit" id="lvLoop"></div>
   </div>
 </section>
 
@@ -834,6 +835,11 @@ const LEVELS={
   godel:[['Symbols & rules','0, S, +, = rearranged by the rules of arithmetic'],['Patterns','Gödel numbers that mirror formulas and proofs'],['Meaning','a formula about which formulas have proofs'],['Self','G: "I have no proof"']],
   brain:[['Symbols & rules','neurons firing, following chemistry'],['Patterns','groups of neurons that track things in the world'],['Meaning','thoughts and ideas'],['Self','the idea of "I"']]
 };
+const LV_LOOP={
+  general:'<b>The loop, concretely</b>Take the sentence "This sentence has five words." Its parts are letters, which form words, which make a claim. And the claim is about this very sentence: the top level lands back on the parts at the bottom. (Count them: it\'s true.)',
+  godel:'<b>The loop, concretely</b>Here the gold arrow means <b>refers to</b>, and nothing more. G is a long string of symbols like 0, S, + and =. Read as arithmetic, it says "the formula with Gödel number <i>g</i> has no proof". And <i>g</i> is the Gödel number of G itself. So the claim at the top lands on the string at the bottom: the very symbols that make it up. Reading G this way changes nothing about it. The loop is in what G says, not in anything it does.',
+  brain:'<b>The loop, concretely</b>Here the gold arrow means <b>refers to and changes</b>. The idea of "I" describes you, the whole system. But it isn\'t separate from your neurons: it is itself a pattern of neurons firing, and when it\'s active it sets off other neurons, like any pattern does. Say you think "I promised myself I\'d quit sugar." That thought stops the neurons that would move your hand toward the cake. It can also go round and round: "I always panic in exams" sets off stress, the stress makes you do badly, and doing badly strengthens the belief. So the top box isn\'t really above the bottom one. "Self" is made of neurons, which is why it can act on them.'
+};
 const LV_COL=['var(--grid)','var(--godel-tint)','var(--escher-tint)','var(--bach-tint)'];
 function drawLevels(k){
   let s='<defs><marker id="ah3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--ink)"/></marker><marker id="ah4" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--gold)"/></marker></defs>';
@@ -842,6 +848,7 @@ function drawLevels(k){
     if(i<3)s+=`<path d="M220,${y} L220,${y-20}" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#ah3)"/>`;});
   s+=`<path d="M420,52 C500,60 500,280 422,290" fill="none" stroke="var(--gold)" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#ah4)"/><text x="488" y="175" font-family="Inter" font-size="12" fill="var(--gold)" text-anchor="middle" transform="rotate(90 488 175)">the Strange Loop</text>`;
   $('levels').innerHTML=s;
+  $('lvLoop').innerHTML=LV_LOOP[k];
   document.querySelectorAll('[data-lv]').forEach(b=>b.classList.toggle('on',b.dataset.lv===k));
 }
 document.querySelectorAll('[data-lv]').forEach(b=>b.onclick=()=>drawLevels(b.dataset.lv));
