@@ -163,9 +163,6 @@ footer{max-width:1040px;margin:0 auto;padding:30px 22px 60px;font:13px Inter,san
 .mv-card p{margin:0 0 10px}
 .mv-then{color:var(--ink2);font-size:16px}
 .mv-so{background:#f3f6fb;border-radius:8px;padding:8px 12px;margin-bottom:0!important}
-.mv-src{margin-top:14px;font:14px Inter,sans-serif;color:var(--ink2)}
-.mv-src summary{cursor:pointer;font-weight:600}
-.mv-src ol{margin:8px 0 0;padding-left:20px}
 /* Dialogue + Chapter pages: the divider that marks each half */
 .half{margin:64px 0 0;padding:18px 0 0;border-top:3px double var(--rule);text-align:center}
 .half .hk{font:600 11.5px Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
