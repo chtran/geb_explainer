@@ -76,6 +76,7 @@ Rules:
 
 ### 6. Copyright and sources
 - Never embed copyrighted art (Escher's prints are under copyright). Link to official sources (mcescher.com, museum pages) and draw original diagrams that convey the idea.
+- **Cite inline, never in a list.** Put each source's link on the words that make the claim ("a 2026 study found…", "MIT Technology Review named it…"), opening in a new tab (`target="_blank" rel="noopener"`). No "Sources", "References" or "Further reading" sections. A second copy of the same work (preprint, free copy) goes in a short parenthetical link right after. Keep links off `class="term"` words, so tapping a term only shows its definition.
 - Paraphrase the book. No long quotes. Bach's music is public domain, but recordings usually aren't: synthesize, or link.
 - Check historical and musical facts before stating them.
 
@@ -88,7 +89,7 @@ Rules:
 ### 8. Every page ends with "Modern view"
 The last section of every explainer is **Modern view: what we know now**, stamped with the month it was written ("As of November 2026"). It covers how today's understanding improves, confirms, challenges or applies the page's ideas (dialogue and chapter together).
 - **Focus:** AI first, especially large language models and mechanistic interpretability (how models work inside); then neuroscience, mathematics and anything else that genuinely bears on the page.
-- **Format:** 3–5 cards. Each has a small topic label, a title, **In the book:** (one line), **Now:** (what's known today, concrete examples and numbers), and **Why it matters:** (the link back to the page). Link each source directly on the words that cite it (`target="_blank" rel="noopener"`); no separate Sources list. A second copy of the same work (preprint, free copy) goes in a short parenthetical link right after.
+- **Format:** 3–5 cards. Each has a small topic label, a title, **In the book:** (one line), **Now:** (what's known today, concrete examples and numbers), and **Why it matters:** (the link back to the page). Sources are linked inline on the words they support, with no Sources list (section 6).
 - **Research it fresh every time.** This field changes monthly. Search for the latest work and verify each claim against a primary source (the paper, the lab's own write-up). Prefer peer-reviewed results.
 - **Be careful with hype.** Label disputed or unverified claims as such (2026's AI Navier–Stokes "solution" is the example: it went in as "still being debated"). Repeat researchers' own caveats (e.g. "worked about 20% of the time", "says nothing about consciousness").
 - Same taste as the rest: define new words (large language model, artificial neuron, feature…), concrete examples, no jargon, paraphrase sources, keep it concise.
