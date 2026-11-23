@@ -516,7 +516,7 @@ const SCENES=[
 ];
 let mapI=0;
 function drawMap(){
-  if(mapI>=SCENES.length-1)$('mapReveal').style.display='';
+  $('mapReveal').style.display=mapI>=SCENES.length-1?'':'none';
   const svg=$('mapSvg');svg.innerHTML='';
   const fs=FS(),W=560,x0=fs>1?190:150,x1=540,ys=[40,110,180,250];
   LEVELS.forEach((n,i)=>{
@@ -581,8 +581,8 @@ function lhVoices(cut){
 }
 let lhCutView=true, lhT0=0, lhRaf=0;
 function lhStrip(){
-  const end=lhCutView?LH_CUT:LH_END, segs=[[0,LH_TURN,'kc','Home key'],[LH_TURN,LH_CUT,'kg','New key']];
-  if(!lhCutView)segs.push([LH_CUT,LH_END,'kc','Home key']);
+  const end=lhCutView?LH_CUT:LH_END, segs=[[0,LH_TURN,'kc','Home key (C)'],[LH_TURN,LH_CUT,'kg','New key (G)']];
+  if(!lhCutView)segs.push([LH_CUT,LH_END,'kc','Home key (C)']);
   $('lhStrip').innerHTML=segs.map(([a,b,c,t])=>`<span class="${c}" style="flex:${b-a} 1 0">${t}</span>`).join('');
 }
 function lhMind(beat,done){
