@@ -72,5 +72,16 @@ window.GEB_GLOSSARY = {
   "passive meaning":   {def:"Meaning in a formal system: the rules alone decide what is a theorem, and the meaning has no say.", in:"03"},
   "ideal numbers":     {def:"Numbers as arithmetic treats them: counts of things that stay separate and never merge or split.", in:"03"},
   "prompt injection":  {def:"An attack on an AI system in which text hidden in the material it is given to work on gets treated as an instruction.", in:"03"},
-  "neural network":    {def:"What an AI model is made of: a web of simple connected units, each passing numbers on to the next.", in:"03"}
+  "neural network":    {def:"What an AI model is made of: a web of simple connected units, each passing numbers on to the next.", in:"03"},
+  "sonata":            {def:"A piece of music in several separate parts (movements) for one or two instruments.", in:"04"},
+  "unaccompanied":     {def:"Played by one instrument alone, with nothing else playing along.", in:"04"},
+  "figure":            {def:"The thing a picture shows; the part you are meant to look at.", in:"04"},
+  "ground":            {def:"Short for background: everything in a picture that is not the figure.", in:"04"},
+  "hyphen-string":     {def:"A row of one or more hyphens and nothing else, such as ---.", in:"04"},
+  "composite number":  {def:"A whole number made by multiplying two smaller numbers, each at least 2: 4, 6, 8, 9, 10, …", in:"04"},
+  "typographical operation": {def:"A step that only handles symbols as shapes: reading, writing, copying, erasing or comparing them, or keeping a list of theorems made.", in:"04"},
+  "cursively drawable":{def:"Hofstadter’s name for a figure you can draw directly, whatever its background turns out to be.", in:"04"},
+  "recursive":         {def:"In this chapter: a figure whose background is also a figure, or a set whose members and non-members can each be listed by a formal system.", in:"04"},
+  "recursively enumerable": {def:"Said of a set whose members some formal system can list one by one, missing none and adding no others.", in:"04"},
+  "border ownership":  {def:"A nerve cell's signal of which side of an edge the object is on.", in:"04"}
 };

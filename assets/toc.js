@@ -33,7 +33,7 @@ window.GEB_TOC = [
   "title": "Chapter III: Figure and Ground",
   "dialogue": "Sonata for Unaccompanied Achilles",
   "chapter": "Chapter III: Figure and Ground",
-  "done": false
+  "done": true
  },
  {
   "id": "05-ch04-consistency-completeness-and-geometry",
