@@ -144,5 +144,18 @@ window.GEB_GLOSSARY = {
   "stack":             {def:"The list of unfinished tasks, last set aside first resumed, that makes popping possible.", in:"06"},
   "transformer":       {def:"The kind of neural network behind today's chatbots; at each word it looks back over everything so far and picks out what matters.", in:"06"},
   "coding agent":      {def:"A large language model wrapped in ordinary program code that lets it read, write and run files to finish a programming job.", in:"06"},
-  "graphene":          {def:"Carbon in a sheet one atom thick, with the atoms in a honeycomb pattern.", in:"06"}
+  "graphene":          {def:"Carbon in a sheet one atom thick, with the atoms in a honeycomb pattern.", in:"06"},
+
+  /* 08 · Chapter VII: The Propositional Calculus */
+  "propositional calculus": {def:"Hofstadter’s formal system for reasoning with “and”, “or”, “not” and “if… then”.", in:"08"},
+  "atom":              {def:"In the Propositional Calculus: one of the simplest strings, P, Q or R, with or without primes. It can stand for any sentence.", in:"08"},
+  "formation rule":    {def:"A rule saying how well-formed strings are built from smaller well-formed strings.", in:"08"},
+  "fantasy rule":      {def:"Suppose a string x; if the rules then lead to y, the string &lt;x⊃y&gt; (“if x, then y”) is a theorem.", in:"08"},
+  "truth table":       {def:"A list of every way the atoms of a string can be true or false, showing whether the whole string is true in each case.", in:"08"},
+  "derived rule":      {def:"A shortcut that is not one of a system’s own rules, but is known, by reasoning about the system, to lead only to theorems.", in:"08"},
+  "metatheorem":       {def:"A proven result about a formal system and its theorems, reached by reasoning from outside the system.", in:"08"},
+  "semi-interpretation": {def:"A reading of a string in which the logic symbols are read as words (“and”, “or”, “not”, “if… then”) and the atoms are left as letters.", in:"08"},
+  "metalanguage":      {def:"The language used to talk about a formal system from outside it. For the systems in this book, English.", in:"08"},
+  "world":             {def:"In a truth table, one way of assigning true or false to each atom. A string with two atoms has four worlds.", in:"08"},
+  "metatheory":        {def:"The study of a formal system from outside it, in ordinary reasoning.", in:"08"}
 };
