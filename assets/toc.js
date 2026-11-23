@@ -54,7 +54,7 @@ window.GEB_TOC = [
   "title": "Chapter VI: The Location of Meaning",
   "dialogue": "Canon by Intervallic Augmentation",
   "chapter": "Chapter VI: The Location of Meaning",
-  "done": false
+  "done": true
  },
  {
   "id": "08-ch07-the-propositional-calculus",
