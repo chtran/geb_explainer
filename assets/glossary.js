@@ -106,11 +106,9 @@ window.GEB_GLOSSARY = {
   "resolution":        {def:"The moment tension in music lets go, most fully when the music arrives back on its home note.", in:"06"},
   "grammar":           {def:"The rules for which arrangements of words (or symbols) count as properly formed.", in:"06"},
   "recursive transition network": {def:"A map of pathways for building a phrase, in which a box may call a whole other network, or the network itself. RTN for short.", in:"06"},
-  "node":              {def:"One box or dot in a diagram of pathways or branches.", in:"06"},
   "procedure":         {def:"A named group of steps that can be called from elsewhere; when it finishes, you carry on where you left off.", in:"06"},
   "recursive definition": {def:"A definition that uses the thing being defined, but only in simpler versions, so that it is not circular.", in:"06"},
   "bottoms out":       {def:"Said of a recursion that reaches a case answered outright, with no further call to itself.", in:"06"},
-  "heterarchy":        {def:"A set of procedures that call one another with no single one on top.", in:"06"},
   "fibonacci number":  {def:"The sequence 1, 1, 2, 3, 5, 8, 13, …, in which each number is the sum of the two before it.", in:"06"},
   "lucas number":      {def:"The sequence 1, 3, 4, 7, 11, 18, …: Fibonacci's rule with a different starting pair.", in:"06"},
   "skeleton":          {def:"In this chapter: the plan saying where each copy of a graph sits inside the graph. The non-recursive half of its definition.", in:"06"}
