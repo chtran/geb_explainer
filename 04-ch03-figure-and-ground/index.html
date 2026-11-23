@@ -28,6 +28,8 @@ ol.deriv li.more{list-style:none;font:13px Inter,sans-serif}
 ol.deriv li.more button{padding:3px 10px;font-size:12.5px}
 @media (max-width:720px){ol.deriv li .why{display:block;margin-left:0}}
 .legend[hidden],.strip[hidden]{display:none}
+:root{--fg-dark:#2f6b4f;--fg-light:#f3ead6}
+@media (prefers-color-scheme:dark){:root{--fg-dark:#2a5a43;--fg-light:#d6cab0}}
 .fgsets svg{width:100%;height:auto;border:1px solid var(--rule);border-radius:10px;background:var(--field);display:block}
 .fgsets text{font:11px Inter,sans-serif;fill:var(--ink);text-anchor:middle}
 .legend{margin:6px 0 10px}
@@ -455,7 +457,7 @@ cUpdate();
 /* ===== Section 6: figure and ground pictures (original drawings) ===== */
 // one tile: a square whose top and right edges bulge out (wing, head) and whose bottom and left edges are dented in by the same amounts, so copies interlock
 const S=60, BIRD='M0,0 L10,0 L4,-18 L34,-6 L40,0 L60,0 L60,12 L70,10 L84,22 L70,26 L60,34 L60,60 L40,60 L34,54 L4,42 L10,60 L0,60 L0,34 L10,26 L24,22 L10,10 L0,12 Z';
-const DARK='var(--escher)', LIGHT='var(--paper2)';
+const DARK='var(--fg-dark)', LIGHT='var(--fg-light)';
 function bird(x,y,k,dark){return `<g data-k="${k}" transform="translate(${x},${y})"><path d="${BIRD}" fill="${dark?DARK:LIGHT}" stroke="var(--ink)" stroke-width="1.2" stroke-linejoin="round"/><circle cx="69" cy="19" r="2.4" fill="${dark?LIGHT:DARK}"/></g>`;}
 function fgDraw(){
   $('fgA').innerHTML=`<rect data-k="paper" x="0" y="0" width="360" height="240" fill="${LIGHT}"/>`+bird(140,90,'dark',true);
