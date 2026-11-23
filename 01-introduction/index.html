@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>GEB · Introduction: A Musico-Logical Offering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=56991a91">
+<link rel="stylesheet" href="../assets/geb.css?v=d4f46666">
 <style>
 .ctable{border-collapse:collapse;font:14px/1.45 Inter,sans-serif;margin:8px 0;width:100%}
 .ctable th,.ctable td{padding:6px 14px 6px 0;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
@@ -81,7 +82,7 @@
   <div class="intuit"><b>Intuition</b>A canon is a theme plus a rule. Once you know the rule, the second voice is "already contained" in the first. Hofstadter's big theme starts here: how one thing can carry the shape of another. His word for this is <span class="term">isomorphism</span>. The second voice of a canon is an isomorphic copy of the first.</div>
   <div class="card">
     <h3 style="margin-top:0">Canon lab — build your own</h3>
-    <div class="words">The controls set the delay in <span class="term">beats</span> and <span class="term">bars</span>, and shift the copy's pitch by an <span class="term">interval</span>: a <span class="term">fifth</span> or an <span class="term">octave</span>. Notes that <span class="term">clash</span> show as <span style="color:#c0392b;font-weight:600">red bands</span> on the chart.</div>
+    <div class="words">The controls set the delay in <span class="term">beats</span> and <span class="term">bars</span>, and shift the copy's pitch by an <span class="term">interval</span>: a <span class="term">fifth</span> or an <span class="term">octave</span>. Notes that <span class="term">clash</span> show as <span style="color:var(--clash);font-weight:600">red bands</span> on the chart.</div>
     <div class="row">
       <label class="ctl">Theme <select id="cTheme"><option value="fj">Frère Jacques (easy to hear)</option><option value="royal">The King's theme</option></select></label>
       <label class="ctl">Delay <select id="cDelay"><option value="0">none</option><option value="2">2 beats</option><option value="4">1 bar</option><option value="8" selected>2 bars</option></select></label>
@@ -102,7 +103,7 @@
       <button id="cPlay">▶ Play both voices</button>
       <button class="ghost" id="cPlay1">Voice 1 only</button>
       <button class="ghost" id="cPlay2">Voice 2 only</button>
-      <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>voice 1 (original)</span><span><i style="background:var(--godel)"></i>voice 2 (copy + rule)</span><span><i style="background:#e8a29a"></i>clash</span></div>
+      <div class="legend" style="margin-left:auto"><span><i style="background:var(--bach)"></i>voice 1 (original)</span><span><i style="background:var(--godel)"></i>voice 2 (copy + rule)</span><span><i style="background:var(--bach-soft)"></i>clash</span></div>
     </div>
     <div class="clashmeter"><span>Clash meter</span><div class="bar"><div id="clashFill"></div></div><b id="clashPct" class="mono">–</b><span id="clashWord"></span></div>
     <div class="row"><span class="small-note">Show the best setting (fewest clashes, copy starting later):</span><button class="ghost small" data-best="fj">Frère Jacques</button><button class="ghost small" data-best="royal">The King's theme</button></div>
@@ -144,7 +145,7 @@
     </div>
     <div class="card">
       <svg id="pianoB" viewBox="0 0 500 180" width="100%"></svg>
-      <div class="legend"><span><i style="background:#9b2f2f"></i>the key's family of notes</span><span>● home note</span><span><i style="background:#b7862b"></i>note playing now</span></div>
+      <div class="legend"><span><i style="background:var(--bach)"></i>the key's family of notes</span><span>● home note</span><span><i style="background:var(--gold)"></i>note playing now</span></div>
       <div class="row"><button id="pbMaj">▶ C major scale</button><button id="pbMin">▶ C minor scale</button></div>
       <p class="small-note">The home note really does feel like home. Here's a short tune in C minor, first ending on C, then stopping one note early:</p>
       <div class="row"><button class="ghost" id="pbHome">▶ Ends at home</button><button class="ghost" id="pbEarly">▶ Stops one note early</button></div>
@@ -191,7 +192,7 @@
     <div class="primer-body">
       <p class="small-note">Click a key on the ring to hear the canon's melody in that key, the same one you hear during playback. Then step around the ring one key at a time, try jumping straight across it, and compare how many of the 7 family notes change. Each move plays the end of the old key's melody, then the new key's.</p>
       <svg id="kbd" viewBox="0 0 520 200" width="100%" style="max-width:540px;display:block;margin:8px auto 0"></svg>
-      <div class="legend" id="kLegend"><span><i style="background:#b7862b"></i>kept from the previous key</span><span><i style="background:#9b2f2f"></i>new in this key</span><span><i style="background:#efe7d6;border:1px dashed #8c826e"></i>dropped</span><span>● home note</span></div>
+      <div class="legend" id="kLegend"><span><i style="background:var(--gold)"></i>kept from the previous key</span><span><i style="background:var(--bach)"></i>new in this key</span><span><i style="background:var(--paper2);border:1px dashed var(--mute)"></i>dropped</span><span>● home note</span></div>
       <div class="row"><button class="ghost" id="kPrev">◀ Step down</button><button class="ghost" id="kNext">Step up ▶</button><span class="small-note">or click any key on the ring to jump straight to it</span></div>
       <p class="meter" id="kMsg"></p>
       <p class="small-note">That's why Bach's canon climbs one step at a time. Each step keeps 5 of the 7 notes, so the ear barely feels the shift, yet six small steps carry you through keys that share almost nothing and back home again.</p>
@@ -427,11 +428,11 @@
 <script src="../assets/glossary.js?v=18c3283a"></script>
 <script src="../assets/terms.js?v=056fc7ec" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
-<script src="../assets/music.js?v=761fe73a"></script>
+<script src="../assets/music.js?v=65649e48"></script>
 <script>
 /* Section 1: theme */
 const themeCv=document.getElementById('themeCanvas');
-const themeVoices=[{ev:toEvents(ROYAL),color:getCss('--bach'),gain:.25}];
+const themeVoices=[{ev:toEvents(ROYAL),color:'var(--bach)',gain:.25}];
 function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
 playToggle(document.getElementById('playTheme'),()=>playVoices(themeCv,themeVoices,0.36));
 document.getElementById('acro').onclick=function(){this.classList.toggle('show');};
@@ -451,7 +452,7 @@ function buildCanon(){
   if(st.aug) s2=s2.map(([p,d])=>[p,d*2]);
   s2=s2.map(([p,d])=>[p==null?null:p+tr,d]);
   const v2=toEvents(s2,delay);
-  const arr=[{ev:v1,color:getCss('--bach'),gain:.18},{ev:v2,color:getCss('--godel'),gain:.18,timbre:'soft'}];
+  const arr=[{ev:v1,color:'var(--bach)',gain:.18},{ev:v2,color:'var(--godel)',gain:.18,timbre:'soft'}];
   arr.clashes=clashInfo(v1,v2); return arr;
 }
 function clashInfo(v1,v2){
@@ -508,19 +509,19 @@ const FAM_MAJ=[0,2,4,5,7,9,11], FAM_MIN=[0,2,3,5,7,8,10];
 function drawPiano(svg,o={}){
   const W=60,X0=10,Y0=6,H=150, wh=[0,2,4,5,7,9,11,12], bl={1:0,3:1,6:3,8:4,10:5};
   const look=(semi,black)=>{
-    if(o.active===semi) return ['#b7862b','#fff'];
-    if(o.fam && o.fam.has(semi%12)) return ['#9b2f2f','#fff'];
-    return black?['#2a2621','#d9d0bf']:['#fffdf8','#5b5447'];
+    if(o.active===semi) return ['var(--gold)','var(--on-accent)'];
+    if(o.fam && o.fam.has(semi%12)) return ['var(--bach)','var(--on-accent)'];
+    return black?['var(--key-black)','var(--key-black-text)']:['var(--card)','var(--ink2)'];
   };
   let s='';
   wh.forEach((semi,j)=>{const [f,tc]=look(semi,false),x=X0+j*W;
-    s+=`<g data-semi="${semi}" style="cursor:pointer"><rect x="${x}" y="${Y0}" width="${W-3}" height="${H}" rx="5" fill="${f}" stroke="#bfb39b" stroke-width="1.5"/>`;
+    s+=`<g data-semi="${semi}" style="cursor:pointer"><rect x="${x}" y="${Y0}" width="${W-3}" height="${H}" rx="5" fill="${f}" stroke="var(--line)" stroke-width="1.5"/>`;
     s+=`<text x="${x+W/2-1.5}" y="${Y0+H-30}" text-anchor="middle" font-family="Inter" font-size="17" font-weight="600" fill="${tc}">${LET[semi]}</text>`;
     if(o.solf) s+=`<text x="${x+W/2-1.5}" y="${Y0+H-11}" text-anchor="middle" font-family="EB Garamond" font-style="italic" font-size="15" fill="${tc}">${SOLF[semi]}</text>`;
     if(o.home!=null && semi%12===o.home) s+=`<circle cx="${x+W/2-1.5}" cy="${Y0+H-56}" r="6" fill="${tc}"/>`;
     s+='</g>';});
   Object.entries(bl).forEach(([semi,j])=>{semi=+semi;const [f,tc]=look(semi,true),x=X0+(j+1)*W-19;
-    s+=`<g data-semi="${semi}" style="cursor:pointer"><rect x="${x}" y="${Y0}" width="36" height="${H*0.6}" rx="4" fill="${f}" stroke="#1f1c17" stroke-width="1.2"/>`;
+    s+=`<g data-semi="${semi}" style="cursor:pointer"><rect x="${x}" y="${Y0}" width="36" height="${H*0.6}" rx="4" fill="${f}" stroke="var(--ink)" stroke-width="1.2"/>`;
     if(o.solf){
       s+=`<text x="${x+18}" y="${Y0+H*0.6-26}" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="600" fill="${tc}">${BLK[semi][0]}</text>`;
       s+=`<text x="${x+18}" y="${Y0+H*0.6-10}" text-anchor="middle" font-family="Inter" font-size="12.5" font-weight="600" fill="${tc}">${BLK[semi][1]}</text>`;
@@ -565,18 +566,18 @@ playToggle($('pcD'),()=>playOnPiano(pC,{fam:famSet(2,FAM_MIN),home:2},TUNE.map((
 const KEYS=['C minor','D minor','E minor','F♯ minor','A♭ minor','B♭ minor'];
 const ring=$('keyRing');
 (function drawRing(){
-  const cx=160,cy=160,R=115; let s='<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b7862b"/></marker></defs>';
-  s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#e2d8c3" stroke-width="18"/>`;
+  const cx=160,cy=160,R=115; let s='<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--gold)"/></marker></defs>';
+  s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--grid)" stroke-width="18"/>`;
   for(let i=0;i<6;i++){
     const a1=-Math.PI/2+i*Math.PI/3+0.28,a2=-Math.PI/2+(i+1)*Math.PI/3-0.28;
-    s+=`<path d="M${cx+R*Math.cos(a1)},${cy+R*Math.sin(a1)} A${R},${R} 0 0 1 ${cx+R*Math.cos(a2)},${cy+R*Math.sin(a2)}" fill="none" stroke="#b7862b" stroke-width="2" marker-end="url(#ah)"/>`;
+    s+=`<path d="M${cx+R*Math.cos(a1)},${cy+R*Math.sin(a1)} A${R},${R} 0 0 1 ${cx+R*Math.cos(a2)},${cy+R*Math.sin(a2)}" fill="none" stroke="var(--gold)" stroke-width="2" marker-end="url(#ah)"/>`;
     const a=-Math.PI/2+i*Math.PI/3, x=cx+R*Math.cos(a), y=cy+R*Math.sin(a);
-    s+=`<g id="kn${i}"><circle cx="${x}" cy="${y}" r="24" fill="#fff" stroke="#9b2f2f" stroke-width="2"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="EB Garamond" font-size="15" fill="#1f1c17">${KEYS[i].replace(' minor','m')}</text></g>`;
+    s+=`<g id="kn${i}"><circle cx="${x}" cy="${y}" r="24" fill="var(--field)" stroke="var(--bach)" stroke-width="2"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="EB Garamond" font-size="15" fill="var(--ink)">${KEYS[i].replace(' minor','m')}</text></g>`;
     const lx=cx+(R+0)*Math.cos(a+Math.PI/6)*0.62, ly=cy+(R)*Math.sin(a+Math.PI/6)*0.62;
-    s+=`<text x="${lx}" y="${ly+4}" text-anchor="middle" font-family="Inter" font-size="10" fill="#b7862b">+2 ↑</text>`;
+    s+=`<text x="${lx}" y="${ly+4}" text-anchor="middle" font-family="Inter" font-size="10" fill="var(--gold)">+2 ↑</text>`;
   }
-  s+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" font-family="EB Garamond" font-size="18" fill="#5b5447">always up…</text><text x="${cx}" y="${cy+18}" text-anchor="middle" font-family="EB Garamond" font-size="18" fill="#5b5447" font-style="italic">always home</text>`;
-  s+=`<circle id="kdot" r="9" fill="#b7862b" cx="${cx}" cy="${cy-R}" opacity="0"/>`;
+  s+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" font-family="EB Garamond" font-size="18" fill="var(--ink2)">always up…</text><text x="${cx}" y="${cy+18}" text-anchor="middle" font-family="EB Garamond" font-size="18" fill="var(--ink2)" font-style="italic">always home</text>`;
+  s+=`<circle id="kdot" r="9" fill="var(--gold)" cx="${cx}" cy="${cy-R}" opacity="0"/>`;
   ring.innerHTML=s;
 })();
 function highlightKey(i,steps){
@@ -585,7 +586,7 @@ function highlightKey(i,steps){
   $('mKey').textContent=KEYS[i]; $('mSteps').textContent=steps; $('mRise').textContent=steps*2;
 }
 function ringHighlight(i){
-  for(let k=0;k<6;k++){const c=$('kn'+k).querySelector('circle');c.setAttribute('fill',k===i?'#9b2f2f':'#fff');$('kn'+k).querySelector('text').setAttribute('fill',k===i?'#fff':'#1f1c17');}
+  for(let k=0;k<6;k++){const c=$('kn'+k).querySelector('circle');c.setAttribute('fill',k===i?'var(--bach)':'var(--field)');$('kn'+k).querySelector('text').setAttribute('fill',k===i?'var(--on-accent)':'var(--ink)');}
   const a=-Math.PI/2+i*Math.PI/3; const d=$('kdot'); d.setAttribute('opacity',1);
   d.setAttribute('cx',160+150*Math.cos(a)*0.97); d.setAttribute('cy',160+150*Math.sin(a)*0.97);
 }
@@ -600,20 +601,20 @@ function showKeys(i,prev){
   let s='';
   const fill=(pc,black)=>{
     const inNow=now.has(pc), inWas=was&&was.has(pc);
-    if(inNow&&inWas) return ['#b7862b','#fff','none'];
-    if(inNow) return ['#9b2f2f','#fff','none'];
-    if(inWas) return ['#efe7d6','#5b5447','4 3'];
-    return black?['#2a2621','#bbb','none']:['#fffdf8','#8c826e','none'];
+    if(inNow&&inWas) return ['var(--gold)','var(--on-accent)','none'];
+    if(inNow) return ['var(--bach)','var(--on-accent)','none'];
+    if(inWas) return ['var(--paper2)','var(--ink2)','4 3'];
+    return black?['var(--key-black)','var(--key-black-text)','none']:['var(--card)','var(--mute)','none'];
   };
   WX.forEach((pc,j)=>{const [f,tc,da]=fill(pc,false);const x=X0+j*W;
-    s+=`<rect x="${x}" y="${Y0}" width="${W-3}" height="${H}" rx="5" fill="${f}" stroke="${da==='none'?'#bfb39b':'#8c826e'}" stroke-dasharray="${da}" stroke-width="1.5"/>`;
+    s+=`<rect x="${x}" y="${Y0}" width="${W-3}" height="${H}" rx="5" fill="${f}" stroke="${da==='none'?'var(--line)':'var(--mute)'}" stroke-dasharray="${da}" stroke-width="1.5"/>`;
     s+=`<text x="${x+W/2-1.5}" y="${Y0+H-12}" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="${tc}">${NOTE[pc]}</text>`;
     if(pc===2*i%12) s+=`<circle cx="${x+W/2-1.5}" cy="${Y0+H-38}" r="6" fill="${tc}"/>`;});
   Object.entries(BX).forEach(([pc,j])=>{pc=+pc;const [f,tc,da]=fill(pc,true);const x=X0+(j+1)*W-22;
-    s+=`<rect x="${x}" y="${Y0}" width="41" height="${H*0.6}" rx="4" fill="${f}" stroke="${da==='none'?'#1f1c17':'#8c826e'}" stroke-dasharray="${da}" stroke-width="1.5"/>`;
+    s+=`<rect x="${x}" y="${Y0}" width="41" height="${H*0.6}" rx="4" fill="${f}" stroke="${da==='none'?'var(--ink)':'var(--mute)'}" stroke-dasharray="${da}" stroke-width="1.5"/>`;
     s+=`<text x="${x+20.5}" y="${Y0+H*0.6-10}" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="${tc}">${NOTE[pc]}</text>`;
     if(pc===2*i%12) s+=`<circle cx="${x+20.5}" cy="${Y0+H*0.6-30}" r="5" fill="${tc}"/>`;});
-  s+=`<text x="${X0}" y="${Y0+H+38}" font-family="EB Garamond" font-size="19" fill="#1f1c17">${prev==null?'':KEYS[prev]+'  →  '}<tspan font-weight="600">${KEYS[i]}</tspan></text>`;
+  s+=`<text x="${X0}" y="${Y0+H+38}" font-family="EB Garamond" font-size="19" fill="var(--ink)">${prev==null?'':KEYS[prev]+'  →  '}<tspan font-weight="600">${KEYS[i]}</tspan></text>`;
   $('kbd').innerHTML=s;
   let msg;
   if(prev==null) msg=`<b>${KEYS[i]}</b> uses these 7 notes. Step up or down to see what changes.`;
@@ -664,23 +665,23 @@ function shepardNote(out,pc,t,dur,gain=0.11){
 }
 function stopShepard(){if(shep){clearInterval(shep.timer);shep=null;} drawShep(null);}
 function drawShep(pos){
-  const cv=$('shepCv'), dpr=window.devicePixelRatio||1, W=cv.clientWidth, H=+cv.getAttribute('height');
+  const cv=$('shepCv'), dpr=window.devicePixelRatio||1, W=cv.clientWidth, H=+(cv.dataset.h||=cv.getAttribute('height'));
   cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+'px';
   const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,W,H);
   const N=12, padL=68, padR=66, padT=8, padB=30, pw=W-padL-padR, ph=H-padT-padB;
   const C0=Math.log2(16.352), center=Math.log2(330), sig=1.1, lo=center-2.6, hi=center+2.6;  // same loudness curve as the sound
   const wt=l=>Math.exp(-Math.pow(l-center,2)/(2*sig*sig));
   const X=st=>padL+pw*st/N, Y=l=>padT+ph*(1-(l-lo)/(hi-lo));
-  g.strokeStyle='#d8cdb6'; g.lineWidth=1; g.beginPath(); g.moveTo(padL,padT); g.lineTo(padL,padT+ph); g.lineTo(padL+pw,padT+ph); g.stroke();
-  g.fillStyle='#5b5447'; g.font='12px Inter,sans-serif'; g.textAlign='center';
+  g.strokeStyle=col('var(--faint)'); g.lineWidth=1; g.beginPath(); g.moveTo(padL,padT); g.lineTo(padL,padT+ph); g.lineTo(padL+pw,padT+ph); g.stroke();
+  g.fillStyle=col('var(--ink2)'); g.font='12px Inter,sans-serif'; g.textAlign='center';
   for(let st=0;st<=N;st++){g.fillRect(X(st)-0.5,padT+ph,1,4); if(st%6===0) g.fillText(KEYS[0].replace(' minor','m'),X(st),padT+ph+16);}
   g.fillText('keys climbed →',padL+pw/2,padT+ph+26);
   g.save(); g.translate(11,padT+ph/2); g.rotate(-Math.PI/2); g.fillText('pitch (frequency) →',0,0); g.restore();
   g.textAlign='right'; let prevY=null;
   for(const hz of [55,110,220,440,880,1760]){
-    const y=Y(Math.log2(hz)); g.strokeStyle='#ece4d3'; g.lineWidth=1; g.beginPath(); g.moveTo(padL,y); g.lineTo(padL+pw,y); g.stroke();
-    g.fillStyle='#5b5447'; g.font='11px Inter,sans-serif'; g.fillText(hz.toLocaleString('en')+' Hz',padL-6,y+4);
-    if(prevY!=null){g.fillStyle='#b7862b'; g.fillText('×2',padL-6,(y+prevY)/2+4);} prevY=y;
+    const y=Y(Math.log2(hz)); g.strokeStyle=col('var(--grid)'); g.lineWidth=1; g.beginPath(); g.moveTo(padL,y); g.lineTo(padL+pw,y); g.stroke();
+    g.fillStyle=col('var(--ink2)'); g.font='11px Inter,sans-serif'; g.fillText(hz.toLocaleString('en')+' Hz',padL-6,y+4);
+    if(prevY!=null){g.fillStyle=col('var(--gold)'); g.fillText('×2',padL-6,(y+prevY)/2+4);} prevY=y;
   }
   g.font='12px Inter,sans-serif';
   const cur=pos==null?null:pos%N, curStep=cur==null?-1:Math.floor(cur);
@@ -688,15 +689,15 @@ function drawShep(pos){
     for(let st=0;st<N;st++){
       const l=C0+k+st/6, l2=l+1/6; if(l<lo||l>hi) continue;
       const w=wt(l), a=Math.max(w,0.06);
-      g.strokeStyle=`rgba(155,47,47,${a})`; g.lineWidth=1.2+2.8*w;
+      g.strokeStyle=col('--bach',a); g.lineWidth=1.2+2.8*w;
       g.beginPath(); g.moveTo(X(st),Y(l)); g.lineTo(X(st+1),Y(l)); if(st<N-1&&l2<=hi) g.lineTo(X(st+1),Y(l2)); g.stroke();
-      if(st===curStep){g.fillStyle=`rgba(183,134,43,${Math.max(w,0.15)})`; g.beginPath(); g.arc(X(cur),Y(l),2+5*w,0,7); g.fill();}
+      if(st===curStep){g.fillStyle=col('--gold',Math.max(w,0.15)); g.beginPath(); g.arc(X(cur),Y(l),2+5*w,0,7); g.fill();}
     }
   }
-  if(cur!=null){g.fillStyle='rgba(183,134,43,.35)'; g.fillRect(X(cur)-1.5,padT,3,ph);}
-  const bx=padL+pw+14; g.strokeStyle='#b7862b'; g.lineWidth=2; g.beginPath();
+  if(cur!=null){g.fillStyle=col('--gold',.35); g.fillRect(X(cur)-1.5,padT,3,ph);}
+  const bx=padL+pw+14; g.strokeStyle=col('var(--gold)'); g.lineWidth=2; g.beginPath();
   for(let l=lo;l<=hi;l+=0.05){const x=bx+40*wt(l), y=Y(l); l===lo?g.moveTo(x,y):g.lineTo(x,y);} g.stroke();
-  g.fillStyle='#b7862b'; g.textAlign='left'; g.fillText('loud',bx+20,Y(center)-6); g.fillText('quiet',bx,padT+10); g.fillText('quiet',bx,padT+ph-4);
+  g.fillStyle=col('var(--gold)'); g.textAlign='left'; g.fillText('loud',bx+20,Y(center)-6); g.fillText('quiet',bx,padT+10); g.fillText('quiet',bx,padT+ph-4);
 }
 drawShep(null); window.addEventListener('resize',()=>{if(!shep)drawShep(null);});
 function startRise(mode){
@@ -733,19 +734,19 @@ playToggle($('riseShep'),()=>startRise('shep'));
 
 /* Section 4: hands + droste */
 $('hands').innerHTML=`
-<defs><marker id="ah2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#2f6b4f"/></marker></defs>
-<rect x="20" y="80" width="130" height="80" rx="12" fill="#eef7f1" stroke="#2f6b4f" stroke-width="2"/>
+<defs><marker id="ah2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--escher)"/></marker></defs>
+<rect x="20" y="80" width="130" height="80" rx="12" fill="var(--escher-tint)" stroke="var(--escher)" stroke-width="2"/>
 <text x="85" y="115" text-anchor="middle" font-family="EB Garamond" font-size="20">Left hand</text>
-<text x="85" y="138" text-anchor="middle" font-family="Inter" font-size="11" fill="#5b5447">"I am the artist"</text>
-<rect x="250" y="80" width="130" height="80" rx="12" fill="#eef7f1" stroke="#2f6b4f" stroke-width="2"/>
+<text x="85" y="138" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--ink2)">"I am the artist"</text>
+<rect x="250" y="80" width="130" height="80" rx="12" fill="var(--escher-tint)" stroke="var(--escher)" stroke-width="2"/>
 <text x="315" y="115" text-anchor="middle" font-family="EB Garamond" font-size="20">Right hand</text>
-<text x="315" y="138" text-anchor="middle" font-family="Inter" font-size="11" fill="#5b5447">"No, I am!"</text>
-<path id="hArc1" d="M110,78 C150,10 250,10 290,78" fill="none" stroke="#2f6b4f" stroke-width="2.5" marker-end="url(#ah2)"/>
-<path id="hArc2" d="M290,162 C250,230 150,230 110,162" fill="none" stroke="#2f6b4f" stroke-width="2.5" marker-end="url(#ah2)"/>
-<text x="200" y="54" text-anchor="middle" font-family="Inter" font-size="12" fill="#2f6b4f">draws</text>
-<text x="200" y="196" text-anchor="middle" font-family="Inter" font-size="12" fill="#2f6b4f">draws</text>
-<circle r="6" fill="#b7862b"><animateMotion dur="4s" repeatCount="indefinite" path="M110,78 C150,10 250,10 290,78 L290,162 C250,230 150,230 110,162 Z"/></circle>
-<text x="200" y="125" text-anchor="middle" font-family="EB Garamond" font-style="italic" font-size="14" fill="#5b5447"><tspan x="200" y="117">which level</tspan><tspan x="200" y="134">is on top?</tspan></text>`;
+<text x="315" y="138" text-anchor="middle" font-family="Inter" font-size="11" fill="var(--ink2)">"No, I am!"</text>
+<path id="hArc1" d="M110,78 C150,10 250,10 290,78" fill="none" stroke="var(--escher)" stroke-width="2.5" marker-end="url(#ah2)"/>
+<path id="hArc2" d="M290,162 C250,230 150,230 110,162" fill="none" stroke="var(--escher)" stroke-width="2.5" marker-end="url(#ah2)"/>
+<text x="200" y="54" text-anchor="middle" font-family="Inter" font-size="12" fill="var(--escher)">draws</text>
+<text x="200" y="196" text-anchor="middle" font-family="Inter" font-size="12" fill="var(--escher)">draws</text>
+<circle r="6" fill="var(--gold)"><animateMotion dur="4s" repeatCount="indefinite" path="M110,78 C150,10 250,10 290,78 L290,162 C250,230 150,230 110,162 Z"/></circle>
+<text x="200" y="125" text-anchor="middle" font-family="EB Garamond" font-style="italic" font-size="14" fill="var(--ink2)"><tspan x="200" y="117">which level</tspan><tspan x="200" y="134">is on top?</tspan></text>`;
 (function droste(){
   const cv=$('droste'); let x=setupCanvas(cv); let t0=performance.now();
   window.addEventListener('resize',()=>{x=setupCanvas(cv);});
@@ -757,9 +758,9 @@ $('hands').innerHTML=`
       const s=base*Math.pow(k,i-phase); if(s>Math.max(W,H)*3||s<2)continue;
       const rot=(i-phase)*0.35;
       x.save(); x.translate(cx,cy); x.rotate(rot);
-      x.fillStyle=(i%2===0)?'#eef7f1':'#fbf8f1'; x.strokeStyle='#2f6b4f'; x.lineWidth=Math.max(.5,s/90);
+      x.fillStyle=col((i%2===0)?'var(--escher-tint)':'var(--well)'); x.strokeStyle=col('var(--escher)'); x.lineWidth=Math.max(.5,s/90);
       x.fillRect(-s/2,-s*0.34,s,s*0.68); x.strokeRect(-s/2,-s*0.34,s,s*0.68);
-      x.fillStyle='#2f6b4f'; x.font=`${Math.max(6,s/14)}px EB Garamond`; x.textAlign='center';
+      x.fillStyle=col('var(--escher)'); x.font=`${Math.max(6,s/14)}px EB Garamond`; x.textAlign='center';
       x.fillText('a picture of…',0,-s*0.22);
       x.restore();
     }
@@ -839,13 +840,13 @@ const LV_LOOP={
   godel:'<b>The loop, concretely</b>Here the gold arrow means <b>refers to</b>, and nothing more. G is a long string of symbols like 0, S, + and =. Read as arithmetic, it says "the formula with Gödel number <i>g</i> has no proof". And <i>g</i> is the Gödel number of G itself. So the claim at the top lands on the string at the bottom: the very symbols that make it up. Reading G this way changes nothing about it. The loop is in what G says, not in anything it does.',
   brain:'<b>The loop, concretely</b>Here the gold arrow means <b>refers to and changes</b>. The idea of "I" describes you, the whole system. But it isn\'t separate from your neurons: it is itself a pattern of neurons firing, and when it\'s active it sets off other neurons, like any pattern does. Say you think "I promised myself I\'d quit sugar." That thought stops the neurons that would move your hand toward the cake. It can also go round and round: "I always panic in exams" sets off stress, the stress makes you do badly, and doing badly strengthens the belief. So the top box isn\'t really above the bottom one. "Self" is made of neurons, which is why it can act on them.'
 };
-const LV_COL=['#e9e2d2','#e4ecf6','#e6f2ea','#f7e6e6'];
+const LV_COL=['var(--grid)','var(--godel-tint)','var(--escher-tint)','var(--bach-tint)'];
 function drawLevels(k){
-  let s='<defs><marker id="ah3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1f1c17"/></marker><marker id="ah4" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b7862b"/></marker></defs>';
+  let s='<defs><marker id="ah3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--ink)"/></marker><marker id="ah4" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--gold)"/></marker></defs>';
   LEVELS[k].forEach(([t,d],i)=>{const y=262-i*78;
-    s+=`<rect x="20" y="${y}" width="400" height="56" rx="10" fill="${LV_COL[i]}" stroke="#bfb39b"/><text x="36" y="${y+24}" font-family="EB Garamond" font-size="19" font-weight="600">${t}</text><text x="36" y="${y+44}" font-family="Inter" font-size="12.5" fill="#5b5447">${d}</text>`;
-    if(i<3)s+=`<path d="M220,${y} L220,${y-20}" stroke="#1f1c17" stroke-width="1.5" marker-end="url(#ah3)"/>`;});
-  s+=`<path d="M420,52 C500,60 500,280 422,290" fill="none" stroke="#b7862b" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#ah4)"/><text x="488" y="175" font-family="Inter" font-size="12" fill="#b7862b" text-anchor="middle" transform="rotate(90 488 175)">the Strange Loop</text>`;
+    s+=`<rect x="20" y="${y}" width="400" height="56" rx="10" fill="${LV_COL[i]}" stroke="var(--line)"/><text x="36" y="${y+24}" font-family="EB Garamond" font-size="19" font-weight="600">${t}</text><text x="36" y="${y+44}" font-family="Inter" font-size="12.5" fill="var(--ink2)">${d}</text>`;
+    if(i<3)s+=`<path d="M220,${y} L220,${y-20}" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#ah3)"/>`;});
+  s+=`<path d="M420,52 C500,60 500,280 422,290" fill="none" stroke="var(--gold)" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#ah4)"/><text x="488" y="175" font-family="Inter" font-size="12" fill="var(--gold)" text-anchor="middle" transform="rotate(90 488 175)">the Strange Loop</text>`;
   $('levels').innerHTML=s;
   $('lvLoop').innerHTML=LV_LOOP[k];
   document.querySelectorAll('[data-lv]').forEach(b=>b.classList.toggle('on',b.dataset.lv===k));
@@ -857,12 +858,12 @@ drawLevels('general');
 $('weave').innerHTML=(()=>{
   let s='';const items=['Intro','Dialogue','Ch. I','Dialogue','Ch. II','Dialogue','Ch. III','…'];
   items.forEach((t,i)=>{const x=20+i*44,isD=t==='Dialogue';const y=isD?60:130;
-    s+=`<rect x="${x}" y="${y}" width="40" height="50" rx="7" fill="${isD?'#f7e6e6':'#e4ecf6'}" stroke="${isD?'#9b2f2f':'#2c5282'}"/>`;
-    s+=`<text x="${x+20}" y="${y+30}" text-anchor="middle" font-family="Inter" font-size="${isD?8.5:10}" fill="#1f1c17">${isD?'story':t}</text>`;
-    if(i<items.length-1){const nx=20+(i+1)*44, ny=(items[i+1]==='Dialogue'?60:130);s+=`<path d="M${x+40},${y+25} L${nx},${ny+25}" stroke="#bfb39b"/>`;}
+    s+=`<rect x="${x}" y="${y}" width="40" height="50" rx="7" fill="${isD?'var(--bach-tint)':'var(--godel-tint)'}" stroke="${isD?'var(--bach)':'var(--godel)'}"/>`;
+    s+=`<text x="${x+20}" y="${y+30}" text-anchor="middle" font-family="Inter" font-size="${isD?8.5:10}" fill="var(--ink)">${isD?'story':t}</text>`;
+    if(i<items.length-1){const nx=20+(i+1)*44, ny=(items[i+1]==='Dialogue'?60:130);s+=`<path d="M${x+40},${y+25} L${nx},${ny+25}" stroke="var(--line)"/>`;}
   });
-  s+=`<text x="20" y="40" font-family="EB Garamond" font-size="17" fill="#9b2f2f">Dialogues — show it (Achilles &amp; the Tortoise)</text>`;
-  s+=`<text x="20" y="210" font-family="EB Garamond" font-size="17" fill="#2c5282">Chapters — explain it</text>`;
+  s+=`<text x="20" y="40" font-family="EB Garamond" font-size="17" fill="var(--bach)">Dialogues — show it (Achilles &amp; the Tortoise)</text>`;
+  s+=`<text x="20" y="210" font-family="EB Garamond" font-size="17" fill="var(--godel)">Chapters — explain it</text>`;
   return s;})();
 
 

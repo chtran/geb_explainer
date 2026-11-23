@@ -59,6 +59,17 @@ const FJ=[[60,1],[62,1],[64,1],[60,1],[60,1],[62,1],[64,1],[60,1],[64,1],[65,1],
 function toEvents(seq,offset=0){let t=offset,ev=[];for(const [p,d] of seq){if(p!=null)ev.push({p,s:t,d});t+=d;}return ev;}
 function seqLen(seq){return seq.reduce((a,[,d])=>a+d,0);}
 
+/* ============ THEME ============ */
+/* Canvas can't read CSS variables: col('var(--ink)') or col('--ink', alpha) gives the current theme's colour. */
+function col(c,a){
+  const m=/^(?:var\()?(--[\w-]+)\)?$/.exec(c);
+  if(m)c=getComputedStyle(document.documentElement).getPropertyValue(m[1]).trim();
+  if(a!=null&&/^#[0-9a-f]{6}$/i.test(c))c='rgba('+[1,3,5].map(i=>parseInt(c.substr(i,2),16))+','+a+')';
+  return c;
+}
+/* When the system switches light/dark, pages redraw their canvases (they already redraw on resize). */
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{dispatchEvent(new Event('themechange'));dispatchEvent(new Event('resize'));});
+
 /* ============ PIANO ROLL ============ */
 function setupCanvas(cv){const r=window.devicePixelRatio||1;if(!cv._h)cv._h=+cv.getAttribute('height');const w=cv.clientWidth||600;if(cv._w!==w||cv._r!==r){cv._w=w;cv._r=r;cv.width=w*r;cv.height=cv._h*r;cv.style.height=cv._h+'px';}const x=cv.getContext('2d');x.setTransform(r,0,0,r,0,0);return x;}
 function drawRoll(cv,voices,playBeat=-1){
@@ -69,22 +80,22 @@ function drawRoll(cv,voices,playBeat=-1){
   let end=Math.max(...all.map(e=>e.s+e.d));
   const pad=14, bx=b=>pad+(W-2*pad)*b/end, py=p=>H-pad-(H-2*pad)*(p-lo)/(hi-lo);
   // grid
-  x.strokeStyle='#e7dfcd';x.lineWidth=1;
+  x.strokeStyle=col('var(--grid)');x.lineWidth=1;
   for(let b=0;b<=end;b+=4){x.beginPath();x.moveTo(bx(b),pad/2);x.lineTo(bx(b),H-pad/2);x.stroke();}
-  for(let p=Math.ceil(lo);p<=hi;p++){if(p%12===0){x.strokeStyle='#d9cfbb';x.beginPath();x.moveTo(pad,py(p));x.lineTo(W-pad,py(p));x.stroke();x.fillStyle='#a89d86';x.font='10px Inter';x.fillText('C'+(p/12-1),2,py(p)-2);}}
-  if(voices.clashes){x.fillStyle='rgba(192,57,43,.16)';for(const t of voices.clashes.times){x.fillRect(bx(t),pad/2,Math.max(1.5,bx(t+.25)-bx(t)),H-pad);}}
+  for(let p=Math.ceil(lo);p<=hi;p++){if(p%12===0){x.strokeStyle=col('var(--rule)');x.beginPath();x.moveTo(pad,py(p));x.lineTo(W-pad,py(p));x.stroke();x.fillStyle=col('var(--mute)');x.font='10px Inter';x.fillText('C'+(p/12-1),2,py(p)-2);}}
+  if(voices.clashes){x.fillStyle=col('--clash',.16);for(const t of voices.clashes.times){x.fillRect(bx(t),pad/2,Math.max(1.5,bx(t+.25)-bx(t)),H-pad);}}
   const nh=Math.max(4,Math.min(10,(H-2*pad)/(hi-lo)*0.9));
   for(const v of voices){
     for(const e of v.ev){
       const active=playBeat>=e.s&&playBeat<e.s+e.d;
-      x.fillStyle=v.color; x.globalAlpha=active?1:(playBeat<0?0.85:0.45);
+      x.fillStyle=col(v.color); x.globalAlpha=active?1:(playBeat<0?0.85:0.45);
       const X=bx(e.s),Y=py(e.p)-nh/2,w=Math.max(2,bx(e.s+e.d)-bx(e.s)-2);
       x.beginPath(); if(x.roundRect)x.roundRect(X,Y,w,nh,3); else x.rect(X,Y,w,nh); x.fill();
       if(active){x.globalAlpha=.25;x.beginPath();x.arc(X+w/2,Y+nh/2,nh*1.6,0,7);x.fill();}
     }
   }
   x.globalAlpha=1;
-  if(playBeat>=0){x.strokeStyle='#b7862b';x.lineWidth=2;x.beginPath();x.moveTo(bx(playBeat),0);x.lineTo(bx(playBeat),H);x.stroke();}
+  if(playBeat>=0){x.strokeStyle=col('var(--gold)');x.lineWidth=2;x.beginPath();x.moveTo(bx(playBeat),0);x.lineTo(bx(playBeat),H);x.stroke();}
 }
 function playVoices(cv,voices,spb){
   stopSound(); const out=newBus(), c=ac(), t0=c.currentTime+0.08;

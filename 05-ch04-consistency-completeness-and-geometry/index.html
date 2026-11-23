@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>GEB · Contracrostipunctus + Chapter IV: Consistency, Completeness, and Geometry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=56991a91">
+<link rel="stylesheet" href="../assets/geb.css?v=d4f46666">
 <style>
 .pq{font-family:"JetBrains Mono",monospace;letter-spacing:.04em;white-space:nowrap}
 .pq .p,.pq.p{color:var(--godel);font-weight:500} .pq .q,.pq.q{color:var(--bach);font-weight:500}
@@ -24,10 +25,11 @@
 .pqgrid th.rh,.pqgrid th.ch{font:500 12px "JetBrains Mono",monospace;white-space:nowrap}
 .pqgrid th.rh{text-align:right;padding-right:6px}
 .pqgrid th.ch{font:500 11px Inter,sans-serif}
-.pqgrid td{width:40px;height:40px;text-align:center;border-radius:8px;border:1.5px solid var(--rule);background:#fff;color:#b9ae99;cursor:pointer;font:500 14px Inter,sans-serif;padding:0}
-.pqgrid td.tt{background:var(--escher);border-color:var(--escher);color:#fff}
-.pqgrid td.tf{background:var(--bach);border-color:var(--bach);color:#fff}
-.pqgrid td.nt{border:2px dashed var(--gold);color:var(--gold);background:#fff8e6}
+.pqgrid td{width:40px;height:40px;text-align:center;border-radius:8px;border:1.5px solid var(--rule);background:var(--field);color:var(--line);cursor:pointer;font:500 14px Inter,sans-serif;padding:0}
+@media (prefers-color-scheme:dark){.pqgrid td{color:var(--mute)}}
+.pqgrid td.tt{background:var(--escher);border-color:var(--escher);color:var(--on-accent)}
+.pqgrid td.tf{background:var(--bach);border-color:var(--bach);color:var(--on-accent)}
+.pqgrid td.nt{border:2px dashed var(--gold);color:var(--gold);background:var(--gold-tint)}
 .pqgrid td.sel{outline:3px solid var(--ink);outline-offset:1px}
 @media (max-width:520px){.pqgrid{border-spacing:2px}.pqgrid td{min-width:36px;height:42px;font-size:13px}.pqgrid th.rh{font-size:11px;padding-right:1px}.pqgrid th.ch{font-size:9px;white-space:normal;line-height:1.1}}
 @media (max-width:560px){.seg{gap:8px}main button{min-height:44px}.geo input[type=range]{height:44px}}
@@ -36,7 +38,7 @@
 .verdict{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:8px 0}
 .verdict.one{grid-template-columns:1fr}
 @media (max-width:640px){.verdict{grid-template-columns:1fr}}
-.verdict div{font:14px/1.45 Inter,sans-serif;color:var(--ink2);border:1px solid var(--rule);border-radius:10px;padding:8px 12px;background:#fff}
+.verdict div{font:14px/1.45 Inter,sans-serif;color:var(--ink2);border:1px solid var(--rule);border-radius:10px;padding:8px 12px;background:var(--field)}
 .verdict div b{display:block;font-size:15px}
 /* geometry */
 .geo input[type=range]{width:100%;margin:6px 0;accent-color:var(--gold)}
@@ -348,11 +350,11 @@ ul.layers li b{font-family:Inter,sans-serif;font-size:14px}
 <script src="../assets/glossary.js?v=18c3283a"></script>
 <script src="../assets/terms.js?v=056fc7ec" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
-<script src="../assets/music.js?v=761fe73a"></script>
+<script src="../assets/music.js?v=65649e48"></script>
 <script>
 const $=id=>document.getElementById(id);
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-const INK='#1f1c17',INK2='#5b5447',MUTE='#8c826e',RULE='#d9cfbb',GODEL='#2c5282',ESCHER='#2f6b4f',BACH='#9b2f2f',GOLD='#b7862b';
+const INK='var(--ink)',INK2='var(--ink2)',MUTE='var(--mute)',RULE='var(--rule)',GODEL='var(--godel)',ESCHER='var(--escher)',BACH='var(--bach)',GOLD='var(--gold)';
 function segButtons(host,items,get,set){
   host.innerHTML='';
   items.forEach(it=>{const b=document.createElement('button');b.className='ghost small'+(get()===it.v?' on':'');b.textContent=it.label;b.onclick=()=>set(it.v);host.appendChild(b);});
@@ -366,9 +368,9 @@ const bachShift=BACH_FLIP[0]-BACH_N[0];
 const bachSame=BACH_FLIP.every((p,i)=>p-BACH_N[i]===bachShift);
 const bachCv=$('bachCanvas');
 function bachVoices(flip){
-  const v=[{ev:toEvents(BACH_N.map(p=>[p,2])),color:css('--bach'),gain:.22}];
-  if(flip)v.push({ev:toEvents(BACH_FLIP.map(p=>[p,2]),10),color:css('--gold'),gain:.22});
-  else v.push({ev:[],color:css('--gold')});
+  const v=[{ev:toEvents(BACH_N.map(p=>[p,2])),color:'var(--bach)',gain:.22}];
+  if(flip)v.push({ev:toEvents(BACH_FLIP.map(p=>[p,2]),10),color:'var(--gold)',gain:.22});
+  else v.push({ev:[],color:'var(--gold)'});
   return v;
 }
 let bachShown=false;
@@ -378,7 +380,7 @@ function bachLetters(){
   const x=bachCv.getContext('2d'), names=['B','A','C','H'];
   const all=bachVoices(bachShown).flatMap(v=>v.ev), lo=Math.min(...all.map(e=>e.p))-2, hi=Math.max(...all.map(e=>e.p))+2, end=Math.max(...all.map(e=>e.s+e.d));
   const W=bachCv._w,H=bachCv._h,pad=14;
-  x.font='600 13px Inter';x.fillStyle=BACH;
+  x.font='600 13px Inter';x.fillStyle=col(BACH);
   BACH_N.forEach((p,i)=>{x.fillText(names[i],pad+(W-2*pad)*(i*2+0.15)/end,H-pad-(H-2*pad)*(p-lo)/(hi-lo)-9);});
 }
 function drawBach(){drawRoll(bachCv,bachVoices(bachShown));}
@@ -408,14 +410,14 @@ function rpDraw(shake){
   const cx=250,cy=95;
   s+=`<g class="${shake?'shake':''}">`;
   if(dead&&!rp.playing){
-    s+=`<g transform="rotate(-7 180 120)"><rect x="110" y="40" width="150" height="120" rx="8" fill="#efe6d2" stroke="${INK2}" stroke-width="2"/></g>`;
-    s+=`<g transform="rotate(9 360 120)"><rect x="285" y="52" width="120" height="112" rx="8" fill="#efe6d2" stroke="${INK2}" stroke-width="2"/></g>`;
+    s+=`<g transform="rotate(-7 180 120)"><rect x="110" y="40" width="150" height="120" rx="8" fill="var(--paper2)" stroke="${INK2}" stroke-width="2"/></g>`;
+    s+=`<g transform="rotate(9 360 120)"><rect x="285" y="52" width="120" height="112" rx="8" fill="var(--paper2)" stroke="${INK2}" stroke-width="2"/></g>`;
     s+=`<path d="M215,60 A52,52 0 0 1 262,130 L230,100z" fill="${INK}"/><path d="M300,84 A52,52 0 0 1 300,150 L288,118z" fill="${INK}"/>`;
     s+=`<path d="M262,30 l8,26 l-14,14 l16,22 l-12,20 l14,24 l-8,26" fill="none" stroke="${BACH}" stroke-width="2.5"/>`;
     s+=`<text x="250" y="184" text-anchor="middle" font-family="Inter" font-size="13" fill="${BACH}">Record Player ${rp.n}: in pieces</text>`;
   } else {
-    s+=`<rect x="110" y="30" width="290" height="130" rx="${lofi?4:10}" fill="${lofi?'#e9e2d0':'#efe6d2'}" stroke="${INK2}" stroke-width="2"/>`;
-    s+=`<circle cx="${cx}" cy="${cy}" r="${lofi?46:56}" fill="${INK}"/>`;
+    s+=`<rect x="110" y="30" width="290" height="130" rx="${lofi?4:10}" fill="${lofi?'var(--grid)':'var(--paper2)'}" stroke="${INK2}" stroke-width="2"/>`;
+    s+=`<circle cx="${cx}" cy="${cy}" r="${lofi?46:56}" fill="var(--key-black)"/>`;
     for(const r of [44,34,24]) if(r<(lofi?46:56)) s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#3a352c" stroke-width="1"/>`;
     s+=`<circle cx="${cx}" cy="${cy}" r="15" fill="${rp.rec==='tune'?GODEL:BACH}"/>`;
     s+=`<line x1="${cx}" y1="${cy}" x2="${cx+13*Math.cos(rp.spin)}" y2="${cy+13*Math.sin(rp.spin)}" stroke="#fff" stroke-width="2"/>`;
@@ -424,7 +426,7 @@ function rpDraw(shake){
   }
   s+='</g>';
   // record sleeve (left out on narrow screens, where the selected Record button already names it)
-  if(window.innerWidth>=560) s+=`<rect x="450" y="50" width="150" height="90" rx="6" fill="#fff" stroke="${RULE}" stroke-width="1.5"/><text x="525" y="72" text-anchor="middle" font-family="Inter" font-size="10.5" fill="${MUTE}">ON THE TURNTABLE</text>`;
+  if(window.innerWidth>=560) s+=`<rect x="450" y="50" width="150" height="90" rx="6" fill="var(--field)" stroke="${RULE}" stroke-width="1.5"/><text x="525" y="72" text-anchor="middle" font-family="Inter" font-size="10.5" fill="${MUTE}">ON THE TURNTABLE</text>`;
   const nm=rp.rec==='tune'?['An ordinary','tune']:['“I Cannot Be Played','on Record Player '+rp.rec+'”'];
   if(window.innerWidth>=560) nm.forEach((l,i)=>s+=`<text x="525" y="${96+i*18}" text-anchor="middle" font-family="EB Garamond" font-size="15" fill="${INK}">${l}</text>`);
   $('rp').innerHTML=s;
@@ -527,7 +529,7 @@ function pqGrid(rootId,opts){
     <div class="seg" style="margin-top:8px"><span class="sl">Read q as</span><span class="seg" data-r="rd"></span></div>
     <div class="verdict ${opts.both?'':'one'}" data-r="verdict"></div>
     <div style="overflow-x:auto"><table class="pqgrid" data-r="grid"></table></div>
-    <div class="legend"><span><i style="background:var(--escher)"></i>theorem, and true</span><span><i style="background:var(--bach)"></i>theorem, but false</span>${opts.both?'<span><i style="background:#fff8e6;border:1.5px dashed var(--gold)"></i>true, but not a theorem</span>':''}<span><i style="background:#fff;border:1px solid var(--rule)"></i>${opts.both?'neither':'not a theorem'}</span></div>
+    <div class="legend"><span><i style="background:var(--escher)"></i>theorem, and true</span><span><i style="background:var(--bach)"></i>theorem, but false</span>${opts.both?'<span><i style="background:var(--gold-tint);border:1.5px dashed var(--gold)"></i>true, but not a theorem</span>':''}<span><i style="background:var(--field);border:1px solid var(--rule)"></i>${opts.both?'neither':'not a theorem'}</span></div>
     <div class="out" data-r="cell"></div>`;
   const q=r=>root.querySelector(`[data-r="${r}"]`);
   function render(){
@@ -605,8 +607,8 @@ function diskPath(deg,stroke,w,op=1){
 }
 // widest angle (from the horizontal) at which a line through P still misses L, found by bisection
 const diskEdge=(()=>{let lo=0,hi=90;for(let i=0;i<50;i++){const m=(lo+hi)/2;diskLine(m).meets?hi=m:lo=m;}return lo;})();
-const dot=(X,Y,fill,r=5)=>`<circle cx="${X}" cy="${Y}" r="${r}" fill="${fill}" stroke="#fff" stroke-width="1.5"/>`;
-const lab=(X,Y,t,fill=INK,anchor='start')=>`<text x="${X}" y="${Y}" stroke="#fffdf7" stroke-width="4" paint-order="stroke" stroke-linejoin="round" font-family="Inter" font-size="14" font-weight="600" fill="${fill}" text-anchor="${anchor}">${t}</text>`;
+const dot=(X,Y,fill,r=5)=>`<circle cx="${X}" cy="${Y}" r="${r}" fill="${fill}" stroke="var(--field)" stroke-width="1.5"/>`;
+const lab=(X,Y,t,fill=INK,anchor='start')=>`<text x="${X}" y="${Y}" stroke="var(--card)" stroke-width="4" paint-order="stroke" stroke-linejoin="round" font-family="Inter" font-size="14" font-weight="600" fill="${fill}" text-anchor="${anchor}">${t}</text>`;
 const FAN=[...Array(30)].map((_,i)=>i*6);
 function geoMeets(deg){return geo.world==='flat'?flatLine(deg).meets:geo.world==='sphere'?true:diskLine(deg).meets;}
 function geoDraw(){
@@ -624,16 +626,16 @@ function geoDraw(){
     else out=`<b>Never meets L.</b> The line stays the same distance from L for ever.`;
     s+=dot(FL.px,FL.py,INK)+lab(FL.px+10,FL.py-10,'P');
   } else if(w==='sphere'){
-    s+=`<circle cx="${SP.cx}" cy="${SP.cy}" r="${SP.R}" fill="#f6f1e4" stroke="${RULE}" stroke-width="1.5"/>`;
+    s+=`<circle cx="${SP.cx}" cy="${SP.cy}" r="${SP.R}" fill="var(--paper)" stroke="${RULE}" stroke-width="1.5"/>`;
     s+=circlePath(equator,SP,INK,2.5);
     if(geo.fan)FAN.forEach(d=>s+=circlePath(greatCircle(d).pt,SP,MUTE,1,.5));
     const g=greatCircle(deg); s+=circlePath(g.pt,SP,lineCol,3);
-    g.hits.forEach(h=>{const p=proj(h);s+=p.front?dot(p.X,p.Y,BACH):`<circle cx="${p.X}" cy="${p.Y}" r="5" fill="#fff" stroke="${BACH}" stroke-width="2"/>`;});
+    g.hits.forEach(h=>{const p=proj(h);s+=p.front?dot(p.X,p.Y,BACH):`<circle cx="${p.X}" cy="${p.Y}" r="5" fill="var(--field)" stroke="${BACH}" stroke-width="2"/>`;});
     const P=proj(sphereBasis().P); s+=dot(P.X,P.Y,INK)+lab(P.X-22,P.Y-10,'P');
     s+=lab(SP.cx-SP.R-20,proj(equator(Math.PI)).Y+5,'L');
     out=`<b>Meets L</b> in 2 spots, exactly opposite each other on the ball (red dots; the hollow one is on the far side).`;
   } else {
-    s+=`<circle cx="${DK.cx}" cy="${DK.cy}" r="${DK.R}" fill="#f6f1e4" stroke="${RULE}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    s+=`<circle cx="${DK.cx}" cy="${DK.cy}" r="${DK.R}" fill="var(--paper)" stroke="${RULE}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
     s+=`<line x1="${DK.cx-DK.R}" y1="${DK.cy}" x2="${DK.cx+DK.R}" y2="${DK.cy}" stroke="${INK}" stroke-width="2.5"/>`+lab(DK.cx-DK.R+12,DK.cy+20,'L');
     if(geo.fan)FAN.forEach(d=>{const m=diskLine(d).meets;s+=diskPath(d,m?MUTE:GOLD,m?1:2,m?.5:.9);});
     s+=diskPath(deg,lineCol,3);
@@ -664,12 +666,12 @@ geoUI();
 const S6={cx:320,cy:150,R:122,tilt:rad(24),lat:rad(38)}; let s6pair=false;
 function s6Draw(){
   const deg=+$('sAng').value; let s='';
-  s+=`<circle cx="${S6.cx}" cy="${S6.cy}" r="${S6.R}" fill="#f6f1e4" stroke="${RULE}" stroke-width="1.5"/>`;
+  s+=`<circle cx="${S6.cx}" cy="${S6.cy}" r="${S6.R}" fill="var(--paper)" stroke="${RULE}" stroke-width="1.5"/>`;
   for(const d of [0,36,72,108,144]) s+=circlePath(greatCircle(d,S6).pt,S6,MUTE,1,.5);
   s+=circlePath(greatCircle(deg,S6).pt,S6,GODEL,3);
   const A=sphereBasis(S6).P, a=proj(A,S6), b=proj(A.map(v=>-v),S6);
   s+=dot(a.X,a.Y,BACH,6)+lab(a.X+11,a.Y-10,'A',BACH);
-  s+=`<circle cx="${b.X}" cy="${b.Y}" r="6" fill="#fff" stroke="${BACH}" stroke-width="2"/>`+lab(b.X+11,b.Y+18,s6pair?'A (far side)':'A′ (far side)',BACH);
+  s+=`<circle cx="${b.X}" cy="${b.Y}" r="6" fill="var(--field)" stroke="${BACH}" stroke-width="2"/>`+lab(b.X+11,b.Y+18,s6pair?'A (far side)':'A′ (far side)',BACH);
   $('sSvg').innerHTML=s;
   $('sOut').innerHTML=s6pair
     ?'<b>One point, with many lines through it.</b> That is what a point should have. Now pick any two different points (two different pairs of spots) and exactly one great circle passes through both, as the first postulate asks.'
@@ -694,7 +696,7 @@ function tzDraw(){
   [['T','Z'],['Z','E'],['E','T']].forEach(([a,b])=>{const [x1,y1]=N[a],[x2,y2]=N[b],dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
     s+=`<line x1="${x1+ux*30}" y1="${y1+uy*30}" x2="${x2-ux*32}" y2="${y2-uy*32}" stroke="${col}" stroke-width="2" marker-end="url(#tza)"/>`;
     s+=`<text x="${(x1+x2)/2+(a==='Z'?0:(a==='T'?26:-26))}" y="${(y1+y2)/2+(a==='Z'?18:-4)}" text-anchor="middle" font-family="JetBrains Mono" font-size="14" fill="${INK2}">${a}b${b}</text>`;});
-  for(const k in N){const [x,y]=N[k];s+=`<circle cx="${x}" cy="${y}" r="26" fill="#fff" stroke="${INK}" stroke-width="1.8"/><text x="${x}" y="${y+4}" text-anchor="middle" font-family="Inter" font-size="12.5" fill="${INK}">${names[k]}</text>`;}
+  for(const k in N){const [x,y]=N[k];s+=`<circle cx="${x}" cy="${y}" r="26" fill="var(--field)" stroke="${INK}" stroke-width="1.8"/><text x="${x}" y="${y+4}" text-anchor="middle" font-family="Inter" font-size="12.5" fill="${INK}">${names[k]}</text>`;}
   $('tzSvg').innerHTML=s; $('tzOut').innerHTML=R.msg;
 }
 tzDraw();
@@ -705,7 +707,7 @@ tzDraw();
   for(let i=0;i<st;i++){x+=w;d+=` L${x},${y}`;y-=h;d+=` L${x},${y}`;}
   d+=` L${x+w},${y}`;
   const man=(col)=>`<circle cx="0" cy="-34" r="6" fill="${col}"/><path d="M0,-28 L0,-12 M0,-12 L-6,0 M0,-12 L6,0 M-8,-22 L8,-22" stroke="${col}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
-  let s=`<path d="${d} L${x+w},186 L40,186Z" fill="#f1ead8"/><path d="${d}" fill="none" stroke="${INK}" stroke-width="2.2"/>`;
+  let s=`<path d="${d} L${x+w},186 L40,186Z" fill="var(--paper2)"/><path d="${d}" fill="none" stroke="${INK}" stroke-width="2.2"/>`;
   s+=`<g transform="translate(${40+w*2.5},${170-h*2})">${man(GODEL)}</g>`;
   s+=`<g transform="translate(${40+w*4},${170-h*3.5}) rotate(-90)">${man(BACH)}</g>`;
   $('relSvg').innerHTML=s;
