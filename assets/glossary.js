@@ -75,7 +75,7 @@ window.GEB_GLOSSARY = {
   "intervallic augmentation": {def:"The Tortoise’s name for stretching the jumps between a tune’s notes instead of its timing.", in:"07"},
   "decoder":           {def:"Something that brings out what is in a message without adding meaning of its own, as a record player does for a record. The book’s words are “decoding mechanism” and “information-revealer”.", in:"07"},
   "trigger":           {def:"An input that sets something off without containing it, like the buttons on a jukebox.", in:"07"},
-  "dna":               {def:"The long, thin molecule in every living cell that is passed from parents to offspring. It is a chain of four kinds of unit, written A, C, G and T.", in:"07"},
+  "dna":               {def:"The long, thin molecule in the cells of every living thing that is passed from parents to offspring. It is a chain of four kinds of unit, written A, C, G and T.", in:"07"},
   "genotype":          {def:"A living thing’s DNA.", in:"07"},
   "phenotype":         {def:"The living thing itself: its body and all its features.", in:"07"},
   "protein":           {def:"One of the molecules that do most of the work in a cell. Each is a chain of smaller units called amino acids.", in:"07"},

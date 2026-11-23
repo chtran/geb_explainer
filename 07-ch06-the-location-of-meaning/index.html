@@ -51,11 +51,22 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
 .shapes figure.on{border-color:var(--bach);border-width:2px;padding:5px 5px 3px}
 .shapes svg{display:block;width:100%;height:70px}
 .shapes b{font-family:"JetBrains Mono",monospace;font-weight:500;color:var(--ink);white-space:nowrap}
-#grv{display:block;width:100%;max-width:520px;touch-action:manipulation;cursor:pointer}
+#grv{display:block;width:100%;height:208px;padding:0 14px;box-sizing:border-box;touch-action:manipulation;cursor:pointer}
 .mlabel{font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin:10px 0 4px}
-.chain{display:block;width:100%;max-width:760px;margin:6px auto}
+.chainrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:13px Inter,sans-serif;margin:4px 0 12px}
+.chainrow span{background:#fff;border:1px solid #b9ae99;border-radius:8px;padding:7px 12px;color:var(--ink)}
+.chainrow span.dash{border-style:dashed;color:var(--ink2)}
+.chainrow span.brain{background:#eaf1ea;border:2px solid var(--escher);border-radius:20px}
+.chainrow i{font-style:normal;font-size:12px}
+.chainrow.r i{color:var(--bach)}.chainrow.g i{color:var(--escher)}
+.chainrow i::after{content:" →"}
+.scales{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin:12px 0;font:13px Inter,sans-serif;color:var(--ink2);text-align:center}
+.scales div{border:1px solid var(--rule);border-radius:10px;background:#fff;padding:10px}
+.scales b{display:block;font:500 28px "JetBrains Mono",monospace;color:var(--bach)}
+.scales em{display:block;font-style:normal;color:var(--escher);font-weight:600;margin-top:4px}
+.cols>.card{height:100%;box-sizing:border-box}
 .stepper button{min-width:44px}
-.stepper button:disabled{opacity:.4}
+.stepper button{font-weight:600}.stepper button:disabled{color:#c9bfa9}
 #jkPlay{min-width:210px}
 @media (max-width:560px){
   .ctable.stack,.ctable.stack tbody,.ctable.stack tr,.ctable.stack td{display:block;width:auto}
@@ -75,7 +86,7 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
   <div class="kicker">Gödel, Escher, Bach · Explainer 07</div>
   <h1>Canon by Intervallic Augmentation <span style="color:var(--ink2)">+</span> <em>The Location of Meaning</em></h1>
   <div class="geb"><span class="g">G</span><span class="e">E</span><span class="b">B</span></div>
-  <p class="lede">A fortune-cookie slip reads two ways, and one record plays three different tunes on three different record players. So where is the meaning: in the message, or in whoever reads it? This page covers the dialogue <i>Canon by Intervallic Augmentation</i> and Chapter VI, in which Hofstadter sends a record, a strand of DNA and a metal plate out into space and asks how much of their meaning travels with them.</p>
+  <p class="lede">A fortune-cookie slip reads two ways, and one record plays three different tunes on three different record players. So where is the meaning: in the message, or in whoever reads it? This page covers the dialogue <i>Canon by Intervallic Augmentation</i> and Chapter VI, in which the author, Douglas Hofstadter, sends a record, a strand of DNA and a metal plaque out into space and asks how much of their meaning travels with them.</p>
 </header>
 
 <div class="toolbar"><div class="in">
@@ -117,41 +128,42 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     </div>
   </div>
   <p>The fifteen letters are the same under all three spacings. What changes is the rule the reader uses to cut them into words. Two of the three rules give English words, and they give different ones. The slip alone doesn't say which of those two is right. Still, the letters set limits: the third cut gives no sentence, and no cut will make them say "happy birthday". Some of the meaning comes from the reader and some from the slip. How much comes from each is the question of the chapter.</p>
-  <p>Each of them also reads in his own way. Achilles counts syllables and looks for the form of a poem. The Tortoise looks for something the words could be saying. And before the Tortoise has even seen the slip, he jokes that a haiku with most of its syllables eaten would be a new art form, and a sad one. Then he reads nearly those words off the paper. He found in the message what he already had in mind.</p>
+  <p>Each reads in his own way: Achilles counts syllables, and the Tortoise looks for something the words could be saying. Before the Tortoise has even seen the slip, he jokes that a haiku with most of its syllables eaten would be a new art form, and a sad one. Then he reads nearly those words off the paper.</p>
 </section>
 
 <!-- 2 -->
 <section id="s-jukebox">
   <div class="sec-head"><div class="num">2</div><h2>One record, three tunes</h2></div>
-  <p>The talk turns to the Tortoise's friend the Crab. A record is a flat disc with one long spiral groove cut into it. Tiny wiggles in the groove are a trace of a sound, and a record player turns them back into sound by running a needle along the groove. In <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/#s-records"><i>Contracrostipunctus</i></a>, two dialogues ago, the Crab kept losing record players to the Tortoise's records. A jukebox is a coin-operated machine, once common in cafés, that holds a stack of records and plays the one whose buttons you press. The Crab has bought a strange jukebox. It holds a single record and a whole rack of record players hanging from rails, and pressing a pair of buttons chooses which player rolls up to the one record and plays it.</p>
+  <p>The talk turns to the Tortoise's friend the Crab. A record is a flat disc with one long spiral groove cut into it. Tiny wiggles in the groove are a trace of a sound, and a record player turns them back into sound by running a needle along the groove. In <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/#s-records"><i>Contracrostipunctus</i></a>, two dialogues ago, the Crab kept losing record players to the Tortoise's records, which were made to shake them to pieces. A jukebox is a coin-operated machine, once common in cafés, that holds a stack of records and plays the one whose buttons you press. The Crab has bought a strange jukebox. It holds a single record and a whole rack of record players hanging from rails, and pressing a pair of buttons chooses which player rolls up to the one record and plays it.</p>
   <p>The Tortoise tried three players and heard three different tunes. To see how that could be, we need a few words from the <a class="xref" href="../01-introduction/#s-canon">Introduction</a>. A <span class="term">semitone</span> is a step of one piano key, black or white. An <span class="term">interval</span> is the distance between two notes, which we will count in semitones: +3 means "three keys up", −1 means "one key down". A four-note tune has three intervals, and those three numbers are its shape. Notes are also named by letters, A to G. B♭ (B <span class="term">flat</span>) is the black key just below B. German musicians name two notes differently: they call B♭ plain "B", and they call B "H". That gives them one more letter to spell with.</p>
-  <p>Try the three players. The Tortoise concludes that the groove holds one pattern which each player stretches by its own amount. This demo assumes the simplest version of that: the groove holds three intervals, and each player decides how far to stretch them and which note to start on.</p>
+  <p>Try the three players. Achilles and the Tortoise conclude that the groove holds one pattern, which each player stretches by its own amount. This demo assumes the simplest version of that: the groove holds three intervals, and each player decides how far to stretch them and which note to start on.</p>
   <div class="card">
     <div class="seg"><span class="sl">Player</span><span id="jkPlayers" class="seg"></span></div>
     <canvas id="jkCanvas" height="210" style="margin-top:10px"></canvas>
     <div class="legend"><span><i style="background:var(--bach)"></i>the tune this player makes</span><span><i style="background:#cfc4ad"></i>the other two players' tunes</span></div>
     <div class="row"><button id="jkPlay">▶ Play this player's tune</button></div>
+    <svg id="jkKeys" role="img" aria-label="A piano keyboard with this player's four notes marked" style="display:block;width:100%;margin:8px 0 2px"></svg>
     <div class="jk" id="jkOut"></div>
-    <div class="mlabel">The three tunes, each drawn to fill its own box</div>
+    <div class="mlabel">With the size taken out, the three tunes have the same zigzag</div>
     <div class="shapes" id="jkShapes"></div>
     <p class="small-note">Simplified: the Tortoise says the first two songs were "based on" their four notes and tells us nothing more, so only the four notes are played here, at an even pace, on a synthesized instrument.</p>
   </div>
-  <p>The first tune is the one from <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/#s-dialogue"><i>Contracrostipunctus</i></a>. In German names its four notes are B, A, C and H, the name BACH. The second player stretches every interval to 3⅓ times its size and rounds to the nearest whole key. That is the stretch that takes −1, +3, −1 to −3, +10, −3. Started on C, the stretched tune spells C, A, G, E: the name of John Cage (1912–1992), an American composer famous for a piece in which the performer plays nothing at all for four minutes and thirty-three seconds. The third player stretches the already stretched shape again and gets the letters of BACH back in the wrong order: B, C, A, H. So BACH and CAGE, which sound nothing alike, are in one sense the same tune: one shape at two sizes.</p>
+  <p>The first tune is the one from <a class="xref" href="../05-ch04-consistency-completeness-and-geometry/#s-dialogue"><i>Contracrostipunctus</i></a>. In German names its four notes are B, A, C and H, the name BACH. The second player stretches every interval to 3⅓ times its size and rounds to the nearest whole key. The number is the Tortoise's. No whole number will do: −1 to −3 is times 3, but +3 to +10 is times 3⅓. Started on C, the stretched tune spells C, A, G, E: the name of John Cage (1912–1992), an American composer famous for a piece in which the performer plays nothing at all for four minutes and thirty-three seconds. The third player stretches the already stretched shape again and gets the letters of BACH back in the wrong order: B, C, A, H. So BACH and CAGE, which sound nothing alike, are in one sense the same tune: one shape at two sizes.</p>
   <div class="cols">
     <div class="card">
       <h3 style="margin-top:0">The form: a canon, stretched in pitch instead of time</h3>
-      <p>A <span class="term">canon</span> is a tune played against a copy of itself, where the copy follows a strict rule. In a canon by <span class="term">augmentation</span> the rule is "play it slower": every note of the copy lasts, say, twice as long. The notes stay the same and only the time is stretched.</p>
+      <p>A <span class="term">canon</span> is a tune played against a copy of itself, where the copy follows a strict rule. In a canon by <span class="term">augmentation</span> the rule is "play it slower": every note of the copy lasts, say, twice as long. The notes stay the same and only the time is stretched. Here the copy is played after the tune, so that you can compare them.</p>
       <canvas id="augCanvas" height="110"></canvas>
       <div class="legend"><span><i style="background:var(--bach)"></i>B-A-C-H</span><span><i style="background:var(--gold)"></i>the same notes, each lasting twice as long</span></div>
       <div class="row"><button id="jkTime">▶ Play B-A-C-H, then augmented</button></div>
       <p>The Tortoise's name for the Crab's trick is <span class="term">intervallic augmentation</span>: stretch the jumps between notes and leave the time alone. Slowing a tune down leaves it recognisable. Stretching its intervals gives a tune no listener would call the same.</p>
     </div>
     <div class="intuit" style="margin:0"><b>The hidden tricks</b>
-      <p style="margin:6px 0">One way to read the dialogue is as the canon in its title. It states one small idea, a slip of paper read two ways, and then states it again much enlarged, a record played three ways. Its last line is a copy too. When the Tortoise read the slip, he called it an insightful comment on the new art form of the eaten haiku. When Achilles remarks that BACH comes back from CAGE jumbled, the Tortoise calls that an insightful comment on the new art form of Cage.</p>
+      <p style="margin:6px 0">The dialogue's last line copies an earlier one. When the Tortoise read the slip, he called it an insightful comment on the new art form of the eaten haiku. When Achilles remarks that BACH comes back from CAGE jumbled, the Tortoise calls that an insightful comment on the new art form of Cage.</p>
       <p style="margin:6px 0">The button names look like a clue. The Tortoise pressed B-1, C-3 and B-10. Each name gives the note the tune starts on and the size of its first step: BACH starts on B and first moves 1 key, CAGE starts on C and first moves 3, and the third tune starts on B and first moves 10. The dialogue doesn't point this out.</p>
     </div>
   </div>
-  <p>Achilles and the Tortoise agree that the groove must hold one pattern and that each player adds its own reading. Nobody in the dialogue looks in the groove to check. So it ends on an open question. If one record gives BACH on one player and CAGE on another, is the tune in the record or in the player? <b>The chapter now asks that question about every kind of message.</b></p>
+  <p>Achilles and the Tortoise conclude that the groove holds one pattern and that each player adds its own reading. Nobody in the dialogue looks in the groove to check. So it ends on an open question. If one record gives BACH on one player and CAGE on another, is the tune in the record or in the player? <b>The chapter now asks that question about every kind of message.</b></p>
 </section>
 
 <div class="half"><div class="hk">Chapter VI</div><div class="ht"><em>The Location of Meaning</em></div></div>
@@ -164,10 +176,10 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     <div class="card"><h3 style="margin-top:0">Meaning is in the message</h3><p>The message carries its meaning with it. Anyone who reads it properly gets the same thing out, so it makes sense to say what the message "really" means. The meaning has a location, and it is the same for everybody.</p></div>
     <div class="card"><h3 style="margin-top:0">Meaning is made by the reader</h3><p>A message is only marks. Meaning appears when a mind or a machine does something with the marks, and a different mind or machine may make something different, as with the slip and the Crab's record. Then the meaning is in no one place, and no reading is the right one.</p></div>
   </div>
-  <p>The dialogue seems to side with the second answer. Hofstadter sets out to defend the first, though only for some messages. His case will turn on what kind of thing intelligence is, which is the subject of <a class="xref" href="#s-intrinsic">section 8</a>. First we need words for the two things involved.</p>
-  <p>Take an ordinary record and an ordinary record player. The record carries information and the player brings it out. The book calls them an information-bearer and an information-revealer. This page will call the second a <span class="term">decoder</span>. The player can do its job because the wiggles in the groove and the sounds of the music line up piece for piece. Such a lining-up is an <span class="term">isomorphism</span>.</p>
-  <p>The same two roles appeared in <a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/#s-meaning">Chapter II</a>. The <span class="term">pq-system</span> produces strings such as <span class="mono">--p---q-----</span>. The strings carry the information. The decoder is the <span class="term">interpretation</span> that reads p as "plus", q as "equals" and each group of hyphens as the number of hyphens in it, which turns that string into "2 plus 3 equals 5". Here the decoder is so simple that you carry it in your head. And we have already seen one thing come out two ways: the same string could also be read as "2 equals 3 taken from 5".</p>
-  <p>Both examples suggest that information sits inside a thing, waiting to be pulled out. But how hard are you allowed to pull? If pulling it out takes a huge and clever effort, you may start to feel that you are putting in more than you are getting out. The next two sections look at where that feeling comes from.</p>
+  <p>The dialogue seems to side with the second answer. Hofstadter sets out to defend the first, though only for some messages. His case will turn on what kind of thing intelligence is. First we need words for the two things involved.</p>
+  <p>Take an ordinary record and an ordinary record player. The record carries information and the player brings it out. The player is a <span class="term">decoder</span>. The player can do its job because the wiggles in the groove and the sounds of the music line up piece for piece. Such a lining-up is an <span class="term">isomorphism</span>.</p>
+  <p>The same two roles appeared in <a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/#s-meaning">Chapter II</a>. The <span class="term">pq-system</span> was a toy game whose rules produce rows of symbols such as <span class="mono">--p---q-----</span>. The rows carry the information. The decoder is the <span class="term">interpretation</span> that reads p as "plus", q as "equals" and each group of hyphens as the number of hyphens in it, which turns that string into "2 plus 3 equals 5". Here the decoder is so simple that you carry it in your head. And we have already seen one thing come out two ways: the same row could also be read as "2 equals 3 taken from 5".</p>
+  <p>Both examples suggest that information sits inside a thing, waiting to be pulled out. But how hard are you allowed to pull? If pulling it out takes a huge and clever effort, you may start to feel that you are putting in more than you are getting out.</p>
 </section>
 
 <!-- 4 -->
@@ -182,9 +194,9 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     <canvas id="mcCanvas" height="130"></canvas>
     <div class="row"><button id="mcPlay">▶ Play</button></div>
     <div class="out" id="mcOut"></div>
-    <p class="small-note">Simplified: a real groove is a continuous wiggle that traces the sound wave itself. Here it is eight steps, and the height of each step sets one note.</p>
+    <p class="small-note" id="mcNote"></p>
   </div>
-  <p>The book gives four reasons for saying that a record, unlike a pair of buttons, really does hold its music. You have just seen three of them.</p>
+  <p>The book gives four reasons for saying that a record, unlike a pair of buttons, really does hold its music. The demo showed the first three; the fourth is about how easily the two things come apart.</p>
   <div class="card">
     <table class="ctable stack">
       <tr><th>The test</th><th>Record in a record player</th><th>Buttons on a jukebox</th></tr>
@@ -195,7 +207,7 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     </table>
   </div>
   <p>So a decoder is a mechanism that adds no meaning of its own and only reveals what is in its input. A jukebox is the opposite case. It supplies meaning that was stored inside itself.</p>
-  <p>These are the two ends of a scale, and most cases fall between them. Think of a record smashed to pieces. The music can be recovered, since the broken edges fit together in only one way, but it takes far more work than putting on a record. If Achilles' guess is right, the Crab's jukebox sits in the middle too: its record holds a shape, and each player adds a size. The book's hardest case is in every cell of your body.</p>
+  <p>These are the two ends of a scale, and most cases fall between them. Think of a record smashed to pieces. The music can be recovered, since the broken edges fit together in only one way, but it takes far more work than putting on a record. If the guess at the end of the dialogue is right, the Crab's jukebox sits in the middle too: its record holds a shape, and each player adds a size. The book's hardest case is in nearly every cell of your body.</p>
 </section>
 
 <!-- 5 -->
@@ -203,27 +215,26 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
   <div class="sec-head"><div class="num">5</div><h2>DNA: a message that needs a cell to read it</h2></div>
   <p><span class="term">DNA</span> is a very long, thin molecule found in the cells of every living thing. It is a chain of four kinds of small chemical unit, usually written as the letters A, C, G and T, so a DNA molecule can be written down as a long row of letters. A living thing's DNA is called its <span class="term">genotype</span>. The living thing itself, with its body and all its features, is called its <span class="term">phenotype</span>.</p>
   <p>Experiments in the 1940s, led by Oswald Avery, showed that DNA is the material that passes features from parents to offspring. Change the DNA and the change is inherited. So it is common to say that DNA "contains the information" for building the organism. In the book's terms, genotype and phenotype would then be isomorphic, with the chemistry of the cell as the decoder.</p>
-  <p>But compare this with a record.</p>
-  <p>With a record the parts are easy to match: for any moment of the music you can put your finger on the bit of groove that holds it. Hofstadter calls that a prosaic isomorphism, meaning a plain, everyday one. Now try to find the piece of your DNA that holds the shape of your nose. He compares it to looking for the one note that carries the sadness of a sad piece of music. There isn't one. The sadness belongs to large stretches of the piece taken together. A match where it is this hard even to say what the matching parts are he calls an <span class="term">exotic isomorphism</span>.</p>
-  <p>The way DNA gets read is also nothing like a needle in a groove. Short stretches of DNA set off the making of <span class="term">proteins</span>, the molecules that do most of the work in a cell. Those proteins set off hundreds of chemical reactions. Some of the reactions build more of the machinery that reads the DNA, and some copy the DNA itself. Each stretch of DNA behaves like a pair of jukebox buttons, and the "songs" that come out are instructions for building more jukeboxes. The organism is what you have after a vast number of rounds of this.</p>
+  <p>But with a record the parts are easy to match: for any moment of the music you can put your finger on the bit of groove that holds it. Now try to find the piece of your DNA that holds the shape of your nose. He compares it to looking for the one note that carries the sadness of a sad piece of music. There isn't one. The sadness belongs to large stretches of the piece taken together. A match where it is this hard even to say what the matching parts are he calls an <span class="term">exotic isomorphism</span>.</p>
+  <p>The way DNA gets read is also nothing like a needle in a groove. Short stretches of DNA set off the making of <span class="term">proteins</span>, the molecules that do most of the work in a cell. Those proteins set off hundreds of chemical reactions. Some of the reactions build more of the machinery that reads the DNA, and some copy the DNA itself. Each stretch of DNA behaves like a pair of jukebox buttons. The "songs" that come out are proteins, and some of those proteins build more jukeboxes. A process that feeds on its own results like this is the recursion of Chapter V, and the book returns to it in Chapter XVI. The organism is what you have after a vast number of rounds of this.</p>
   <details class="primer">
     <summary><span class="pm-title">Background: the genetic code is not the meaning of DNA</span><span class="pm-sub">A warning the book gives</span></summary>
     <div class="primer-body">
       <p>Proteins are chains of smaller units called amino acids. In the 1960s biologists worked out the <span class="term">genetic code</span>: the table that says which three DNA letters stand for which amino acid. Hofstadter warns that this is like learning how the letters of a foreign alphabet are pronounced. You can then read the text aloud, but you still know none of its words or grammar. Knowing how a row of DNA letters becomes a protein does not tell you how a set of proteins becomes a nose.</p>
     </div>
   </details>
-  <p>And much of the chemistry that does the reading is not written in the DNA at all. The DNA counts on the cell around it to supply it. That leaves two views of what DNA is:</p>
+  <p>In short, knowing how DNA letters turn into proteins is not yet knowing what the DNA means. And much of the chemistry that does the reading is not written in the DNA at all. The DNA counts on the cell around it to supply it. That leaves two views of what DNA is:</p>
   <div class="cols">
     <div class="card"><span class="tag b">View 1</span><h4>Only triggers</h4><p>So much of the information is in the cell's chemistry that DNA is no more than a long row of buttons to push. Out of its chemical setting it means nothing.</p></div>
     <div class="card"><span class="tag g">View 2</span><h4>All there, deeply hidden</h4><p>The information is in the DNA, but not on the surface. The pattern is so strongly ordered that a clever enough being could work out the meaning from the molecule alone.</p></div>
   </div>
-  <p>Does DNA need the right <b>chemistry</b> to have meaning, or only enough <b>intelligence</b> looking at it? Hofstadter moves the question to a simpler object, far from home. We come back to DNA in <a class="xref" href="#s-context">section 9</a>.</p>
+  <p>Does DNA need the right <b>chemistry</b> to have meaning, or only enough <b>intelligence</b> looking at it? Hofstadter moves the question to a simpler object, far from home.</p>
 </section>
 
 <!-- 6 -->
 <section id="s-layers">
   <div class="sec-head"><div class="num">6</div><h2>A record in space, and the three layers of any message</h2></div>
-  <p>Imagine a record of a Bach violin sonata launched out of the solar system. It has lost everything that surrounded it on Earth: record players, ears, concert halls, Bach. Everything around a message that helps in reading it is called its <b>context</b>. With all its context gone, how much meaning does the record still carry?</p>
+  <p>Imagine a record of a piece for violin by Bach launched out of the solar system. It has lost everything that surrounded it on Earth: record players, ears, concert halls, Bach. Everything around a message that helps in reading it is called its <b>context</b>. With all its context gone, how much meaning does the record still carry?</p>
   <p>Suppose that after a very long time some alien beings find it. Hofstadter separates what they would have to grasp into three layers.</p>
   <ul class="layers">
     <li class="l1"><b>1 · The <span class="term">frame message</span></b><br>"I am a message. Decode me if you can." Nothing says this in words. The shape says it: a flat, perfectly round disc with a hole in the exact middle is not something rocks do. To understand the frame message is to see that a decoder is needed.</li>
@@ -234,39 +245,37 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
   <h3>A bottle on the beach</h3>
   <p>The three layers are easiest to see closer to home. You find a sealed bottle on a beach with a dry sheet of paper inside. Before you see any writing, you know that somebody meant this to be found: that is the frame message. You pull out the paper and recognise the writing as Japanese, without understanding a word of it. That is the outer message: "I am in Japanese." Now you know what kind of decoder you need, a person who reads Japanese, and only then can you get at the inner message, which might be a call for help or a haiku.</p>
   <div class="intuit"><b>The outer message can't be spelled out</b>Could the sender help by writing "This note is in Japanese" at the top? Only a reader of Japanese could read that line, and that reader doesn't need it. Writing the line in twenty languages helps in practice, but you still have to recognise English as English before the English line can tell you anything. So the outer message is never a message in the ordinary sense. It is a set of triggers that the sender hopes will set off the right idea in the finder, and the sender can't make sure they do.</div>
-  <p>The same three layers can be found in other things the chapter discusses.</p>
   <div class="card">
-    <div class="seg"><span class="sl">Object</span><span id="lySeg" class="seg"></span></div>
-    <ul class="layers" id="lyOut" style="min-height:190px"></ul>
+    <table class="ctable stack">
+      <tr><th></th><th>Frame: "I am a message"</th><th>Outer: "decode me like this"</th><th>Inner: what was meant</th></tr>
+      <tr><td>Bottle on a beach</td><td data-l="Frame">A sealed bottle with dry paper in it</td><td data-l="Outer">The look of Japanese writing</td><td data-l="Inner">A call for help, a poem</td></tr>
+      <tr><td>Record in space</td><td data-l="Frame">A round disc with a centred hole</td><td data-l="Outer">One long groove whose wiggles look like a recorded vibration</td><td data-l="Inner">What the music makes a listener feel</td></tr>
+      <tr><td>An ancient carved stone</td><td data-l="Frame">Rows of small carved signs on a shaped slab</td><td data-l="Outer">Which signs repeat, and how they are grouped</td><td data-l="Inner">What the writers were saying</td></tr>
+      <tr><td>DNA</td><td data-l="Frame">A long chain that never simply repeats, wound into a regular coil</td><td data-l="Outer">The chemical form of the chain</td><td data-l="Inner">The phenotype: the living thing</td></tr>
+    </table>
   </div>
+  <p>The outer message is more than a label. Before a piece of music can say anything to you, you have to know how to listen to that kind of music. Hofstadter treats a sender's style, the outer message and the technique for decoding as one idea.</p>
   <details class="primer">
     <summary><span class="pm-title">Background: what makes something look like a message?</span><span class="pm-sub">Schrödinger's aperiodic crystals</span></summary>
     <div class="primer-body">
       <p>Hofstadter borrows a phrase from the physicist Erwin Schrödinger. A crystal, such as a grain of salt, is a pattern of atoms repeated over and over. An <span class="term">aperiodic crystal</span> is orderly too, but it never simply repeats (aperiodic means "not repeating"). In 1944, before anyone knew how DNA was built, Schrödinger predicted that whatever carries heredity would turn out to be of this kind. A row of DNA letters fits the description. So do the groove of a record and the print in a book. Hofstadter's suggestion is that a common kind of frame message is an aperiodic crystal inside a neat, regular package: a spiral groove on a round disc, lines of print in a rectangular book, a strand of DNA wound into a regular coil. He adds that this doesn't cover every case.</p>
     </div>
   </details>
-  <p>The book calls the three layers a rough first sketch; a real message may have layers inside layers.</p>
+  <p>In short, things that look like messages tend to be orderly without ever simply repeating; Schrödinger's name for such a thing is an aperiodic crystal. The book calls the three layers a rough first sketch; a real message may have layers inside layers.</p>
 </section>
 
 <!-- 7 -->
 <section id="s-trap">
   <div class="sec-head"><div class="num">7</div><h2>A decoder for the decoder</h2></div>
-  <p>The bottle leads to a trap. Suppose you held that no message means anything by itself, and that every message needs something added before it can be understood. Hofstadter calls this the jukebox theory of meaning, since it treats every message as a pair of buttons. On that theory, a message needs a second message saying how to read it. The second needs a third. The chain never ends, so no message could ever be understood.</p>
+  <p>The bottle leads to a trap. Suppose you held that no message means anything by itself, and that every message needs something added before it can be understood. Hofstadter calls this the jukebox theory of meaning, since it treats every message as a pair of buttons. What gets added, a way of reading the message, is information too, and it has to be understood in its turn. So on that theory a message needs a second message saying how to read it. The second needs a third. The chain never ends, so no message could ever be understood.</p>
   <p>We met this trap in the <a class="xref" href="../03-ch02-meaning-and-form-in-mathematics/#s-regress">dialogue before Chapter II</a>. There the Tortoise refused to use a rule of reasoning until a further rule was written down telling him he could use it, then asked for a rule about that rule, and so on for ever. The two traps have the same shape: before you can use a rule, or read a message, you need another one telling you how.</p>
   <p>Yet rules do get used and messages do get understood. Hofstadter's way out is that the chain ends in something that is not a message. A brain is a physical object. It was shaped by evolution, it runs by the laws of physics, and nobody has to tell it how to run. He says that brains come with built-in equipment, which he calls hardware, for noticing that something is a message and for starting to decode it. A baby is not handed instructions for learning its first language. It starts with the equipment, and everything it learns later is built on that start.</p>
-  <svg class="chain" viewBox="0 0 760 150" role="img" aria-label="Top: a message needs a second message saying how to read it, which needs a third, without end. Bottom: a message is read by a brain, which needs no instructions.">
-    <g font-family="Inter,sans-serif" font-size="12.5" text-anchor="middle">
-      <text x="8" y="16" text-anchor="start" font-weight="600" fill="#6b6557" font-size="11" letter-spacing="1.3">THE JUKEBOX THEORY</text>
-      <g fill="#fff" stroke="#b9ae99"><rect x="8" y="26" width="150" height="38" rx="8"/><rect x="198" y="26" width="150" height="38" rx="8"/><rect x="388" y="26" width="150" height="38" rx="8"/><rect x="578" y="26" width="150" height="38" rx="8" stroke-dasharray="4 4"/></g>
-      <g fill="#1f1c17"><text x="83" y="50">a message</text><text x="273" y="50">how to read it</text><text x="463" y="50">how to read that</text><text x="653" y="50">and so on, for ever</text></g>
-      <g stroke="#9b2f2f" stroke-width="2" fill="none"><path d="M160 45h34m-7-5l7 5-7 5"/><path d="M350 45h34m-7-5l7 5-7 5"/><path d="M540 45h34m-7-5l7 5-7 5"/></g>
-      <text x="8" y="100" text-anchor="start" font-weight="600" fill="#6b6557" font-size="11" letter-spacing="1.3">HOFSTADTER'S WAY OUT</text>
-      <g fill="#fff" stroke="#b9ae99"><rect x="8" y="108" width="150" height="38" rx="8"/></g>
-      <rect x="198" y="108" width="340" height="38" rx="19" fill="#eaf1ea" stroke="#2f6b4f" stroke-width="2"/>
-      <g fill="#1f1c17"><text x="83" y="132">a message</text><text x="368" y="132">a brain: a physical thing, not a message</text></g>
-      <path d="M160 127h34m-7-5l7 5-7 5" stroke="#2f6b4f" stroke-width="2" fill="none"/>
-    </g>
-  </svg>
+  <div class="chainbox" role="img" aria-label="Top: a message needs a second message saying how to read it, which needs a third, without end. Bottom: a message is read by a brain, which needs no instructions.">
+    <div class="mlabel">The jukebox theory</div>
+    <div class="chainrow r"><span>a message</span><i>needs</i><span>how to read it</span><i>needs</i><span>how to read that</span><i>needs</i><span class="dash">and so on, for ever</span></div>
+    <div class="mlabel">Hofstadter's way out</div>
+    <div class="chainrow g"><span>a message</span><i>is read by</i><span class="brain">a brain: a physical thing, not a message</span></div>
+  </div>
   <p>So there is a jukebox at the bottom after all: the brain supplies what turns bare triggers into messages. Does that mean the meaning is in the brain and not in the message?</p>
 </section>
 
@@ -274,17 +283,19 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
 <section id="s-intrinsic">
   <div class="sec-head"><div class="num">8</div><h2>When meaning belongs to the message</h2></div>
   <p>A property is <span class="term">intrinsic</span> to a thing if the thing has it by itself, wherever it is and whoever is looking. Hofstadter's test for whether meaning is intrinsic comes from old inscriptions.</p>
-  <p>Many ancient scripts were forgotten for centuries and later worked out again. Sometimes there was help. The Rosetta Stone, found in Egypt in 1799, carries one announcement in Egyptian hieroglyphs, which nobody could read any longer, and again in Greek, which scholars could. The Greek was a readable copy of the inner message, and so a strong hint for building the decoder. Other scripts, such as the one called Linear B from ancient Crete and Greece, were worked out with no such copy.</p>
+  <p>Many ancient scripts were forgotten for centuries and later worked out again. Sometimes there was help. The Rosetta Stone, found in Egypt in 1799, carries one announcement in Egyptian hieroglyphs, which nobody could read any longer, and again in Greek, which scholars could. The Greek was a readable copy of the inner message, and so a strong hint for building the decoder. Other scripts, such as Linear B from ancient Crete, which Chapter II mentions, were worked out with no such copy.</p>
   <p>Working out an unknown script can take rival teams of scholars decades, using libraries from all over the world. With so much effort put in, was the meaning found in the text, or added to it? Hofstadter says found, for one reason: the result could not have come out otherwise. If one group had not worked a script out, another would have, later, and would have reached the same reading.</p>
   <div class="intuit"><b>Hofstadter's test</b>Meaning is part of an object to the extent that it acts on intelligence in a predictable way.</div>
   <p>Now apply the test to the brain's built-in jukebox. If every person's jukebox held different songs, the same marks would set off different things in each of us, and nobody would say the marks had a meaning. But human brains are built alike. Any baby can learn any language. The same triggers set off the same things in all of us, and that is why we can share frame messages and outer messages at all.</p>
   <p>Hofstadter then takes a step he labels as a belief. Suppose intelligence is not a one-off accident on Earth but something nature produces in many places, as it produces stars. Then some triggers might work on every intelligence, anywhere. A message made of such triggers would be read the same way by all of them, and it would be fair to say the meaning is in the message.</p>
   <h3>Weight and mass</h3>
-  <p>He compares this with weighing things. People once took weight to be a property of the object itself. Then it turned out that weight depends on where the object is. Stand on a bathroom scale on the Moon and it shows about a sixth of what it shows on Earth: a scale that says 60 kilograms at home would say about 10 there. But behind weight is a quantity that does not change from place to place, the object's <span class="term">mass</span>, the amount of matter in it. Mass is intrinsic and weight is not, as far as we know. If mass turned out to change with circumstances too, we would take the label back. Meaning would be intrinsic in the same way if it stayed the same from reader to reader.</p>
+  <p>He compares this with weighing things. People once took weight to be a property of the object itself. Then it turned out that weight depends on where the object is. Stand on a bathroom scale on the Moon and it shows about a sixth of what it shows on Earth: a scale that says 60 kilograms at home would say about 10 there. </p>
+  <div class="scales"><div>The scale on Earth<b>60</b><em>mass: 60 kilograms</em></div><div>The same scale on the Moon<b>10</b><em>mass: 60 kilograms</em></div></div>
+  <p>Behind weight is a quantity that does not change from place to place, the object's <span class="term">mass</span>, the amount of matter in it. Mass is intrinsic and weight is not, as far as we know. If mass turned out to change with circumstances too, we would take the label back. Meaning would be intrinsic in the same way if it stayed the same from reader to reader.</p>
   <p>The book states two doubts about its own argument, and leaves both open.</p>
   <div class="cols">
-    <div class="card"><h3 style="margin-top:0">Earth chauvinism</h3><p>You could make weight intrinsic by a trick: define weight as "what the scale says on Earth" and refuse to count readings anywhere else. Chauvinism is the unreasoned belief that your own kind is the measure of everything. We may be doing the same with intelligence if we count as intelligent only what resembles a human brain. There might be beings whose messages we would never recognise as messages, and who would not recognise ours.</p></div>
-    <div class="card"><h3 style="margin-top:0">A circle</h3><p>If "intelligent" just means "gets the same meaning out of things as we do", then "all intelligent beings get the same meaning" says nothing. The argument needs a description of intelligence that doesn't mention us. In 1979 Hofstadter had none. He guessed that if intelligence has a short, simple description of that kind, then it is likely to be a natural thing that turns up in many places, and the circle is broken. He hoped that psychology, brain science and the study of artificial intelligence would supply one within a few decades.</p></div>
+    <div class="card"><h3 style="margin-top:0">Earth chauvinism</h3><p>Chauvinism is the unreasoned belief that your own kind is the measure of everything. You could make weight intrinsic by a chauvinist's trick: define weight as "what the scale says on Earth" and refuse to count readings anywhere else. We may be doing the same with intelligence if we count as intelligent only what resembles a human brain. There might be beings whose messages we would never recognise as messages, and who would not recognise ours.</p></div>
+    <div class="card"><h3 style="margin-top:0">A circle</h3><p>If "intelligent" just means "gets the same meaning out of things as we do", then "all intelligent beings get the same meaning" says nothing. The argument needs a description of intelligence that doesn't mention us. In 1979 Hofstadter had none. He thought a short, simple description would make the idea feel less centred on humans, though it might never be fully free of that, and that meeting another intelligence would be the real support. He hoped that psychology, brain science and the study of artificial intelligence would supply one within a few decades.</p></div>
   </div>
 </section>
 
@@ -306,7 +317,7 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     </div>
     <p class="small-note">The five rules are this page's own examples. Even counting the dots is a guess about how to read the plaque. A longer plaque makes a rule more certain, never proven.</p>
   </div>
-  <p>With two rows, all five rules fit, and they disagree about what comes next. The plaque can't tell you which its maker had in mind. Each new row removes rules, and by the sixth row only one of the five is left: every row is the sum of the two rows above it. Numbers built this way are called the <span class="term">Fibonacci sequence</span>: 1, 1, 2, 3, 5, 8, 13, 21, 34. The book's second plaque carries those nine rows.</p>
+  <p>With two rows, all five rules fit. Four of them even agree that row 3 has two dots, and they part ways soon after. The plaque can't tell you which its maker had in mind. Each new row removes rules, and by the sixth row only one of the five is left: every row is the sum of the two rows above it. A rule like this, which makes each new thing out of earlier ones, is a recursive rule, the subject of Chapter V. Numbers built this way are called the <span class="term">Fibonacci sequence</span>: 1, 1, 2, 3, 5, 8, 13, 21, 34. The book's second plaque carries those nine rows.</p>
   <p>Once the rule is known, it can be built into a machine, and then the first two numbers are enough to get all the rest.</p>
   <div class="card">
     <div class="mlabel" style="margin-top:0">A machine with the rule built in · choose its two starting numbers</div>
@@ -317,10 +328,10 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     <div class="seqout" id="fSeq"></div>
     <p class="small-note" id="fNote"></p>
   </div>
-  <p>Hofstadter reuses the words from the DNA section here. The two starting numbers are a short "genotype" and the whole sequence is its "phenotype". The short genotype does not contain the sequence: it is a pair of buttons that works only on a machine already holding the rule. The nine-row plaque is a long genotype. It carries an inner message, the numbers, and also an outer message, the rule for going on, which a finder can work out from the plaque alone. The clearness of an outer message, he concludes, comes largely from sheer length. People who work out ancient scripts know this well: their chance of success depends on how much text has survived.</p>
+  <p>Hofstadter reuses the words from the DNA section here. The two starting numbers are a short "genotype" and the whole sequence is its "phenotype". The short genotype does not contain the sequence: it is a pair of buttons that works only on a machine already holding the rule. The nine-row plaque is a long genotype for the same phenotype, the endless sequence. It carries its own outer message: from the rows alone a finder can work out the rule needed to decode them into the rest. The clearness of an outer message, he concludes, comes largely from sheer length. People who work out ancient scripts know this well: their chance of success depends on how much text has survived.</p>
   <h3>Bach and Cage in space</h3>
   <p>Length is not enough, though. Go back to the record in space and swap the Bach for a piece by John Cage in which twenty-four performers turn the knobs of twelve radios, so that what you hear depends on chance. Music made by chance is called <span class="term">aleatoric music</span>. To us the piece means something as a rebellion against the habits of Western music. To get that meaning you need to know those habits. The listener who has that history is the jukebox, and the piece is the pair of buttons: most of the meaning is in the listener already. That jukebox exists only on Earth.</p>
-  <p>Bach's music is full of patterns, and patterns of patterns, which a finder could seize on. Hofstadter's remark is that intelligence loves pattern and balks at randomness, so the highly organised piece is the one that needs less explaining. He doesn't claim that Bach would get through. How much complexity a listener can take in probably depends on how our species happened to evolve, and beings elsewhere might need to be told a great deal about humans first. The book's joke is that the two names fit: it spells Bach's music out as a Beautiful Aperiodic Crystal of Harmony, and Cage's as a Composition of Aleatorically Generated Elements.</p>
+  <p>Bach's music is full of patterns, and patterns of patterns, which a finder could seize on. Hofstadter's remark is that intelligence loves pattern and balks at randomness, so the highly organised piece is the one that needs less explaining. He doesn't claim that Bach would get through. How much complexity a listener can take in probably depends on how our species happened to evolve, and beings elsewhere might need to be told a great deal about humans first. The book's joke is that the two names fit: it spells Bach's music out as a Beautiful <span class="term">Aperiodic Crystal</span> of Harmony (an aperiodic crystal is something orderly that never simply repeats), and Cage's as a Composition of Aleatorically Generated Elements.</p>
   <h3>Back to DNA</h3>
   <p>Can DNA bring about a living thing without the right chemistry around it? Hofstadter's answer is "no, but a qualified no". A DNA molecule alone in empty space does nothing. Yet if intelligent beings found one, they might see its frame message, study its chemical form, guess what kind of surroundings it needs, and try to supply them. Given millions of years of trying, he thinks, they might get the meaning out. But send the same DNA as a printed row of the letters A, C, G and T, and the chance is close to nil. The chemical form was the outer message, and printing strips it off.</p>
   <p>So the answer to "where is the meaning?" is a matter of degree. The more a message can do, by its own length and pattern, to make an intelligent finder rebuild the missing context, the more of its meaning is in the message. The more it depends on context that it cannot rebuild, the more it is only a trigger.</p>
@@ -335,7 +346,7 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
     <div class="card"><span class="tag g">Messages</span><h4>Reveal or supply; three layers</h4><p>A decoder reveals what is in its input; a jukebox supplies what is in itself, and its input is only a trigger. Every message has a frame ("I am a message"), an outer message ("decode me like this") that can only be hinted at, and an inner message.</p></div>
     <div class="card"><span class="tag e">Intelligence</span><h4>Meaning that stays put</h4><p>The chain of decoders ends in brains, which run without instructions. Meaning is intrinsic to the extent that it acts on intelligence predictably, as mass stays fixed where weight doesn't. Long, patterned messages rebuild their own context; short or random ones can't.</p></div>
   </div>
-  <p>The question comes back later in the book, when strings of a formal system about numbers turn out to carry a second meaning that only a particular code brings out.</p>
+  <p>The question comes back later in the book, when rows of symbols in a rule-game about numbers turn out to carry a second meaning that only a particular code brings out.</p>
 </section>
 
 <!-- 11 -->
@@ -351,7 +362,7 @@ ul.layers li.l1{border-color:var(--gold)} ul.layers li.l2{border-color:var(--god
 </footer>
 
 <script src="../assets/toc.js?v=ddcc2074"></script>
-<script src="../assets/glossary.js?v=89a2816c"></script>
+<script src="../assets/glossary.js?v=fcad07b3"></script>
 <script src="../assets/terms.js?v=62f05ed1" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
 <script src="../assets/music.js?v=761fe73a"></script>
@@ -367,7 +378,7 @@ function segButtons(host,items,get,set){
 const SLIP='ONEWARTWOEAREWE';
 // first: length of the first group; every later group has 3 letters
 const CUTS=[
-  {v:3,label:"Achilles' spacing",note:'Five English words that say nothing together. Five syllables, Achilles notes: what is left of a seventeen-syllable haiku.'},
+  {v:3,label:"Achilles' spacing",note:'Five English words that say nothing together. Five syllables: the Tortoise calls it five-seventeenths of a haiku.'},
   {v:1,label:"The Tortoise's spacing",note:'Six English words that make a sentence: a lament about a new art.'},
   {v:2,label:'The third spacing',note:'One stray word, ON, and then nothing. Not every way of cutting the letters gives a message.'}
 ];
@@ -418,6 +429,11 @@ function drawJk(){
   $('jkOut').innerHTML=h;
   segButtons($('jkPlayers'),PLAYERS,()=>player,v=>{stopSound();player=v;drawJk();});
   drawRoll(jkCv,jkVoices());
+  { const lo=57,hi=95,isB=m=>[1,3,6,8,10].includes(m%12); let x=0,wh='',bl='',pos={};
+    for(let m=lo;m<=hi;m++){ if(isB(m)){pos[m]=x-3.5;bl+='<rect x="'+(x-3.5)+'" y="18" width="7" height="24" fill="'+(p.notes.includes(m)?'#9b2f2f':'#1f1c17')+'"/>';}
+      else{pos[m]=x;wh+='<rect x="'+x+'" y="18" width="12" height="40" fill="'+(p.notes.includes(m)?'#e9b7b0':'#fff')+'" stroke="#b9ae99" stroke-width=".6"/>';x+=12;} }
+    let lab='';p.notes.forEach((m,i)=>{const cx=pos[m]+(isB(m)?3.5:6);lab+='<text x="'+cx+'" y="'+(i%2?13:7)+'" text-anchor="middle" font-size="7" font-family="JetBrains Mono,monospace" font-weight="500" fill="#9b2f2f">'+de(m)+'</text><line x1="'+cx+'" x2="'+cx+'" y1="'+(i%2?14.5:8.5)+'" y2="18" stroke="#9b2f2f" stroke-width=".6"/>';});
+    $('jkKeys').setAttribute('viewBox','0 0 '+x+' 60'); $('jkKeys').innerHTML=wh+bl+lab; }
   $('jkShapes').innerHTML=PLAYERS.map(q=>{
     const lo=Math.min(...q.notes),hi=Math.max(...q.notes);
     const pts=q.notes.map((n,i)=>[16+i*56,60-46*(n-lo)/(hi-lo)]);
@@ -439,28 +455,31 @@ window.addEventListener('resize',()=>{drawRoll(jkCv,jkVoices());drawRoll(augCv,a
 const SCALE=[60,62,64,65,67,69,71,72];            // heights 0..7 -> C D E F G A B C
 let groove=[0,2,4,2,0,2,4,7], mach='player', song=0, lastStep=-1;
 const SONGS=[
-  {v:0,label:'A-1',name:'Twinkle, Twinkle, Little Star',n:[60,60,67,67,69,69,67]},
-  {v:1,label:'A-2',name:'Frère Jacques',n:[60,62,64,60,60,62,64,60]},
-  {v:2,label:'B-1',name:'Ode to Joy',n:[64,64,65,67,67,65,64,62]},
-  {v:3,label:'B-2',name:'Mary Had a Little Lamb',n:[64,62,60,62,64,64,64]}
+  {v:0,label:'A-5',name:'Twinkle, Twinkle, Little Star',n:[60,60,67,67,69,69,67],long:1},
+  {v:1,label:'A-6',name:'Frère Jacques',n:[60,62,64,60,60,62,64,60]},
+  {v:2,label:'D-5',name:'Ode to Joy',n:[64,64,65,67,67,65,64,62]},
+  {v:3,label:'D-6',name:'Mary Had a Little Lamb',n:[64,62,60,62,64,64,64],long:1}
 ];
 const mcCv=$('mcCanvas');
 function mcVoices(){
-  const n=mach==='player'?groove.map(h=>SCALE[h]):SONGS[song].n;
-  // two silent anchor notes keep the picture's scale fixed
-  return [{ev:[{p:59,s:0,d:.01},{p:73,s:0,d:.01}],color:'rgba(0,0,0,0)',gain:0.0001},{ev:toEvents(n.map(x=>[x,1])),color:css(mach==='player'?'--bach':'--godel'),gain:.22}];
+  const anchor={ev:[{p:59,s:0,d:.01},{p:73,s:0,d:.01}],color:'rgba(0,0,0,0)',gain:0.0001}; // keeps the picture's scale fixed
+  if(mach==='jukebox'){const S=SONGS[song];return [anchor,{ev:toEvents(S.n.map((x,i)=>[x,S.long&&i===S.n.length-1?2:1])),color:css('--godel'),gain:.22}];}
+  const ev=toEvents(groove.map(h=>[SCALE[h],1]));
+  return [anchor,{ev:ev.filter((e,i)=>i!==lastStep),color:css('--bach'),gain:.22},{ev:ev.filter((e,i)=>i===lastStep),color:css('--gold'),gain:.22}];
 }
 function drawMc(){
   segButtons($('mcSeg'),[{v:'player',label:'Record player'},{v:'jukebox',label:'Jukebox'}],()=>mach,v=>{stopSound();mach=v;drawMc();});
   if(mach==='player'){
     const cw=60,ch=17,W=cw*8,H=ch*8+8;
-    let g='<div class="mlabel">What goes in · the groove: tap to set the height of each step</div><svg id="grv" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="A groove of eight steps">';
+    $('mcNote').textContent='Simplified: a real groove is a continuous wiggle that traces the sound wave itself. Here it is eight steps, and the height of each step sets one note.';
+    let g='<div class="mlabel">What goes in · the groove: tap to set the height of each step</div><svg id="grv" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" role="img" aria-label="A groove of eight steps">';
     for(let c=0;c<8;c++)for(let r=0;r<8;r++)g+='<rect data-c="'+c+'" data-r="'+r+'" x="'+(c*cw+1)+'" y="'+(4+(7-r)*ch+1)+'" width="'+(cw-2)+'" height="'+(ch-2)+'" rx="3" fill="'+(groove[c]===r?(c===lastStep?'#b7862b':'#1f1c17'):'#efe8d8')+'"/>';
     $('mcIn').innerHTML=g+'</svg>';
     $('grv').onclick=e=>{const t=e.target;if(t.dataset.c===undefined)return;stopSound();lastStep=+t.dataset.c;groove[lastStep]=+t.dataset.r;drawMc();};
     $('mcOut').innerHTML=(lastStep<0?'Each step of the groove gives one note: step for note, in order.':'You changed step '+(lastStep+1)+' of the groove. Note '+(lastStep+1)+' of the tune changed, and no other.')+
       '<br><b>'+Math.pow(8,8).toLocaleString('en-US')+'</b> different grooves fit this strip (8 heights for each of 8 steps), and this one player turns each into a different tune.';
   }else{
+    $('mcNote').textContent='The songs are first phrases only, on a synthesized instrument.';
     $('mcIn').innerHTML='<div class="mlabel">What goes in · a pair of buttons</div><div class="seg" id="sgSeg"></div>';
     segButtons($('sgSeg'),SONGS,()=>song,v=>{stopSound();song=v;drawMc();});
     $('mcOut').innerHTML='Buttons '+SONGS[song].label+' give <b>'+SONGS[song].name+'</b>. Nothing in "'+SONGS[song].label+'" matches any note of it.'+
@@ -470,21 +489,6 @@ function drawMc(){
 }
 drawMc();
 playToggle($('mcPlay'),()=>playVoices(mcCv,mcVoices(),0.3));
-
-/* ===== Section 6: three layers ===== */
-const LAYERS=[
-  {v:0,label:'Bottle on a beach',f:'A sealed bottle with a dry sheet of paper in it.',o:'The look of Japanese writing.',i:'A call for help, or a poem.'},
-  {v:1,label:'Record in space',f:'A flat round disc with a hole in the exact middle.',o:'One long spiral groove whose wiggles look like a recorded vibration.',i:'What the music makes a listener feel.'},
-  {v:2,label:'Carved stone',f:'Rows of small carved signs on a shaped slab.',o:'Which signs repeat, and how they are grouped.',i:'What the writers were saying.'},
-  {v:3,label:'DNA',f:'A long chain that never simply repeats, wound into a regular coil.',o:'The chemical form of the chain.',i:'The phenotype: the living thing.'}
-];
-let layer=1;
-function drawLayers(){
-  segButtons($('lySeg'),LAYERS,()=>layer,v=>{layer=v;drawLayers();});
-  const L=LAYERS[layer];
-  $('lyOut').innerHTML='<li class="l1"><b>Frame · "I am a message"</b><br>'+L.f+'</li><li class="l2"><b>Outer · "decode me like this"</b><br>'+L.o+'</li><li class="l3"><b>Inner · what was meant</b><br>'+L.i+'</li>';
-}
-drawLayers();
 
 /* ===== Section 9: the two plaques ===== */
 const N=10;
@@ -526,7 +530,7 @@ function drawSeq(){
   $('fa').textContent=fa;$('fb').textContent=fb;
   $('fSeq').textContent=a.join(', ')+', …';
   $('fa-').disabled=fa<=1;$('fa+').disabled=fa>=9;$('fb-').disabled=fb<=1;$('fb+').disabled=fb>=9;
-  $('fNote').textContent=fa===1&&fb===1?'The plaque\'s own sequence.':(fa===1&&fb===3)||(fa===2&&fb===1)?(fb===3?'The book\'s example: ':'')+'the Lucas numbers, usually listed starting 2, 1, 3, 4, …':'Same rule, different pair of buttons, different sequence.';
+  $('fNote').textContent=fa===1&&fb===1?'The plaque\'s own sequence.':(fa===1&&fb===3)||(fa===2&&fb===1)?(fb===3?'The book\'s example, known as the Lucas numbers.':'The Lucas numbers, as they are usually listed.'):'Same rule, different pair of buttons, different sequence.';
 }
 [['fa-',()=>fa=Math.max(1,fa-1)],['fa+',()=>fa=Math.min(9,fa+1)],['fb-',()=>fb=Math.max(1,fb-1)],['fb+',()=>fb=Math.min(9,fb+1)]].forEach(([id,f])=>$(id).onclick=()=>{f();drawSeq();});
 drawSeq();
