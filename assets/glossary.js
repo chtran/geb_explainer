@@ -44,6 +44,7 @@ window.GEB_GLOSSARY = {
   "artificial neuron": {def:"The smallest unit of an AI model: it adds up numbers coming in and passes a number on. Models have billions of them.", in:"01"},
   "feature":           {def:"In an AI model, a concept represented as a pattern of activity spread across many artificial neurons.", in:"01"},
   "proof assistant":   {def:"Software, such as Lean, that checks every step of a mathematical proof by machine.", in:"01"},
+  "riemann hypothesis":{def:"A claim made in 1859 about a hidden pattern in how the prime numbers are spread along the number line. One of the most famous open problems in mathematics.", in:"01"},
   "parallel postulate":{def:"The axiom that through a point beside a line there’s exactly one line that never meets it.", in:"01"},
   "set":               {def:"A collection of things.", in:"01"},
   "zeno's paradoxes":  {def:"Ancient Greek puzzles, e.g. one “proving” speedy Achilles can never catch a tortoise with a head start.", in:"01"},
