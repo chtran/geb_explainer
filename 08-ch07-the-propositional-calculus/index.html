@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>GEB · Chromatic Fantasy, And Feud + Chapter VII: The Propositional Calculus</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/geb.css?v=56991a91">
+<link rel="stylesheet" href="../assets/geb.css?v=1a599310">
 <style>
 [hidden]{display:none!important}
 /* strings of the Propositional Calculus */
@@ -49,16 +50,16 @@
 .picks button{font-family:"JetBrains Mono",monospace;font-size:13.5px;text-align:left}
 .picks button span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-left:8px}
 .picks input{font:16px "JetBrains Mono",monospace;width:min(100%,260px)}
-.deriv{font:14.5px/1.6 "JetBrains Mono",monospace;margin:0;overflow-x:auto;max-height:420px;overflow-y:auto;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 10px;min-height:60px}
+.deriv{font:14.5px/1.6 "JetBrains Mono",monospace;margin:0;overflow-x:auto;max-height:420px;overflow-y:auto;background:var(--field);border:1px solid var(--rule);border-radius:10px;padding:8px 10px;min-height:60px}
 .deriv .dl{display:flex;gap:8px;white-space:nowrap;align-items:baseline}
-.deriv .ln{font:12px Inter,sans-serif;color:#a2977f;min-width:20px;text-align:right}
+.deriv .ln{font:12px Inter,sans-serif;color:var(--mute);min-width:20px;text-align:right}
 .deriv .ds{border-left:3px solid transparent;padding-left:8px}
-.deriv .d1 .ds{margin-left:14px;border-color:#e3c98f}
-.deriv .d2 .ds{margin-left:28px;border-color:#d9a0a0}
-.deriv .d3 .ds{margin-left:42px;border-color:#9db8d6}
-.deriv .d4 .ds{margin-left:56px;border-color:#9fc9b1}
+.deriv .d1 .ds{margin-left:14px;border-color:var(--gold-line)}
+.deriv .d2 .ds{margin-left:28px;border-color:var(--bach-soft)}
+.deriv .d3 .ds{margin-left:42px;border-color:var(--godel-soft)}
+.deriv .d4 .ds{margin-left:56px;border-color:var(--escher-soft)}
 .deriv .why{font:12.5px Inter,sans-serif;color:var(--ink2)}
-.deriv .thm .ds{font-weight:500;background:#eef7f1;border-radius:4px;padding-right:6px}
+.deriv .thm .ds{font-weight:500;background:var(--escher-tint);border-radius:4px;padding-right:6px}
 .deriv .empty{font:14px Inter,sans-serif;color:var(--ink2)}
 .levels{font:13px Inter,sans-serif;color:var(--ink2);margin:6px 0 0}
 .levels i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}
@@ -67,7 +68,7 @@
 .worlds button{font:14px Inter,sans-serif}
 .worlds button b{font-family:"JetBrains Mono",monospace;font-weight:500}
 .worlds button.t{border-color:var(--escher);color:var(--escher)} .worlds button.f{border-color:var(--bach);color:var(--bach)}
-.reading{font-size:18px;line-height:1.45;margin:8px 0;padding:10px 14px;border-left:4px solid var(--rule);background:#fff;border-radius:0 8px 8px 0}
+.reading{font-size:18px;line-height:1.45;margin:8px 0;padding:10px 14px;border-left:4px solid var(--rule);background:var(--field);border-radius:0 8px 8px 0}
 .reading.t{border-color:var(--escher)} .reading.f{border-color:var(--bach)}
 .reading small{display:block;font:600 12.5px Inter,sans-serif;margin-top:4px}
 .reading.t small{color:var(--escher)} .reading.f small{color:var(--bach)}
@@ -75,9 +76,9 @@
 .tt th,.tt td{padding:4px 14px;text-align:center;border-bottom:1px solid var(--rule)}
 .tt th{font-family:"JetBrains Mono",monospace;font-weight:500}
 .tt td.t{color:var(--escher)} .tt td.f{color:var(--bach);font-weight:600}
-.tt tr.cur td{background:#f7e3b0}
+.tt tr.cur td{background:var(--gold-hl)}
 .ttwrap{overflow-x:auto}
-.flat{font:14px/1.9 "JetBrains Mono",monospace;overflow-x:auto;white-space:nowrap;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
+.flat{font:14px/1.9 "JetBrains Mono",monospace;overflow-x:auto;white-space:nowrap;background:var(--field);border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
 .flat span{font:12.5px Inter,sans-serif;color:var(--ink2);margin-right:10px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .two>*,.wb>*{min-width:0}
@@ -240,7 +241,7 @@
       <div>
         <div class="lbl-s">Your derivation</div>
         <div class="deriv" id="wbList"></div>
-        <div class="levels">Indent shows the level:<i style="background:#eef7f1;border:1px solid #9fc9b1"></i>real world (theorems)<i style="background:#e3c98f"></i>fantasy<i style="background:#d9a0a0"></i>fantasy in a fantasy</div>
+        <div class="levels">Indent shows the level:<i style="background:var(--escher-tint);border:1px solid var(--escher-soft)"></i>real world (theorems)<i style="background:var(--gold-line)"></i>fantasy<i style="background:var(--bach-soft)"></i>fantasy in a fantasy</div>
       </div>
     </div>
   </div>
@@ -464,7 +465,7 @@
 <script src="../assets/glossary.js?v=18c3283a"></script>
 <script src="../assets/terms.js?v=056fc7ec" defer></script>
 <script src="../assets/nav.js?v=55d02fb1" defer></script>
-<script src="../assets/music.js?v=761fe73a"></script>
+<script src="../assets/music.js?v=65649e48"></script>
 <script>
 /* ===== The Propositional Calculus: parser, rules, truth tables ===== */
 const OPS='∧∨⊃';
