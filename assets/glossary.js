@@ -101,7 +101,7 @@ window.GEB_GLOSSARY = {
   "propositional calculus": {def:"Hofstadter’s formal system for reasoning with “and”, “or”, “not” and “if… then”.", in:"08"},
   "atom":              {def:"In the Propositional Calculus: one of the simplest strings, P, Q or R, with or without primes. It can stand for any sentence.", in:"08"},
   "formation rule":    {def:"A rule saying how well-formed strings are built from smaller well-formed strings.", in:"08"},
-  "fantasy rule":      {def:"Suppose a string x; if the rules then lead to y, the string <x⊃y> (“if x, then y”) is a theorem.", in:"08"},
+  "fantasy rule":      {def:"Suppose a string x; if the rules then lead to y, the string &lt;x⊃y&gt; (“if x, then y”) is a theorem.", in:"08"},
   "truth table":       {def:"A list of every way the atoms of a string can be true or false, showing whether the whole string is true in each case.", in:"08"},
   "derived rule":      {def:"A shortcut that is not one of a system’s own rules, but is known, by reasoning about the system, to lead only to theorems.", in:"08"},
   "metatheorem":       {def:"A proven result about a formal system and its theorems, reached by reasoning from outside the system.", in:"08"},
